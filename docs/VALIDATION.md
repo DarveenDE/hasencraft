@@ -1,12 +1,14 @@
 # Validierungsstand
 
-Stand: `0.1.0-alpha.1`, 1. August 2026.
+Stand: `0.1.0-alpha.2`, 2. August 2026.
 
 ## Bestanden
 
 - Packwiz-Index aktualisiert und 158 gepinnte Einträge geprüft: 121 beide Seiten, 24 nur Client, 13 nur Server.
-- Minecraft `1.21.1`, NeoForge `21.1.248` und Java `21.0.12` in einer frischen lokalen Serverinstallation verwendet.
-- Drei Dedicated-Server-Starts bis `Done` und drei kontrollierte Shutdowns ausgeführt; der Wiederholungsstart erreichte die spielbereite Weltphase in 3,567 Sekunden.
+- Den offiziellen NeoForge-Installer `21.1.247` per Upstream-SHA-1 geprüft und mit Minecraft `1.21.1` sowie Java `21.0.12` lokal installiert.
+- Den vollständigen Alpha-2-Serverstand bis `Done (3.217s)` gestartet und danach kontrolliert beendet; auch der vorausgehende Loader-Abgleich erreichte `Done (3.380s)`.
+- Das installierte Prism-Profil `Hasencraft Fluffy` im Online-Modus bis zum Titelbildschirm gestartet: NeoForge `21.1.247`, JEI `19.43.0.392`, Sodium `0.8.12` und Iris `1.8.14-beta.1` wurden gemeinsam geladen.
+- Complementary Reimagined wurde von Iris aktiviert; Distant Horizons meldete die erfolgreiche Iris-Event- und OpenGL-Anbindung.
 - FTB Quests lud eine Gruppe, ein Kapitel und neun deutsche Quests.
 - Simple Voice Chat startete auf UDP `24454`.
 - Die endgültige Waystones-Konfiguration wurde ohne Laufzeitkorrektur bytegleich übernommen: keine Kosten, keine Cooldowns, kein Haltbarkeitsverlust sowie Transport von Haustieren und angeleinten Tieren.
@@ -21,13 +23,14 @@ Stand: `0.1.0-alpha.1`, 1. August 2026.
 - Zwei technische Advancements aus Dungeons & Taverns.
 - Vier optionale Regions-Unexplored-Rewards aus Bumblezone.
 - Einzelne optionale Mixin-Ziele und externe Versionsprüfungen.
+- Fehlende optionale Shader-Uniforms von Complementary Reimagined sowie die fehlende Access-Transformer-Datei der aktuellen Iris/Flywheel-Bridge; beide Meldungen waren beim erfolgreichen Titelbildschirm-Start nicht fatal.
 
 Diese Meldungen wurden bis zur jeweiligen bedingten Registrierung beziehungsweise Quelldatei zurückverfolgt. Sie weisen nicht auf eine Create-6.0.10-Inkompatibilität oder beschädigte Welt hin.
 
 ## Vor Stable noch manuell prüfen
 
-- Beide Prism-Profile wirklich importieren und mit Microsoft-Konto starten.
-- Iris, Complementary Reimagined, Fresh Animations und Distant Horizons visuell auf RX 7900 XT und GTX 1080 prüfen.
+- Das Prism-Profil `cozy` importieren und mit dem zweiten Microsoft-Konto starten.
+- Iris, Complementary Reimagined, Fresh Animations und Distant Horizons im Spiel auf RX 7900 XT sowie vollständig auf GTX 1080 prüfen.
 - Zwei Clients verbinden und Haustierbindung, Tod, Respawn, Waystone-Mitnahme und Dimensionswechsel spielen.
 - Aether, Twilight Forest und Bumblezone betreten sowie einige Create-/AE2-/Mekanism-Rezepte in JEI anklicken.
 - Installation, systemd-Lock, Backup und Rollback auf der vorgesehenen Ubuntu-VM testen.

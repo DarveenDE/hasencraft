@@ -88,8 +88,9 @@ if (Test-Path -LiteralPath $indexFile) {
 
 $critical = @{
     "mods/distanthorizons.pw.toml" = 'filename = "DistantHorizons-3.2.0-b-1.21.1-fabric-neoforge.jar"'
-    "mods/iris.pw.toml"             = 'filename = "iris-neoforge-1.8.12+mc1.21.1.jar"'
-    "mods/sodium.pw.toml"           = 'filename = "sodium-neoforge-0.6.13+mc1.21.1.jar"'
+    "mods/iris.pw.toml"             = 'filename = "iris-neoforge-1.8.14-beta.1+mc1.21.1.jar"'
+    "mods/sodium.pw.toml"           = 'filename = "sodium-neoforge-0.8.12+mc1.21.1.jar"'
+    "mods/jei.pw.toml"              = 'filename = "jei-1.21.1-neoforge-19.43.0.392.jar"'
     "mods/create.pw.toml"           = 'filename = "create-1.21.1-6.0.10.jar"'
 }
 foreach ($entry in $critical.GetEnumerator()) {

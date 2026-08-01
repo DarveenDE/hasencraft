@@ -1,6 +1,6 @@
 # Modliste
 
-Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.1`.
+Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.2`.
 
 - Gesamt: 158 verwaltete Eintraege
 - beide Seiten: 121
@@ -99,10 +99,10 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.1`
 | ImmediatelyFast | `client` | `ImmediatelyFast-NeoForge-1.6.11+1.21.1.jar` | [Modrinth](https://modrinth.com/project/5ZwdcRci) |
 | Immersive Engineering | `both` | `ImmersiveEngineering-1.21.1-12.4.2-194.jar` | [Modrinth](https://modrinth.com/project/tIm2nV03) |
 | Iris & Oculus Flywheel Compat | `client` | `iris-flywheel-compat-NeoForge-2.4.0.jar` | [Modrinth](https://modrinth.com/project/ndHYMY2K) |
-| Iris Shaders | `client` | `iris-neoforge-1.8.12+mc1.21.1.jar` | [Modrinth](https://modrinth.com/project/YL57xq9U) |
+| Iris Shaders | `client` | `iris-neoforge-1.8.14-beta.1+mc1.21.1.jar` | [Modrinth](https://modrinth.com/project/YL57xq9U) |
 | Jade Addons (Neo/Forge) | `both` | `JadeAddons-1.21.1-NeoForge-6.0.1.jar` | [Modrinth](https://modrinth.com/project/xuDOzCLy) |
 | Jade 🔍 | `both` | `Jade-1.21.1-NeoForge-15.10.5.jar` | [Modrinth](https://modrinth.com/project/nvQzSEkH) |
-| Just Enough Items (JEI) | `both` | `jei-1.21.1-neoforge-19.27.0.336.jar` | [Modrinth](https://modrinth.com/project/u6dRKJwZ) |
+| Just Enough Items (JEI) | `both` | `jei-1.21.1-neoforge-19.43.0.392.jar` | [Modrinth](https://modrinth.com/project/u6dRKJwZ) |
 | Kotlin for Forge | `both` | `kotlinforforge-5.12.0-all.jar` | [Modrinth](https://modrinth.com/project/ordsPcFz) |
 | KubeJS | `both` | `kubejs-neoforge-2101.7.2-build.368.jar` | [Modrinth](https://modrinth.com/project/umyGl7zF) |
 | Lithium | `both` | `lithium-neoforge-0.15.4+mc1.21.1.jar` | [Modrinth](https://modrinth.com/project/gvQqBUqZ) |
@@ -146,7 +146,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.1`
 | Shulker Box Tooltip | `both` | `shulkerboxtooltip-neoforge-5.1.9+1.21.1.jar` | [Modrinth](https://modrinth.com/project/2M01OLQq) |
 | Simple Voice Chat | `both` | `voicechat-neoforge-1.21.1-2.6.21.jar` | [Modrinth](https://modrinth.com/project/9eGKb6K1) |
 | Snuffles | `both` | `snuffles-1.1.2.jar` | [Modrinth](https://modrinth.com/project/NYGhKUS6) |
-| Sodium | `client` | `sodium-neoforge-0.6.13+mc1.21.1.jar` | [Modrinth](https://modrinth.com/project/AANobbMI) |
+| Sodium | `client` | `sodium-neoforge-0.8.12+mc1.21.1.jar` | [Modrinth](https://modrinth.com/project/AANobbMI) |
 | Sophisticated Backpacks | `both` | `sophisticatedbackpacks-1.21.1-3.25.73.2020.jar` | [Modrinth](https://modrinth.com/project/TyCTlI4b) |
 | Sophisticated Core | `both` | `sophisticatedcore-1.21.1-1.4.80.2194.jar` | [Modrinth](https://modrinth.com/project/nmoqTijg) |
 | Sophisticated Storage | `both` | `sophisticatedstorage-1.21.1-1.5.83.2017.jar` | [Modrinth](https://modrinth.com/project/hMlaZH8f) |

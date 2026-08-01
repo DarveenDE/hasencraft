@@ -2,6 +2,13 @@
 
 Alle relevanten Änderungen an Mods, Konfiguration, Quests und Serveranforderungen werden hier dokumentiert.
 
+## 0.1.0-alpha.2 — 2026-08-02
+
+- NeoForge von `21.1.248` auf `21.1.247` gepinnt, da Prism für den neueren Maven-Build noch keine Komponenten-Metadaten ausliefert.
+- Prism- und Servervorlagen auf denselben Loader-Stand gebracht.
+- Sodium `0.8.12` und das dazu passende Iris `1.8.14-beta.1` aktualisiert, damit Supplementaries korrekt lädt.
+- JEI auf `19.43.0.392` aktualisiert, wie von Sophisticated Core vorausgesetzt.
+
 ## 0.1.0-alpha.1 — 2026-08-01
 
 - Packwiz-Projekt für Minecraft 1.21.1 und NeoForge 21.1.248 erstellt.

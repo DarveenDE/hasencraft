@@ -10,7 +10,7 @@ tools_dir="$root/tools"
 config_dir=/etc/hasencraft
 libexec_dir=/usr/local/libexec
 service_file=/etc/systemd/system/hasencraft.service
-neoforge_version=21.1.248
+neoforge_version=21.1.247
 installer="$tools_dir/neoforge-$neoforge_version-installer.jar"
 installer_url="https://maven.neoforged.net/releases/net/neoforged/neoforge/$neoforge_version/neoforge-$neoforge_version-installer.jar"
 

@@ -10,7 +10,7 @@ Repository auf die VM kopieren und aus dessen Wurzel ausführen:
 sudo ./server/install-server.sh
 ```
 
-Das Skript installiert Java 21 und zstd, legt den nicht-interaktiven Benutzer `hasencraft` an, installiert NeoForge `21.1.248`, kopiert den packwiz-Bootstrap und richtet den systemd-Dienst ein. Es startet den Server nicht und akzeptiert die Minecraft-EULA nicht stellvertretend.
+Das Skript installiert Java 21 und zstd, legt den nicht-interaktiven Benutzer `hasencraft` an, installiert NeoForge `21.1.247`, kopiert den packwiz-Bootstrap und richtet den systemd-Dienst ein. Es startet den Server nicht und akzeptiert die Minecraft-EULA nicht stellvertretend.
 
 Danach:
 

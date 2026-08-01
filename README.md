@@ -2,10 +2,10 @@
 
 Hasencraft ist ein gemütliches, technisch tiefes Zwei-Personen-Modpack mit sehr vielen Tieren, großen Erkundungszielen und einer möglichst stressfreien Infrastruktur.
 
-Aktueller Stand: **`0.1.0-alpha.1`**
+Aktueller Stand: **`0.1.0-alpha.2`**
 
 - Minecraft `1.21.1`
-- NeoForge `21.1.248`
+- NeoForge `21.1.247`
 - Java `21`
 - 158 verwaltete Mods, Bibliotheken, Shader- und Resourcepack-Einträge
 - Prism Launcher + packwiz
@@ -49,6 +49,6 @@ Danach wird die jeweilige ZIP einmal in Prism importiert. Bei jedem Start lädt 
 
 Modversionen werden im Stable-Kanal nicht blind aktualisiert. Ein Release läuft immer über Beta, einen Server-Boot-Test, ein Versions-Tag und ein Pre-Update-Backup. Details: [docs/RELEASES.md](docs/RELEASES.md).
 
-## Nächster Schritt
+## Aktueller Deploymentstand
 
-Für den produktiven Updatekanal fehlt die endgültige HTTPS-Adresse. Danach können die beiden fertigen Prism-Profile mit dieser URL gebaut und der Ubuntu-Server erstmals installiert werden. Zugangsdaten, Server-IP und Whitelist gehören bewusst nicht in dieses Repository; die bereitgestellte VM wurde von diesem Build nicht verändert.
+Das lokale Prism-Profil `Hasencraft Fluffy` ist installiert und Alpha 2 wurde bis zum Titelbildschirm mit aktivem Shader sowie Distant-Horizons-/Iris-Anbindung getestet. Auf der Ubuntu-VM laufen der lokale Pack-Host und die vorbereitete Serverinstallation; der geprüfte Alpha-2-Rollout liegt im Benutzer-Staging und wird durch einen einmaligen administrativen Aufruf aktiviert. Whitelist und Spielerdaten bleiben bewusst außerhalb dieses Repositorys.
