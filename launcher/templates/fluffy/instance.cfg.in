@@ -1,0 +1,12 @@
+InstanceType=OneSix
+name=__INSTANCE_NAME__
+iconKey=hasencraft
+OverrideCommands=true
+PreLaunchCommand="$INST_JAVA" -jar packwiz-installer-bootstrap.jar __PACK_URL__
+AutomaticJava=true
+OverrideMemory=true
+MinMemAlloc=4096
+MaxMemAlloc=10240
+ShowConsole=false
+AutoCloseConsole=true
+OverrideWindow=false

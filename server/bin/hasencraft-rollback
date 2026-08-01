@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+[[ $# -eq 1 ]] || { echo "Usage: hasencraft-rollback <backup.tar.zst>" >&2; exit 2; }
+[[ ${EUID:-$(id -u)} -eq 0 ]] || { echo "Run as root." >&2; exit 1; }
+
+config=/etc/hasencraft/hasencraft.env
+[[ -r "$config" ]] || { echo "Missing $config" >&2; exit 1; }
+# shellcheck source=/dev/null
+source "$config"
+
+root="${HASENCRAFT_ROOT:?HASENCRAFT_ROOT is required}"
+live="$root/server"
+backup_root="$root/backups"
+backup="$(realpath -e -- "$1")"
+backup_prefix="$(realpath -e -- "$backup_root")/"
+
+[[ "$root" == /srv/hasencraft ]] || { echo "Unexpected root: $root" >&2; exit 1; }
+[[ "$backup" == "$backup_prefix"* ]] || { echo "Backup is outside $backup_root" >&2; exit 1; }
+[[ "$backup" == *.tar.zst ]] || { echo "Expected a .tar.zst backup." >&2; exit 1; }
+[[ -f "$backup" && ! -L "$backup" ]] || { echo "Backup must be a regular file." >&2; exit 1; }
+[[ -d "$live" ]] || { echo "Missing server directory: $live" >&2; exit 1; }
+
+exec 9>"$root/.lifecycle.lock"
+flock --nonblock 9 || { echo "Server or another lifecycle operation is active." >&2; exit 1; }
+
+if systemctl is-active --quiet hasencraft.service; then
+  echo "Stop hasencraft.service before rollback." >&2
+  exit 1
+fi
+
+stamp="$(date -u +%Y%m%dT%H%M%SZ)"
+quarantine="$root/server.failed-$stamp"
+restore="$root/.restore-$stamp-$$"
+[[ ! -e "$quarantine" ]] || { echo "Quarantine path exists: $quarantine" >&2; exit 1; }
+[[ "$restore" == "$root/.restore-"* && ! -e "$restore" ]] || { echo "Unsafe restore path: $restore" >&2; exit 1; }
+
+while IFS= read -r member; do
+  [[ -n "$member" ]] || { echo "Backup contains an empty member name." >&2; exit 1; }
+  case "$member" in
+    /*|..|../*|*/..|*/../*) echo "Backup contains an unsafe path: $member" >&2; exit 1 ;;
+  esac
+done < <(tar --zstd -tf "$backup")
+
+if ! tar --zstd -tvf "$backup" | awk 'substr($0, 1, 1) !~ /^[-d]$/ { bad=1 } END { exit bad ? 1 : 0 }'; then
+  echo "Backup contains links or special file types; refusing extraction." >&2
+  exit 1
+fi
+
+install -d -o hasencraft -g hasencraft -m 0750 "$restore"
+cleanup() {
+  if [[ -n "$restore" && "$restore" == "$root/.restore-"* && -d "$restore" ]]; then
+    rm -rf --one-file-system -- "$restore"
+  fi
+}
+trap cleanup EXIT
+
+runuser -u hasencraft -- tar --zstd -xf "$backup" -C "$restore" \
+  --no-same-owner --no-same-permissions --delay-directory-restore --no-overwrite-dir
+[[ -f "$restore/run.sh" && -f "$restore/packwiz.json" ]] || {
+  echo "Extracted backup is not a complete managed server." >&2
+  exit 1
+}
+
+mv -T "$live" "$quarantine"
+if ! mv -T "$restore" "$live"; then
+  mv -T "$quarantine" "$live"
+  echo "Restore switch failed; original server put back." >&2
+  exit 1
+fi
+restore=""
+
+echo "Restored $backup"
+echo "Previous server preserved at $quarantine"
+echo "Confirm the stable channel points to the matching old release before starting."

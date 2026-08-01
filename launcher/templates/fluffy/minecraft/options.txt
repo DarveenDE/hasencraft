@@ -1,0 +1,13 @@
+autoJump:false
+biomeBlendRadius:5
+enableVsync:true
+entityDistanceScaling:1.0
+graphicsMode:1
+guiScale:3
+maxFps:120
+mipmapLevels:4
+particles:0
+renderDistance:14
+simulationDistance:8
+resourcePacks:["vanilla","file/FreshAnimations_v1.10.4.zip"]
+incompatibleResourcePacks:[]

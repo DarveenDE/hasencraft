@@ -1,0 +1,102 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+config=/etc/hasencraft/hasencraft.env
+[[ -r "$config" ]] || { echo "Missing $config" >&2; exit 1; }
+# shellcheck source=/dev/null
+source "$config"
+
+channel="${1:-stable}"
+case "$channel" in
+  stable) pack_url="$PACK_URL_STABLE" ;;
+  beta) pack_url="$PACK_URL_BETA" ;;
+  *) echo "Usage: hasencraft-deploy [stable|beta]" >&2; exit 2 ;;
+esac
+
+[[ "$pack_url" == https://* || "$pack_url" == http://127.0.0.1:* ]] || {
+  echo "Refusing non-HTTPS pack URL: $pack_url" >&2
+  exit 1
+}
+[[ "$pack_url" != *example.invalid* ]] || {
+  echo "Configure a real PACK_URL_$channel in $config first." >&2
+  exit 1
+}
+
+root="${HASENCRAFT_ROOT:?HASENCRAFT_ROOT is required}"
+live="$root/server"
+backup_root="$root/backups"
+bootstrap="$root/tools/packwiz-installer-bootstrap.jar"
+java_bin="${JAVA_BIN:-/usr/bin/java}"
+expected_neoforge="${NEOFORGE_VERSION:?NEOFORGE_VERSION is required}"
+stamp="$(date -u +%Y%m%dT%H%M%SZ)"
+
+[[ "$root" == /srv/hasencraft ]] || {
+  echo "Unexpected HASENCRAFT_ROOT: $root" >&2
+  exit 1
+}
+[[ -d "$live" ]] || { echo "Missing server directory: $live" >&2; exit 1; }
+[[ -f "$bootstrap" ]] || { echo "Missing packwiz bootstrap: $bootstrap" >&2; exit 1; }
+[[ -x "$java_bin" ]] || { echo "Java is not executable: $java_bin" >&2; exit 1; }
+[[ "$(sha256sum "$bootstrap" | awk '{print $1}')" == a8fbb24dc604278e97f4688e82d3d91a318b98efc08d5dbfcbcbcab6443d116c ]] || {
+  echo "packwiz bootstrap hash mismatch." >&2
+  exit 1
+}
+
+exec 9>"$root/.lifecycle.lock"
+flock --nonblock 9 || { echo "Server or another lifecycle operation is active." >&2; exit 1; }
+
+if systemctl is-active --quiet hasencraft.service; then
+  echo "Stop hasencraft.service before deploying." >&2
+  exit 1
+fi
+
+pack_meta="$(mktemp --tmpdir hasencraft-pack.XXXXXXXXXX.toml)"
+tmp_backup=""
+cleanup() {
+  [[ -z "$pack_meta" ]] || rm -f -- "$pack_meta"
+  [[ -z "$tmp_backup" ]] || rm -f -- "$tmp_backup"
+}
+trap cleanup EXIT
+
+curl -fsSL --connect-timeout 15 --max-time 60 -o "$pack_meta" "$pack_url"
+declared_neoforge="$(awk -F '"' '/^[[:space:]]*neoforge[[:space:]]*=/ { print $2; exit }' "$pack_meta")"
+[[ -n "$declared_neoforge" ]] || { echo "Pack metadata has no NeoForge version." >&2; exit 1; }
+[[ "$declared_neoforge" == "$expected_neoforge" ]] || {
+  echo "Pack requires NeoForge $declared_neoforge, but this server has $expected_neoforge. Run the reviewed loader-upgrade procedure first." >&2
+  exit 1
+}
+
+mkdir -p "$backup_root"
+live_kib="$(du -sk "$live" | awk '{print $1}')"
+available_kib="$(df --output=avail -k "$backup_root" | tail -n 1 | tr -d '[:space:]')"
+reserve_kib=$((2 * 1024 * 1024))
+required_kib=$((live_kib + reserve_kib))
+if (( available_kib < required_kib )); then
+  echo "Not enough free space for a safe pre-update snapshot: need ${required_kib} KiB, have ${available_kib} KiB." >&2
+  exit 1
+fi
+
+tmp_backup="$backup_root/.pre-update-$stamp.tar.zst.tmp"
+backup="$backup_root/pre-update-$stamp.tar.zst"
+
+echo "Creating complete pre-update snapshot: $backup"
+tar --zstd -C "$live" -cf "$tmp_backup" .
+mv -T "$tmp_backup" "$backup"
+tmp_backup=""
+
+echo "Applying Hasencraft channel '$channel'"
+"$java_bin" \
+  -jar "$bootstrap" \
+  -g \
+  -s server \
+  --pack-folder "$live" \
+  --meta-file packwiz.json \
+  "$pack_url"
+
+[[ -f "$live/packwiz.json" ]] || {
+  echo "packwiz did not create $live/packwiz.json" >&2
+  exit 1
+}
+
+printf '%s\t%s\t%s\n' "$stamp" "$channel" "$pack_url" > "$root/.last-deploy"
+echo "Deployment completed. Start hasencraft.service after checking the output."

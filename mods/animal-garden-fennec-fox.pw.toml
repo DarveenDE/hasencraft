@@ -1,0 +1,14 @@
+name = "Animal Garden - Fennec Fox"
+filename = "animalgarden-fennecfox-1.0.1-neoforge-1.21.1-21.1.215.jar"
+side = "both"
+pin = true
+
+[download]
+url = "https://cdn.modrinth.com/data/BRO0Qo3Y/versions/1yeXUVxH/animalgarden-fennecfox-1.0.1-neoforge-1.21.1-21.1.215.jar"
+hash-format = "sha512"
+hash = "0cc5dce51dc864a4e32def9b5efefb90fc5305dc4dc4ea00440041363709911ada39b7f25568676495cfd73f8cc05417c5686f1b8948b935e2c0683691cefda1"
+
+[update]
+[update.modrinth]
+mod-id = "BRO0Qo3Y"
+version = "1yeXUVxH"

@@ -1,0 +1,22 @@
+name: Validate Hasencraft
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  packwiz:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.25.x"
+      - name: Install pinned packwiz toolchain
+        run: go install github.com/packwiz/packwiz@dfd8b68a4796
+      - name: Validate pack
+        shell: pwsh
+        run: ./scripts/validate-pack.ps1 -Packwiz "$HOME/go/bin/packwiz"

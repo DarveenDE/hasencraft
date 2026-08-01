@@ -1,0 +1,6 @@
+-Xms8G
+-Xmx12G
+-XX:+UseZGC
+-XX:+ZGenerational
+-XX:+UseStringDeduplication
+-Dfile.encoding=UTF-8

@@ -1,0 +1,7 @@
+[common.worldGenerator]
+	distantGeneratorMode = "FEATURES"
+	enableDistantGeneration = true
+
+[client.advanced.graphics.experimental]
+	ignoredDimensionCsv = "ae2:spatial_storage"
+	renderingEngine = "AUTO"

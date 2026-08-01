@@ -1,0 +1,14 @@
+name = "Animal Garden - Owl"
+filename = "animalgarden-owl-1.2.2-neoforge-1.21.1-21.1.206.jar"
+side = "both"
+pin = true
+
+[download]
+url = "https://cdn.modrinth.com/data/gMz0rZEq/versions/HmY1lxuI/animalgarden-owl-1.2.2-neoforge-1.21.1-21.1.206.jar"
+hash-format = "sha512"
+hash = "2d835a903dee402d81f185e8695a8e8e7385b37f10477e04f2392449cd49c9cbd620b58d1e62fe7678d0960249cb3277114e97aecdef0be0ed22a9ccdec498fd"
+
+[update]
+[update.modrinth]
+mod-id = "gMz0rZEq"
+version = "HmY1lxuI"

@@ -1,0 +1,26 @@
+[Unit]
+Description=Hasencraft NeoForge Server
+Wants=network-online.target
+After=network-online.target
+RequiresMountsFor=/srv/hasencraft
+
+[Service]
+Type=simple
+User=hasencraft
+Group=hasencraft
+WorkingDirectory=/srv/hasencraft/server
+UMask=0027
+ExecStart=/usr/bin/flock --no-fork --exclusive --nonblock /srv/hasencraft/.lifecycle.lock /usr/bin/bash /srv/hasencraft/server/run.sh nogui
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=2min
+SuccessExitStatus=0 143
+LimitNOFILE=65535
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/srv/hasencraft/server /srv/hasencraft/.lifecycle.lock
+
+[Install]
+WantedBy=multi-user.target

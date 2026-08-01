@@ -1,0 +1,15 @@
+packs.example.invalid {
+	encode zstd gzip
+	root * /srv/hasencraft-pack-host
+	file_server
+
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy no-referrer
+		# Release assets may be cached; channel pack.toml is revalidated by clients.
+		Cache-Control "public, max-age=300"
+	}
+
+	@immutable path /releases/*
+	header @immutable Cache-Control "public, max-age=31536000, immutable"
+}
