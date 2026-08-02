@@ -158,9 +158,8 @@ else {
 
 $serverPropertiesTemplate = Join-Path $repoRoot "server\server.properties.example"
 $serverPropertiesValues = @(
-    "view-distance=8",
-    "simulation-distance=4",
-    "spawn-chunk-radius=2"
+    "view-distance=5",
+    "simulation-distance=2"
 )
 if (-not (Test-Path -LiteralPath $serverPropertiesTemplate -PathType Leaf)) {
     Add-ValidationError "Missing server.properties template"

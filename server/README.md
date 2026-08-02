@@ -70,11 +70,12 @@ neu starten. Eine Weltvorabgenerierung erfolgt getrennt, begrenzt und vor dem
 Spielbetrieb; die Hintergrund-Neugenerierung nicht für einen laufenden Stream
 einschalten.
 
-Die Servervorlage verwendet außerdem `view-distance=8`,
-`simulation-distance=4` und `spawn-chunk-radius=2`. Das reduziert die dauerhaft
-tickenden Chunks auf dem 16-GiB-Streamserver deutlich. Für farm- oder
-redstoneintensive Welten die Werte erst nach einem Spark-Vergleichsprofil
-erhöhen.
+Die Servervorlage verwendet außerdem `view-distance=5` und
+`simulation-distance=2`. Das begrenzt gleichzeitige Chunk-Ladevorgänge und
+die dauerhaft tickende Umgebung auf dem 16-GiB-Streamserver. Die Spawn-Chunks
+werden pro Welt mit `/gamerule spawnChunkRadius 0` deaktiviert, nicht über
+`server.properties`. Für farm- oder redstoneintensive Welten die Werte erst
+nach einem Spark-Vergleichsprofil erhöhen.
 
 Vor Stable mit zwei bis vier gleichzeitig spielenden Clients eine neue Gegend
 erkunden und dabei TPS, Speicher sowie Chunk-Latenz beobachten. Bei einem
@@ -82,6 +83,13 @@ Spike im Chat oder in der Konsole `spark profiler start --timeout 300` ausführe
 die Situation nachstellen und den erzeugten Profil-Link dokumentieren. Keine
 aggressiveren ServerCore- oder Distant-Horizons-Threadwerte ohne Vergleichsprofil
 aktivieren.
+
+Zeigt ein Vergleichsprofil synchrone Chunk-Ladevorgänge auf dem Server-Thread,
+kann ServerCore vorübergehend mit
+`features.prevent-moving-into-unloaded-chunks: true` geschützt und per
+`/servercore reload` ohne Neustart geladen werden. An noch nicht geladenen
+Chunkgrenzen wird die Bewegung dann kurz korrigiert, statt den gesamten Server
+durch einen synchronen Ladevorgang anzuhalten.
 
 ## Rollback
 
