@@ -88,12 +88,26 @@ $repository = "DarveenDE/hasencraft"
 $fluffyUrl = "https://github.com/$repository/releases/download/v$stableVersion/Hasencraft-stable-fluffy.zip"
 $cozyUrl = "https://github.com/$repository/releases/download/v$stableVersion/Hasencraft-stable-cozy.zip"
 $ecoUrl = "https://github.com/$repository/releases/download/v$stableVersion/Hasencraft-stable-eco.zip"
+
+$stablePack = Get-Content -Raw -Encoding utf8 -LiteralPath (Join-Path $releasesRoot (Join-Path $stableVersion "pack.toml"))
+foreach ($key in @("minecraft", "neoforge")) {
+    if ($stablePack -notmatch "(?m)^\s*$key\s*=\s*`"([^`"]+)`"") {
+        throw "Release $stableVersion is missing the $key version in pack.toml"
+    }
+    Set-Variable -Name "$($key)Version" -Value $Matches[1]
+}
+
 $indexFile = Join-Path $destinationFull "index.html"
 $index = Get-Content -Raw -Encoding utf8 -LiteralPath $indexFile
 $index = $index.Replace("__STABLE_VERSION__", $stableVersion)
+$index = $index.Replace("__MINECRAFT_VERSION__", $minecraftVersion)
+$index = $index.Replace("__NEOFORGE_VERSION__", $neoforgeVersion)
 $index = $index.Replace("__FLUFFY_IMPORT_URL__", $fluffyUrl)
 $index = $index.Replace("__COZY_IMPORT_URL__", $cozyUrl)
 $index = $index.Replace("__ECO_IMPORT_URL__", $ecoUrl)
+if ($index -match '__[A-Z][A-Z0-9_]*__') {
+    throw "Unresolved placeholder in index.html: $($Matches[0])"
+}
 [System.IO.File]::WriteAllText($indexFile, $index, [System.Text.UTF8Encoding]::new($false))
 
 $publishedChannels = Join-Path $destinationFull "channels"

@@ -3,369 +3,941 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Hasencraft ist ein gemütliches Minecraft-Modpack für Technik, Tierchen, Magie und große Erkundungsziele.">
-  <meta name="theme-color" content="#09211f">
-  <link rel="icon" type="image/png" href="assets/hasencraft.png">
   <title>Hasencraft – Gemütlich bauen. Weit entdecken.</title>
+  <meta name="description" content="Hasencraft ist ein kuratiertes Minecraft-Modpack für __MINECRAFT_VERSION__: Create, Immersive Engineering, AE2, Ars Nouveau, Aether und ganz viele Tiere. In zwei Minuten über Prism Launcher installiert.">
+  <meta name="theme-color" content="#0d1310">
+  <link rel="icon" href="assets/hasencraft.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/hasencraft.png">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:site_name" content="Hasencraft">
+  <meta property="og:title" content="Hasencraft – gemütliches Minecraft-Modpack">
+  <meta property="og:description" content="Technik, Tiere, Magie und große Erkundungsziele für Minecraft __MINECRAFT_VERSION__. Ein Klick in Prism Launcher, Updates laufen automatisch.">
+  <meta property="og:url" content="https://darveende.github.io/hasencraft/">
+  <meta property="og:image" content="https://darveende.github.io/hasencraft/assets/galerie-aether.webp">
+  <meta property="og:image:alt" content="Weite Aether-Landschaft in Minecraft mit schwebenden Felsen am Himmel">
+  <meta name="twitter:card" content="summary_large_image">
   <style>
+    /* ---------------------------------------------------------------
+       Hasencraft Design System
+       Farbwerte nach docs/BRANDING.md: Nachtpetrol, Panel-Petrol, Teal,
+       Honig, Kupfer, Fellcreme. Die übrigen Töne sind daraus abgeleitet.
+       --------------------------------------------------------------- */
     :root {
       color-scheme: dark;
-      font-family: "Segoe UI", system-ui, sans-serif;
-      --ink: #071e1c;
-      --panel: #0d2b28;
-      --panel-soft: rgba(13, 43, 40, .88);
-      --cream: #fff6e5;
-      --muted: #c6d5cc;
-      --honey: #ffd166;
-      --copper: #d97941;
-      --teal: #2f8378;
-      --line: rgba(198, 213, 204, .23);
-      --focus: #fff6e5;
+
+      --ink:        #071e1c;
+      --night:      #0a2523;
+      --surface:    #0d2b28;
+      --surface-2:  #123531;
+      --line:       #1d4a44;
+      --line-soft:  #163a35;
+
+      --cream:      #fff6e5;
+      --muted:      #a8bdb8;
+
+      --honey:      #ffd166;
+      --copper:     #d97941;
+      --teal:       #2f8378;
+      /* Aufgehellte Teal-Variante für Flächen, die dunklen Text tragen –
+         das Marken-Teal selbst käme dort nicht auf AA-Kontrast. */
+      --teal-bright:#57b3a6;
+      --moss:       #8ec96f;
+      --blush:      #f4b7c3;
+
+      --radius-s: 10px;
+      --radius-m: 16px;
+      --radius-l: 24px;
+
+      --shadow-soft: 0 18px 40px -24px rgb(0 0 0 / 0.9);
+      --shadow-lift: 0 26px 60px -28px rgb(0 0 0 / 0.95);
+
+      --step: clamp(1rem, 0.6rem + 1.6vw, 1.5rem);
+      --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --mono: ui-monospace, SFMono-Regular, "Cascadia Mono", Consolas, "Liberation Mono", monospace;
     }
 
-    * { box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      min-width: 320px;
-      min-height: 100vh;
       margin: 0;
+      font-family: var(--font);
+      font-size: clamp(1rem, 0.96rem + 0.2vw, 1.075rem);
+      line-height: 1.65;
       color: var(--cream);
       background: var(--ink);
+      -webkit-font-smoothing: antialiased;
     }
 
-    body::before {
-      position: fixed;
-      z-index: -2;
-      inset: 0;
-      content: "";
-      background:
-        linear-gradient(180deg, rgba(4, 25, 24, .82) 0%, rgba(4, 25, 24, .57) 44%, rgba(4, 25, 24, .92) 100%),
-        url("assets/hasencraft-panorama.webp") center / cover;
+    h1, h2, h3 { line-height: 1.15; letter-spacing: -0.015em; margin: 0; text-wrap: balance; }
+    p { margin: 0; text-wrap: pretty; }
+    img { max-width: 100%; height: auto; }
+
+    a {
+      color: var(--moss);
+      text-decoration-color: color-mix(in srgb, var(--moss) 45%, transparent);
+      text-underline-offset: 3px;
+    }
+    a:hover { color: var(--honey); text-decoration-color: currentColor; }
+
+    :focus-visible {
+      outline: 3px solid var(--honey);
+      outline-offset: 3px;
+      border-radius: 6px;
     }
 
-    body::after {
-      position: fixed;
-      z-index: -1;
-      inset: 0;
-      content: "";
-      background: radial-gradient(circle at 50% 0%, rgba(255, 209, 102, .13), transparent 38%);
-      pointer-events: none;
-    }
+    .wrap { width: min(100% - 2.5rem, 1080px); margin-inline: auto; }
 
-    .page {
-      width: min(1120px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 40px 0 56px;
+    .skip {
+      position: absolute; left: -9999px; top: 0; z-index: 99;
+      padding: 0.75rem 1.25rem; background: var(--honey); color: var(--ink);
+      font-weight: 700; border-radius: 0 0 var(--radius-s) 0;
     }
+    .skip:focus { left: 0; }
 
-    .hero,
-    .content-section {
+    /* ---------------- Topbar ---------------- */
+    .topbar {
+      position: sticky; top: 0; z-index: 20;
+      background: color-mix(in srgb, var(--ink) 82%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .topbar__inner {
+      display: flex; align-items: center; gap: 1rem;
+      min-height: 64px; padding-block: 0.6rem;
+    }
+    .brand { display: flex; flex: none; align-items: center; gap: 0.7rem; font-weight: 800; letter-spacing: -0.02em; color: var(--cream); text-decoration: none; }
+    .brand:hover { color: var(--cream); }
+    .brand img { width: 36px; height: 36px; border-radius: 9px; image-rendering: pixelated; box-shadow: 0 0 0 1px var(--line); }
+    .brand span { font-size: 1.15rem; white-space: nowrap; }
+
+    .topnav { display: none; margin-left: auto; gap: 1.35rem; font-size: 0.93rem; }
+    .topnav a { color: var(--muted); text-decoration: none; }
+    .topnav a:hover { color: var(--cream); }
+
+    .pill {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.3rem 0.75rem; border-radius: 999px;
       border: 1px solid var(--line);
-      border-radius: 28px;
-      background: var(--panel-soft);
-      box-shadow: 0 18px 70px rgba(0, 0, 0, .24);
-      backdrop-filter: blur(9px);
+      background: var(--surface);
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.02em;
+      color: var(--muted);
+      white-space: nowrap;
     }
+    .pill--version { margin-left: auto; color: var(--cream); font-size: 0.78rem; }
+    .topnav + .pill--version { margin-left: 0; }
+    .pill__label { display: none; color: var(--muted); }
+    .dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--moss); box-shadow: 0 0 0 3px color-mix(in srgb, var(--moss) 22%, transparent); }
 
+    @media (min-width: 420px) { .pill__label { display: inline; } }
+    @media (min-width: 960px) { .topnav { display: flex; } }
+
+    /* ---------------- Hero ---------------- */
     .hero {
-      display: grid;
-      grid-template-columns: minmax(170px, 250px) minmax(0, 1fr);
-      align-items: center;
-      gap: clamp(24px, 5vw, 56px);
-      overflow: hidden;
-      padding: clamp(28px, 6vw, 64px);
+      position: relative; overflow: hidden; isolation: isolate;
+      padding-block: clamp(3.5rem, 8vw, 7rem) clamp(9rem, 20vw, 15rem);
     }
-
-    .brand-mark {
-      width: 100%;
-      max-width: 250px;
-      border-radius: 50%;
-      filter: drop-shadow(0 12px 24px rgba(0, 0, 0, .38));
+    /* Panorama aus dem Titelbildschirm, abgedunkelt: links ein Scrim, damit
+       Wortmarke und Fließtext auf jedem Bildausschnitt lesbar bleiben. */
+    .hero__sky {
+      position: absolute; inset: 0; z-index: -2;
+      background:
+        radial-gradient(1100px 620px at 18% 45%, rgb(7 30 28 / 0.82), rgb(7 30 28 / 0.15) 70%),
+        linear-gradient(180deg, rgb(7 30 28 / 0.62) 0%, rgb(7 30 28 / 0.3) 45%, var(--ink) 100%),
+        url("assets/hasencraft-panorama.webp") center / cover no-repeat,
+        var(--ink);
     }
+    .hero__fade { position: absolute; inset: auto 0 0 0; z-index: -1; height: 180px; background: linear-gradient(180deg, transparent, var(--ink)); }
 
     .eyebrow {
-      margin: 0 0 10px;
+      display: inline-flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
+      font-size: 0.82rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
       color: var(--honey);
-      font-size: .78rem;
-      font-weight: 800;
-      letter-spacing: .13em;
-      text-transform: uppercase;
     }
+    .eyebrow::before { content: ""; width: 28px; height: 2px; background: currentColor; opacity: 0.6; }
 
-    h1,
-    h2,
-    p { margin-top: 0; }
-
-    h1 {
-      margin-bottom: 14px;
-      font-size: clamp(2.5rem, 8vw, 5rem);
-      line-height: .95;
-      letter-spacing: -.055em;
-    }
-
-    .wordmark-heading {
-      width: min(100%, 540px);
-      margin-bottom: 14px;
-    }
-
+    .hero__title { margin-top: 1.1rem; }
     .wordmark {
       display: block;
-      width: 100%;
+      width: min(100%, 30rem);
       height: auto;
+      filter: drop-shadow(0 10px 26px rgb(0 0 0 / 0.55));
     }
 
     .visually-hidden {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
+      position: absolute; width: 1px; height: 1px;
+      margin: -1px; padding: 0; overflow: hidden;
+      clip-path: inset(50%); white-space: nowrap; border: 0;
+    }
+    .hero__lead {
+      margin-top: 1.1rem;
+      max-width: 46ch;
+      font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.3rem);
+      color: color-mix(in srgb, var(--cream) 86%, var(--muted));
     }
 
-    h2 {
-      margin-bottom: 10px;
-      font-size: clamp(1.4rem, 3vw, 2rem);
-    }
+    .hero__actions { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 2rem; }
 
-    .lede {
-      max-width: 61ch;
-      margin-bottom: 20px;
-      color: var(--muted);
-      font-size: clamp(1rem, 1.8vw, 1.15rem);
-      line-height: 1.55;
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+      padding: 0.85rem 1.4rem;
+      border: 1px solid transparent; border-radius: var(--radius-s);
+      font: inherit; font-weight: 700;
+      cursor: pointer; text-decoration: none;
+      transition: transform 120ms ease, background-color 160ms ease, border-color 160ms ease, color 160ms ease;
     }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+    .btn--primary { background: var(--honey); color: #1a1206; }
+    .btn--primary:hover { background: #ffd472; color: #1a1206; }
+    .btn--ghost { background: transparent; border-color: var(--line); color: var(--cream); }
+    .btn--ghost:hover { border-color: var(--moss); color: var(--cream); background: color-mix(in srgb, var(--moss) 10%, transparent); }
 
-    .version {
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-      margin: 0;
-      padding: 8px 12px;
-      border: 1px solid rgba(255, 209, 102, .45);
-      border-radius: 999px;
-      color: var(--cream);
-      background: rgba(7, 30, 28, .72);
-      font-size: .9rem;
+    /* Faktenband */
+    .facts {
+      position: relative;
+      border-block: 1px solid var(--line-soft);
+      background: var(--ink);
     }
-
-    .version strong { color: var(--honey); }
-
-    .content-section {
-      margin-top: 24px;
-      padding: clamp(26px, 5vw, 48px);
+    .facts__grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1px; background: var(--line-soft);
     }
+    .fact { background: var(--ink); padding: 1.15rem 1.25rem; }
+    .fact dt { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .fact dd { margin: 0.25rem 0 0; font-size: clamp(1.05rem, 0.9rem + 0.6vw, 1.35rem); font-weight: 700; letter-spacing: -0.02em; overflow-wrap: anywhere; }
+    @media (min-width: 760px) { .facts__grid { grid-template-columns: repeat(4, 1fr); } }
 
-    .section-copy {
-      max-width: 62ch;
-      color: var(--muted);
-      line-height: 1.55;
-    }
+    /* ---------------- Sections ---------------- */
+    section[id] { scroll-margin-top: 84px; }
+    .band { padding-block: clamp(3.5rem, 8vw, 6rem); }
+    .band--tint { background: linear-gradient(180deg, var(--ink), var(--night) 40%, var(--ink)); }
 
-    .profile-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 18px;
-      margin-top: 28px;
+    .band__head { max-width: 60ch; margin-bottom: clamp(2rem, 4vw, 3rem); }
+    .band__head h2 { font-size: clamp(1.8rem, 1.3rem + 2vw, 2.7rem); font-weight: 800; }
+    .band__head p { margin-top: 0.85rem; color: var(--muted); }
+    .kicker { display: block; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--moss); margin-bottom: 0.7rem; }
+
+    /* Schritte */
+    .steps { display: grid; gap: 1rem; padding: 0; margin: 0 0 clamp(2rem, 4vw, 3rem); list-style: none; counter-reset: step; }
+    @media (min-width: 820px) { .steps { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; } }
+    .step {
+      position: relative; counter-increment: step;
+      padding: 1.4rem 1.4rem 1.4rem 3.9rem;
+      border: 1px solid var(--line-soft); border-radius: var(--radius-m);
+      background: var(--surface);
     }
+    .step::before {
+      content: counter(step);
+      position: absolute; left: 1.25rem; top: 1.25rem;
+      display: grid; place-items: center;
+      width: 2rem; height: 2rem; border-radius: 8px;
+      background: color-mix(in srgb, var(--moss) 18%, transparent);
+      border: 1px solid color-mix(in srgb, var(--moss) 40%, transparent);
+      color: var(--moss); font-weight: 800; font-size: 0.95rem;
+    }
+    .step h3 { font-size: 1.05rem; font-weight: 700; }
+    .step p { margin-top: 0.35rem; color: var(--muted); font-size: 0.95rem; }
+
+    /* Profilkarten */
+    .profiles { display: grid; gap: 1.25rem; }
+    /* Drei Profile bleiben untereinander, bis alle drei nebeneinander passen –
+       zwei plus ein Waisenkind wäre schlechter vergleichbar. */
+    @media (min-width: 940px) { .profiles { grid-template-columns: repeat(3, 1fr); } }
 
     .profile {
-      display: flex;
-      flex-direction: column;
-      min-height: 100%;
-      padding: 24px;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      background: rgba(7, 30, 28, .63);
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column;
+      padding: clamp(1.5rem, 3vw, 2rem);
+      border: 1px solid var(--line); border-radius: var(--radius-l);
+      box-shadow: var(--shadow-soft);
+      transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+
+      /* Jede Karte zeigt einen anderen Ausschnitt desselben Panoramas – oben
+         links sichtbar, dann in die Kartenfläche auslaufend. Das Bild ist für
+         den Hero ohnehin geladen, kostet hier also keinen weiteren Request. */
+      --shot: 50% 30%;
+      background:
+        radial-gradient(120% 100% at 0% 0%, color-mix(in srgb, var(--accent) 22%, transparent) 0%, transparent 52%),
+        linear-gradient(145deg, rgb(7 30 28 / 0.2) 0%, rgb(7 30 28 / 0.55) 26%, rgb(13 43 40 / 0.94) 48%, var(--surface) 64%),
+        url("assets/hasencraft-panorama.webp") var(--shot) / 230% auto no-repeat,
+        linear-gradient(180deg, var(--surface-2), var(--surface));
+    }
+    .profile:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); box-shadow: var(--shadow-lift); }
+    .profile::before {
+      content: ""; position: absolute; inset: 0 0 auto 0; height: 4px;
+      background: linear-gradient(90deg, var(--accent), transparent 85%);
+    }
+    .profile--fluffy { --accent: var(--honey);      --accent-ink: #1a1206; --shot: 30% 26%; }
+    .profile--cozy   { --accent: var(--teal-bright); --accent-ink: #06201d; --shot: 52% 34%; }
+    .profile--eco    { --accent: var(--moss);       --accent-ink: #10200c; --shot: 78% 24%; }
+
+    /* Der Bildausschnitt hinter dem Kartenkopf ist je Profil unterschiedlich
+       hell – ein Schatten hält Kennzeichnung und Name in jedem Fall lesbar. */
+    .profile__top, .profile__desc { text-shadow: 0 1px 8px rgb(7 30 28 / 0.9); }
+    .profile__top { display: flex; align-items: center; gap: 0.85rem; }
+    .profile__icon {
+      display: grid; place-items: center; flex: none;
+      width: 44px; height: 44px; border-radius: 12px;
+      background: color-mix(in srgb, var(--accent) 16%, transparent);
+      border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
+      color: var(--accent);
+    }
+    .profile h3 { font-size: 1.5rem; font-weight: 800; }
+    .profile__tag { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+    .profile__desc { margin-top: 1rem; color: var(--muted); }
+
+    .req__title {
+      margin-top: 1.4rem;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent);
+    }
+    .req {
+      display: grid; grid-template-columns: auto 1fr; gap: 0.45rem 1rem;
+      margin: 0.7rem 0 1.7rem;
+      font-size: 0.91rem;
+    }
+    .req dt { color: var(--muted); }
+    .req dd { margin: 0; color: color-mix(in srgb, var(--cream) 82%, var(--muted)); }
+    @media (max-width: 460px) {
+      .req { grid-template-columns: 1fr; gap: 0.15rem; }
+      .req dd { margin-bottom: 0.55rem; }
     }
 
-    .profile h3 {
-      margin: 0 0 8px;
-      font-size: 1.45rem;
-    }
-
-    .profile p { color: var(--muted); line-height: 1.5; }
-
-    .profile-badge {
-      align-self: flex-start;
-      margin: 0 0 18px;
-      padding: 5px 9px;
-      border-radius: 999px;
-      color: var(--ink);
-      background: var(--honey);
-      font-size: .76rem;
-      font-weight: 800;
-    }
-
-    .profile--cozy .profile-badge { background: #a9d8a3; }
-    .profile--eco .profile-badge { background: #a8c7e8; }
-
-    button {
-      width: 100%;
-      margin-top: auto;
-      padding: 13px 16px;
-      border: 0;
-      border-radius: 12px;
-      color: var(--ink);
-      background: var(--honey);
-      cursor: pointer;
-      font: inherit;
-      font-weight: 800;
-    }
-
-    .profile--cozy button { background: #a9d8a3; }
-    .profile--eco button { background: #a8c7e8; }
-
-    button:hover { filter: brightness(1.06); }
-
-    button:focus-visible,
-    a:focus-visible,
-    summary:focus-visible {
-      outline: 3px solid var(--focus);
-      outline-offset: 3px;
-    }
+    .profile__cta { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
+    .btn--copy { background: var(--accent); color: var(--accent-ink); width: 100%; }
+    .btn--copy:hover { background: color-mix(in srgb, var(--accent) 82%, white); }
+    /* Der Erfolgszustand darf keine eigene Farbe bekommen – Eco ist bereits
+       moosgrün. Ein Ring plus geänderte Beschriftung trägt über alle drei. */
+    .btn--copy.is-copied { box-shadow: inset 0 0 0 2px var(--cream); }
+    .profile__alt { font-size: 0.88rem; color: var(--muted); }
+    .profile__alt a { color: var(--muted); }
+    .profile__alt a:hover { color: var(--honey); }
 
     .copy-status {
-      min-height: 1.5em;
-      margin: 11px 0 0;
-      color: var(--honey);
-      font-size: .9rem;
+      margin-top: 1.25rem; min-height: 1.5rem;
+      font-size: 0.93rem; color: var(--moss);
+    }
+    .copy-status:empty { margin-top: 0; }
+    .copy-status.is-error { color: var(--honey); }
+    .copy-fallback { display: none; margin-top: 0.75rem; }
+    .copy-fallback.is-visible { display: block; }
+    .copy-fallback input {
+      width: 100%; padding: 0.6rem 0.75rem;
+      font: inherit; font-family: var(--mono); font-size: 0.85rem;
+      color: var(--cream); background: var(--ink);
+      border: 1px solid var(--line); border-radius: var(--radius-s);
     }
 
-    details { margin-top: 12px; }
+    .note {
+      display: flex; gap: 0.9rem; align-items: flex-start;
+      margin-top: 1.5rem; padding: 1.1rem 1.25rem;
+      border: 1px solid color-mix(in srgb, var(--honey) 30%, var(--line));
+      border-left-width: 4px;
+      border-radius: var(--radius-m);
+      background: color-mix(in srgb, var(--honey) 7%, var(--surface));
+      font-size: 0.95rem;
+    }
+    .note svg { flex: none; color: var(--honey); margin-top: 0.2rem; }
+    .note strong { color: var(--cream); }
 
-    summary {
-      color: var(--muted);
-      cursor: pointer;
-      font-size: .9rem;
+    /* Inhaltskarten */
+    .cards { display: grid; gap: 1.1rem; }
+    @media (min-width: 700px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1000px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+
+    .card {
+      padding: 1.5rem;
+      border: 1px solid var(--line-soft); border-radius: var(--radius-m);
+      background: var(--surface);
+      transition: border-color 180ms ease, transform 180ms ease;
+    }
+    .card:hover { border-color: var(--line); transform: translateY(-2px); }
+    .card__icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; margin-bottom: 1rem; background: color-mix(in srgb, var(--tone) 15%, transparent); color: var(--tone); }
+    .card h3 { font-size: 1.15rem; font-weight: 700; }
+    .card p { margin-top: 0.5rem; color: var(--muted); font-size: 0.95rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; padding: 0; list-style: none; }
+    .chips li {
+      padding: 0.22rem 0.6rem; border-radius: 999px;
+      border: 1px solid var(--line); background: var(--night);
+      font-size: 0.78rem; color: color-mix(in srgb, var(--cream) 72%, var(--muted));
+    }
+    .card--tech { --tone: var(--copper); }
+    .card--pets { --tone: var(--blush); }
+    .card--magic { --tone: var(--teal); }
+    .card--explore { --tone: var(--moss); }
+    .card--mood { --tone: var(--honey); }
+    .card--quests { --tone: #9d8ff0; }
+
+    /* Galerie */
+    .gallery { display: grid; gap: 1.1rem; }
+    @media (min-width: 700px) {
+      .gallery { grid-template-columns: repeat(2, 1fr); }
+      .shot--wide { grid-column: 1 / -1; }
     }
 
-    code {
-      display: block;
-      margin-top: 10px;
-      padding: 10px;
-      overflow-wrap: anywhere;
-      border-radius: 8px;
-      color: var(--cream);
-      background: rgba(0, 0, 0, .24);
-      font-size: .78rem;
+    .shot {
+      margin: 0; overflow: hidden;
+      border: 1px solid var(--line-soft); border-radius: var(--radius-m);
+      background: var(--surface);
+      transition: border-color 180ms ease, transform 180ms ease;
+    }
+    .shot:hover { border-color: var(--line); transform: translateY(-2px); }
+    .shot__frame { position: relative; background: var(--ink); aspect-ratio: 16 / 9; }
+    .shot--wide .shot__frame { aspect-ratio: 21 / 9; }
+    .shot__frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .shot__frame::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      box-shadow: inset 0 0 42px rgb(0 0 0 / 0.28), inset 0 -1px 0 var(--line-soft);
+    }
+    .shot figcaption { padding: 1.1rem 1.2rem 1.25rem; }
+    .shot figcaption strong { display: block; font-size: 1.02rem; }
+    .shot figcaption p { margin-top: 0.35rem; font-size: 0.92rem; color: var(--muted); }
+    .shot__meta {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+      margin: 0.85rem 0 0; padding: 0; list-style: none;
+    }
+    .shot__meta li {
+      padding: 0.18rem 0.55rem; border-radius: 999px;
+      border: 1px solid var(--line); background: var(--night);
+      font-size: 0.75rem; color: var(--moss);
     }
 
-    .technical-links { margin-bottom: 0; }
-
-    .technical-links ul {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 20px;
-      padding: 0;
-      margin: 14px 0 0;
-      list-style: none;
+    /* Gut zu wissen */
+    .knowledge { display: grid; gap: 1.1rem; }
+    @media (min-width: 760px) { .knowledge { grid-template-columns: repeat(2, 1fr); } }
+    .know {
+      display: flex; gap: 0.9rem;
+      padding: 1.25rem;
+      border: 1px solid var(--line-soft); border-radius: var(--radius-m);
+      background: color-mix(in srgb, var(--surface) 60%, transparent);
     }
+    .know svg { flex: none; color: var(--moss); margin-top: 0.15rem; }
+    .know h3 { font-size: 1rem; font-weight: 700; }
+    .know p { margin-top: 0.3rem; font-size: 0.93rem; color: var(--muted); }
 
-    a { color: var(--honey); text-underline-offset: 3px; }
-
-    .footer-note {
-      margin: 26px 0 0;
-      color: var(--muted);
-      font-size: .9rem;
-      text-align: center;
+    /* Technik */
+    .tech { border: 1px solid var(--line-soft); border-radius: var(--radius-m); background: var(--surface); overflow: hidden; }
+    .tech + .tech { margin-top: 0.85rem; }
+    .tech > summary {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 1.1rem 1.25rem; cursor: pointer;
+      font-weight: 700; list-style: none;
     }
-
-    @media (max-width: 640px) {
-      .page { width: min(100% - 22px, 1120px); padding-top: 11px; }
-      .hero { grid-template-columns: 1fr; text-align: center; }
-      .brand-mark { width: 180px; margin: 0 auto; }
-      .version { justify-content: center; }
-      .technical-links ul { display: grid; gap: 12px; }
+    .tech > summary::-webkit-details-marker { display: none; }
+    .tech > summary::after {
+      content: ""; margin-left: auto;
+      width: 9px; height: 9px;
+      border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted);
+      transform: rotate(45deg); transition: transform 180ms ease;
     }
+    .tech[open] > summary::after { transform: rotate(-135deg); }
+    .tech__body { padding: 0 1.25rem 1.35rem; color: var(--muted); font-size: 0.95rem; }
+    .tech__body p + p { margin-top: 0.8rem; }
+    .tech__body code, .feed code { font-family: var(--mono); font-size: 0.87em; overflow-wrap: anywhere; }
+    .feed { display: grid; gap: 0.5rem; margin-top: 0.9rem; }
+    .feed a {
+      display: block; padding: 0.7rem 0.9rem;
+      border: 1px solid var(--line); border-radius: var(--radius-s);
+      background: var(--ink); text-decoration: none;
+    }
+    .feed a:hover { border-color: var(--moss); }
+    .feed strong { display: block; color: var(--cream); font-size: 0.85rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    .feed code { color: var(--moss); }
+
+    /* Footer */
+    .footer { border-top: 1px solid var(--line-soft); padding-block: 2.5rem 3rem; background: var(--night); }
+    .footer__inner { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; justify-content: space-between; }
+    .footer p { font-size: 0.88rem; color: var(--muted); max-width: 52ch; }
+    .footer nav { display: flex; flex-wrap: wrap; gap: 1.25rem; font-size: 0.9rem; }
 
     @media (prefers-reduced-motion: reduce) {
-      * { scroll-behavior: auto; }
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+      .btn:hover, .card:hover, .profile:hover { transform: none; }
     }
   </style>
 </head>
 <body>
-  <main class="page">
-    <header class="hero">
-      <img class="brand-mark" src="assets/hasencraft.png" width="256" height="256" alt="Das Hasencraft-Emblem: ein Blockstil-Hase mit Biene und Zahnrad.">
-      <div>
+  <a class="skip" href="#install">Direkt zur Installation</a>
+
+  <header class="topbar">
+    <div class="wrap topbar__inner">
+      <a class="brand" href="#top">
+        <img src="assets/hasencraft.png" alt="" width="36" height="36">
+        <span>Hasencraft</span>
+      </a>
+      <nav class="topnav" aria-label="Seitenbereiche">
+        <a href="#install">Installieren</a>
+        <a href="#inhalte">Inhalte</a>
+        <a href="#bilder">Bilder</a>
+        <a href="#wissen">Gut zu wissen</a>
+        <a href="#technik">Technik</a>
+      </nav>
+      <span class="pill pill--version"><span class="dot"></span><span class="pill__label">Stable</span> <span>__STABLE_VERSION__</span></span>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <div class="hero__sky" aria-hidden="true"></div>
+      <div class="hero__fade" aria-hidden="true"></div>
+
+      <div class="wrap">
         <p class="eyebrow">Gemütlich bauen. Weit entdecken.</p>
-        <h1 class="wordmark-heading"><span class="visually-hidden">Hasencraft</span><img class="wordmark" src="assets/hasencraft-wordmark.png" width="1024" height="256" alt=""></h1>
-        <p class="lede">Ein gemeinsames Minecraft-Modpack für Technik, Tierchen, Magie und große Erkundungsziele. Baue eine Basis, die sich nach Zuhause anfühlt – und entdecke, was dahinter liegt.</p>
-        <p class="version">Stable: <strong>Hasencraft __STABLE_VERSION__</strong></p>
-      </div>
-    </header>
-
-    <section class="content-section" aria-labelledby="install-heading">
-      <h2 id="install-heading">In Prism installieren</h2>
-      <p class="section-copy">In Prism Launcher <strong>Instanz hinzufügen → Importieren</strong> wählen, dann das passende Profil kopieren und einfügen. Alle drei enthalten dieselben Mods, Welten und Inhalte – nur die Grafikvorgaben unterscheiden sich.</p>
-
-      <div class="profile-grid">
-        <article class="profile">
-          <p class="profile-badge">Mehr Sichtweite</p>
-          <h3>Fluffy</h3>
-          <p>Für leistungsstarke Rechner: höhere Sichtweite und Shader-Details als Startpunkt.</p>
-          <button type="button" data-import-url="__FLUFFY_IMPORT_URL__" data-status-id="fluffy-status">Fluffy-Importadresse kopieren</button>
-          <p id="fluffy-status" class="copy-status" aria-live="polite"></p>
-          <details>
-            <summary>Importadresse manuell anzeigen</summary>
-            <code>__FLUFFY_IMPORT_URL__</code>
-          </details>
-        </article>
-
-        <article class="profile profile--cozy">
-          <p class="profile-badge">Gleiche Welt, sanftere Grafik</p>
-          <h3>Cozy</h3>
-          <p>Für ältere oder mittelstarke Rechner: zurückhaltendere Grafik- und Speicherwerte.</p>
-          <button type="button" data-import-url="__COZY_IMPORT_URL__" data-status-id="cozy-status">Cozy-Importadresse kopieren</button>
-          <p id="cozy-status" class="copy-status" aria-live="polite"></p>
-          <details>
-            <summary>Importadresse manuell anzeigen</summary>
-            <code>__COZY_IMPORT_URL__</code>
-          </details>
-        </article>
-
-        <article class="profile profile--eco">
-          <p class="profile-badge">Maximal sparsam</p>
-          <h3>Eco</h3>
-          <p>Für schwächere Rechner: geringere Sichtweite, 6 GiB Heap sowie kein Shader oder Fresh Animations beim ersten Start.</p>
-          <button type="button" data-import-url="__ECO_IMPORT_URL__" data-status-id="eco-status">Eco-Importadresse kopieren</button>
-          <p id="eco-status" class="copy-status" aria-live="polite"></p>
-          <details>
-            <summary>Importadresse manuell anzeigen</summary>
-            <code>__ECO_IMPORT_URL__</code>
-          </details>
-        </article>
+        <h1 class="hero__title">
+          <span class="visually-hidden">Hasencraft</span>
+          <img class="wordmark" src="assets/hasencraft-wordmark.png" width="1024" height="256" alt="" fetchpriority="high">
+        </h1>
+        <p class="hero__lead">
+          Ein gemeinsames Modpack für Technik, Tierchen, Magie und große Erkundungsziele.
+          Bau eine Basis, die sich nach Zuhause anfühlt – und entdecke, was dahinter liegt.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#install">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></svg>
+            Jetzt installieren
+          </a>
+          <a class="btn btn--ghost" href="#inhalte">Was drin ist</a>
+        </div>
       </div>
     </section>
 
-    <section class="content-section technical-links" aria-labelledby="links-heading">
-      <h2 id="links-heading">Technische Links</h2>
-      <ul>
-        <li><a href="channels/stable/pack.toml">Stable packwiz feed</a></li>
-        <li><a href="channels/beta/pack.toml">Beta packwiz feed</a></li>
-        <li><a href="https://github.com/DarveenDE/hasencraft/releases">Prism-Pakete und Releases</a></li>
-      </ul>
+    <div class="facts">
+      <div class="wrap">
+        <dl class="facts__grid">
+          <div class="fact"><dt>Mods</dt><dd>über 150 kuratiert</dd></div>
+          <div class="fact"><dt>Minecraft</dt><dd>__MINECRAFT_VERSION__</dd></div>
+          <div class="fact"><dt>NeoForge</dt><dd>__NEOFORGE_VERSION__</dd></div>
+          <div class="fact"><dt>Updates</dt><dd>automatisch</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <!-- ================= INSTALL ================= -->
+    <section class="band" id="install">
+      <div class="wrap">
+        <div class="band__head">
+          <span class="kicker">Installation</span>
+          <h2>In zwei Minuten spielbereit</h2>
+          <p>
+            Hasencraft läuft über den <a href="https://prismlauncher.org/" rel="noopener">Prism Launcher</a>.
+            Du kopierst eine Importadresse, fügst sie in Prism ein – den Rest erledigt der Launcher.
+          </p>
+        </div>
+
+        <ol class="steps">
+          <li class="step">
+            <h3>Prism vorbereiten</h3>
+            <p>Prism Launcher installieren und dein Microsoft-Konto anmelden. Java 21 richtet Prism selbst ein.</p>
+          </li>
+          <li class="step">
+            <h3>Adresse kopieren</h3>
+            <p>Unten das passende Profil wählen und die Importadresse in die Zwischenablage kopieren.</p>
+          </li>
+          <li class="step">
+            <h3>In Prism importieren</h3>
+            <p><strong>Instanz hinzufügen → Importieren</strong>, Adresse einfügen, einmal starten. Fertig.</p>
+          </li>
+        </ol>
+
+        <div class="profiles">
+          <article class="profile profile--fluffy">
+            <div class="profile__top">
+              <span class="profile__icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-9 12h7l-1 8 9-12h-7z"/></svg>
+              </span>
+              <div>
+                <span class="profile__tag">Volle Details</span>
+                <h3>Fluffy</h3>
+              </div>
+            </div>
+            <p class="profile__desc">Weite Sicht, volle Shader-Details. Für Rechner, die Reserven haben.</p>
+            <p class="req__title">Mindestens empfohlen</p>
+            <dl class="req">
+              <dt>Grafik</dt><dd>AMD RX 7800 XT · NVIDIA RTX 4070</dd>
+              <dt>Arbeitsspeicher</dt><dd>32 GB</dd>
+              <dt>Profil setzt</dt><dd>10 GiB Heap · 14 Chunks · DH 256 · Shader auf High</dd>
+            </dl>
+            <div class="profile__cta">
+              <button class="btn btn--copy" type="button" data-import-url="__FLUFFY_IMPORT_URL__" data-label="Fluffy-Importadresse kopieren">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <span>Fluffy-Importadresse kopieren</span>
+              </button>
+              <p class="profile__alt">oder <a href="__FLUFFY_IMPORT_URL__">ZIP direkt herunterladen</a></p>
+            </div>
+          </article>
+
+          <article class="profile profile--cozy">
+            <div class="profile__top">
+              <span class="profile__icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M9.5 20v-5h5v5"/></svg>
+              </span>
+              <div>
+                <span class="profile__tag">Ausgewogen</span>
+                <h3>Cozy</h3>
+              </div>
+            </div>
+            <p class="profile__desc">Dieselbe Welt, ruhigere Grafik. Die passende Wahl für die meisten Rechner.</p>
+            <p class="req__title">Mindestens empfohlen</p>
+            <dl class="req">
+              <dt>Grafik</dt><dd>AMD RX 6600 · NVIDIA GTX 1080 oder RTX 3060</dd>
+              <dt>Arbeitsspeicher</dt><dd>16 GB</dd>
+              <dt>Profil setzt</dt><dd>8 GiB Heap · 10 Chunks · DH 96–128 · Shader auf Medium</dd>
+            </dl>
+            <div class="profile__cta">
+              <button class="btn btn--copy" type="button" data-import-url="__COZY_IMPORT_URL__" data-label="Cozy-Importadresse kopieren">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <span>Cozy-Importadresse kopieren</span>
+              </button>
+              <p class="profile__alt">oder <a href="__COZY_IMPORT_URL__">ZIP direkt herunterladen</a></p>
+            </div>
+          </article>
+
+          <article class="profile profile--eco">
+            <div class="profile__top">
+              <span class="profile__icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
+              </span>
+              <div>
+                <span class="profile__tag">Maximal sparsam</span>
+                <h3>Eco</h3>
+              </div>
+            </div>
+            <p class="profile__desc">Startet bewusst ohne Shader. Läuft auch da, wo es sonst eng wird – dazuschalten kannst du später jederzeit.</p>
+            <p class="req__title">Mindestens empfohlen</p>
+            <dl class="req">
+              <dt>Grafik</dt><dd>AMD RX 570 · NVIDIA GTX 1060</dd>
+              <dt>Arbeitsspeicher</dt><dd>12 GB</dd>
+              <dt>Profil setzt</dt><dd>6 GiB Heap · 8 Chunks · DH 64 · ohne Shader</dd>
+            </dl>
+            <div class="profile__cta">
+              <button class="btn btn--copy" type="button" data-import-url="__ECO_IMPORT_URL__" data-label="Eco-Importadresse kopieren">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <span>Eco-Importadresse kopieren</span>
+              </button>
+              <p class="profile__alt">oder <a href="__ECO_IMPORT_URL__">ZIP direkt herunterladen</a></p>
+            </div>
+          </article>
+        </div>
+
+        <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+        <div class="copy-fallback" id="copy-fallback">
+          <label for="copy-input">Importadresse manuell kopieren:</label>
+          <input id="copy-input" type="text" readonly value="">
+        </div>
+
+        <div class="note">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-6.2-8.6"/><path d="m9 12 2 2 5-5"/></svg>
+          <p>
+            <strong>Alle drei Profile enthalten dieselben Spielinhalte.</strong>
+            Sie unterscheiden sich nur bei lokalen Grafik-, Resourcepack- und Speicherwerten – ihr spielt problemlos zusammen.
+            Die Hardwareangaben sind Richtwerte: Im Zweifel mit Cozy anfangen und von dort nach oben oder unten wechseln.
+            Nach dem ersten Import werden Updates bei jedem Start automatisch installiert.
+          </p>
+        </div>
+      </div>
     </section>
 
-    <p class="footer-note">Mod-Dateien werden von ihren offiziellen Quellen geladen.</p>
+    <!-- ================= INHALTE ================= -->
+    <section class="band band--tint" id="inhalte">
+      <div class="wrap">
+        <div class="band__head">
+          <span class="kicker">Inhalte</span>
+          <h2>Was dich erwartet</h2>
+          <p>Über 150 Mods, aufeinander abgestimmt statt einfach zusammengeworfen. Sechs Schwerpunkte, ein gemeinsames Tempo.</p>
+        </div>
+
+        <div class="cards">
+          <article class="card card--tech">
+            <span class="card__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M4.9 4.9l2.2 2.2m9.8 9.8 2.2 2.2M19.1 4.9l-2.2 2.2M7.1 16.9l-2.2 2.2"/></svg>
+            </span>
+            <h3>Technik</h3>
+            <p>Von der ersten Handkurbel bis zur vollautomatischen Fabrik. Create als Herzstück, Mekanism und AE2 für den späten Ausbau.</p>
+            <ul class="chips"><li>Create</li><li>Immersive Engineering</li><li>Applied Energistics 2</li><li>Mekanism</li></ul>
+          </article>
+
+          <article class="card card--pets">
+            <span class="card__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-3.5 0-6-2.2-6-4.8 0-2 1.6-3.4 3.2-4.4C10.6 11 11 10 12 10s1.4 1 2.8 1.8C16.4 12.8 18 14.2 18 16.2 18 18.8 15.5 21 12 21Z"/><circle cx="6.5" cy="7.5" r="2"/><circle cx="17.5" cy="7.5" r="2"/><circle cx="11" cy="4.5" r="1.8"/></svg>
+            </span>
+            <h3>Tiere</h3>
+            <p>Hamster, Hunde, Otter, Bienen und ein ganzer Zoo an neuen Nachbarn – inklusive sicherem Zuhause und Betten für alle.</p>
+            <ul class="chips"><li>Naturalist</li><li>Doggy Talents Next</li><li>Adorable Hamster Pets</li><li>Animal Garden</li><li>Productive Bees</li></ul>
+          </article>
+
+          <article class="card card--magic">
+            <span class="card__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 19 9-9"/><path d="m13 5 2 2-3 3-2-2z"/><path d="M18 3v4M16 5h4M18 15v3M16.5 16.5h3"/></svg>
+            </span>
+            <h3>Magie</h3>
+            <p>Eigene Zauber bauen, Rituale wirken und Magie mit Maschinen verzahnen. Ars Nouveau spricht direkt mit Create.</p>
+            <ul class="chips"><li>Ars Nouveau</li><li>Ars Creo</li></ul>
+          </article>
+
+          <article class="card card--explore">
+            <span class="card__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg>
+            </span>
+            <h3>Erkundung</h3>
+            <p>Größere Berge, neue Biome, bewohnte Ruinen – und mit Aether, Twilight Forest und Bumblezone drei ganze Dimensionen extra.</p>
+            <ul class="chips"><li>Tectonic</li><li>Regions Unexplored</li><li>Aether</li><li>Twilight Forest</li><li>YUNG's Structures</li></ul>
+          </article>
+
+          <article class="card card--mood">
+            <span class="card__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h18"/><path d="M6 17V9l6-5 6 5v8"/><path d="M9 17v-4h6v4"/></svg>
+            </span>
+            <h3>Atmosphäre</h3>
+            <p>Shader, echte Fernsicht bis zum Horizont, lebendige Tieranimationen und Waldgeräusche, die nach Feierabend klingen.</p>
+            <ul class="chips"><li>Distant Horizons</li><li>Complementary Reimagined</li><li>Fresh Animations</li><li>AmbientSounds</li></ul>
+          </article>
+
+          <article class="card card--quests">
+            <span class="card__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h8M8 11h6"/></svg>
+            </span>
+            <h3>Zusammen spielen</h3>
+            <p>Quests führen sanft durch den Einstieg, Sprachchat und Wegpunkte halten die Gruppe zusammen. Dein Bauplatz lässt sich als Claim schützen – gemeinsam bauen heißt nicht, dass jemand dein Dach abträgt.</p>
+            <ul class="chips"><li>FTB Quests</li><li>FTB Chunks</li><li>Simple Voice Chat</li><li>Xaero's Map</li><li>Waystones</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= GALERIE ================= -->
+    <section class="band" id="bilder">
+      <div class="wrap">
+        <div class="band__head">
+          <span class="kicker">Bilder</span>
+          <h2>Ein Blick in die Welt</h2>
+          <p>
+            Nichts davon ist gestellt. Alles hier haben Leute gebaut, gefunden oder
+            zum Laufen gebracht, die mit demselben Pack angefangen haben wie du gleich.
+          </p>
+        </div>
+
+        <div class="gallery">
+          <!-- 1 – Aether (Foto) -->
+          <figure class="shot shot--wide">
+            <div class="shot__frame">
+              <img src="assets/galerie-aether.webp" width="1920" height="1010" loading="lazy" decoding="async"
+                   alt="Weite Landschaft in blassen Blau- und Grüntönen mit schwebenden Felsbrocken am Himmel und hellem Boden">
+            </div>
+            <figcaption>
+              <strong>Und dann stehst du plötzlich hier</strong>
+              <p>Drei zusätzliche Dimensionen warten darauf, dass du sie findest. Der Aether ist nur die erste – und der Moment, in dem du das erste Mal hindurchgehst, gehört zu den besten im ganzen Pack.</p>
+              <ul class="shot__meta"><li>Aether</li><li>Twilight Forest</li><li>Bumblezone</li></ul>
+            </figcaption>
+          </figure>
+
+          <!-- 2 – Magierturm (Foto) -->
+          <figure class="shot">
+            <div class="shot__frame">
+              <img src="assets/galerie-magierturm.webp" width="1280" height="720" loading="lazy" decoding="async"
+                   alt="Hoher Turm aus dunklem Stein mit leuchtenden Portalen und Laternen, dahinter Kirschblütenwald und ein Fluss">
+            </div>
+            <figcaption>
+              <strong>Bau das, was du im Kopf hast</strong>
+              <p>Irgendwann reicht die Erdhütte nicht mehr. Ein paar hundert Blockvarianten, Möbel, Laternen und Magie später steht da genau der Turm, den du dir vorgenommen hattest.</p>
+              <ul class="shot__meta"><li>Ars Nouveau</li><li>Chipped</li><li>Another Furniture</li></ul>
+            </figcaption>
+          </figure>
+
+          <!-- 3 – Bienenwand (Foto) -->
+          <figure class="shot">
+            <div class="shot__frame">
+              <img src="assets/galerie-bienen.webp" width="1280" height="720" loading="lazy" decoding="async"
+                   alt="Große Wand aus Honigwaben in einem Hang, davor fliegt eine Biene im Gegenlicht">
+            </div>
+            <figcaption>
+              <strong>Es fängt mit einem Volk an</strong>
+              <p>Dann sind es fünf, dann produzieren sie für dich, und irgendwann ist aus der Imkerei ein Bauprojekt geworden. Niemand plant das – es passiert einfach.</p>
+              <ul class="shot__meta"><li>Productive Bees</li><li>Automatisierung</li></ul>
+            </figcaption>
+          </figure>
+
+          <!-- 4 – Fernsicht (Foto) -->
+          <figure class="shot">
+            <div class="shot__frame">
+              <img src="assets/galerie-fernsicht.webp" width="860" height="484" loading="lazy" decoding="async"
+                   alt="Sonnenaufgang über bewaldeten Hügeln, Nebelschwaden in den Tälern, eine Biene fliegt durchs Bild">
+            </div>
+            <figcaption>
+              <strong>Lauf einfach los</strong>
+              <p>Der Berg am Horizont ist wirklich da, und du kannst hin. Morgens aufbrechen, ohne zu wissen, wo du abends schläfst – genau dafür ist dieses Pack gebaut.</p>
+              <ul class="shot__meta"><li>Distant Horizons</li><li>Complementary Reimagined</li></ul>
+            </figcaption>
+          </figure>
+
+          <!-- 5 – Create-Fabrik (Foto) -->
+          <figure class="shot">
+            <div class="shot__frame">
+              <img src="assets/galerie-create.webp" width="1280" height="800" loading="lazy" decoding="async"
+                   alt="Reihe mechanischer Pressen über einem Förderband, daneben eine hohe Maschinenkonstruktion auf einer Wiese">
+            </div>
+            <figcaption>
+              <strong>Irgendwann läuft es ohne dich</strong>
+              <p>Erst kurbelst du von Hand. Dann steht die erste Presse, dann eine ganze Halle. Und dann sitzt du daneben, schaust zu und musst nichts mehr tun.</p>
+              <ul class="shot__meta"><li>Create</li><li>Immersive Engineering</li><li>Mekanism</li></ul>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= GUT ZU WISSEN ================= -->
+    <section class="band" id="wissen">
+      <div class="wrap">
+        <div class="band__head">
+          <span class="kicker">Gut zu wissen</span>
+          <h2>Vier Dinge vor dem ersten Start</h2>
+        </div>
+
+        <div class="knowledge">
+          <div class="know">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg>
+            <div>
+              <h3>Mods nicht selbst aktualisieren</h3>
+              <p>Das Pack ist eine getestete Kombination. „Alle aktualisieren“ in Prism kann Server-Verbindung und Shader brechen – der Updater erledigt das beim Start.</p>
+            </div>
+          </div>
+          <div class="know">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10a7 7 0 0 1-14 0"/><path d="M12 17v4"/></svg>
+            <div>
+              <h3>Mikrofon freigeben</h3>
+              <p>Für den Sprachchat braucht Minecraft Zugriff auf dein Mikrofon. Die Abfrage erscheint meist beim ersten Betreten des Servers.</p>
+            </div>
+          </div>
+          <div class="know">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16l-7-4z"/></svg>
+            <div>
+              <h3>Deine Einstellungen bleiben</h3>
+              <p>Tastenbelegung, Screenshots, Xaero-Karten samt Wegpunkten und die Distant-Horizons-Caches überstehen jedes Pack-Update.</p>
+            </div>
+          </div>
+          <div class="know">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.4 1 2.5h6c0-1.1.3-1.8 1-2.5A6 6 0 0 0 12 3z"/><path d="M10 19h4M11 22h2"/></svg>
+            <div>
+              <h3>Wenn es ruckelt</h3>
+              <p>Erst die LoD-Distanz von Distant Horizons senken, dann die Shader-Details. Hilft das nicht, wechsle auf Cozy – und wenn es dann immer noch hakt, auf Eco.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TECHNIK ================= -->
+    <section class="band band--tint" id="technik">
+      <div class="wrap">
+        <div class="band__head">
+          <span class="kicker">Für Neugierige</span>
+          <h2>Technik &amp; Feeds</h2>
+          <p>Alles, was du zum Spielen brauchst, steht oben. Hier liegt der Unterbau – für alle, die es genau wissen wollen.</p>
+        </div>
+
+        <details class="tech">
+          <summary>packwiz-Feeds</summary>
+          <div class="tech__body">
+            <p>Die Instanzen ziehen ihren Stand direkt aus diesen Feeds. Der Stable-Kanal ist der freigegebene Spielstand, Beta dient dem Test vor einer Freigabe.</p>
+            <div class="feed">
+              <a href="channels/stable/pack.toml"><strong>Stable</strong><code>channels/stable/pack.toml</code></a>
+              <a href="channels/beta/pack.toml"><strong>Beta</strong><code>channels/beta/pack.toml</code></a>
+            </div>
+          </div>
+        </details>
+
+        <details class="tech">
+          <summary>Releases &amp; Prüfsummen</summary>
+          <div class="tech__body">
+            <p>Jede Version wird als unveränderliches Release abgelegt, inklusive SHA-256-Summen für alle Pakete.</p>
+            <div class="feed">
+              <a href="https://github.com/DarveenDE/hasencraft/releases" rel="noopener"><strong>GitHub Releases</strong><code>Prism-Pakete, Changelog, SHA256SUMS</code></a>
+            </div>
+          </div>
+        </details>
+
+        <details class="tech">
+          <summary>Woher die Mods kommen</summary>
+          <div class="tech__body">
+            <p>Hasencraft verteilt keine fremden Mod-Dateien. Der Launcher lädt jede Datei bei jedem Update von der offiziellen Quelle – Modrinth oder CurseForge – und prüft sie gegen die hinterlegte Prüfsumme.</p>
+            <p>Die vollständige Liste aller Inhalte steht in der <a href="https://github.com/DarveenDE/hasencraft/blob/main/docs/MODLIST.md" rel="noopener">Modliste</a>, ausführliche Grafikhinweise in der <a href="https://github.com/DarveenDE/hasencraft/blob/main/docs/INSTALL-CLIENT.md" rel="noopener">Installationshilfe</a>.</p>
+          </div>
+        </details>
+
+        <details class="tech">
+          <summary>Hilfe bei Problemen</summary>
+          <div class="tech__body">
+            <p>Schick dem Team einen Screenshot der Fehlermeldung und – wenn möglich – die angezeigte Hasencraft-Version mit. Bitte keine Dateien im <code>mods</code>-Ordner löschen: mit dem Originalzustand lässt sich der Fehler deutlich schneller nachvollziehen.</p>
+          </div>
+        </details>
+      </div>
+    </section>
   </main>
 
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <p>
+        Hasencraft ist ein privat gepflegtes Modpack für Minecraft __MINECRAFT_VERSION__.
+        Mod-Dateien werden von ihren offiziellen Quellen geladen; alle Rechte liegen bei den jeweiligen Autorinnen und Autoren.
+      </p>
+      <nav aria-label="Weiterführende Links">
+        <a href="https://github.com/DarveenDE/hasencraft" rel="noopener">GitHub</a>
+        <a href="https://github.com/DarveenDE/hasencraft/releases" rel="noopener">Releases</a>
+        <a href="https://prismlauncher.org/" rel="noopener">Prism Launcher</a>
+      </nav>
+    </div>
+  </footer>
+
   <script>
-    document.querySelectorAll("[data-import-url]").forEach((button) => {
-      const status = document.getElementById(button.dataset.statusId);
-      button.addEventListener("click", async () => {
-        try {
-          await navigator.clipboard.writeText(button.dataset.importUrl);
-          status.textContent = "Importadresse kopiert – jetzt in Prism einfügen.";
-        } catch {
-          status.textContent = "Kopieren nicht möglich. Bitte die sichtbare Importadresse manuell übernehmen.";
-        }
+    (() => {
+      const status = document.getElementById('copy-status');
+      const fallback = document.getElementById('copy-fallback');
+      const fallbackInput = document.getElementById('copy-input');
+      const buttons = Array.from(document.querySelectorAll('[data-import-url]'));
+      const timers = new Map();
+
+      // Jeder Knopf hat seinen eigenen Timer. Beim Klick werden zuerst alle
+      // zurückgesetzt, damit nie zwei gleichzeitig „Kopiert!“ anzeigen – in der
+      // Zwischenablage liegt schließlich nur eine Adresse.
+      const reset = (button) => {
+        clearTimeout(timers.get(button));
+        timers.delete(button);
+        button.classList.remove('is-copied');
+        const label = button.querySelector('span');
+        if (label) label.textContent = button.dataset.label;
+      };
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', async () => {
+          const url = button.dataset.importUrl;
+          buttons.forEach(reset);
+
+          try {
+            await navigator.clipboard.writeText(url);
+            const label = button.querySelector('span');
+            button.classList.add('is-copied');
+            if (label) label.textContent = 'Kopiert!';
+            status.classList.remove('is-error');
+            status.textContent = 'Importadresse kopiert – in Prism auf „Instanz hinzufügen → Importieren“ einfügen.';
+            fallback.classList.remove('is-visible');
+
+            timers.set(button, setTimeout(() => reset(button), 2600));
+          } catch {
+            status.classList.add('is-error');
+            status.textContent = 'Kopieren hat nicht geklappt – bitte die Adresse unten von Hand kopieren.';
+            fallbackInput.value = url;
+            fallback.classList.add('is-visible');
+            fallbackInput.focus();
+            fallbackInput.select();
+          }
+        });
       });
-    });
+    })();
   </script>
 </body>
 </html>

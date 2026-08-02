@@ -4,6 +4,10 @@ Alle relevanten Änderungen an Mods, Konfiguration, Quests und Serveranforderung
 
 ## Unreleased
 
+- Installationsseite neu gestaltet: Hero mit Wortmarke und Panorama, Profilvergleich Fluffy/Cozy/Eco, Inhaltsübersicht, Bildergalerie und aufklappbarer Technikbereich.
+- Minecraft- und NeoForge-Version werden beim Bauen der Seite aus der `pack.toml` des Stable-Snapshots eingesetzt; unaufgelöste Platzhalter lassen den Build fehlschlagen.
+- Designkonzept in `docs/DESIGN.md` dokumentiert.
+
 - FastSuite mit Placebo, Structure Layout Optimizer mit Resourceful Config sowie ServerCore als gepinnte Performance-Grundlage ergänzt.
 - Distant Horizons auf dem Server mit 256-Chunks-Grenzen sowie fairen Anfrage- und Bandbreitenlimits abgesichert.
 - Das Prism-Profil `eco` für schwächere Rechner ergänzt und den Release-/Pages-Ablauf auf drei Profile erweitert.
