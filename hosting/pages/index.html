@@ -3,50 +3,366 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hasencraft</title>
+  <meta name="description" content="Hasencraft ist ein gemütliches Minecraft-Modpack für Technik, Tierchen, Magie und große Erkundungsziele.">
+  <meta name="theme-color" content="#09211f">
+  <link rel="icon" type="image/png" href="assets/hasencraft.png">
+  <title>Hasencraft – Gemütlich bauen. Weit entdecken.</title>
   <style>
-    :root { color-scheme: dark; font-family: system-ui, sans-serif; }
-    body { max-width: 720px; margin: 10vh auto; padding: 0 24px; background: #171312; color: #f7eee8; }
-    main { padding: 36px; border: 1px solid #604b41; border-radius: 24px; background: #211a18; }
-    h1 { color: #f4b7c3; }
-    a { color: #a9d8a3; }
-    code { overflow-wrap: anywhere; }
-    .install { margin: 8px 8px 8px 0; padding: 12px 16px; border: 0; border-radius: 12px; background: #a9d8a3; color: #182116; cursor: pointer; font: inherit; font-weight: 700; }
-    .muted { color: #b9aaa2; }
+    :root {
+      color-scheme: dark;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      --ink: #071e1c;
+      --panel: #0d2b28;
+      --panel-soft: rgba(13, 43, 40, .88);
+      --cream: #fff6e5;
+      --muted: #c6d5cc;
+      --honey: #ffd166;
+      --copper: #d97941;
+      --teal: #2f8378;
+      --line: rgba(198, 213, 204, .23);
+      --focus: #fff6e5;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      color: var(--cream);
+      background: var(--ink);
+    }
+
+    body::before {
+      position: fixed;
+      z-index: -2;
+      inset: 0;
+      content: "";
+      background:
+        linear-gradient(180deg, rgba(4, 25, 24, .82) 0%, rgba(4, 25, 24, .57) 44%, rgba(4, 25, 24, .92) 100%),
+        url("assets/hasencraft-panorama.webp") center / cover;
+    }
+
+    body::after {
+      position: fixed;
+      z-index: -1;
+      inset: 0;
+      content: "";
+      background: radial-gradient(circle at 50% 0%, rgba(255, 209, 102, .13), transparent 38%);
+      pointer-events: none;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+
+    .hero,
+    .content-section {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: var(--panel-soft);
+      box-shadow: 0 18px 70px rgba(0, 0, 0, .24);
+      backdrop-filter: blur(9px);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(170px, 250px) minmax(0, 1fr);
+      align-items: center;
+      gap: clamp(24px, 5vw, 56px);
+      overflow: hidden;
+      padding: clamp(28px, 6vw, 64px);
+    }
+
+    .brand-mark {
+      width: 100%;
+      max-width: 250px;
+      border-radius: 50%;
+      filter: drop-shadow(0 12px 24px rgba(0, 0, 0, .38));
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--honey);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 14px;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      line-height: .95;
+      letter-spacing: -.055em;
+    }
+
+    .wordmark-heading {
+      width: min(100%, 540px);
+      margin-bottom: 14px;
+    }
+
+    .wordmark {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+    }
+
+    .lede {
+      max-width: 61ch;
+      margin-bottom: 20px;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      line-height: 1.55;
+    }
+
+    .version {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      margin: 0;
+      padding: 8px 12px;
+      border: 1px solid rgba(255, 209, 102, .45);
+      border-radius: 999px;
+      color: var(--cream);
+      background: rgba(7, 30, 28, .72);
+      font-size: .9rem;
+    }
+
+    .version strong { color: var(--honey); }
+
+    .content-section {
+      margin-top: 24px;
+      padding: clamp(26px, 5vw, 48px);
+    }
+
+    .section-copy {
+      max-width: 62ch;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .profile {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(7, 30, 28, .63);
+    }
+
+    .profile h3 {
+      margin: 0 0 8px;
+      font-size: 1.45rem;
+    }
+
+    .profile p { color: var(--muted); line-height: 1.5; }
+
+    .profile-badge {
+      align-self: flex-start;
+      margin: 0 0 18px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      color: var(--ink);
+      background: var(--honey);
+      font-size: .76rem;
+      font-weight: 800;
+    }
+
+    .profile--cozy .profile-badge { background: #a9d8a3; }
+    .profile--eco .profile-badge { background: #a8c7e8; }
+
+    button {
+      width: 100%;
+      margin-top: auto;
+      padding: 13px 16px;
+      border: 0;
+      border-radius: 12px;
+      color: var(--ink);
+      background: var(--honey);
+      cursor: pointer;
+      font: inherit;
+      font-weight: 800;
+    }
+
+    .profile--cozy button { background: #a9d8a3; }
+    .profile--eco button { background: #a8c7e8; }
+
+    button:hover { filter: brightness(1.06); }
+
+    button:focus-visible,
+    a:focus-visible,
+    summary:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    .copy-status {
+      min-height: 1.5em;
+      margin: 11px 0 0;
+      color: var(--honey);
+      font-size: .9rem;
+    }
+
+    details { margin-top: 12px; }
+
+    summary {
+      color: var(--muted);
+      cursor: pointer;
+      font-size: .9rem;
+    }
+
+    code {
+      display: block;
+      margin-top: 10px;
+      padding: 10px;
+      overflow-wrap: anywhere;
+      border-radius: 8px;
+      color: var(--cream);
+      background: rgba(0, 0, 0, .24);
+      font-size: .78rem;
+    }
+
+    .technical-links { margin-bottom: 0; }
+
+    .technical-links ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 20px;
+      padding: 0;
+      margin: 14px 0 0;
+      list-style: none;
+    }
+
+    a { color: var(--honey); text-underline-offset: 3px; }
+
+    .footer-note {
+      margin: 26px 0 0;
+      color: var(--muted);
+      font-size: .9rem;
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      .page { width: min(100% - 22px, 1120px); padding-top: 11px; }
+      .hero { grid-template-columns: 1fr; text-align: center; }
+      .brand-mark { width: 180px; margin: 0 auto; }
+      .version { justify-content: center; }
+      .technical-links ul { display: grid; gap: 12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto; }
+    }
   </style>
 </head>
 <body>
-  <main>
-    <h1>Hasencraft 🐰</h1>
-    <p>Gemütliches Technik-, Tier- und Abenteuer-Modpack für Minecraft 1.21.1.</p>
-    <p><strong>Stable: Hasencraft __STABLE_VERSION__</strong></p>
-    <h2>In Prism installieren</h2>
-    <p>In Prism Launcher <strong>Instanz hinzufügen → Importieren</strong> wählen. Dann den passenden Knopf klicken und die Adresse in Prism einfügen:</p>
-    <p>
-      <button class="install" type="button" data-import-url="__FLUFFY_IMPORT_URL__">Fluffy-Importadresse kopieren</button>
-      <button class="install" type="button" data-import-url="__COZY_IMPORT_URL__">Cozy-Importadresse kopieren</button>
-      <button class="install" type="button" data-import-url="__ECO_IMPORT_URL__">Eco-Importadresse kopieren</button>
-    </p>
-    <p id="copy-status" class="muted" aria-live="polite"></p>
-    <p class="muted">Fluffy ist für stärkere Rechner, Cozy für ausgewogene Grafik und Eco für schwächere Rechner ohne Shader. Alle Profile enthalten dieselben Spielinhalte. Nach dem ersten Import werden Updates beim Start automatisch installiert.</p>
-    <p><strong>Stable packwiz feed:</strong><br>
-      <code><a href="channels/stable/pack.toml">channels/stable/pack.toml</a></code>
-    </p>
-    <p><strong>Beta packwiz feed:</strong><br>
-      <code><a href="channels/beta/pack.toml">channels/beta/pack.toml</a></code>
-    </p>
-    <p><a href="https://github.com/DarveenDE/hasencraft/releases">Prism-Pakete und Releases</a></p>
-    <p class="muted">Mod-Dateien werden von ihren offiziellen Quellen geladen.</p>
+  <main class="page">
+    <header class="hero">
+      <img class="brand-mark" src="assets/hasencraft.png" width="256" height="256" alt="Das Hasencraft-Emblem: ein Blockstil-Hase mit Biene und Zahnrad.">
+      <div>
+        <p class="eyebrow">Gemütlich bauen. Weit entdecken.</p>
+        <h1 class="wordmark-heading"><span class="visually-hidden">Hasencraft</span><img class="wordmark" src="assets/hasencraft-wordmark.png" width="1024" height="256" alt=""></h1>
+        <p class="lede">Ein gemeinsames Minecraft-Modpack für Technik, Tierchen, Magie und große Erkundungsziele. Baue eine Basis, die sich nach Zuhause anfühlt – und entdecke, was dahinter liegt.</p>
+        <p class="version">Stable: <strong>Hasencraft __STABLE_VERSION__</strong></p>
+      </div>
+    </header>
+
+    <section class="content-section" aria-labelledby="install-heading">
+      <h2 id="install-heading">In Prism installieren</h2>
+      <p class="section-copy">In Prism Launcher <strong>Instanz hinzufügen → Importieren</strong> wählen, dann das passende Profil kopieren und einfügen. Alle drei enthalten dieselben Mods, Welten und Inhalte – nur die Grafikvorgaben unterscheiden sich.</p>
+
+      <div class="profile-grid">
+        <article class="profile">
+          <p class="profile-badge">Mehr Sichtweite</p>
+          <h3>Fluffy</h3>
+          <p>Für leistungsstarke Rechner: höhere Sichtweite und Shader-Details als Startpunkt.</p>
+          <button type="button" data-import-url="__FLUFFY_IMPORT_URL__" data-status-id="fluffy-status">Fluffy-Importadresse kopieren</button>
+          <p id="fluffy-status" class="copy-status" aria-live="polite"></p>
+          <details>
+            <summary>Importadresse manuell anzeigen</summary>
+            <code>__FLUFFY_IMPORT_URL__</code>
+          </details>
+        </article>
+
+        <article class="profile profile--cozy">
+          <p class="profile-badge">Gleiche Welt, sanftere Grafik</p>
+          <h3>Cozy</h3>
+          <p>Für ältere oder mittelstarke Rechner: zurückhaltendere Grafik- und Speicherwerte.</p>
+          <button type="button" data-import-url="__COZY_IMPORT_URL__" data-status-id="cozy-status">Cozy-Importadresse kopieren</button>
+          <p id="cozy-status" class="copy-status" aria-live="polite"></p>
+          <details>
+            <summary>Importadresse manuell anzeigen</summary>
+            <code>__COZY_IMPORT_URL__</code>
+          </details>
+        </article>
+
+        <article class="profile profile--eco">
+          <p class="profile-badge">Maximal sparsam</p>
+          <h3>Eco</h3>
+          <p>Für schwächere Rechner: geringere Sichtweite, 6 GiB Heap sowie kein Shader oder Fresh Animations beim ersten Start.</p>
+          <button type="button" data-import-url="__ECO_IMPORT_URL__" data-status-id="eco-status">Eco-Importadresse kopieren</button>
+          <p id="eco-status" class="copy-status" aria-live="polite"></p>
+          <details>
+            <summary>Importadresse manuell anzeigen</summary>
+            <code>__ECO_IMPORT_URL__</code>
+          </details>
+        </article>
+      </div>
+    </section>
+
+    <section class="content-section technical-links" aria-labelledby="links-heading">
+      <h2 id="links-heading">Technische Links</h2>
+      <ul>
+        <li><a href="channels/stable/pack.toml">Stable packwiz feed</a></li>
+        <li><a href="channels/beta/pack.toml">Beta packwiz feed</a></li>
+        <li><a href="https://github.com/DarveenDE/hasencraft/releases">Prism-Pakete und Releases</a></li>
+      </ul>
+    </section>
+
+    <p class="footer-note">Mod-Dateien werden von ihren offiziellen Quellen geladen.</p>
   </main>
+
   <script>
-    const status = document.getElementById('copy-status');
-    document.querySelectorAll('[data-import-url]').forEach((button) => {
-      button.addEventListener('click', async () => {
+    document.querySelectorAll("[data-import-url]").forEach((button) => {
+      const status = document.getElementById(button.dataset.statusId);
+      button.addEventListener("click", async () => {
         try {
           await navigator.clipboard.writeText(button.dataset.importUrl);
-          status.textContent = 'Importadresse kopiert – jetzt in Prism einfügen.';
+          status.textContent = "Importadresse kopiert – jetzt in Prism einfügen.";
         } catch {
-          status.textContent = 'Kopieren nicht möglich. Bitte diese Seite über HTTPS im Browser öffnen.';
+          status.textContent = "Kopieren nicht möglich. Bitte die sichtbare Importadresse manuell übernehmen.";
         }
       });
     });

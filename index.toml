@@ -10,7 +10,7 @@ hash = "925bb2e607a00925690cda1ca0877043a27e66ca0079051a7c430da97d0a7795"
 
 [[files]]
 file = "config/ftbquests/quests/lang/de_de.snbt"
-hash = "29cee07cf6d82ed780bb2a9554e22618f25c6aaeea5bfb964fef2bf3b52307d9"
+hash = "5fbce79c8780744de3ee4af7e1544a5c311bbaa9ecff94e4763f0fd7664e3b8f"
 
 [[files]]
 file = "config/voicechat/voicechat-server.properties"
@@ -25,8 +25,56 @@ file = "kubejs/README.txt"
 hash = "ddec923f1297652196702cabfebc1eb29b70c361f2e5bf3bf6d3bb9f21f68bd8"
 
 [[files]]
+file = "kubejs/assets/minecraft/texts/splashes.txt"
+hash = "e664d364e8ac5de9db32253bb2ab8ccb6de71d7e552e62d52d04638d80add271"
+
+[[files]]
+file = "kubejs/assets/minecraft/textures/gui/title/background/panorama_0.png"
+hash = "5f51ebb09547910391a3f57c8ff170cee721cc052f0a09d75668e84532278254"
+
+[[files]]
+file = "kubejs/assets/minecraft/textures/gui/title/background/panorama_1.png"
+hash = "6d6f2400f671270cb83d28784cbd83da0a6dc0f03c5c14a3af77a8d8556e2645"
+
+[[files]]
+file = "kubejs/assets/minecraft/textures/gui/title/background/panorama_2.png"
+hash = "c7d8f9cd45294871de872820e5aa485cfd3d2e7734b7bd6ea159f5d543d28143"
+
+[[files]]
+file = "kubejs/assets/minecraft/textures/gui/title/background/panorama_3.png"
+hash = "b7ad7e88bc707c2c5ee6989dd5f9eb90384cb49e706c252debe12d76ccaa17e9"
+
+[[files]]
+file = "kubejs/assets/minecraft/textures/gui/title/background/panorama_4.png"
+hash = "af656e369de7aaef9d1a0b938ed8713f92d57f7b518298923cd86377bfcd9576"
+
+[[files]]
+file = "kubejs/assets/minecraft/textures/gui/title/background/panorama_5.png"
+hash = "7085fd04c1d807178ad8387aa31207abed87a30cf773b892c5483725110255cc"
+
+[[files]]
+file = "kubejs/assets/minecraft/textures/gui/title/edition.png"
+hash = "701209dbd97853bb2cfa8aa52cdcb1439bfbba078a97de0366846ac20918fca7"
+
+[[files]]
+file = "kubejs/assets/minecraft/textures/gui/title/minceraft.png"
+hash = "8424d57bd48c161d569ae0d1ca0e239d7933da9c81dee7b309f87f5463b6ade8"
+
+[[files]]
+file = "kubejs/assets/minecraft/textures/gui/title/minecraft.png"
+hash = "8424d57bd48c161d569ae0d1ca0e239d7933da9c81dee7b309f87f5463b6ade8"
+
+[[files]]
 file = "kubejs/client_scripts/hasencraft.js"
 hash = "79c81eac3046a14c25a1b43570d5ad6b25674aa8f373f947f73774609bf8bfd3"
+
+[[files]]
+file = "kubejs/config/client.json"
+hash = "624e9e6f69d28a4b124e8a41db6e97384691a99ebb73d65d4f8b26bdff7636dd"
+
+[[files]]
+file = "kubejs/config/packicon.png"
+hash = "d0ae872b7b6fa76e561c28e65b985413c2320f3b3e015603fdaeffb494fc6763"
 
 [[files]]
 file = "kubejs/data/adorablehamsterpets/recipe/create_compat/compacting_ahp_sunflower_seeds.json"
