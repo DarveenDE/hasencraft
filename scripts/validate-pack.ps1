@@ -133,10 +133,14 @@ $distantHorizonsServerConfig = Join-Path $repoRoot "server\config\DistantHorizon
 $distantHorizonsServerValues = @(
     'distantGeneratorMode = "PRE_EXISTING_ONLY"',
     "enableDistantGeneration = false",
-    "generationRequestRateLimit = 8",
-    "maxGenerationRequestDistance = 256",
-    "syncOnLoadRateLimit = 16",
-    "maxSyncOnLoadRequestDistance = 256",
+    "realTimeUpdateDistanceRadiusInChunks = 64",
+    "maxSyncOnLoadRequestDistance = 64",
+    "synchronizeOnLoad = false",
+    "maxGenerationRequestDistance = 64",
+    "enableServerGeneration = false",
+    "generationRequestRateLimit = 1",
+    "syncOnLoadRateLimit = 2",
+    "enableRealTimeUpdates = false",
     "playerBandwidthLimit = 500",
     "globalBandwidthLimit = 2000"
 )
@@ -148,6 +152,24 @@ else {
     foreach ($expected in $distantHorizonsServerValues) {
         if ($content -notmatch [regex]::Escape($expected)) {
             Add-ValidationError "Distant Horizons server configuration is missing '$expected'"
+        }
+    }
+}
+
+$serverPropertiesTemplate = Join-Path $repoRoot "server\server.properties.example"
+$serverPropertiesValues = @(
+    "view-distance=8",
+    "simulation-distance=4",
+    "spawn-chunk-radius=2"
+)
+if (-not (Test-Path -LiteralPath $serverPropertiesTemplate -PathType Leaf)) {
+    Add-ValidationError "Missing server.properties template"
+}
+else {
+    $content = Get-Content -Raw -Encoding utf8 -LiteralPath $serverPropertiesTemplate
+    foreach ($expected in $serverPropertiesValues) {
+        if ($content -notmatch [regex]::Escape($expected)) {
+            Add-ValidationError "Server properties template is missing '$expected'"
         }
     }
 }

@@ -56,8 +56,10 @@ Synchronisierungsanfragen pro Spieler sowie global. Sie deckt weiterhin die
 256-LoD-Chunks des Fluffy-Profils ab, schützt aber die TPS bei mehreren
 gleichzeitigen Anfragen. Die Hintergrund-Neugenerierung bleibt dabei bewusst
 deaktiviert (`PRE_EXISTING_ONLY` und `enableDistantGeneration = false`): Der
-Server darf LoDs aus bereits erzeugten Chunks liefern, soll aber nicht neben dem
-Spielbetrieb neue, modded Terrain-Chunks erzeugen.
+Server soll weder neben dem Spielbetrieb neue, modded Terrain-Chunks erzeugen
+noch beim Login oder in Echtzeit LoD-Daten propagieren. Dadurch behalten die
+Clients ihre lokalen/gecachten Fernansichten, während der Dedicated Server TPS
+priorisiert.
 
 Der Installer kopiert diese Datei nur bei einer neuen Installation. Auf
 bestehenden Servern nach dem Deployment sowohl den
@@ -67,6 +69,12 @@ bestehenden Servern nach dem Deployment sowohl den
 neu starten. Eine Weltvorabgenerierung erfolgt getrennt, begrenzt und vor dem
 Spielbetrieb; die Hintergrund-Neugenerierung nicht für einen laufenden Stream
 einschalten.
+
+Die Servervorlage verwendet außerdem `view-distance=8`,
+`simulation-distance=4` und `spawn-chunk-radius=2`. Das reduziert die dauerhaft
+tickenden Chunks auf dem 16-GiB-Streamserver deutlich. Für farm- oder
+redstoneintensive Welten die Werte erst nach einem Spark-Vergleichsprofil
+erhöhen.
 
 Vor Stable mit zwei bis vier gleichzeitig spielenden Clients eine neue Gegend
 erkunden und dabei TPS, Speicher sowie Chunk-Latenz beobachten. Bei einem
