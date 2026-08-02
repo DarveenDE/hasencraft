@@ -91,6 +91,31 @@ kann ServerCore vorübergehend mit
 Chunkgrenzen wird die Bewegung dann kurz korrigiert, statt den gesamten Server
 durch einen synchronen Ladevorgang anzuhalten.
 
+### Zeitlich begrenzter Streammodus
+
+Alle folgenden Massnahmen sind ausschliesslich serverseitig; ein neues
+Client-Pack oder eine neue Alpha-Version ist dafuer nicht erforderlich:
+
+- `features.lobotomize-villagers.enabled: true` und
+  `activation-range.enabled: true` in ServerCore begrenzen unproduktive
+  Villager- und Mob-Ticks. Farmen ausserhalb der Aktivierungsreichweite
+  reagieren dadurch bewusst langsamer.
+- `features.prevent-moving-into-unloaded-chunks: true` schuetzt gegen
+  synchrone Struktur-/Chunk-Ladevorgange. An neuen Chunkgrenzen ist ein kurzer
+  Bewegungs-Reset besser als ein globaler Tick-Stall.
+- Die Werte `view-distance=5`, `simulation-distance=2` und
+  `/gamerule spawnChunkRadius 0` sind das konservative Stream-Profil. Hoehere
+  Werte erst nach einem neuen Spark-Vergleich aktivieren.
+
+Wenn ein auf langsame Ticks begrenztes Spark-Profil
+(`spark profiler start --only-ticks-over 50 --timeout 120`) vor allem
+`CoreProtectNeo`/SQLite-Flushes zeigt, darf CoreProtectNeo nur fuer den Stream
+voruebergehend serverseitig deaktiviert werden. Die SQLite-Datenbank bleibt
+unveraendert, aber Block-, Inventar- und Interaktionsereignisse werden bis zur
+Reaktivierung nicht protokolliert. Vor der naechsten regulären Spielrunde den
+Mod wieder aktivieren, einen geplanten Neustart durchfuehren und die Audit- und
+Rollback-Funktion testen.
+
 ## Rollback
 
 Zuerst den gehosteten Stable-Kanal auf das alte Release zurückstellen. Dann:
