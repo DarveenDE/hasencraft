@@ -15,12 +15,18 @@ param(
     [switch]$Force,
 
     # Intended for automated archive checks. Custom output stays inside build/.
-    [string]$OutputDirectory
+    [string]$OutputDirectory,
+
+    # Required only for `-Channel dev`; embedded exclusively in the ignored dev archive.
+    [string]$DevelopmentPackwiz
 )
 
 $ErrorActionPreference = "Stop"
 
-if ($PackUrl.Scheme -ne "https" -and -not ($AllowHttp -and $PackUrl.Scheme -eq "http")) {
+if ($Channel -eq "dev" -and $PackUrl.Scheme -ne "file") {
+    throw "A dev archive requires a local file URI for pack.toml."
+}
+if ($Channel -ne "dev" -and $PackUrl.Scheme -ne "https" -and -not ($AllowHttp -and $PackUrl.Scheme -eq "http")) {
     throw "PackUrl must use HTTPS. Use -AllowHttp only for a local development server."
 }
 
@@ -40,6 +46,10 @@ function Assert-ChildPath([string]$Candidate, [string]$Parent) {
     }
 }
 
+function ConvertTo-PowerShellLiteral([string]$Value) {
+    return "'" + $Value.Replace("'", "''") + "'"
+}
+
 if (-not (Test-Path -LiteralPath $bootstrap)) {
     throw "Missing packwiz bootstrap: $bootstrap"
 }
@@ -47,6 +57,22 @@ if (-not (Test-Path -LiteralPath $bootstrap)) {
 $bootstrapHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $bootstrap).Hash.ToLowerInvariant()
 if ($bootstrapHash -ne "a8fbb24dc604278e97f4688e82d3d91a318b98efc08d5dbfcbcbcab6443d116c") {
     throw "Unexpected packwiz bootstrap SHA-256: $bootstrapHash"
+}
+
+$developmentTemplate = $null
+$developmentPackwizPath = $null
+if ($Channel -eq "dev") {
+    if ([string]::IsNullOrWhiteSpace($DevelopmentPackwiz)) {
+        throw "DevelopmentPackwiz is required when building a dev archive."
+    }
+    $developmentPackwizPath = (Resolve-Path -LiteralPath $DevelopmentPackwiz -ErrorAction Stop).Path
+    if (-not (Test-Path -LiteralPath $developmentPackwizPath -PathType Leaf)) {
+        throw "DevelopmentPackwiz must point to a file: $developmentPackwizPath"
+    }
+    $developmentTemplate = Join-Path $templateRoot "dev\hasencraft-dev-bootstrap.ps1.in"
+    if (-not (Test-Path -LiteralPath $developmentTemplate -PathType Leaf)) {
+        throw "Missing development launcher template: $developmentTemplate"
+    }
 }
 
 if (-not [string]::IsNullOrWhiteSpace($OutputDirectory)) {
@@ -68,6 +94,18 @@ Copy-Item -Path (Join-Path $templateRoot "$Profile\*") -Destination $stage -Recu
 Copy-Item -LiteralPath $bootstrap -Destination (Join-Path $stage "minecraft\packwiz-installer-bootstrap.jar") -Force
 Copy-Item -LiteralPath $icon -Destination (Join-Path $stage "hasencraft.png") -Force
 
+if ($Channel -eq "dev") {
+    $developmentLauncher = Get-Content -Raw -Encoding utf8 -LiteralPath $developmentTemplate
+    $developmentLauncher = $developmentLauncher.Replace("__PACK_ROOT__", (ConvertTo-PowerShellLiteral $repoRoot))
+    $developmentLauncher = $developmentLauncher.Replace("__PACKWIZ_EXECUTABLE__", (ConvertTo-PowerShellLiteral $developmentPackwizPath))
+    $developmentLauncher = $developmentLauncher.Replace("__PACK_TOML_URI__", (ConvertTo-PowerShellLiteral $PackUrl.AbsoluteUri))
+    [System.IO.File]::WriteAllText(
+        (Join-Path $stage "minecraft\hasencraft-dev-bootstrap.ps1"),
+        $developmentLauncher,
+        [System.Text.UTF8Encoding]::new($false)
+    )
+}
+
 $instanceTemplate = Join-Path $stage "instance.cfg.in"
 $instanceFile = Join-Path $stage "instance.cfg"
 $profileNames = @{
@@ -79,8 +117,13 @@ $profileName = $profileNames[$Profile]
 if ($Channel -eq "beta") { $profileName += " Beta" }
 elseif ($Channel -eq "dev") { $profileName += " Dev" }
 
+$preLaunchCommand = '"$INST_JAVA" -jar packwiz-installer-bootstrap.jar ' + $PackUrl.AbsoluteUri
+if ($Channel -eq "dev") {
+    $preLaunchCommand = 'powershell.exe -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$INST_MC_DIR\hasencraft-dev-bootstrap.ps1"'
+}
+
 $instance = Get-Content -Raw -LiteralPath $instanceTemplate
-$instance = $instance.Replace("__PACK_URL__", $PackUrl.AbsoluteUri)
+$instance = $instance.Replace("__PRE_LAUNCH_COMMAND__", $preLaunchCommand)
 $instance = $instance.Replace("__INSTANCE_NAME__", $profileName)
 [System.IO.File]::WriteAllText($instanceFile, $instance, [System.Text.UTF8Encoding]::new($false))
 Remove-Item -LiteralPath $instanceTemplate

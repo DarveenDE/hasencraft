@@ -1,64 +1,57 @@
 # Lokalen Client testen
 
-Der Entwicklerclient testet den aktuellen Arbeitsstand auf deinem Rechner,
+Der Entwicklerclient testet den aktuellen Arbeitsstand auf deinem Rechner –
 auch mit noch nicht committeten Änderungen. Er erstellt keinen Release und
 startet keinen Server.
 
-## Starten
+## Einmal einrichten
 
 Im Wurzelverzeichnis des Repositories ausführen:
 
 ```powershell
-.\scripts\start-client-dev.ps1 -Profile cozy
+.\scripts\start-client-dev.ps1 -Import
 ```
 
-Das Skript aktualisiert und prüft zuerst den packwiz-Index, baut anschließend
-`dist/Hasencraft-dev-cozy.zip` und startet einen lokalen packwiz-Server. Das
-Terminal muss geöffnet bleiben, solange die Dev-Instanz in Prism startet.
-`packwiz refresh` kann dabei `index.toml` und den Index-Hash in `pack.toml`
-ändern; diese Quelländerungen sind nach Pack-Anpassungen erwartbar und gehören
-vor einem Commit zur Prüfung dazu.
+Das Skript aktualisiert und prüft den packwiz-Index, erzeugt eine lokale
+Dev-Instanz und öffnet Prism für den Import. Die Transport-ZIP liegt nur lokal
+unter `build/dev-client/`; sie ist kein Release-Artefakt.
+
+Nach dem Import heißt die Instanz beispielsweise `Hasencraft Cozy Dev`. Sie
+getrennt von Stable und Beta behalten.
 
 Ist `packwiz` noch nicht installiert, einmalig dieselbe Version wie in der CI
-installieren und den Go-Bin-Ordner in die aktuelle PowerShell-Sitzung aufnehmen:
+installieren:
 
 ```powershell
 go install github.com/packwiz/packwiz@dfd8b68a4796
-$env:Path = "$env:USERPROFILE\go\bin;$env:Path"
 ```
 
-Beim ersten Mal in Prism **Instanz hinzufügen** → **Importieren** wählen und
-die erzeugte ZIP importieren. Sie heißt anschließend beispielsweise
-`Hasencraft Cozy Dev`. Die Dev-Instanz getrennt von Stable und Beta behalten.
+Das Skript findet anschließend `%USERPROFILE%\go\bin\packwiz.exe`
+automatisch.
 
 `cozy` ist der schnelle Standard. Für Shader-, Sichtweiten- und Leistungstests
 gibt es `-Profile fluffy`; auf schwächeren Rechnern steht `-Profile eco` zur
-Verfügung. Ein abweichender lokaler Port ist ebenfalls möglich:
+Verfügung.
 
-```powershell
-.\scripts\start-client-dev.ps1 -Profile fluffy -Port 18080
-```
+## Danach: nur noch Prism starten
 
-## Während der Entwicklung
-
-Solange das Skript läuft, genügt nach Änderungen am Pack ein Neustart der
-bereits importierten Dev-Instanz. `packwiz serve` aktualisiert den Index bei
-jeder Abfrage und die Instanz synchronisiert den lokalen Arbeitsstand vor dem
-Minecraft-Start. Das gilt auch für uncommittete Änderungen.
-
-Das Skript bei einem neuen Terminal erneut ausführen. Auch nach Änderungen an
-Launcher-Templates oder dem Dev-Profil die ZIP neu erzeugen und die Instanz in
-Prism erneut importieren.
-
-## Prüfen
+Für normale Pack-, KubeJS-, Config- oder Ressourcenänderungen einfach in Prism
+auf **Hasencraft … Dev** → **Spielen** klicken. Kein Terminal und kein lokaler
+Webserver sind nötig: Der Dev-Pre-Launch-Hook aktualisiert den Index im
+Arbeitsordner und lädt ihn direkt über eine lokale `file:`-Adresse.
 
 Warte mindestens bis zum Titelbildschirm und erstelle anschließend eine neue
 Singleplayer-Welt. Nach Änderungen an Mods, Registries oder Datapacks immer
 eine frische Testwelt verwenden; bestehende Welten sind kein Wegwerf-Teststand.
 
-Die importierte Instanz verwendet `127.0.0.1` und funktioniert ausschließlich
-auf deinem Rechner. Den laufenden packwiz-Testserver nach dem Test mit
-`Strg+C` beenden und den Port nicht in der Firewall freigeben. Der Ablauf
-ersetzt weder den veröffentlichten Beta-/Stable-Feed noch einen Server- oder
-Mehrspieler-Test. Die erzeugten Verzeichnisse `build/` und `dist/` bleiben
-lokal und werden nicht committed.
+## Wann erneut einrichten?
+
+Den Einrichtungsbefehl mit `-Import` erneut ausführen, wenn der Checkout oder
+die `packwiz.exe` verschoben wurde oder wenn Launcher-Templates bzw. das
+gewählte Profil geändert wurden. Prism-Instanzen und ihre Welten werden dabei
+nie automatisch gelöscht; eine alte Dev-Instanz nur bewusst manuell entfernen.
+
+`packwiz refresh` kann `index.toml` und den Index-Hash in `pack.toml` ändern.
+Das ist nach Pack-Anpassungen erwartbar und gehört vor einem Commit zur Prüfung
+dazu. Die Dev-ZIP enthält lokale Pfade und ist nur für diesen Windows-Rechner
+bestimmt – nicht weitergeben.

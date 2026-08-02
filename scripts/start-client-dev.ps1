@@ -3,27 +3,64 @@ param(
     [ValidateSet("fluffy", "cozy", "eco")]
     [string]$Profile = "cozy",
 
-    [ValidateRange(1024, 65535)]
-    [int]$Port = 8080,
+    [string]$Packwiz = "packwiz",
 
-    [string]$Packwiz = "packwiz"
+    [switch]$Import,
+
+    [string]$PrismLauncher
 )
 
 $ErrorActionPreference = "Stop"
 
+function Resolve-PrismLauncher([string]$RequestedPath) {
+    if (-not [string]::IsNullOrWhiteSpace($RequestedPath)) {
+        if (-not (Test-Path -LiteralPath $RequestedPath -PathType Leaf)) {
+            throw "Prism Launcher was not found: $RequestedPath"
+        }
+        return (Resolve-Path -LiteralPath $RequestedPath).Path
+    }
+
+    $candidates = @(
+        (Join-Path ([Environment]::GetFolderPath("LocalApplicationData")) "Programs\PrismLauncher\prismlauncher.exe"),
+        (Join-Path ([Environment]::GetFolderPath("ProgramFiles")) "PrismLauncher\prismlauncher.exe")
+    )
+    $programFilesX86 = ${env:ProgramFiles(x86)}
+    if (-not [string]::IsNullOrWhiteSpace($programFilesX86)) {
+        $candidates += Join-Path $programFilesX86 "PrismLauncher\prismlauncher.exe"
+    }
+    foreach ($candidate in $candidates) {
+        if (Test-Path -LiteralPath $candidate -PathType Leaf) {
+            return (Resolve-Path -LiteralPath $candidate).Path
+        }
+    }
+
+    $command = Get-Command prismlauncher.exe -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($null -ne $command -and $command.CommandType -in @("Application", "ExternalScript")) {
+        return $command.Source
+    }
+    return $null
+}
+
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 $validatePack = Join-Path $PSScriptRoot "validate-pack.ps1"
 $buildPrism = Join-Path $PSScriptRoot "build-prism.ps1"
-$packUrl = [uri]("http://127.0.0.1:{0}/pack.toml" -f $Port)
+$packFile = (Resolve-Path -LiteralPath (Join-Path $repoRoot "pack.toml")).Path
+$packUrl = [uri]$packFile
+$devOutput = Join-Path $repoRoot "build\dev-client"
+$profileNames = @{ fluffy = "Fluffy"; cozy = "Cozy"; eco = "Eco" }
+$profileName = $profileNames[$Profile]
 
 try {
     $packwizCommand = Get-Command $Packwiz -ErrorAction Stop
 }
 catch {
-    throw "Packwiz was not found. Install the CI version with 'go install github.com/packwiz/packwiz@dfd8b68a4796' or pass -Packwiz with its path."
-}
-if ([System.Net.NetworkInformation.IPGlobalProperties]::GetIPGlobalProperties().GetActiveTcpListeners().Port -contains $Port) {
-    throw "Port $Port is already in use. Choose another port with -Port."
+    $goPackwiz = Join-Path $env:USERPROFILE "go\bin\packwiz.exe"
+    if ($Packwiz -eq "packwiz" -and (Test-Path -LiteralPath $goPackwiz -PathType Leaf)) {
+        $packwizCommand = Get-Command $goPackwiz -ErrorAction Stop
+    }
+    else {
+        throw "Packwiz was not found. Install the CI version with 'go install github.com/packwiz/packwiz@dfd8b68a4796' or pass -Packwiz with its path."
+    }
 }
 if ($packwizCommand.CommandType -notin @("Application", "ExternalScript")) {
     throw "Packwiz must resolve to an executable: $Packwiz"
@@ -42,23 +79,25 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 Write-Host "Building the local $Profile Prism development archive..."
-& $buildPrism -PackUrl $packUrl -AllowHttp -Channel dev -Profile $Profile -Force
+& $buildPrism -PackUrl $packUrl -Channel dev -Profile $Profile -DevelopmentPackwiz $packwizCommand.Source -OutputDirectory $devOutput -Force
 if ($LASTEXITCODE -ne 0) {
     throw "Prism development archive build failed."
 }
 
-$archive = Join-Path $repoRoot ("dist\Hasencraft-dev-{0}.zip" -f $Profile)
+$archive = Join-Path $devOutput ("Hasencraft-dev-{0}.zip" -f $Profile)
 Write-Host ""
-Write-Host "Import this archive once in Prism: $archive" -ForegroundColor Green
-Write-Host "Keep this window open while starting the Hasencraft Dev instance."
-Write-Host "The local pack URL is $packUrl and only works on this computer."
-Write-Host ""
-Write-Host "Starting the local packwiz development server (Ctrl+C stops it)..."
+Write-Host "Built local development archive: $archive" -ForegroundColor Green
 
-Push-Location $repoRoot
-try {
-    & $packwizCommand.Source serve --port $Port
+if ($Import) {
+    $prism = Resolve-PrismLauncher $PrismLauncher
+    if ($null -eq $prism) {
+        throw "Prism Launcher was not found. Install it or pass -PrismLauncher with its executable path."
+    }
+    Start-Process -FilePath $prism -ArgumentList ('--import "{0}"' -f $archive)
+    Write-Host "Prism Launcher was opened to import the Hasencraft $profileName Dev instance."
 }
-finally {
-    Pop-Location
+else {
+    Write-Host "Import it once in Prism, or rerun this command with -Import to open Prism automatically."
 }
+
+Write-Host "After the first import, start Hasencraft $profileName Dev directly in Prism; no terminal or local web server is needed."
