@@ -54,11 +54,19 @@ passenden Strukturen bei der Weltgenerierung verringert.
 Die Distant-Horizons-Vorlage begrenzt LoD-Generierungs- und
 Synchronisierungsanfragen pro Spieler sowie global. Sie deckt weiterhin die
 256-LoD-Chunks des Fluffy-Profils ab, schützt aber die TPS bei mehreren
-gleichzeitigen Anfragen. Der Installer kopiert diese Datei nur bei einer neuen
-Installation. Auf bestehenden Servern nach dem Deployment den `[server]`-Block
-aus `server/config/DistantHorizons.toml` in
+gleichzeitigen Anfragen. Die Hintergrund-Neugenerierung bleibt dabei bewusst
+deaktiviert (`PRE_EXISTING_ONLY` und `enableDistantGeneration = false`): Der
+Server darf LoDs aus bereits erzeugten Chunks liefern, soll aber nicht neben dem
+Spielbetrieb neue, modded Terrain-Chunks erzeugen.
+
+Der Installer kopiert diese Datei nur bei einer neuen Installation. Auf
+bestehenden Servern nach dem Deployment sowohl den
+`[common.worldGenerator]`- als auch den `[server]`-Block aus
+`server/config/DistantHorizons.toml` in
 `/srv/hasencraft/server/config/DistantHorizons.toml` übernehmen und den Dienst
-neu starten.
+neu starten. Eine Weltvorabgenerierung erfolgt getrennt, begrenzt und vor dem
+Spielbetrieb; die Hintergrund-Neugenerierung nicht für einen laufenden Stream
+einschalten.
 
 Vor Stable mit zwei bis vier gleichzeitig spielenden Clients eine neue Gegend
 erkunden und dabei TPS, Speicher sowie Chunk-Latenz beobachten. Bei einem

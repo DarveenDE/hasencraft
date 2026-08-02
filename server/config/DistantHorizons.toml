@@ -1,6 +1,9 @@
 [common.worldGenerator]
-	distantGeneratorMode = "FEATURES"
-	enableDistantGeneration = true
+	# Keep the live server responsive: Distant Horizons may import already
+	# generated chunks for LOD data, but it must not generate missing terrain in
+	# the background. Run intentional, bounded pregeneration separately.
+	distantGeneratorMode = "PRE_EXISTING_ONLY"
+	enableDistantGeneration = false
 
 [server]
 	# Bound per-player LOD generation and synchronization to preserve TPS while
