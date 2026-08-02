@@ -119,7 +119,10 @@ elseif ($Channel -eq "dev") { $profileName += " Dev" }
 
 $preLaunchCommand = '"$INST_JAVA" -jar packwiz-installer-bootstrap.jar ' + $PackUrl.AbsoluteUri
 if ($Channel -eq "dev") {
-    $preLaunchCommand = 'powershell.exe -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$INST_MC_DIR\hasencraft-dev-bootstrap.ps1"'
+    # instance.cfg uses INI escaping, so a Windows backslash before the script
+    # name is consumed when Prism reads the setting. A forward slash is valid
+    # for Windows paths; braces make the Prism variable boundary explicit.
+    $preLaunchCommand = 'powershell.exe -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "${INST_MC_DIR}/hasencraft-dev-bootstrap.ps1"'
 }
 
 $instance = Get-Content -Raw -LiteralPath $instanceTemplate
