@@ -14,6 +14,8 @@
 
 Alle drei Profile verwenden exakt dieselben Spielinhalte. Nur lokale Grafik-, Ressourcenpack- und Speicherwerte unterscheiden sich.
 
+Die Profile verwenden mit der mitgelieferten Java-21-Laufzeit ZGC (`-XX:+UseZGC -XX:+ZGenerational`). Das vermeidet den Distant-Horizons-Hinweis zum pausierenden G1-Garbage-Collector.
+
 ## Import
 
 1. In Prism `Instanz hinzufügen` → `Importieren` wählen.
