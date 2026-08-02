@@ -1,0 +1,38 @@
+$ErrorActionPreference = "Stop"
+
+$packRoot = __PACK_ROOT__
+$packwiz = __PACKWIZ_EXECUTABLE__
+$packTomlUri = __PACK_TOML_URI__
+$bootstrap = Join-Path $env:INST_MC_DIR "packwiz-installer-bootstrap.jar"
+
+if (-not $env:INST_JAVA) {
+    throw "Prism did not provide the Java runtime (INST_JAVA)."
+}
+if (-not (Test-Path -LiteralPath $packRoot -PathType Container)) {
+    throw "The Hasencraft source directory is unavailable: $packRoot"
+}
+if (-not (Test-Path -LiteralPath $packwiz -PathType Leaf)) {
+    throw "The configured packwiz executable is unavailable: $packwiz"
+}
+if (-not (Test-Path -LiteralPath $bootstrap -PathType Leaf)) {
+    throw "Missing packwiz bootstrap: $bootstrap"
+}
+
+Write-Host "Preparing the local Hasencraft development pack..."
+$refreshExitCode = 0
+Push-Location -LiteralPath $packRoot
+try {
+    & $packwiz refresh
+    $refreshExitCode = $LASTEXITCODE
+}
+finally {
+    Pop-Location
+}
+if ($refreshExitCode -ne 0) {
+    exit $refreshExitCode
+}
+
+& $env:INST_JAVA -jar $bootstrap $packTomlUri
+if ($LASTEXITCODE -ne 0) {
+    exit $LASTEXITCODE
+}

@@ -11,7 +11,7 @@
 1. Neue oder aktualisierte Mods einzeln auf 1.21.1/NeoForge prüfen.
 2. Packwiz-Metadaten auf die ausdrücklich gewählte Version setzen.
 3. `packwiz refresh` und `scripts/validate-pack.ps1` ausführen.
-4. Den [lokalen Entwicklerclient](DEVELOPMENT.md) mit `scripts/start-client-dev.ps1 -Profile cozy` bis zum Titelbildschirm und mit einer neuen Singleplayer-Welt testen.
+4. Die [lokale Entwicklerinstanz](DEVELOPMENT.md) bis zum Titelbildschirm und mit einer neuen Singleplayer-Welt testen.
 5. Release-Snapshot mit `scripts/make-release.ps1` bauen. Eine vorhandene Versionsnummer wird niemals überschrieben; jede Änderung benötigt eine neue Version.
 6. Beta-Prism-Instanz und Staging-Server starten.
 7. Verbindung, Weltladen, Dimensionen, Haustier-Respawn, JEI-Rezepte und Shader testen.

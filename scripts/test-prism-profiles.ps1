@@ -93,4 +93,40 @@ foreach ($profile in $profiles.Keys | Sort-Object) {
     }
 }
 
-Write-Host "Validated Prism archives for $($profiles.Count) profiles."
+$developmentPackwiz = Join-Path $env:SystemRoot "System32\cmd.exe"
+$developmentUrl = [uri]"file:///C:/hasencraft-dev-test/pack.toml"
+& $buildScript -PackUrl $developmentUrl -Channel dev -Profile cozy -DevelopmentPackwiz $developmentPackwiz -OutputDirectory $testOutput -Force
+if (-not $?) {
+    throw "Prism development archive build failed."
+}
+
+$developmentArchivePath = Join-Path $testOutput "Hasencraft-dev-cozy.zip"
+if (-not (Test-Path -LiteralPath $developmentArchivePath -PathType Leaf)) {
+    throw "Missing Prism development archive: $developmentArchivePath"
+}
+
+$developmentArchive = [System.IO.Compression.ZipFile]::OpenRead($developmentArchivePath)
+try {
+    $developmentInstance = Get-ZipText $developmentArchive "instance.cfg"
+    $developmentLauncher = Get-ZipText $developmentArchive "minecraft/hasencraft-dev-bootstrap.ps1"
+    if ($developmentInstance -notmatch [regex]::Escape("name=Hasencraft Cozy Dev")) {
+        throw "Unexpected instance name in development archive"
+    }
+    if ($developmentInstance -notmatch [regex]::Escape('PreLaunchCommand=powershell.exe -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$INST_MC_DIR\hasencraft-dev-bootstrap.ps1"')) {
+        throw "Missing development pre-launch hook"
+    }
+    if ($developmentLauncher -notmatch [regex]::Escape($developmentUrl.AbsoluteUri)) {
+        throw "Local file URI was not rendered into development archive"
+    }
+    if ($developmentLauncher -match "__PACK_") {
+        throw "Unrendered development launcher placeholder found"
+    }
+    if ($developmentLauncher -match "localhost|127\.0\.0\.1") {
+        throw "Development launcher unexpectedly uses a local web server"
+    }
+}
+finally {
+    $developmentArchive.Dispose()
+}
+
+Write-Host "Validated Prism archives for $($profiles.Count) profiles and the local development hook."
