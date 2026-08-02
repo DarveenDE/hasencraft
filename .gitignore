@@ -29,3 +29,6 @@
 /banned-*.json
 /eula.txt
 /server.properties
+
+# Local server access notes and credentials must never be committed.
+/server/private/

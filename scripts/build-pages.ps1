@@ -83,6 +83,17 @@ Copy-Item -Path (Join-Path $pagesSource "*") -Destination $destinationFull -Recu
 Copy-Item -LiteralPath $channelFile -Destination (Join-Path $destinationFull "channels.json")
 Copy-Item -LiteralPath $releasesRoot -Destination $destinationFull -Recurse -Force
 
+$stableVersion = [string]$channels.stable
+$repository = "DarveenDE/hasencraft"
+$fluffyUrl = "https://github.com/$repository/releases/download/v$stableVersion/Hasencraft-stable-fluffy.zip"
+$cozyUrl = "https://github.com/$repository/releases/download/v$stableVersion/Hasencraft-stable-cozy.zip"
+$indexFile = Join-Path $destinationFull "index.html"
+$index = Get-Content -Raw -LiteralPath $indexFile
+$index = $index.Replace("__STABLE_VERSION__", $stableVersion)
+$index = $index.Replace("__FLUFFY_IMPORT_URL__", $fluffyUrl)
+$index = $index.Replace("__COZY_IMPORT_URL__", $cozyUrl)
+[System.IO.File]::WriteAllText($indexFile, $index, [System.Text.UTF8Encoding]::new($false))
+
 $publishedChannels = Join-Path $destinationFull "channels"
 New-Item -ItemType Directory -Force -Path $publishedChannels | Out-Null
 foreach ($name in @("stable", "beta")) {
