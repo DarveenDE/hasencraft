@@ -11,6 +11,8 @@ die Importadresse für Prism, immer auf dem freigegebenen Stand.
 
 Minecraft `1.21.1` · NeoForge `21.1.247`
 
+**Aktueller Stand:** `0.1.0-alpha.4` · Minecraft `1.21.1` · NeoForge `21.1.247`
+
 ## Loslegen
 
 1. Aktuellen [Prism Launcher](https://prismlauncher.org/) installieren und dein

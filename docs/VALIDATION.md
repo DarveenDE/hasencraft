@@ -1,8 +1,10 @@
 # Validierungsstand
 
-Stand: `0.1.0-alpha.3`, 2. August 2026.
+Stand: `0.1.0-alpha.4`, 2. August 2026.
 
 ## Bestanden
+
+- LuckPerms `5.4.150` wurde auf dem NeoForge-1.21.1-Server mit der vom Upstream bereitgestellten SHA-512-Summe geprüft. Ein realer Spieler-Join erreichte danach den Spielzustand ohne die zuvor auftretende `UserCapabilityImpl`-Ausnahme.
 
 - Packwiz-Index aktualisiert und 169 gepinnte Eintraege geprueft: 124 beide Seiten, 24 nur Client, 21 nur Server.
 - Die neuen P1-Metadaten für FastSuite, Placebo, Structure Layout Optimizer, Resourceful Config und ServerCore sind gepinnt; Indexhash und Seitenzuordnung wurden durch `scripts/validate-pack.ps1` geprüft.

@@ -1,6 +1,6 @@
 # Community-Betrieb
 
-Diese Anleitung gilt fuer `0.1.0-alpha.3` und den Beta-/Staging-Kanal. Sie
+Diese Anleitung gilt fuer `0.1.0-alpha.4` und den Beta-/Staging-Kanal. Sie
 beruehrt niemals den Stable-Server ohne vorherigen, erfolgreichen Test.
 
 ## Was Alpha 3 bereitstellt

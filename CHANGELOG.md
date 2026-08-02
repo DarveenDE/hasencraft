@@ -2,6 +2,10 @@
 
 Alle relevanten Änderungen an Mods, Konfiguration, Quests und Serveranforderungen werden hier dokumentiert.
 
+## 0.1.0-alpha.4 — 2026-08-02
+
+- LuckPerms wurde auf dem NeoForge-Server von `5.4.140` auf `5.4.150` aktualisiert. Das behebt den Join-Abbruch durch eine nicht initialisierte Spieler-Capability; Clients benötigen dafür keine zusätzliche Änderung.
+
 ## 0.1.0-alpha.3 — 2026-08-02
 
 - Installationsseite neu gestaltet: Hero mit Wortmarke und Panorama, Profilvergleich Fluffy/Cozy/Eco, Inhaltsübersicht, Bildergalerie und aufklappbarer Technikbereich.

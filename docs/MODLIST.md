@@ -1,6 +1,6 @@
 # Modliste
 
-Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.3`.
+Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.4`.
 
 - Gesamt: 169 verwaltete Eintraege
 - beide Seiten: 124
@@ -115,7 +115,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.3`
 | Lithostitched | `both` | `lithostitched-1.7.13-neoforge-21.1.jar` | [Modrinth](https://modrinth.com/project/XaDC71GB) |
 | LootJS: KubeJS Addon | `server` | `lootjs-neoforge-1.21.1-3.7.0.jar` | [Modrinth](https://modrinth.com/project/fJFETWDN) |
 | Lootr | `both` | `lootr-neoforge-1.21.1-1.11.37.122.jar` | [Modrinth](https://modrinth.com/project/EltpO5cN) |
-| LuckPerms | `server` | `LuckPerms-NeoForge-5.4.140.jar` | [Modrinth](https://modrinth.com/project/Vebnzrzj) |
+| LuckPerms | `server` | `LuckPerms-NeoForge-5.4.150.jar` | [Modrinth](https://modrinth.com/project/Vebnzrzj) |
 | Macaw's Bridges | `both` | `mcw-bridges-3.1.2-mc1.21.1neoforge.jar` | [Modrinth](https://modrinth.com/project/GURcjz8O) |
 | Macaw's Doors | `both` | `mcw-doors-1.1.5-mc1.21.1neoforge.jar` | [Modrinth](https://modrinth.com/project/kNxa8z3e) |
 | Macaw's Fences and Walls | `both` | `mcw-mcwfences-1.2.1-mc1.21.1neoforge.jar` | [Modrinth](https://modrinth.com/project/GmwLse2I) |
