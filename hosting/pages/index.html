@@ -11,7 +11,7 @@
     h1 { color: #f4b7c3; }
     a { color: #a9d8a3; }
     code { overflow-wrap: anywhere; }
-    .install { display: inline-block; margin: 8px 8px 8px 0; padding: 12px 16px; border-radius: 12px; background: #a9d8a3; color: #182116; font-weight: 700; text-decoration: none; }
+    .install { margin: 8px 8px 8px 0; padding: 12px 16px; border: 0; border-radius: 12px; background: #a9d8a3; color: #182116; cursor: pointer; font: inherit; font-weight: 700; }
     .muted { color: #b9aaa2; }
   </style>
 </head>
@@ -21,11 +21,12 @@
     <p>Gemütliches Technik-, Tier- und Abenteuer-Modpack für Minecraft 1.21.1.</p>
     <p><strong>Stable: Hasencraft __STABLE_VERSION__</strong></p>
     <h2>In Prism installieren</h2>
-    <p>In Prism Launcher <strong>Instanz hinzufügen → Importieren</strong> wählen. Dann mit Rechtsklick auf den passenden Knopf <strong>Link-Adresse kopieren</strong> und die Adresse in Prism einfügen:</p>
+    <p>In Prism Launcher <strong>Instanz hinzufügen → Importieren</strong> wählen. Dann den passenden Knopf klicken und die Adresse in Prism einfügen:</p>
     <p>
-      <a class="install" href="__FLUFFY_IMPORT_URL__">Fluffy-Importadresse</a>
-      <a class="install" href="__COZY_IMPORT_URL__">Cozy-Importadresse</a>
+      <button class="install" type="button" data-import-url="__FLUFFY_IMPORT_URL__">Fluffy-Importadresse kopieren</button>
+      <button class="install" type="button" data-import-url="__COZY_IMPORT_URL__">Cozy-Importadresse kopieren</button>
     </p>
+    <p id="copy-status" class="muted" aria-live="polite"></p>
     <p class="muted">Fluffy ist für stärkere Rechner, Cozy für sparsamere Grafik. Beide Profile enthalten dieselben Spielinhalte. Nach dem ersten Import werden Updates beim Start automatisch installiert.</p>
     <p><strong>Stable packwiz feed:</strong><br>
       <code><a href="channels/stable/pack.toml">channels/stable/pack.toml</a></code>
@@ -36,5 +37,18 @@
     <p><a href="https://github.com/DarveenDE/hasencraft/releases">Prism-Pakete und Releases</a></p>
     <p class="muted">Mod-Dateien werden von ihren offiziellen Quellen geladen.</p>
   </main>
+  <script>
+    const status = document.getElementById('copy-status');
+    document.querySelectorAll('[data-import-url]').forEach((button) => {
+      button.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(button.dataset.importUrl);
+          status.textContent = 'Importadresse kopiert – jetzt in Prism einfügen.';
+        } catch {
+          status.textContent = 'Kopieren nicht möglich. Bitte diese Seite über HTTPS im Browser öffnen.';
+        }
+      });
+    });
+  </script>
 </body>
 </html>
