@@ -1,0 +1,13 @@
+autoJump:false
+biomeBlendRadius:2
+enableVsync:true
+entityDistanceScaling:0.6
+graphicsMode:0
+guiScale:3
+maxFps:60
+mipmapLevels:2
+particles:2
+renderDistance:8
+simulationDistance:5
+resourcePacks:["vanilla"]
+incompatibleResourcePacks:[]

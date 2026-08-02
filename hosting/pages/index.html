@@ -201,6 +201,7 @@
     }
 
     .profile--cozy .profile-badge { background: #a9d8a3; }
+    .profile--eco .profile-badge { background: #a8c7e8; }
 
     button {
       width: 100%;
@@ -216,6 +217,7 @@
     }
 
     .profile--cozy button { background: #a9d8a3; }
+    .profile--eco button { background: #a8c7e8; }
 
     button:hover { filter: brightness(1.06); }
 
@@ -299,7 +301,7 @@
 
     <section class="content-section" aria-labelledby="install-heading">
       <h2 id="install-heading">In Prism installieren</h2>
-      <p class="section-copy">In Prism Launcher <strong>Instanz hinzufügen → Importieren</strong> wählen, dann das passende Profil kopieren und einfügen. Beide enthalten dieselben Mods, Welten und Inhalte – nur die Grafikvorgaben unterscheiden sich.</p>
+      <p class="section-copy">In Prism Launcher <strong>Instanz hinzufügen → Importieren</strong> wählen, dann das passende Profil kopieren und einfügen. Alle drei enthalten dieselben Mods, Welten und Inhalte – nur die Grafikvorgaben unterscheiden sich.</p>
 
       <div class="profile-grid">
         <article class="profile">
@@ -323,6 +325,18 @@
           <details>
             <summary>Importadresse manuell anzeigen</summary>
             <code>__COZY_IMPORT_URL__</code>
+          </details>
+        </article>
+
+        <article class="profile profile--eco">
+          <p class="profile-badge">Maximal sparsam</p>
+          <h3>Eco</h3>
+          <p>Für schwächere Rechner: geringere Sichtweite, 6 GiB Heap sowie kein Shader oder Fresh Animations beim ersten Start.</p>
+          <button type="button" data-import-url="__ECO_IMPORT_URL__" data-status-id="eco-status">Eco-Importadresse kopieren</button>
+          <p id="eco-status" class="copy-status" aria-live="polite"></p>
+          <details>
+            <summary>Importadresse manuell anzeigen</summary>
+            <code>__ECO_IMPORT_URL__</code>
           </details>
         </article>
       </div>

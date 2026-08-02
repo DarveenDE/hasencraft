@@ -87,11 +87,13 @@ $stableVersion = [string]$channels.stable
 $repository = "DarveenDE/hasencraft"
 $fluffyUrl = "https://github.com/$repository/releases/download/v$stableVersion/Hasencraft-stable-fluffy.zip"
 $cozyUrl = "https://github.com/$repository/releases/download/v$stableVersion/Hasencraft-stable-cozy.zip"
+$ecoUrl = "https://github.com/$repository/releases/download/v$stableVersion/Hasencraft-stable-eco.zip"
 $indexFile = Join-Path $destinationFull "index.html"
 $index = Get-Content -Raw -Encoding utf8 -LiteralPath $indexFile
 $index = $index.Replace("__STABLE_VERSION__", $stableVersion)
 $index = $index.Replace("__FLUFFY_IMPORT_URL__", $fluffyUrl)
 $index = $index.Replace("__COZY_IMPORT_URL__", $cozyUrl)
+$index = $index.Replace("__ECO_IMPORT_URL__", $ecoUrl)
 [System.IO.File]::WriteAllText($indexFile, $index, [System.Text.UTF8Encoding]::new($false))
 
 $publishedChannels = Join-Path $destinationFull "channels"

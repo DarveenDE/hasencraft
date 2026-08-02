@@ -1,21 +1,22 @@
 # Validierungsstand
 
-Stand: `0.1.0-alpha.2`, 2. August 2026.
+Stand: `0.1.0-alpha.2` mit Unreleased-Performance-Änderungen, 2. August 2026.
 
 ## Bestanden
 
-- Packwiz-Index aktualisiert und 158 gepinnte Einträge geprüft: 121 beide Seiten, 24 nur Client, 13 nur Server.
+- Packwiz-Index aktualisiert und 163 gepinnte Einträge geprüft: 123 beide Seiten, 24 nur Client, 16 nur Server.
+- Die neuen P1-Metadaten für FastSuite, Placebo, Structure Layout Optimizer, Resourceful Config und ServerCore sind gepinnt; Indexhash und Seitenzuordnung wurden durch `scripts/validate-pack.ps1` geprüft.
 - Den offiziellen NeoForge-Installer `21.1.247` per Upstream-SHA-1 geprüft und mit Minecraft `1.21.1` sowie Java `21.0.12` lokal installiert.
-- Den vollständigen Alpha-2-Serverstand bis `Done (3.217s)` gestartet und danach kontrolliert beendet; auch der vorausgehende Loader-Abgleich erreichte `Done (3.380s)`.
-- Das installierte Prism-Profil `Hasencraft Fluffy` im Online-Modus bis zum Titelbildschirm gestartet: NeoForge `21.1.247`, JEI `19.43.0.392`, Sodium `0.8.12` und Iris `1.8.14-beta.1` wurden gemeinsam geladen.
+- Den vollständigen Alpha-2-Serverstand bis `Done (3.217s)` gestartet und danach kontrolliert beendet; auch der vorausgehende Loader-Abgleich erreichte `Done (3.380s)`. Der Lauf ist die Baseline vor den neuen Performance-Mods.
+- Das installierte Prism-Profil `Hasencraft Fluffy` im Online-Modus bis zum Titelbildschirm gestartet: NeoForge `21.1.247`, JEI `19.43.0.392`, Sodium `0.8.12` und Iris `1.8.14-beta.1` wurden gemeinsam geladen. Das ist die Shaderstack-Baseline vor dem neuen Eco-Profil.
 - Complementary Reimagined wurde von Iris aktiviert; Distant Horizons meldete die erfolgreiche Iris-Event- und OpenGL-Anbindung.
 - FTB Quests lud eine Gruppe, ein Kapitel und neun deutsche Quests.
 - Simple Voice Chat startete auf UDP `24454`.
 - Die endgültige Waystones-Konfiguration wurde ohne Laufzeitkorrektur bytegleich übernommen: keine Kosten, keine Cooldowns, kein Haltbarkeitsverlust sowie Transport von Haustieren und angeleinten Tieren.
 - Nach den Hasencraft-Datenkorrekturen blieben keine Rezept-Parsefehler und kein fehlender Kartoffel-Tag zurück.
-- Beide Prism-ZIPs (`fluffy`, `cozy`) bestanden 48 Prüfungen zu Archivstruktur, Loader-Versionen, Pre-Launch-Update, Icon, Speicherprofil, Distant Horizons, Shader und Resourcepack. Die lokalen Test-ZIPs mit Entwicklungs-URL wurden anschließend entfernt.
-- Der Release-Snapshot enthält 182 durch `SHA256SUMS` geschützte Dateien. Ein zweiter Bau derselben Version wurde wie vorgesehen abgelehnt; die Quellvalidierung bleibt auch bei vorhandenem Snapshot bei exakt 158 Einträgen.
-- Sämtliche Bash-Skripte bestanden eine Syntaxprüfung; die PowerShell-Skripte liefen unter Windows PowerShell 5.1.
+- Alle drei Prism-Profile (`fluffy`, `cozy`, `eco`) bestanden die automatisierte Archivprüfung zu Instanzname, Pre-Launch-URL, Speicherprofil, Distant Horizons, Shader- und Ressourcenpack-Auswahl.
+- Der Alpha-2-Release-Snapshot enthält 182 durch `SHA256SUMS` geschützte Dateien. Ein zweiter Bau derselben Version wurde wie vorgesehen abgelehnt; die aktuelle Quellvalidierung umfasst 163 Einträge.
+- Sämtliche Bash-Skripte bestanden eine Syntaxprüfung; die aktualisierten PowerShell-Skripte parsen unter Windows PowerShell 5.1 und die Archivprüfung lief dort erfolgreich.
 
 ## Erwartete, nicht fatale Upstream-Meldungen
 
@@ -30,7 +31,10 @@ Diese Meldungen wurden bis zur jeweiligen bedingten Registrierung beziehungsweis
 ## Vor Stable noch manuell prüfen
 
 - Das Prism-Profil `cozy` importieren und mit dem zweiten Microsoft-Konto starten.
+- Das Prism-Profil `eco` importieren, seine deaktivierten Shader und Fresh Animations prüfen und mit Cozy vergleichen.
 - Iris, Complementary Reimagined, Fresh Animations und Distant Horizons im Spiel auf RX 7900 XT sowie vollständig auf GTX 1080 prüfen.
+- Zwei bis vier Clients gleichzeitig neue Gebiete erkunden lassen und Spark-Profile vor und nach den Distant-Horizons-Limits vergleichen.
+- More Culling und BadOptimizations ausschließlich auf einer frischen Testinstanz gegen den Shader-/Distant-Horizons-Stack testen; bei Fehlern nicht in den Stable-Feed übernehmen.
 - Zwei Clients verbinden und Haustierbindung, Tod, Respawn, Waystone-Mitnahme und Dimensionswechsel spielen.
 - Aether, Twilight Forest und Bumblezone betreten sowie einige Create-/AE2-/Mekanism-Rezepte in JEI anklicken.
 - Installation, systemd-Lock, Backup und Rollback auf der vorgesehenen Ubuntu-VM testen.

@@ -462,6 +462,11 @@ hash = "1c17c5ac0f42b0417429a0a14f225a942fc421cf929673b8e1e6c131600ca517"
 metafile = true
 
 [[files]]
+file = "mods/fastsuite.pw.toml"
+hash = "f7cd224c4ba2e8e897eefb3bbe89f889f8445dfde10605d878950914aef04ae0"
+metafile = true
+
+[[files]]
 file = "mods/ferrite-core.pw.toml"
 hash = "b4bbe1023e3adb39173823599788b7cb04e6ac550aa488dd0aa74cbc10571e79"
 metafile = true
@@ -697,6 +702,11 @@ hash = "ce94742d9741e62f279e0c353fed74e819fa374c1bba3462493fb98e7ee063f8"
 metafile = true
 
 [[files]]
+file = "mods/placebo.pw.toml"
+hash = "3522a0ed8ed4ed4f2ee25b94f6ea1d500a517604ed70c7ecd445623366cf8594"
+metafile = true
+
+[[files]]
 file = "mods/polymorph.pw.toml"
 hash = "c9ee2fb6794440331f0d4d39dbddc9fd3a2b6bfe75c1ce228d0fc300b166e952"
 metafile = true
@@ -737,6 +747,11 @@ hash = "d489bdff09fc5fda1dc68f05237b9678d50dd6feffd7319214136142593646ef"
 metafile = true
 
 [[files]]
+file = "mods/resourceful-config.pw.toml"
+hash = "b482414fb9cc128ed0d8af90c815a72170f6528cf7c71e5a27726c7ede6c6989"
+metafile = true
+
+[[files]]
 file = "mods/resourceful-lib.pw.toml"
 hash = "833cd378e86612f5d5da89db48ac408dd97d1037f7e998f9e373e36fdf2c9e74"
 metafile = true
@@ -754,6 +769,11 @@ metafile = true
 [[files]]
 file = "mods/searchables.pw.toml"
 hash = "a7b277a9f5b016ede7fc8d1f8cd44dc2e054f5d6bf8dc22908dbc162d3696a11"
+metafile = true
+
+[[files]]
+file = "mods/servercore.pw.toml"
+hash = "0462ee33ff0ff6b22f65c95832334e50637a603722b02199a12fa7cd682f1083"
 metafile = true
 
 [[files]]
@@ -799,6 +819,11 @@ metafile = true
 [[files]]
 file = "mods/spark.pw.toml"
 hash = "fcfd2cf3cd07bb91b6fb9f23ee99e93db67154199c6ad61abc177633b2afdfa9"
+metafile = true
+
+[[files]]
+file = "mods/structure-layout-optimizer.pw.toml"
+hash = "9bf76c566fac6ca9d1cd40d573837fa4797aa39de0d7d52956124590281d53f3"
 metafile = true
 
 [[files]]
