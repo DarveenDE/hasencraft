@@ -112,8 +112,11 @@ try {
     if ($developmentInstance -notmatch [regex]::Escape("name=Hasencraft Cozy Dev")) {
         throw "Unexpected instance name in development archive"
     }
-    if ($developmentInstance -notmatch [regex]::Escape('PreLaunchCommand=powershell.exe -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$INST_MC_DIR\hasencraft-dev-bootstrap.ps1"')) {
+    if ($developmentInstance -notmatch [regex]::Escape('PreLaunchCommand=powershell.exe -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "${INST_MC_DIR}/hasencraft-dev-bootstrap.ps1"')) {
         throw "Missing development pre-launch hook"
+    }
+    if ($developmentInstance -match [regex]::Escape('\hasencraft-dev-bootstrap.ps1')) {
+        throw "Development pre-launch hook uses an INI-escaped Windows path separator"
     }
     if ($developmentLauncher -notmatch [regex]::Escape($developmentUrl.AbsoluteUri)) {
         throw "Local file URI was not rendered into development archive"
