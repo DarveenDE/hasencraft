@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Hasencraft – gemütliches Minecraft-Modpack mit Technik, Tieren und Magie</title>
-  <meta name="description" content="Hasencraft ist ein kuratiertes Minecraft-Modpack für 1.21.1: Create, Immersive Engineering, AE2, Ars Nouveau, Aether und ganz viele Tiere. In zwei Minuten über Prism Launcher installiert.">
+  <meta name="description" content="Hasencraft ist ein kuratiertes Minecraft-Modpack für __MINECRAFT_VERSION__: Create, Immersive Engineering, AE2, Ars Nouveau, Aether und ganz viele Tiere. In zwei Minuten über Prism Launcher installiert.">
   <meta name="theme-color" content="#0d1310">
   <link rel="icon" href="assets/hasencraft.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/hasencraft.png">
@@ -12,7 +12,7 @@
   <meta property="og:locale" content="de_DE">
   <meta property="og:site_name" content="Hasencraft">
   <meta property="og:title" content="Hasencraft – gemütliches Minecraft-Modpack">
-  <meta property="og:description" content="Technik, Tiere, Magie und große Erkundungsziele für Minecraft 1.21.1. Ein Klick in Prism Launcher, Updates laufen automatisch.">
+  <meta property="og:description" content="Technik, Tiere, Magie und große Erkundungsziele für Minecraft __MINECRAFT_VERSION__. Ein Klick in Prism Launcher, Updates laufen automatisch.">
   <meta property="og:url" content="https://darveende.github.io/hasencraft/">
   <meta property="og:image" content="https://darveende.github.io/hasencraft/assets/galerie-aether.webp">
   <meta property="og:image:alt" content="Weite Aether-Landschaft in Minecraft mit schwebenden Felsen am Himmel">
@@ -452,7 +452,7 @@
         <a href="#wissen">Gut zu wissen</a>
         <a href="#technik">Technik</a>
       </nav>
-      <span class="pill pill--version"><span class="dot"></span><span class="pill__label">Stable</span>__STABLE_VERSION__</span>
+      <span class="pill pill--version"><span class="dot"></span><span class="pill__label">Stable</span> <span>__STABLE_VERSION__</span></span>
     </div>
   </header>
 
@@ -528,7 +528,7 @@
       <div class="hero__fade" aria-hidden="true"></div>
 
       <div class="wrap">
-        <p class="eyebrow">Minecraft 1.21.1 · NeoForge · Deutsch</p>
+        <p class="eyebrow">Minecraft __MINECRAFT_VERSION__ · NeoForge · Deutsch</p>
         <h1 class="hero__title">Bau mit. <em>Hasencraft.</em></h1>
         <p class="hero__lead">
           Ein gemütliches Modpack aus Technik, Tieren, Magie und großen Erkundungszielen –
@@ -907,28 +907,35 @@
       const status = document.getElementById('copy-status');
       const fallback = document.getElementById('copy-fallback');
       const fallbackInput = document.getElementById('copy-input');
-      let resetTimer;
+      const buttons = Array.from(document.querySelectorAll('[data-import-url]'));
+      const timers = new Map();
 
-      document.querySelectorAll('[data-import-url]').forEach((button) => {
+      // Jeder Knopf hat seinen eigenen Timer. Beim Klick werden zuerst alle
+      // zurückgesetzt, damit nie zwei gleichzeitig „Kopiert!“ anzeigen – in der
+      // Zwischenablage liegt schließlich nur eine Adresse.
+      const reset = (button) => {
+        clearTimeout(timers.get(button));
+        timers.delete(button);
+        button.classList.remove('is-copied');
         const label = button.querySelector('span');
-        const original = button.dataset.label;
+        if (label) label.textContent = button.dataset.label;
+      };
 
+      buttons.forEach((button) => {
         button.addEventListener('click', async () => {
           const url = button.dataset.importUrl;
-          clearTimeout(resetTimer);
+          buttons.forEach(reset);
 
           try {
             await navigator.clipboard.writeText(url);
+            const label = button.querySelector('span');
             button.classList.add('is-copied');
             if (label) label.textContent = 'Kopiert!';
             status.classList.remove('is-error');
             status.textContent = 'Importadresse kopiert – in Prism auf „Instanz hinzufügen → Importieren“ einfügen.';
             fallback.classList.remove('is-visible');
 
-            resetTimer = setTimeout(() => {
-              button.classList.remove('is-copied');
-              if (label) label.textContent = original;
-            }, 2600);
+            timers.set(button, setTimeout(() => reset(button), 2600));
           } catch {
             status.classList.add('is-error');
             status.textContent = 'Kopieren hat nicht geklappt – bitte die Adresse unten von Hand kopieren.';
