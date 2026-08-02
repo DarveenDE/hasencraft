@@ -1,6 +1,10 @@
 hash-format = "sha256"
 
 [[files]]
+file = "config/bluemap/webserver.conf"
+hash = "64470bc2a7d192a317bb4c75dba931978eea229e194187f7c41dae5bd43e1cda"
+
+[[files]]
 file = "config/carryon-common.toml"
 hash = "e89cf801c57784593fb2a83c1fc91f04caf4a1da05e8ad5f442f74945e3f82c2"
 
@@ -274,6 +278,11 @@ hash = "564b3baf3e4635cb10d0355b49e0807ddafbf4beb99ecedc46f774d70937f1b4"
 metafile = true
 
 [[files]]
+file = "mods/bluemap.pw.toml"
+hash = "103803cf1ac202fdb992fa5c188b0c270242ad1500ad0652bf896c010df2de57"
+metafile = true
+
+[[files]]
 file = "mods/bookshelf-lib.pw.toml"
 hash = "86b385d76f0ba345ff0c6add2bc8ff49ed918d5c85851a554f70f8b2bea1dccf"
 metafile = true
@@ -321,6 +330,11 @@ metafile = true
 [[files]]
 file = "mods/crafting-tweaks.pw.toml"
 hash = "15640250d7a7b74de02bf6266ae60d7bdf1ccd48a6acebc6604e64d11865f4af"
+metafile = true
+
+[[files]]
+file = "mods/create-bluemap.pw.toml"
+hash = "5cb41522a630fb66225f73695c53cb8a1763437d8cb854c9b7bebde87fa9e63d"
 metafile = true
 
 [[files]]
@@ -391,6 +405,11 @@ metafile = true
 [[files]]
 file = "mods/diagonal-windows.pw.toml"
 hash = "f56a20ad7ba3a5e55309d460aae902af39e39da20c5a4583c76e50b50178a57f"
+metafile = true
+
+[[files]]
+file = "mods/discord-integration.pw.toml"
+hash = "14822a696007c2bf909dd9bd5e43cc88019a0eb2d76819ea78cb0521d1d2b215"
 metafile = true
 
 [[files]]

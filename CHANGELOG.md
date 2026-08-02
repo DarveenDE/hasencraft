@@ -14,6 +14,8 @@ Alle relevanten Änderungen an Mods, Konfiguration, Quests und Serveranforderung
 - Carry On verlangsamt beim Tragen von Entitäten nur noch auf 25 Prozent.
 - Neue Installationen verwenden `U` für die FTB-Karte; Xaero's Weltkarte bleibt auf `M`.
 
+- BlueMap, Create BlueMap und Discord Integration sind ausschliesslich auf dem Server ergaenzt; Karte und Discord-Bot bleiben bis zum Staging-Test deaktiviert beziehungsweise nicht oeffentlich.
+
 ## 0.1.0-alpha.2 — 2026-08-02
 
 - NeoForge von `21.1.248` auf `21.1.247` gepinnt, da Prism für den neueren Maven-Build noch keine Komponenten-Metadaten ausliefert.

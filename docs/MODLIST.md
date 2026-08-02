@@ -2,10 +2,10 @@
 
 Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.3`.
 
-- Gesamt: 166 verwaltete Eintraege
+- Gesamt: 169 verwaltete Eintraege
 - beide Seiten: 124
 - nur Client: 24
-- nur Server: 18
+- nur Server: 21
 
 ## Kuratierter Kern
 
@@ -44,6 +44,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.3`
 | Better Advancements | `client` | `BetterAdvancements-NeoForge-1.21.1-0.4.3.21.jar` | [Modrinth](https://modrinth.com/project/Q2OqKxDG) |
 | Better Third Person | `client` | `BetterThirdPerson-neoforge-1.9.0.jar` | [Modrinth](https://modrinth.com/project/G1s2WpNo) |
 | BetterF3 | `client` | `BetterF3-11.0.3-NeoForge-1.21.1.jar` | [Modrinth](https://modrinth.com/project/8shC1gFX) |
+| BlueMap | `server` | `bluemap-5.7-neoforge.jar` | [Modrinth](https://modrinth.com/project/swbUV1cr) |
 | Bookshelf | `both` | `bookshelf-neoforge-1.21.1-21.1.81.jar` | [Modrinth](https://modrinth.com/project/uy4Cnpcm) |
 | Carry On | `both` | `carryon-neoforge-1.21.1-2.2.6.13.jar` | [Modrinth](https://modrinth.com/project/joEfVgkn) |
 | Chipped | `both` | `chipped-neoforge-1.21.1-4.0.2.jar` | [Modrinth](https://modrinth.com/project/BAscRYKm) |
@@ -55,6 +56,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.3`
 | CoreProtectNeo | `server` | `coreprotectneo-1.0.jar` | [Modrinth](https://modrinth.com/project/J80MzpEK) |
 | Crafting Tweaks | `both` | `craftingtweaks-neoforge-1.21.1-21.1.10.jar` | [Modrinth](https://modrinth.com/project/DMu0oBKf) |
 | Create | `both` | `create-1.21.1-6.0.10.jar` | [Modrinth](https://modrinth.com/project/LNytGWDc) |
+| Create BlueMap | `server` | `create_bluemap-1.1.1.jar` | [Modrinth](https://modrinth.com/project/W9e7rf1y) |
 | Create Crafts & Additions | `both` | `createaddition-1.6.0.jar` | [Modrinth](https://modrinth.com/project/kU1G12Nn) |
 | Create Deco | `both` | `createdeco-2.1.3.jar` | [Modrinth](https://modrinth.com/project/sMvUb4Rb) |
 | Create Slice & Dice | `both` | `sliceanddice-4.3.3-neoforge.jar` | [Modrinth](https://modrinth.com/project/GmjmRQ0A) |
@@ -70,6 +72,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.3`
 | Diagonal Fences | `both` | `DiagonalFences-v21.1.1-1.21.1-NeoForge.jar` | [Modrinth](https://modrinth.com/project/IKARgflD) |
 | Diagonal Walls | `both` | `DiagonalWalls-v21.1.2-1.21.1-NeoForge.jar` | [Modrinth](https://modrinth.com/project/FQgc8dib) |
 | Diagonal Windows | `both` | `DiagonalWindows-v21.1.1-1.21.1-NeoForge.jar` | [Modrinth](https://modrinth.com/project/oOi0CKes) |
+| Discord Integration (DI) | `server` | `DiscordIntegration-1.21.1-4.0.1.jar` | [Modrinth](https://modrinth.com/project/wdZidyDu) |
 | Distant Horizons | `both` | `DistantHorizons-3.2.0-b-1.21.1-fabric-neoforge.jar` | [Modrinth](https://modrinth.com/project/uCdwusMi) |
 | Doggy Talents Next | `both` | `DoggyTalentsNext-1.21.1-1.19.0.jar` | [Modrinth](https://modrinth.com/project/oXgmplvv) |
 | Dungeons and Taverns | `both` | `dungeons-and-taverns-v4.4.4.jar` | [Modrinth](https://modrinth.com/project/tpehi7ww) |
