@@ -6,12 +6,15 @@ param(
     [ValidateSet("stable", "beta")]
     [string]$Channel = "stable",
 
-    [ValidateSet("fluffy", "cozy")]
+    [ValidateSet("fluffy", "cozy", "eco")]
     [string]$Profile = "fluffy",
 
     [switch]$AllowHttp,
 
-    [switch]$Force
+    [switch]$Force,
+
+    # Intended for automated archive checks. Custom output stays inside build/.
+    [string]$OutputDirectory
 )
 
 $ErrorActionPreference = "Stop"
@@ -27,7 +30,6 @@ $icon = Join-Path $repoRoot "launcher\hasencraft.png"
 $buildParent = Join-Path $repoRoot "build"
 $stage = Join-Path $buildParent "prism-$Channel-$Profile"
 $dist = Join-Path $repoRoot "dist"
-$archive = Join-Path $dist "Hasencraft-$Channel-$Profile.zip"
 
 function Assert-ChildPath([string]$Candidate, [string]$Parent) {
     $fullCandidate = [System.IO.Path]::GetFullPath($Candidate)
@@ -46,6 +48,12 @@ if ($bootstrapHash -ne "a8fbb24dc604278e97f4688e82d3d91a318b98efc08d5dbfcbcbcab6
     throw "Unexpected packwiz bootstrap SHA-256: $bootstrapHash"
 }
 
+if (-not [string]::IsNullOrWhiteSpace($OutputDirectory)) {
+    $dist = [System.IO.Path]::GetFullPath($OutputDirectory)
+    Assert-ChildPath $dist $buildParent
+}
+$archive = Join-Path $dist "Hasencraft-$Channel-$Profile.zip"
+
 New-Item -ItemType Directory -Force -Path $buildParent, $dist | Out-Null
 Assert-ChildPath $stage $buildParent
 
@@ -61,7 +69,12 @@ Copy-Item -LiteralPath $icon -Destination (Join-Path $stage "hasencraft.png") -F
 
 $instanceTemplate = Join-Path $stage "instance.cfg.in"
 $instanceFile = Join-Path $stage "instance.cfg"
-$profileName = if ($Profile -eq "fluffy") { "Hasencraft Fluffy" } else { "Hasencraft Cozy" }
+$profileNames = @{
+    fluffy = "Hasencraft Fluffy"
+    cozy   = "Hasencraft Cozy"
+    eco    = "Hasencraft Eco"
+}
+$profileName = $profileNames[$Profile]
 if ($Channel -eq "beta") { $profileName += " Beta" }
 
 $instance = Get-Content -Raw -LiteralPath $instanceTemplate

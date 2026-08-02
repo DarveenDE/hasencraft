@@ -23,10 +23,21 @@ Daraus folgen drei Leitsätze:
 
 ## 2. Markenfundament
 
-Die Marke wird nicht neu erfunden, sondern aus dem bestehenden Pack-Icon
-(`launcher/hasencraft.png`) abgeleitet: Pixelhase vor Nachtwald, Sonnenuntergang,
-Biene, Zahnrad. Das Icon liegt als `hosting/pages/assets/hasencraft.png` und
-dient gleichzeitig als Wortmarke-Begleiter, Favicon und Open-Graph-Bild.
+Maßgeblich ist [`docs/BRANDING.md`](BRANDING.md) – dieses Dokument setzt die
+Marke um, es definiert sie nicht. Von dort kommen Leitsatz, Wortmarke und
+Farbwerte; die Seite ergänzt nur, was zum Bauen einer Website fehlt
+(Flächenhierarchie, abgeleitete Grautöne, Kontrastvarianten).
+
+Übernommen werden:
+
+- **Leitsatz** „Gemütlich bauen. Weit entdecken." als Hero-Eyebrow.
+- **Wortmarke** `assets/hasencraft-wordmark.png` als `<h1>`-Bild, mit
+  `visually-hidden`-Textalternative „Hasencraft".
+- **Emblem** `assets/hasencraft.png` in der Topbar, als Favicon und
+  Apple-Touch-Icon.
+- **Panorama** `assets/hasencraft-panorama.webp` als Hero-Hintergrund –
+  dasselbe Bild, das im Spiel den Titelbildschirm trägt. Wer die Seite
+  besucht und danach das Spiel startet, sieht dieselbe Szene wieder.
 
 **Tonalität:** warm, ruhig, kompetent. Gemütlich heißt nicht kindlich – die
 Seite darf technisch klingen, aber nie einschüchternd. Durchgehend Duzen,
@@ -34,33 +45,42 @@ durchgehend Deutsch.
 
 ## 3. Farbsystem
 
-Nachtwald als Grundton, Honig als einzige laute Farbe. Die Seite ist bewusst
-**nur dunkel**: Das Pack spielt abends, das Icon ist eine Nachtszene, und ein
-zweites Theme wäre doppelte Pflege ohne Nutzen.
+Petrol als Grundton, Honig als einzige laute Farbe. Die Seite ist bewusst
+**nur dunkel**: Das Pack spielt abends, Panorama und Emblem sind Nachtszenen,
+und ein zweites Theme wäre doppelte Pflege ohne Nutzen.
 
-| Token | Wert | Rolle |
-|---|---|---|
-| `--ink` | `#0d1310` | Seitenhintergrund |
-| `--night` | `#111a15` | abgesetzte Bänder, Footer |
-| `--surface` / `--surface-2` | `#18241e` / `#1f2d25` | Karten |
-| `--line` / `--line-soft` | `#2c4034` / `#223126` | Rahmen, Trennlinien |
-| `--cream` | `#f7efe6` | Fließtext, Überschriften |
-| `--muted` | `#b6aa9f` | Sekundärtext |
-| `--honey` | `#f6c453` | primäre Aktion, Akzent „Fluffy“ |
-| `--teal` | `#5fb3a8` | Akzent „Cozy“ |
-| `--moss` | `#8ec96f` | Links, Erfolgszustände, Schrittzähler |
-| `--copper` | `#d1813f` | Sonnenuntergang, Akzent „Technik“ |
-| `--blush` | `#f4b7c3` | Wortmarke, Akzent „Tiere“ |
+Die ersten sechs Werte stammen unverändert aus `BRANDING.md`, der Rest ist
+daraus abgeleitet:
+
+| Token | Wert | Herkunft | Rolle |
+|---|---|---|---|
+| `--ink` | `#071e1c` | Nachtpetrol | Seitenhintergrund |
+| `--surface` | `#0d2b28` | Panel-Petrol | Karten |
+| `--teal` | `#2f8378` | Teal | Rahmen, Deko |
+| `--honey` | `#ffd166` | Honig | primäre Aktion, Akzent „Fluffy“ |
+| `--copper` | `#d97941` | Kupfer | Akzent „Technik“ |
+| `--cream` | `#fff6e5` | Fellcreme | Fließtext, Überschriften |
+| `--night` / `--surface-2` | `#0a2523` / `#123531` | abgeleitet | Bänder, erhöhte Karten |
+| `--line` / `--line-soft` | `#1d4a44` / `#163a35` | abgeleitet | Rahmen, Trennlinien |
+| `--muted` | `#a8bdb8` | abgeleitet | Sekundärtext |
+| `--teal-bright` | `#57b3a6` | aufgehellt | Flächen mit dunklem Text, Akzent „Cozy“ |
+| `--moss` | `#8ec96f` | ergänzt | Links, Schrittzähler, Akzent „Eco“ |
+| `--blush` | `#f4b7c3` | ergänzt | Akzent „Tiere“ |
 
 **Regeln:**
 
 - Honig ist reserviert. Pro Bildschirm höchstens eine honigfarbene Fläche, sonst
   verliert der Installations-Button seine Wirkung.
-- Fluffy trägt Honig, Cozy trägt Teal – konsequent über Rahmen, Icon, Aufzählung
-  und Button hinweg. Die Farbe erklärt die Wahl schneller als der Text.
-- Text auf Farbfläche ist immer dunkel (`#14190f` / `#06201d`), nie weiß.
-- Alle Text-/Hintergrundpaare liegen über WCAG AA (Fließtext ≥ 4,5:1,
-  Sekundärtext auf Karte ≈ 7:1).
+- Fluffy trägt Honig, Cozy trägt helles Teal, Eco trägt Moos – konsequent über
+  Rahmen, Icon, Beschriftung und Button hinweg. Die Farbe erklärt die Wahl
+  schneller als der Text.
+- Text auf Farbfläche ist immer dunkel, nie weiß. Jede Akzentfarbe bringt ihren
+  eigenen Textton mit (`--accent-ink`).
+- **Das Marken-Teal `#2f8378` trägt keinen Text.** Gegen dunklen Text kommt es
+  nur auf 3,8:1 und reißt damit AA. Für Flächen mit Beschriftung gibt es
+  `--teal-bright`; das Marken-Teal bleibt Rahmen, Icon und Dekoration.
+- Gemessene Werte: Fließtext 16,2:1, Knopfbeschriftungen 12,9:1 (Fluffy),
+  6,8:1 (Cozy) und 8,7:1 (Eco).
 
 ## 4. Typografie
 
@@ -69,9 +89,9 @@ Requests, kein Datenabfluss, kein Ladeflackern. Der Minecraft-Bezug kommt aus
 Pixelgrafik und Farbe, nicht aus einer Pixelschrift – die wäre bei Fließtext
 kaum lesbar.
 
-- **Hero:** `clamp(2.9rem … 5.4rem)`, 800, Laufweite `-0.035em`. Zweigeteilt:
-  „Bau mit.“ in Creme, „Hasencraft.“ in Blush mit 4-px-Versatzschatten in Kupfer
-  – ein Blockschatten als Zitat der Pixeloptik.
+- **Hero:** die Wortmarke als Bild (`width: min(100%, 30rem)`), darüber der
+  Leitsatz als Eyebrow. Kein gesetzter Titel – die Wortmarke *ist* die
+  Überschrift; der Textinhalt der `<h1>` steckt in einem `visually-hidden`-Span.
 - **Abschnittstitel:** `clamp(1.8rem … 2.7rem)`, 800, darüber ein „Kicker“ in
   Moos oder Honig (0,8 rem, Versalien, Sperrung `0.14em`).
 - **Fließtext:** `clamp(1rem … 1.075rem)`, Zeilenhöhe 1,65, Zeilenlänge maximal
@@ -84,9 +104,10 @@ kaum lesbar.
 - Vertikaler Rhythmus über `clamp(3.5rem … 6rem)` Bandabstand; abwechselnd
   `--ink` und ein leicht aufgehellter Verlauf (`.band--tint`), damit sich die
   Abschnitte ohne harte Trennlinien voneinander abheben.
-- Raster: Mobile einspaltig, 700 px zweispaltig, 1000 px dreispaltig. Die
-  Profilkarten wechseln bei 820 px auf zwei Spalten – vorher wird der
-  Vergleich zu schmal.
+- Raster: Mobile einspaltig, 700 px zweispaltig, 1000 px dreispaltig. Die drei
+  Profilkarten springen erst bei 940 px auf drei Spalten und bleiben davor
+  untereinander – zwei nebeneinander plus ein Waisenkind wäre schlechter
+  vergleichbar als eine saubere Reihe.
 - Sticky-Topbar (64 px) mit Blur; `scroll-margin-top: 84px` an allen
   Sprungzielen, damit Ankerlinks nicht unter der Leiste landen.
 
@@ -95,10 +116,10 @@ kaum lesbar.
 | Baustein | Zweck | Merkmale |
 |---|---|---|
 | **Topbar** | Orientierung + Statusanzeige | Marke links, Ankernavigation ab 860 px, Versions-Pille mit grünem Punkt als Live-Signal |
-| **Hero** | Emotion + Einstieg | Pixelwald-Szene, zwei Aktionen (primär/sekundär) |
+| **Hero** | Emotion + Einstieg | Panorama aus dem Titelbildschirm, Wortmarke, zwei Aktionen |
 | **Faktenband** | Vertrauen in vier Zahlen | Vollbreites Raster, 1-px-Fugen, Werte aus `pack.toml` |
 | **Schrittliste** | Angst vor Installation nehmen | Drei nummerierte Karten, CSS-Counter, jeweils ein Satz |
-| **Profilkarte** | die eine echte Entscheidung | Akzentleiste oben, Hardware-Einordnung, drei Spezifikationen, ganzbreiter Kopierknopf, Alternativlink zum ZIP |
+| **Profilkarte** | die eine echte Entscheidung | Akzentleiste oben, Block „Mindestens empfohlen“ (Grafik als AMD/NVIDIA-Paar, RAM, was das Profil setzt), ganzbreiter Kopierknopf, Alternativlink zum ZIP |
 | **Hinweis-Note** | Missverständnisse abfangen | Honigrahmen links, genau eine Aussage |
 | **Inhaltskarte** | Lust machen | Icon in Themenfarbe, zwei Sätze, Mod-Chips als Belege |
 | **Galeriekachel** | zeigen statt behaupten | Bild 16:9 (breite Kachel 21:9), Vignette, Titel, Bildunterschrift, Meta-Chips |
@@ -106,8 +127,13 @@ kaum lesbar.
 | **Technik-Akkordeon** | Tiefe ohne Ballast | `<details>`, zugeklappt als Standard |
 
 **Kopierknopf** – das Kernstück der Seite:
-Klick kopiert die Importadresse, der Knopf wechselt für 2,6 s auf „Kopiert!“ in
-Moosgrün, darunter erscheint die Anweisung für den nächsten Schritt in Prism.
+Klick kopiert die Importadresse; der Knopf bekommt für 2,6 s einen cremefarbenen
+Innenring und die Beschriftung „Kopiert!“, darunter erscheint die Anweisung für
+den nächsten Schritt in Prism. Der Erfolgszustand hat bewusst **keine** eigene
+Farbe – Eco ist bereits moosgrün, eine grüne Bestätigung wäre dort unsichtbar.
+Jeder Knopf hat seinen eigenen Timer, und ein Klick setzt zuerst alle anderen
+zurück: In der Zwischenablage liegt nur eine Adresse, also darf auch nur ein
+Knopf bestätigt aussehen.
 Scheitert der Zugriff auf die Zwischenablage (kein HTTPS, restriktiver Browser),
 erscheint automatisch ein vorausgewähltes Textfeld mit der Adresse. Zusätzlich
 steht dieselbe Adresse als normaler Download-Link daneben – der Weg bricht nie
@@ -115,16 +141,17 @@ ab.
 
 ## 7. Grafiksprache
 
-Alle Grafiken sind **Inline-SVG oder CSS**, kein externes Bildmaterial außer dem
-Pack-Icon:
+Bilder tragen die Stimmung, Vektorgrafik die Struktur. Ein einziges Foto-Asset
+trägt Hero und Profilkarten:
 
-- **Pixelwald:** ein `<symbol>` mit gestufter Nadelbaum-Silhouette, per `<use>`
-  in zwei Ebenen gestreut (fern `--pine-far`, nah `--pine-near`). Das ergibt
-  Tiefe bei ~2 KB Markup und skaliert per `preserveAspectRatio="slice"` von
-  Handy bis Ultrawide.
-- **Himmel:** drei überlagerte Verläufe – Kupferglühen unten rechts als
-  Sonnenuntergang, kühler Teal-Schimmer oben links, dunkler Grundverlauf.
-- **Glühwürmchen:** drei 4–5 px große Honigquadrate mit langsamer Drift.
+- **Panorama:** dasselbe Bild, das im Spiel den Titelbildschirm trägt. Im Hero
+  als Hintergrund mit radialem Scrim links, in den Profilkarten als Ausschnitt
+  oben links, der in die Kartenfläche ausläuft. Jede Karte zeigt einen anderen
+  Bereich des 360°-Bildes – ein Asset, drei Motive, kein zusätzlicher Download.
+  Ein früher hier gezeichneter Pixelwald ist entfallen; das echte Panorama sagt
+  dasselbe besser und verbindet Seite und Spielstart.
+- **Galeriebilder:** die einzigen weiteren Fotos. Sie stehen bewusst nur in der
+  Galerie, damit die Screenshots ihre Wirkung nicht mit anderen Bildern teilen.
 - **Icons:** einheitlich 24×24 Strichzeichnungen, Strichstärke 2, runde
   Enden – neutral genug, um nicht mit der Pixeloptik zu konkurrieren.
 - **Galeriebilder:** die einzigen Fotos der Seite. Sie stehen bewusst nur in der
@@ -168,7 +195,8 @@ sämtliche Animationen, Transitions und das Smooth-Scrolling ab.
   keine Analytics, keine CDN-Abhängigkeit. Das hält die Seite schnell, DSGVO-arm
   und unabhängig von fremder Verfügbarkeit.
 - **Platzhalter bleiben der Vertrag** zwischen Seite und Build:
-  `__STABLE_VERSION__`, `__FLUFFY_IMPORT_URL__`, `__COZY_IMPORT_URL__` sowie neu
+  `__STABLE_VERSION__`, `__FLUFFY_IMPORT_URL__`, `__COZY_IMPORT_URL__`,
+  `__ECO_IMPORT_URL__` sowie
   `__MINECRAFT_VERSION__` und `__NEOFORGE_VERSION__` (aus der `pack.toml` des
   Stable-Snapshots). `build-pages.ps1` bricht ab, wenn nach dem Ersetzen noch
   ein Platzhalter übrig ist – eine halbfertige Seite geht nicht live.
@@ -183,9 +211,9 @@ sämtliche Animationen, Transitions und das Smooth-Scrolling ab.
 
 ```text
 Topbar        Marke · Ankernavigation · Stable-Version
-Hero          Pixelwald · „Bau mit. Hasencraft.“ · zwei Aktionen
+Hero          Panorama · Wortmarke · Leitsatz · zwei Aktionen
 Faktenband    Mods · Minecraft · NeoForge · Updates
-Installation  drei Schritte → Fluffy/Cozy → Hinweis „gleiche Inhalte“
+Installation  drei Schritte → Fluffy/Cozy/Eco → Hinweis „gleiche Inhalte“
 Inhalte       sechs Themenkarten mit Mod-Belegen
 Bilder        fünf Galeriekacheln mit eigenen Screenshots
 Gut zu wissen vier Karten gegen die häufigsten Stolperfallen

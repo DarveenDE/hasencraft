@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hasencraft – gemütliches Minecraft-Modpack mit Technik, Tieren und Magie</title>
+  <title>Hasencraft – Gemütlich bauen. Weit entdecken.</title>
   <meta name="description" content="Hasencraft ist ein kuratiertes Minecraft-Modpack für __MINECRAFT_VERSION__: Create, Immersive Engineering, AE2, Ars Nouveau, Aether und ganz viele Tiere. In zwei Minuten über Prism Launcher installiert.">
   <meta name="theme-color" content="#0d1310">
   <link rel="icon" href="assets/hasencraft.png" type="image/png">
@@ -20,29 +20,30 @@
   <style>
     /* ---------------------------------------------------------------
        Hasencraft Design System
-       Farben aus dem Pack-Icon: Nachtwald, Honig, Kupfer, Hasenfell.
+       Farbwerte nach docs/BRANDING.md: Nachtpetrol, Panel-Petrol, Teal,
+       Honig, Kupfer, Fellcreme. Die übrigen Töne sind daraus abgeleitet.
        --------------------------------------------------------------- */
     :root {
       color-scheme: dark;
 
-      --ink:        #0d1310;
-      --night:      #111a15;
-      --surface:    #18241e;
-      --surface-2:  #1f2d25;
-      --line:       #2c4034;
-      --line-soft:  #223126;
+      --ink:        #071e1c;
+      --night:      #0a2523;
+      --surface:    #0d2b28;
+      --surface-2:  #123531;
+      --line:       #1d4a44;
+      --line-soft:  #163a35;
 
-      --cream:      #f7efe6;
-      --muted:      #b6aa9f;
+      --cream:      #fff6e5;
+      --muted:      #a8bdb8;
 
+      --honey:      #ffd166;
+      --copper:     #d97941;
+      --teal:       #2f8378;
+      /* Aufgehellte Teal-Variante für Flächen, die dunklen Text tragen –
+         das Marken-Teal selbst käme dort nicht auf AA-Kontrast. */
+      --teal-bright:#57b3a6;
       --moss:       #8ec96f;
-      --honey:      #f6c453;
-      --copper:     #d1813f;
       --blush:      #f4b7c3;
-      --teal:       #5fb3a8;
-
-      --pine-far:   #1b2c22;
-      --pine-near:  #0f1a14;
 
       --radius-s: 10px;
       --radius-m: 16px;
@@ -138,15 +139,17 @@
       position: relative; overflow: hidden; isolation: isolate;
       padding-block: clamp(3.5rem, 8vw, 7rem) clamp(9rem, 20vw, 15rem);
     }
+    /* Panorama aus dem Titelbildschirm, abgedunkelt: links ein Scrim, damit
+       Wortmarke und Fließtext auf jedem Bildausschnitt lesbar bleiben. */
     .hero__sky {
       position: absolute; inset: 0; z-index: -2;
       background:
-        radial-gradient(1200px 460px at 68% 88%, color-mix(in srgb, var(--copper) 34%, transparent), transparent 62%),
-        radial-gradient(900px 420px at 20% 10%, color-mix(in srgb, var(--teal) 16%, transparent), transparent 65%),
-        linear-gradient(180deg, #0b1a1c 0%, #10201a 45%, var(--ink) 100%);
+        radial-gradient(1100px 620px at 18% 45%, rgb(7 30 28 / 0.82), rgb(7 30 28 / 0.15) 70%),
+        linear-gradient(180deg, rgb(7 30 28 / 0.62) 0%, rgb(7 30 28 / 0.3) 45%, var(--ink) 100%),
+        url("assets/hasencraft-panorama.webp") center / cover no-repeat,
+        var(--ink);
     }
-    .hero__scene { position: absolute; inset: auto 0 0 0; z-index: -1; width: 100%; height: clamp(180px, 26vw, 300px); display: block; }
-    .hero__fade { position: absolute; inset: auto 0 0 0; z-index: -1; height: 160px; background: linear-gradient(180deg, transparent, var(--ink)); }
+    .hero__fade { position: absolute; inset: auto 0 0 0; z-index: -1; height: 180px; background: linear-gradient(180deg, transparent, var(--ink)); }
 
     .eyebrow {
       display: inline-flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
@@ -155,16 +158,18 @@
     }
     .eyebrow::before { content: ""; width: 28px; height: 2px; background: currentColor; opacity: 0.6; }
 
-    .hero__title {
-      margin-top: 1rem;
-      font-size: clamp(2.9rem, 1.6rem + 6vw, 5.4rem);
-      font-weight: 800;
-      letter-spacing: -0.035em;
+    .hero__title { margin-top: 1.1rem; }
+    .wordmark {
+      display: block;
+      width: min(100%, 30rem);
+      height: auto;
+      filter: drop-shadow(0 10px 26px rgb(0 0 0 / 0.55));
     }
-    .hero__title em {
-      font-style: normal;
-      color: var(--blush);
-      text-shadow: 4px 4px 0 color-mix(in srgb, var(--copper) 45%, transparent);
+
+    .visually-hidden {
+      position: absolute; width: 1px; height: 1px;
+      margin: -1px; padding: 0; overflow: hidden;
+      clip-path: inset(50%); white-space: nowrap; border: 0;
     }
     .hero__lead {
       margin-top: 1.1rem;
@@ -238,25 +243,40 @@
 
     /* Profilkarten */
     .profiles { display: grid; gap: 1.25rem; }
-    @media (min-width: 820px) { .profiles { grid-template-columns: repeat(2, 1fr); } }
+    /* Drei Profile bleiben untereinander, bis alle drei nebeneinander passen –
+       zwei plus ein Waisenkind wäre schlechter vergleichbar. */
+    @media (min-width: 940px) { .profiles { grid-template-columns: repeat(3, 1fr); } }
 
     .profile {
       position: relative; overflow: hidden;
       display: flex; flex-direction: column;
       padding: clamp(1.5rem, 3vw, 2rem);
       border: 1px solid var(--line); border-radius: var(--radius-l);
-      background: linear-gradient(180deg, var(--surface-2), var(--surface));
       box-shadow: var(--shadow-soft);
       transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+
+      /* Jede Karte zeigt einen anderen Ausschnitt desselben Panoramas – oben
+         links sichtbar, dann in die Kartenfläche auslaufend. Das Bild ist für
+         den Hero ohnehin geladen, kostet hier also keinen weiteren Request. */
+      --shot: 50% 30%;
+      background:
+        radial-gradient(120% 100% at 0% 0%, color-mix(in srgb, var(--accent) 22%, transparent) 0%, transparent 52%),
+        linear-gradient(145deg, rgb(7 30 28 / 0.2) 0%, rgb(7 30 28 / 0.55) 26%, rgb(13 43 40 / 0.94) 48%, var(--surface) 64%),
+        url("assets/hasencraft-panorama.webp") var(--shot) / 230% auto no-repeat,
+        linear-gradient(180deg, var(--surface-2), var(--surface));
     }
     .profile:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); box-shadow: var(--shadow-lift); }
     .profile::before {
       content: ""; position: absolute; inset: 0 0 auto 0; height: 4px;
       background: linear-gradient(90deg, var(--accent), transparent 85%);
     }
-    .profile--fluffy { --accent: var(--honey); }
-    .profile--cozy   { --accent: var(--teal); }
+    .profile--fluffy { --accent: var(--honey);      --accent-ink: #1a1206; --shot: 30% 26%; }
+    .profile--cozy   { --accent: var(--teal-bright); --accent-ink: #06201d; --shot: 52% 34%; }
+    .profile--eco    { --accent: var(--moss);       --accent-ink: #10200c; --shot: 78% 24%; }
 
+    /* Der Bildausschnitt hinter dem Kartenkopf ist je Profil unterschiedlich
+       hell – ein Schatten hält Kennzeichnung und Name in jedem Fall lesbar. */
+    .profile__top, .profile__desc { text-shadow: 0 1px 8px rgb(7 30 28 / 0.9); }
     .profile__top { display: flex; align-items: center; gap: 0.85rem; }
     .profile__icon {
       display: grid; place-items: center; flex: none;
@@ -269,15 +289,29 @@
     .profile__tag { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
     .profile__desc { margin-top: 1rem; color: var(--muted); }
 
-    .specs { display: grid; gap: 0.55rem; margin: 1.25rem 0 1.6rem; padding: 0; list-style: none; font-size: 0.93rem; }
-    .specs li { display: flex; gap: 0.6rem; align-items: baseline; color: color-mix(in srgb, var(--cream) 80%, var(--muted)); }
-    .specs li::before { content: ""; flex: none; width: 6px; height: 6px; margin-top: 0.45rem; background: var(--accent); }
+    .req__title {
+      margin-top: 1.4rem;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent);
+    }
+    .req {
+      display: grid; grid-template-columns: auto 1fr; gap: 0.45rem 1rem;
+      margin: 0.7rem 0 1.7rem;
+      font-size: 0.91rem;
+    }
+    .req dt { color: var(--muted); }
+    .req dd { margin: 0; color: color-mix(in srgb, var(--cream) 82%, var(--muted)); }
+    @media (max-width: 460px) {
+      .req { grid-template-columns: 1fr; gap: 0.15rem; }
+      .req dd { margin-bottom: 0.55rem; }
+    }
 
     .profile__cta { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
-    .btn--copy { background: var(--accent); color: #14190f; width: 100%; }
-    .profile--cozy .btn--copy { color: #06201d; }
+    .btn--copy { background: var(--accent); color: var(--accent-ink); width: 100%; }
     .btn--copy:hover { background: color-mix(in srgb, var(--accent) 82%, white); }
-    .btn--copy.is-copied { background: var(--moss); color: #10200c; }
+    /* Der Erfolgszustand darf keine eigene Farbe bekommen – Eco ist bereits
+       moosgrün. Ein Ring plus geänderte Beschriftung trägt über alle drei. */
+    .btn--copy.is-copied { box-shadow: inset 0 0 0 2px var(--cream); }
     .profile__alt { font-size: 0.88rem; color: var(--muted); }
     .profile__alt a { color: var(--muted); }
     .profile__alt a:hover { color: var(--honey); }
@@ -419,16 +453,6 @@
     .footer p { font-size: 0.88rem; color: var(--muted); max-width: 52ch; }
     .footer nav { display: flex; flex-wrap: wrap; gap: 1.25rem; font-size: 0.9rem; }
 
-    /* Pixel-Deko */
-    .firefly { animation: drift 9s ease-in-out infinite alternate; transform-origin: center; }
-    .firefly--b { animation-duration: 12s; animation-delay: -3s; }
-    .firefly--c { animation-duration: 15s; animation-delay: -7s; }
-    @keyframes drift {
-      from { transform: translate(0, 0); opacity: 0.35; }
-      50%  { opacity: 1; }
-      to   { transform: translate(26px, -18px); opacity: 0.45; }
-    }
-
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
@@ -460,79 +484,17 @@
     <!-- ================= HERO ================= -->
     <section class="hero">
       <div class="hero__sky" aria-hidden="true"></div>
-      <svg class="hero__scene" viewBox="0 0 1600 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
-        <defs>
-          <symbol id="pine" viewBox="0 0 16 26">
-            <rect x="7" y="21" width="2" height="5"></rect>
-            <rect x="7" y="1"  width="2" height="3"></rect>
-            <rect x="6" y="4"  width="4" height="3"></rect>
-            <rect x="5" y="7"  width="6" height="3"></rect>
-            <rect x="4" y="10" width="8" height="3"></rect>
-            <rect x="3" y="13" width="10" height="3"></rect>
-            <rect x="2" y="16" width="12" height="3"></rect>
-            <rect x="1" y="19" width="14" height="2"></rect>
-          </symbol>
-        </defs>
-
-        <!-- Sterne -->
-        <g fill="#f7efe6" opacity="0.5">
-          <rect x="120" y="34" width="3" height="3"></rect>
-          <rect x="310" y="18" width="3" height="3"></rect>
-          <rect x="470" y="52" width="3" height="3"></rect>
-          <rect x="905" y="26" width="3" height="3"></rect>
-          <rect x="1180" y="44" width="3" height="3"></rect>
-          <rect x="1420" y="20" width="3" height="3"></rect>
-        </g>
-
-        <!-- Fernes Waldband -->
-        <g style="fill: var(--pine-far)" opacity="0.85">
-          <use href="#pine" x="20"   y="130" width="118" height="192"></use>
-          <use href="#pine" x="150"  y="150" width="96"  height="156"></use>
-          <use href="#pine" x="255"  y="118" width="132" height="214"></use>
-          <use href="#pine" x="400"  y="152" width="92"  height="150"></use>
-          <use href="#pine" x="505"  y="128" width="120" height="196"></use>
-          <use href="#pine" x="640"  y="156" width="88"  height="144"></use>
-          <use href="#pine" x="745"  y="124" width="126" height="204"></use>
-          <use href="#pine" x="890"  y="150" width="98"  height="158"></use>
-          <use href="#pine" x="1000" y="120" width="128" height="208"></use>
-          <use href="#pine" x="1145" y="154" width="90"  height="148"></use>
-          <use href="#pine" x="1250" y="126" width="122" height="200"></use>
-          <use href="#pine" x="1390" y="148" width="100" height="162"></use>
-          <use href="#pine" x="1500" y="132" width="116" height="188"></use>
-        </g>
-
-        <!-- Glühwürmchen -->
-        <g fill="#f6c453">
-          <rect class="firefly" x="360" y="196" width="5" height="5" opacity="0.7"></rect>
-          <rect class="firefly firefly--b" x="880" y="214" width="4" height="4" opacity="0.6"></rect>
-          <rect class="firefly firefly--c" x="1230" y="188" width="5" height="5" opacity="0.65"></rect>
-        </g>
-
-        <!-- Naher Wald -->
-        <g style="fill: var(--pine-near)">
-          <use href="#pine" x="-30"  y="186" width="150" height="146"></use>
-          <use href="#pine" x="115"  y="204" width="126" height="126"></use>
-          <use href="#pine" x="230"  y="180" width="164" height="160"></use>
-          <use href="#pine" x="400"  y="210" width="120" height="120"></use>
-          <use href="#pine" x="520"  y="188" width="152" height="148"></use>
-          <use href="#pine" x="680"  y="212" width="118" height="118"></use>
-          <use href="#pine" x="795"  y="182" width="160" height="156"></use>
-          <use href="#pine" x="960"  y="208" width="124" height="124"></use>
-          <use href="#pine" x="1080" y="186" width="154" height="150"></use>
-          <use href="#pine" x="1240" y="210" width="120" height="120"></use>
-          <use href="#pine" x="1355" y="184" width="158" height="154"></use>
-          <use href="#pine" x="1510" y="206" width="128" height="128"></use>
-          <rect x="0" y="292" width="1600" height="12"></rect>
-        </g>
-      </svg>
       <div class="hero__fade" aria-hidden="true"></div>
 
       <div class="wrap">
-        <p class="eyebrow">Minecraft __MINECRAFT_VERSION__ · NeoForge · Deutsch</p>
-        <h1 class="hero__title">Bau mit. <em>Hasencraft.</em></h1>
+        <p class="eyebrow">Gemütlich bauen. Weit entdecken.</p>
+        <h1 class="hero__title">
+          <span class="visually-hidden">Hasencraft</span>
+          <img class="wordmark" src="assets/hasencraft-wordmark.png" width="1024" height="256" alt="" fetchpriority="high">
+        </h1>
         <p class="hero__lead">
-          Ein gemütliches Modpack aus Technik, Tieren, Magie und großen Erkundungszielen –
-          kuratiert, getestet und in zwei Minuten spielbereit.
+          Ein gemeinsames Modpack für Technik, Tierchen, Magie und große Erkundungsziele.
+          Bau eine Basis, die sich nach Zuhause anfühlt – und entdecke, was dahinter liegt.
         </p>
         <div class="hero__actions">
           <a class="btn btn--primary" href="#install">
@@ -589,16 +551,17 @@
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-9 12h7l-1 8 9-12h-7z"/></svg>
               </span>
               <div>
-                <span class="profile__tag">Für starke Rechner</span>
+                <span class="profile__tag">Volle Details</span>
                 <h3>Fluffy</h3>
               </div>
             </div>
-            <p class="profile__desc">Volle Weite, volle Details. Gedacht für Karten der Klasse RX&nbsp;7900&nbsp;XT aufwärts.</p>
-            <ul class="specs">
-              <li>10 GiB Heap, 14 Chunks Vanilla-Sichtweite</li>
-              <li>Distant Horizons bis 256 Chunks LoD</li>
-              <li>Complementary Reimagined auf High</li>
-            </ul>
+            <p class="profile__desc">Weite Sicht, volle Shader-Details. Für Rechner, die Reserven haben.</p>
+            <p class="req__title">Mindestens empfohlen</p>
+            <dl class="req">
+              <dt>Grafik</dt><dd>AMD RX 7800 XT · NVIDIA RTX 4070</dd>
+              <dt>Arbeitsspeicher</dt><dd>32 GB</dd>
+              <dt>Profil setzt</dt><dd>10 GiB Heap · 14 Chunks · DH 256 · Shader auf High</dd>
+            </dl>
             <div class="profile__cta">
               <button class="btn btn--copy" type="button" data-import-url="__FLUFFY_IMPORT_URL__" data-label="Fluffy-Importadresse kopieren">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
@@ -614,22 +577,49 @@
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M9.5 20v-5h5v5"/></svg>
               </span>
               <div>
-                <span class="profile__tag">Für sparsame Rechner</span>
+                <span class="profile__tag">Ausgewogen</span>
                 <h3>Cozy</h3>
               </div>
             </div>
-            <p class="profile__desc">Gleiche Welt, ruhigere Grafik. Läuft angenehm ab Karten der Klasse GTX&nbsp;1080.</p>
-            <ul class="specs">
-              <li>8 GiB Heap, 10 Chunks Vanilla-Sichtweite</li>
-              <li>Distant Horizons 96–128 Chunks LoD</li>
-              <li>Complementary auf Medium, ohne teure Effekte</li>
-            </ul>
+            <p class="profile__desc">Dieselbe Welt, ruhigere Grafik. Die passende Wahl für die meisten Rechner.</p>
+            <p class="req__title">Mindestens empfohlen</p>
+            <dl class="req">
+              <dt>Grafik</dt><dd>AMD RX 6600 · NVIDIA GTX 1080 oder RTX 3060</dd>
+              <dt>Arbeitsspeicher</dt><dd>16 GB</dd>
+              <dt>Profil setzt</dt><dd>8 GiB Heap · 10 Chunks · DH 96–128 · Shader auf Medium</dd>
+            </dl>
             <div class="profile__cta">
               <button class="btn btn--copy" type="button" data-import-url="__COZY_IMPORT_URL__" data-label="Cozy-Importadresse kopieren">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                 <span>Cozy-Importadresse kopieren</span>
               </button>
               <p class="profile__alt">oder <a href="__COZY_IMPORT_URL__">ZIP direkt herunterladen</a></p>
+            </div>
+          </article>
+
+          <article class="profile profile--eco">
+            <div class="profile__top">
+              <span class="profile__icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
+              </span>
+              <div>
+                <span class="profile__tag">Maximal sparsam</span>
+                <h3>Eco</h3>
+              </div>
+            </div>
+            <p class="profile__desc">Startet bewusst ohne Shader. Läuft auch da, wo es sonst eng wird – dazuschalten kannst du später jederzeit.</p>
+            <p class="req__title">Mindestens empfohlen</p>
+            <dl class="req">
+              <dt>Grafik</dt><dd>AMD RX 570 · NVIDIA GTX 1060</dd>
+              <dt>Arbeitsspeicher</dt><dd>12 GB</dd>
+              <dt>Profil setzt</dt><dd>6 GiB Heap · 8 Chunks · DH 64 · ohne Shader</dd>
+            </dl>
+            <div class="profile__cta">
+              <button class="btn btn--copy" type="button" data-import-url="__ECO_IMPORT_URL__" data-label="Eco-Importadresse kopieren">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <span>Eco-Importadresse kopieren</span>
+              </button>
+              <p class="profile__alt">oder <a href="__ECO_IMPORT_URL__">ZIP direkt herunterladen</a></p>
             </div>
           </article>
         </div>
@@ -643,8 +633,9 @@
         <div class="note">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-6.2-8.6"/><path d="m9 12 2 2 5-5"/></svg>
           <p>
-            <strong>Beide Profile enthalten dieselben Spielinhalte.</strong>
-            Sie unterscheiden sich nur bei lokalen Grafik- und Speicherwerten – ihr spielt problemlos zusammen.
+            <strong>Alle drei Profile enthalten dieselben Spielinhalte.</strong>
+            Sie unterscheiden sich nur bei lokalen Grafik-, Resourcepack- und Speicherwerten – ihr spielt problemlos zusammen.
+            Die Hardwareangaben sind Richtwerte: Im Zweifel mit Cozy anfangen und von dort nach oben oder unten wechseln.
             Nach dem ersten Import werden Updates bei jedem Start automatisch installiert.
           </p>
         </div>
@@ -711,8 +702,8 @@
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h8M8 11h6"/></svg>
             </span>
             <h3>Zusammen spielen</h3>
-            <p>Quests führen sanft durch den Einstieg, Wegpunkte und Sprachchat halten die Gruppe zusammen – Serveradresse gibt's in der Community.</p>
-            <ul class="chips"><li>FTB Quests</li><li>Simple Voice Chat</li><li>Xaero's Map</li><li>Waystones</li></ul>
+            <p>Quests führen sanft durch den Einstieg, Sprachchat und Wegpunkte halten die Gruppe zusammen. Dein Bauplatz lässt sich als Claim schützen – gemeinsam bauen heißt nicht, dass jemand dein Dach abträgt.</p>
+            <ul class="chips"><li>FTB Quests</li><li>FTB Chunks</li><li>Simple Voice Chat</li><li>Xaero's Map</li><li>Waystones</li></ul>
           </article>
         </div>
       </div>
@@ -833,7 +824,7 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.4 1 2.5h6c0-1.1.3-1.8 1-2.5A6 6 0 0 0 12 3z"/><path d="M10 19h4M11 22h2"/></svg>
             <div>
               <h3>Wenn es ruckelt</h3>
-              <p>Erst die LoD-Distanz von Distant Horizons senken, dann die Shader-Details. Hilft das nicht, ist Cozy das bessere Profil.</p>
+              <p>Erst die LoD-Distanz von Distant Horizons senken, dann die Shader-Details. Hilft das nicht, wechsle auf Cozy – und wenn es dann immer noch hakt, auf Eco.</p>
             </div>
           </div>
         </div>

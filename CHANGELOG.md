@@ -2,11 +2,23 @@
 
 Alle relevanten Änderungen an Mods, Konfiguration, Quests und Serveranforderungen werden hier dokumentiert.
 
-## Unveröffentlicht
+## Unreleased
 
-- Installationsseite neu gestaltet: Hero mit Pixelwald, Profilvergleich Fluffy/Cozy, Inhaltsübersicht, Bildergalerie und aufklappbarer Technikbereich.
+- Installationsseite neu gestaltet: Hero mit Wortmarke und Panorama, Profilvergleich Fluffy/Cozy/Eco, Inhaltsübersicht, Bildergalerie und aufklappbarer Technikbereich.
 - Minecraft- und NeoForge-Version werden beim Bauen der Seite aus der `pack.toml` des Stable-Snapshots eingesetzt; unaufgelöste Platzhalter lassen den Build fehlschlagen.
 - Designkonzept in `docs/DESIGN.md` dokumentiert.
+
+- FastSuite mit Placebo, Structure Layout Optimizer mit Resourceful Config sowie ServerCore als gepinnte Performance-Grundlage ergänzt.
+- Distant Horizons auf dem Server mit 256-Chunks-Grenzen sowie fairen Anfrage- und Bandbreitenlimits abgesichert.
+- Das Prism-Profil `eco` für schwächere Rechner ergänzt und den Release-/Pages-Ablauf auf drei Profile erweitert.
+- Automatische Archivprüfung für Fluffy, Cozy und Eco ergänzt; Testkandidaten mit potenziellen Shader-Konflikten bleiben außerhalb des Stable-Packs.
+
+- Community-Grundlage ergänzt: FTB Chunks, LuckPerms und CoreProtectNeo.
+- Claims sind über die vorhandenen FTB Teams geschützt und mit konservativen Community-Limits vorkonfiguriert.
+- Carry On verlangsamt beim Tragen von Entitäten nur noch auf 25 Prozent.
+- Neue Installationen verwenden `U` für die FTB-Karte; Xaero's Weltkarte bleibt auf `M`.
+
+- BlueMap, Create BlueMap und Discord Integration sind ausschliesslich auf dem Server ergaenzt; Karte und Discord-Bot bleiben bis zum Staging-Test deaktiviert beziehungsweise nicht oeffentlich.
 
 ## 0.1.0-alpha.2 — 2026-08-02
 

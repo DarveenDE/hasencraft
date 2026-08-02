@@ -17,6 +17,8 @@ Bumblezone und sorgen dafür, dass auch Haustiere ein sicheres Zuhause haben.
      und Shader-Details.
    - **Cozy** für ältere oder mittelstarke Rechner, z. B. GTX 1080; gleiche
      Spielinhalte, dafür zurückhaltendere Grafik- und Speicherwerte.
+   - **Eco** für schwächere Rechner; geringere Sichtweite, ein 6-GiB-Heap sowie
+     kein aktivierter Shader oder Fresh Animations beim ersten Start.
 3. In Prism: **Instanz hinzufügen** → **Importieren** → die kopierte Adresse
    einfügen.
 4. Starte die Instanz einmal. Prism richtet Java 21 ein und lädt die benötigten
@@ -40,14 +42,14 @@ Mod-Updates können Verbindungen zum Server oder Shader beschädigen.
 
 ## Gut zu wissen
 
-- Beide Profile enthalten dieselben Mods, Welten und Inhalte. Sie unterscheiden
+- Alle drei Profile enthalten dieselben Mods, Welten und Inhalte. Sie unterscheiden
   sich nur bei lokalen Grafik- und Speicherwerten.
 - Für den Sprachchat muss Minecraft die Nutzung des Mikrofons erlaubt werden.
   Eine Freigabe kann beim ersten Betreten des Servers erscheinen.
 - Eigene Tastenbelegung, Screenshots, Xaero-Karten/Wegpunkte und
   Distant-Horizons-Caches bleiben bei Pack-Updates erhalten.
-- Wenn dein Rechner beim Start an seine Grenzen kommt, wähle **Cozy** oder
-  reduziere im Spiel zuerst die Distant-Horizons-LoD-Distanz und Shader-Details.
+- Wenn dein Rechner beim Start an seine Grenzen kommt, wähle **Eco**. Danach
+  reduziere im Spiel zuerst die Distant-Horizons-LoD-Distanz.
 
 ## Hilfe
 

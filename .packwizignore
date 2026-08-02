@@ -5,6 +5,7 @@
 /.gitattributes
 /.gitignore
 /.git/
+/.claude/
 /.github/
 /README.md
 /CHANGELOG.md
@@ -60,3 +61,11 @@
 /config/DistantHorizons.toml
 /config/xaerominimap.txt
 /config/xaeroworldmap.txt
+
+# Server-owned community moderation and permission state
+/config/coreprotectneo/
+/config/luckperms/
+
+/config/bluemap/*
+!/config/bluemap/webserver.conf
+/world/serverconfig/discordintegration-server.toml

@@ -1,11 +1,11 @@
 # Modliste
 
-Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.2`.
+Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.3`.
 
-- Gesamt: 158 verwaltete Eintraege
-- beide Seiten: 121
+- Gesamt: 169 verwaltete Eintraege
+- beide Seiten: 124
 - nur Client: 24
-- nur Server: 13
+- nur Server: 21
 
 ## Kuratierter Kern
 
@@ -44,6 +44,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.2`
 | Better Advancements | `client` | `BetterAdvancements-NeoForge-1.21.1-0.4.3.21.jar` | [Modrinth](https://modrinth.com/project/Q2OqKxDG) |
 | Better Third Person | `client` | `BetterThirdPerson-neoforge-1.9.0.jar` | [Modrinth](https://modrinth.com/project/G1s2WpNo) |
 | BetterF3 | `client` | `BetterF3-11.0.3-NeoForge-1.21.1.jar` | [Modrinth](https://modrinth.com/project/8shC1gFX) |
+| BlueMap | `server` | `bluemap-5.7-neoforge.jar` | [Modrinth](https://modrinth.com/project/swbUV1cr) |
 | Bookshelf | `both` | `bookshelf-neoforge-1.21.1-21.1.81.jar` | [Modrinth](https://modrinth.com/project/uy4Cnpcm) |
 | Carry On | `both` | `carryon-neoforge-1.21.1-2.2.6.13.jar` | [Modrinth](https://modrinth.com/project/joEfVgkn) |
 | Chipped | `both` | `chipped-neoforge-1.21.1-4.0.2.jar` | [Modrinth](https://modrinth.com/project/BAscRYKm) |
@@ -52,8 +53,10 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.2`
 | Comforts | `both` | `comforts-neoforge-9.0.5+1.21.1.jar` | [Modrinth](https://modrinth.com/project/SaCpeal4) |
 | Controlling | `client` | `Controlling-neoforge-1.21.1-19.0.5.jar` | [Modrinth](https://modrinth.com/project/xv94TkTM) |
 | Cooking for Blockheads | `both` | `cookingforblockheads-neoforge-1.21.1-21.1.24.jar` | [Modrinth](https://modrinth.com/project/vJnhuDde) |
+| CoreProtectNeo | `server` | `coreprotectneo-1.0.jar` | [Modrinth](https://modrinth.com/project/J80MzpEK) |
 | Crafting Tweaks | `both` | `craftingtweaks-neoforge-1.21.1-21.1.10.jar` | [Modrinth](https://modrinth.com/project/DMu0oBKf) |
 | Create | `both` | `create-1.21.1-6.0.10.jar` | [Modrinth](https://modrinth.com/project/LNytGWDc) |
+| Create BlueMap | `server` | `create_bluemap-1.1.1.jar` | [Modrinth](https://modrinth.com/project/W9e7rf1y) |
 | Create Crafts & Additions | `both` | `createaddition-1.6.0.jar` | [Modrinth](https://modrinth.com/project/kU1G12Nn) |
 | Create Deco | `both` | `createdeco-2.1.3.jar` | [Modrinth](https://modrinth.com/project/sMvUb4Rb) |
 | Create Slice & Dice | `both` | `sliceanddice-4.3.3-neoforge.jar` | [Modrinth](https://modrinth.com/project/GmjmRQ0A) |
@@ -69,6 +72,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.2`
 | Diagonal Fences | `both` | `DiagonalFences-v21.1.1-1.21.1-NeoForge.jar` | [Modrinth](https://modrinth.com/project/IKARgflD) |
 | Diagonal Walls | `both` | `DiagonalWalls-v21.1.2-1.21.1-NeoForge.jar` | [Modrinth](https://modrinth.com/project/FQgc8dib) |
 | Diagonal Windows | `both` | `DiagonalWindows-v21.1.1-1.21.1-NeoForge.jar` | [Modrinth](https://modrinth.com/project/oOi0CKes) |
+| Discord Integration (DI) | `server` | `DiscordIntegration-1.21.1-4.0.1.jar` | [Modrinth](https://modrinth.com/project/wdZidyDu) |
 | Distant Horizons | `both` | `DistantHorizons-3.2.0-b-1.21.1-fabric-neoforge.jar` | [Modrinth](https://modrinth.com/project/uCdwusMi) |
 | Doggy Talents Next | `both` | `DoggyTalentsNext-1.21.1-1.19.0.jar` | [Modrinth](https://modrinth.com/project/oXgmplvv) |
 | Dungeons and Taverns | `both` | `dungeons-and-taverns-v4.4.4.jar` | [Modrinth](https://modrinth.com/project/tpehi7ww) |
@@ -84,8 +88,10 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.2`
 | Falling Leaves | `client` | `Falling Leaves-1.0.jar` | [Modrinth](https://modrinth.com/project/ALTwwcC5) |
 | Farmer's Delight | `both` | `FarmersDelight-1.21.1-1.3.2.jar` | [Modrinth](https://modrinth.com/project/R2OftAxM) |
 | Fast IP Ping | `client` | `fast-ip-ping-v1.0.11-mc1.21.1-neoforge.jar` | [Modrinth](https://modrinth.com/project/9mtu0sUO) |
+| FastSuite | `both` | `FastSuite-1.21.1-6.0.7.jar` | [Modrinth](https://modrinth.com/project/roccmqou) |
 | FerriteCore | `both` | `ferritecore-7.0.3-neoforge.jar` | [Modrinth](https://modrinth.com/project/uXXizFIs) |
 | Friends&Foes (Forge/NeoForge) | `both` | `friendsandfoes-neoforge-4.0.26+mc1.21.1.jar` | [Modrinth](https://modrinth.com/project/BOCJKD49) |
+| FTB Chunks (NeoForge) | `both` | `ftb-chunks-neoforge-2101.1.21.jar` | CurseForge #314906 |
 | FTB Library (NeoForge) | `both` | `ftb-library-neoforge-2101.1.34.jar` | CurseForge #404465 |
 | FTB Quests (NeoForge) | `both` | `ftb-quests-neoforge-2101.1.29.jar` | CurseForge #289412 |
 | FTB Teams (NeoForge) | `both` | `ftb-teams-neoforge-2101.1.10.jar` | CurseForge #404468 |
@@ -109,6 +115,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.2`
 | Lithostitched | `both` | `lithostitched-1.7.13-neoforge-21.1.jar` | [Modrinth](https://modrinth.com/project/XaDC71GB) |
 | LootJS: KubeJS Addon | `server` | `lootjs-neoforge-1.21.1-3.7.0.jar` | [Modrinth](https://modrinth.com/project/fJFETWDN) |
 | Lootr | `both` | `lootr-neoforge-1.21.1-1.11.37.122.jar` | [Modrinth](https://modrinth.com/project/EltpO5cN) |
+| LuckPerms | `server` | `LuckPerms-NeoForge-5.4.140.jar` | [Modrinth](https://modrinth.com/project/Vebnzrzj) |
 | Macaw's Bridges | `both` | `mcw-bridges-3.1.2-mc1.21.1neoforge.jar` | [Modrinth](https://modrinth.com/project/GURcjz8O) |
 | Macaw's Doors | `both` | `mcw-doors-1.1.5-mc1.21.1neoforge.jar` | [Modrinth](https://modrinth.com/project/kNxa8z3e) |
 | Macaw's Fences and Walls | `both` | `mcw-mcwfences-1.2.1-mc1.21.1neoforge.jar` | [Modrinth](https://modrinth.com/project/GmwLse2I) |
@@ -131,6 +138,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.2`
 | Not Enough Animations | `client` | `notenoughanimations-neoforge-1.12.4-mc1.21.1.jar` | [Modrinth](https://modrinth.com/project/MPCX6s5C) |
 | oωo (owo-lib) | `both` | `owo-lib-neoforge-0.12.15.5-beta.1+1.21.jar` | [Modrinth](https://modrinth.com/project/ccKDOlHs) |
 | Patchouli | `both` | `Patchouli-1.21.1-93-NEOFORGE.jar` | [Modrinth](https://modrinth.com/project/nU0bVIaL) |
+| Placebo | `both` | `Placebo-1.21.1-9.9.2.jar` | [Modrinth](https://modrinth.com/project/tCkE8p2N) |
 | Polymorph | `both` | `polymorph-neoforge-1.1.0+1.21.1.jar` | [Modrinth](https://modrinth.com/project/tagwiZkJ) |
 | Prickle | `both` | `prickle-neoforge-1.21.1-21.1.11.jar` | [Modrinth](https://modrinth.com/project/aaRl8GiW) |
 | Productive Bees | `both` | `productivebees-1.21.1-13.13.5.jar` | CurseForge #377897 |
@@ -139,10 +147,12 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.2`
 | Rechiseled: Create | `both` | `rechiseledcreate-1.1.1-neoforge-mc1.21.jar` | [Modrinth](https://modrinth.com/project/E6867niZ) |
 | Redomesticate | `both` | `redomesticate-neoforge-1.21.1-1.10.1.jar` | [Modrinth](https://modrinth.com/project/4QTKALKe) |
 | Regions Unexplored | `both` | `regions-unexplored-0.6.2-neoforge-21.1.jar` | [Modrinth](https://modrinth.com/project/Tkikq67H) |
+| Resourceful Config | `server` | `resourcefulconfig-neoforge-1.21-3.0.11.jar` | [Modrinth](https://modrinth.com/project/M1953qlQ) |
 | Resourceful Lib | `both` | `resourcefullib-neoforge-1.21-3.0.12.jar` | [Modrinth](https://modrinth.com/project/G1hIVOrD) |
 | Rhino | `both` | `rhino-2101.2.7-build.85.jar` | [Modrinth](https://modrinth.com/project/sk9knFPE) |
 | Ribbits | `both` | `Ribbits-1.21.1-NeoForge-4.1.6.jar` | [Modrinth](https://modrinth.com/project/8YcE8y4T) |
 | Searchables | `client` | `Searchables-neoforge-1.21.1-1.0.2.jar` | [Modrinth](https://modrinth.com/project/fuuu3xnx) |
+| ServerCore | `server` | `servercore-neoforge-1.5.19+1.21.1.jar` | [Modrinth](https://modrinth.com/project/4WWQxlQP) |
 | Shulker Box Tooltip | `both` | `shulkerboxtooltip-neoforge-5.1.9+1.21.1.jar` | [Modrinth](https://modrinth.com/project/2M01OLQq) |
 | Simple Voice Chat | `both` | `voicechat-neoforge-1.21.1-2.6.21.jar` | [Modrinth](https://modrinth.com/project/9eGKb6K1) |
 | Snuffles | `both` | `snuffles-1.1.2.jar` | [Modrinth](https://modrinth.com/project/NYGhKUS6) |
@@ -151,6 +161,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.2`
 | Sophisticated Core | `both` | `sophisticatedcore-1.21.1-1.4.80.2194.jar` | [Modrinth](https://modrinth.com/project/nmoqTijg) |
 | Sophisticated Storage | `both` | `sophisticatedstorage-1.21.1-1.5.83.2017.jar` | [Modrinth](https://modrinth.com/project/hMlaZH8f) |
 | spark | `server` | `spark-1.10.124-neoforge.jar` | [Modrinth](https://modrinth.com/project/l6YH9Als) |
+| Structure Layout Optimizer | `server` | `structure_layout_optimizer-neoforge-1.0.12.jar` | [Modrinth](https://modrinth.com/project/ayPU0OHc) |
 | SuperMartijn642's Config Lib | `both` | `supermartijn642configlib-1.1.8-neoforge-mc1.21.jar` | [Modrinth](https://modrinth.com/project/LN9BxssP) |
 | SuperMartijn642's Core Lib | `both` | `supermartijn642corelib-1.1.22-neoforge-mc1.21.jar` | [Modrinth](https://modrinth.com/project/rOUBggPv) |
 | Supplementaries | `both` | `supplementaries-neoforge-1.21.1-3.8.5.jar` | [Modrinth](https://modrinth.com/project/fFEIiSDQ) |

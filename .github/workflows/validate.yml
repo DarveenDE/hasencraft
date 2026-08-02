@@ -20,3 +20,11 @@ jobs:
       - name: Validate pack
         shell: pwsh
         run: ./scripts/validate-pack.ps1 -Packwiz "$HOME/go/bin/packwiz"
+
+  prism-profiles:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify Prism profiles
+        shell: pwsh
+        run: ./scripts/test-prism-profiles.ps1

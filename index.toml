@@ -1,6 +1,22 @@
 hash-format = "sha256"
 
 [[files]]
+file = "config/bluemap/webserver.conf"
+hash = "64470bc2a7d192a317bb4c75dba931978eea229e194187f7c41dae5bd43e1cda"
+
+[[files]]
+file = "config/carryon-common.toml"
+hash = "e89cf801c57784593fb2a83c1fc91f04caf4a1da05e8ad5f442f74945e3f82c2"
+
+[[files]]
+file = "config/defaultoptions/keybindings.txt"
+hash = "a7ca11db6e22f04aa7f9c31c234749e25b6443c163a5c4151ea9588320fd3478"
+
+[[files]]
+file = "config/ftbchunks-world.snbt"
+hash = "c5907bbda7d9191c4f5ca5e7605f3aeeebe8f80f2bb946e164d2ac55108c8991"
+
+[[files]]
 file = "config/ftbquests/quests/chapters/hasencraft_start.snbt"
 hash = "2c8a0d981084cdedc64439c95bc12820286f6dbaa5445da3b0550b0a701823ce"
 
@@ -10,7 +26,7 @@ hash = "925bb2e607a00925690cda1ca0877043a27e66ca0079051a7c430da97d0a7795"
 
 [[files]]
 file = "config/ftbquests/quests/lang/de_de.snbt"
-hash = "29cee07cf6d82ed780bb2a9554e22618f25c6aaeea5bfb964fef2bf3b52307d9"
+hash = "5fbce79c8780744de3ee4af7e1544a5c311bbaa9ecff94e4763f0fd7664e3b8f"
 
 [[files]]
 file = "config/voicechat/voicechat-server.properties"
@@ -25,8 +41,56 @@ file = "kubejs/README.txt"
 hash = "ddec923f1297652196702cabfebc1eb29b70c361f2e5bf3bf6d3bb9f21f68bd8"
 
 [[files]]
+file = "kubejs/assets/minecraft/texts/splashes.txt"
+hash = "e664d364e8ac5de9db32253bb2ab8ccb6de71d7e552e62d52d04638d80add271"
+
+[[files]]
+file = "kubejs/assets/minecraft/textures/gui/title/background/panorama_0.png"
+hash = "5f51ebb09547910391a3f57c8ff170cee721cc052f0a09d75668e84532278254"
+
+[[files]]
+file = "kubejs/assets/minecraft/textures/gui/title/background/panorama_1.png"
+hash = "6d6f2400f671270cb83d28784cbd83da0a6dc0f03c5c14a3af77a8d8556e2645"
+
+[[files]]
+file = "kubejs/assets/minecraft/textures/gui/title/background/panorama_2.png"
+hash = "c7d8f9cd45294871de872820e5aa485cfd3d2e7734b7bd6ea159f5d543d28143"
+
+[[files]]
+file = "kubejs/assets/minecraft/textures/gui/title/background/panorama_3.png"
+hash = "b7ad7e88bc707c2c5ee6989dd5f9eb90384cb49e706c252debe12d76ccaa17e9"
+
+[[files]]
+file = "kubejs/assets/minecraft/textures/gui/title/background/panorama_4.png"
+hash = "af656e369de7aaef9d1a0b938ed8713f92d57f7b518298923cd86377bfcd9576"
+
+[[files]]
+file = "kubejs/assets/minecraft/textures/gui/title/background/panorama_5.png"
+hash = "7085fd04c1d807178ad8387aa31207abed87a30cf773b892c5483725110255cc"
+
+[[files]]
+file = "kubejs/assets/minecraft/textures/gui/title/edition.png"
+hash = "701209dbd97853bb2cfa8aa52cdcb1439bfbba078a97de0366846ac20918fca7"
+
+[[files]]
+file = "kubejs/assets/minecraft/textures/gui/title/minceraft.png"
+hash = "8424d57bd48c161d569ae0d1ca0e239d7933da9c81dee7b309f87f5463b6ade8"
+
+[[files]]
+file = "kubejs/assets/minecraft/textures/gui/title/minecraft.png"
+hash = "8424d57bd48c161d569ae0d1ca0e239d7933da9c81dee7b309f87f5463b6ade8"
+
+[[files]]
 file = "kubejs/client_scripts/hasencraft.js"
 hash = "79c81eac3046a14c25a1b43570d5ad6b25674aa8f373f947f73774609bf8bfd3"
+
+[[files]]
+file = "kubejs/config/client.json"
+hash = "624e9e6f69d28a4b124e8a41db6e97384691a99ebb73d65d4f8b26bdff7636dd"
+
+[[files]]
+file = "kubejs/config/packicon.png"
+hash = "d0ae872b7b6fa76e561c28e65b985413c2320f3b3e015603fdaeffb494fc6763"
 
 [[files]]
 file = "kubejs/data/adorablehamsterpets/recipe/create_compat/compacting_ahp_sunflower_seeds.json"
@@ -214,6 +278,11 @@ hash = "564b3baf3e4635cb10d0355b49e0807ddafbf4beb99ecedc46f774d70937f1b4"
 metafile = true
 
 [[files]]
+file = "mods/bluemap.pw.toml"
+hash = "103803cf1ac202fdb992fa5c188b0c270242ad1500ad0652bf896c010df2de57"
+metafile = true
+
+[[files]]
 file = "mods/bookshelf-lib.pw.toml"
 hash = "86b385d76f0ba345ff0c6add2bc8ff49ed918d5c85851a554f70f8b2bea1dccf"
 metafile = true
@@ -254,8 +323,18 @@ hash = "d60bad050a7b8d9ba3f0aec1e9931addca2998281b03ccf99420227ffb4cd79f"
 metafile = true
 
 [[files]]
+file = "mods/coreprotectneo.pw.toml"
+hash = "2a27cf9ed9bf91c7e1bd9e190cc2de0b28b83ddeed9fae94b9d1a951bb3095bc"
+metafile = true
+
+[[files]]
 file = "mods/crafting-tweaks.pw.toml"
 hash = "15640250d7a7b74de02bf6266ae60d7bdf1ccd48a6acebc6604e64d11865f4af"
+metafile = true
+
+[[files]]
+file = "mods/create-bluemap.pw.toml"
+hash = "5cb41522a630fb66225f73695c53cb8a1763437d8cb854c9b7bebde87fa9e63d"
 metafile = true
 
 [[files]]
@@ -326,6 +405,11 @@ metafile = true
 [[files]]
 file = "mods/diagonal-windows.pw.toml"
 hash = "f56a20ad7ba3a5e55309d460aae902af39e39da20c5a4583c76e50b50178a57f"
+metafile = true
+
+[[files]]
+file = "mods/discord-integration.pw.toml"
+hash = "14822a696007c2bf909dd9bd5e43cc88019a0eb2d76819ea78cb0521d1d2b215"
 metafile = true
 
 [[files]]
@@ -414,6 +498,11 @@ hash = "1c17c5ac0f42b0417429a0a14f225a942fc421cf929673b8e1e6c131600ca517"
 metafile = true
 
 [[files]]
+file = "mods/fastsuite.pw.toml"
+hash = "f7cd224c4ba2e8e897eefb3bbe89f889f8445dfde10605d878950914aef04ae0"
+metafile = true
+
+[[files]]
 file = "mods/ferrite-core.pw.toml"
 hash = "b4bbe1023e3adb39173823599788b7cb04e6ac550aa488dd0aa74cbc10571e79"
 metafile = true
@@ -421,6 +510,11 @@ metafile = true
 [[files]]
 file = "mods/friends-and-foes-forge.pw.toml"
 hash = "ff116f5bd456047da99714c9add30f0bf6a4dbffe95d8201920ba600a45b2312"
+metafile = true
+
+[[files]]
+file = "mods/ftb-chunks-forge.pw.toml"
+hash = "9161c7366bae42da30e0382dbca713e9e727fc90d19580b72288ef9d180c3dcf"
 metafile = true
 
 [[files]]
@@ -539,6 +633,11 @@ hash = "8b5efc29959af3eac14e83064aae4a0128afe2d54bbc943266ef3be4b54de718"
 metafile = true
 
 [[files]]
+file = "mods/luckperms.pw.toml"
+hash = "14d4839522eac29a59f688601f8c988f5163b32fb6ff4458c4fdee2386316a3e"
+metafile = true
+
+[[files]]
 file = "mods/macaws-bridges.pw.toml"
 hash = "1bd22adf349b4597fd20f253e51edf7fdcaf9f32fcf8594efcccb858a8a33608"
 metafile = true
@@ -649,6 +748,11 @@ hash = "ce94742d9741e62f279e0c353fed74e819fa374c1bba3462493fb98e7ee063f8"
 metafile = true
 
 [[files]]
+file = "mods/placebo.pw.toml"
+hash = "3522a0ed8ed4ed4f2ee25b94f6ea1d500a517604ed70c7ecd445623366cf8594"
+metafile = true
+
+[[files]]
 file = "mods/polymorph.pw.toml"
 hash = "c9ee2fb6794440331f0d4d39dbddc9fd3a2b6bfe75c1ce228d0fc300b166e952"
 metafile = true
@@ -689,6 +793,11 @@ hash = "d489bdff09fc5fda1dc68f05237b9678d50dd6feffd7319214136142593646ef"
 metafile = true
 
 [[files]]
+file = "mods/resourceful-config.pw.toml"
+hash = "b482414fb9cc128ed0d8af90c815a72170f6528cf7c71e5a27726c7ede6c6989"
+metafile = true
+
+[[files]]
 file = "mods/resourceful-lib.pw.toml"
 hash = "833cd378e86612f5d5da89db48ac408dd97d1037f7e998f9e373e36fdf2c9e74"
 metafile = true
@@ -706,6 +815,11 @@ metafile = true
 [[files]]
 file = "mods/searchables.pw.toml"
 hash = "a7b277a9f5b016ede7fc8d1f8cd44dc2e054f5d6bf8dc22908dbc162d3696a11"
+metafile = true
+
+[[files]]
+file = "mods/servercore.pw.toml"
+hash = "0462ee33ff0ff6b22f65c95832334e50637a603722b02199a12fa7cd682f1083"
 metafile = true
 
 [[files]]
@@ -751,6 +865,11 @@ metafile = true
 [[files]]
 file = "mods/spark.pw.toml"
 hash = "fcfd2cf3cd07bb91b6fb9f23ee99e93db67154199c6ad61abc177633b2afdfa9"
+metafile = true
+
+[[files]]
+file = "mods/structure-layout-optimizer.pw.toml"
+hash = "9bf76c566fac6ca9d1cd40d573837fa4797aa39de0d7d52956124590281d53f3"
 metafile = true
 
 [[files]]
