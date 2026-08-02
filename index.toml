@@ -150,7 +150,7 @@ hash = "015e31bf30db0241efa27fc8eee86a000c3da820972873e1bfac68120af3a017"
 
 [[files]]
 file = "kubejs/server_scripts/hasencraft.js"
-hash = "30b2fc8fd77e5e8b91b69d527b73ae1b525bb17e3ecd173081ee55c3139b8dc6"
+hash = "8701e735fe5ad185b5d28cc28ef82b9929ddee6afaf77126c26b0ceb8e04a792"
 
 [[files]]
 file = "kubejs/startup_scripts/hasencraft.js"
