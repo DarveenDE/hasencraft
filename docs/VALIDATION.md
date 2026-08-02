@@ -1,11 +1,13 @@
 # Validierungsstand
 
-Stand: `0.1.0-alpha.2` mit Unreleased-Performance-Änderungen, 2. August 2026.
+Stand: `0.1.0-alpha.3`, 2. August 2026.
 
 ## Bestanden
 
-- Packwiz-Index aktualisiert und 163 gepinnte Einträge geprüft: 123 beide Seiten, 24 nur Client, 16 nur Server.
+- Packwiz-Index aktualisiert und 166 gepinnte Eintraege geprueft: 124 beide Seiten, 24 nur Client, 18 nur Server.
 - Die neuen P1-Metadaten für FastSuite, Placebo, Structure Layout Optimizer, Resourceful Config und ServerCore sind gepinnt; Indexhash und Seitenzuordnung wurden durch `scripts/validate-pack.ps1` geprüft.
+- Ein isolierter Dedicated-Serverstart mit FTB Chunks `2101.1.21`, FTB Library `2101.1.34`, FTB Teams `2101.1.10` und FTB XMod Compat `21.1.10` erreichte `Done (71.788s)`. Die KubeJS- und Waystones-Integrationen von FTB Chunks wurden aktiviert; die Claim-/Force-Load-Grenzen aus `config/ftbchunks-world.snbt` wurden vom Konfigurationssystem uebernommen.
+- Die alpha.3-Prism-ZIP fuer Fluffy wurde erneut gebaut; die Pre-Launch-Aktualisierung ist enthalten.
 - Den offiziellen NeoForge-Installer `21.1.247` per Upstream-SHA-1 geprüft und mit Minecraft `1.21.1` sowie Java `21.0.12` lokal installiert.
 - Den vollständigen Alpha-2-Serverstand bis `Done (3.217s)` gestartet und danach kontrolliert beendet; auch der vorausgehende Loader-Abgleich erreichte `Done (3.380s)`. Der Lauf ist die Baseline vor den neuen Performance-Mods.
 - Das installierte Prism-Profil `Hasencraft Fluffy` im Online-Modus bis zum Titelbildschirm gestartet: NeoForge `21.1.247`, JEI `19.43.0.392`, Sodium `0.8.12` und Iris `1.8.14-beta.1` wurden gemeinsam geladen. Das ist die Shaderstack-Baseline vor dem neuen Eco-Profil.
@@ -15,7 +17,7 @@ Stand: `0.1.0-alpha.2` mit Unreleased-Performance-Änderungen, 2. August 2026.
 - Die endgültige Waystones-Konfiguration wurde ohne Laufzeitkorrektur bytegleich übernommen: keine Kosten, keine Cooldowns, kein Haltbarkeitsverlust sowie Transport von Haustieren und angeleinten Tieren.
 - Nach den Hasencraft-Datenkorrekturen blieben keine Rezept-Parsefehler und kein fehlender Kartoffel-Tag zurück.
 - Alle drei Prism-Profile (`fluffy`, `cozy`, `eco`) bestanden die automatisierte Archivprüfung zu Instanzname, Pre-Launch-URL, Speicherprofil, Distant Horizons, Shader- und Ressourcenpack-Auswahl.
-- Der Alpha-2-Release-Snapshot enthält 182 durch `SHA256SUMS` geschützte Dateien. Ein zweiter Bau derselben Version wurde wie vorgesehen abgelehnt; die aktuelle Quellvalidierung umfasst 163 Einträge.
+- Der Alpha-2-Release-Snapshot enthält 182 durch `SHA256SUMS` geschützte Dateien. Ein zweiter Bau derselben Version wurde wie vorgesehen abgelehnt; die aktuelle Quellvalidierung umfasst 166 Einträge.
 - Sämtliche Bash-Skripte bestanden eine Syntaxprüfung; die aktualisierten PowerShell-Skripte parsen unter Windows PowerShell 5.1 und die Archivprüfung lief dort erfolgreich.
 
 ## Erwartete, nicht fatale Upstream-Meldungen
@@ -38,4 +40,5 @@ Diese Meldungen wurden bis zur jeweiligen bedingten Registrierung beziehungsweis
 - Zwei Clients verbinden und Haustierbindung, Tod, Respawn, Waystone-Mitnahme und Dimensionswechsel spielen.
 - Aether, Twilight Forest und Bumblezone betreten sowie einige Create-/AE2-/Mekanism-Rezepte in JEI anklicken.
 - Installation, systemd-Lock, Backup und Rollback auf der vorgesehenen Ubuntu-VM testen.
+- Beta-Staging mit LuckPerms und CoreProtectNeo starten, einen Claim mit zwei nicht-OP-Spielenden testen sowie einen bewusst kleinen CoreProtectNeo-Rollback ausführen.
 - Erst danach die benötigten TCP-/UDP-Regeln öffnen und `stable` freigeben.

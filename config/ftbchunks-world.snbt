@@ -1,0 +1,36 @@
+{
+  # Community defaults. The generated per-world copy belongs to the server and
+  # may be adjusted after the staging test; see server/COMMUNITY.md.
+  claiming: {
+    max_claimed_chunks: 64
+    hard_team_claim_limit: 128
+    # Claims are never automatically released. Staff review inactive claims
+    # deliberately, so a longer community break cannot erase a build's
+    # protection.
+    max_idle_days_before_unclaim: 0.0d
+    party_limit_mode: "largest"
+  }
+  force_loading: {
+    # Offline chunkloading is deliberately opt-in through the
+    # ftbchunks.chunk_load_offline LuckPerms permission.
+    force_load_mode: "default"
+    max_force_loaded_chunks: 8
+    hard_team_force_limit: 16
+    max_idle_days_before_unforce: 30.0d
+  }
+  protect_unknown_explosions: true
+  piston_protection: true
+  team_prop_defaults: {
+    def_fake_players: false
+    def_allow_fake_player_ids: true
+    def_entity_interact: "allies"
+    def_block_interact: "allies"
+    def_block_edit: "allies"
+    def_entity_attack: "allies"
+    def_allow_explosions: false
+    def_mob_griefing: false
+    def_claim_visibility: "public"
+    def_player_visibility: "allies"
+    def_pvp: true
+  }
+}

@@ -3,6 +3,8 @@ param()
 
 $ErrorActionPreference = "Stop"
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+$packToml = Get-Content -Raw -Encoding UTF8 -LiteralPath (Join-Path $repoRoot "pack.toml")
+$packVersion = if ($packToml -match '(?m)^version = "([^"]+)"$') { $Matches[1] } else { "unbekannt" }
 $metadataRoots = @("mods", "resourcepacks", "shaderpacks")
 $metadata = foreach ($relativeRoot in $metadataRoots) {
     $root = Join-Path $repoRoot $relativeRoot
@@ -40,7 +42,7 @@ $bothCount = @($rows | Where-Object Side -eq "both").Count
 $lines = [System.Collections.Generic.List[string]]::new()
 $lines.Add("# Modliste")
 $lines.Add("")
-$lines.Add('Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.2`.')
+$lines.Add("Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft ``$packVersion``.")
 $lines.Add("")
 $lines.Add("- Gesamt: $($rows.Count) verwaltete Eintraege")
 $lines.Add("- beide Seiten: $bothCount")

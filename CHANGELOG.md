@@ -9,6 +9,11 @@ Alle relevanten Änderungen an Mods, Konfiguration, Quests und Serveranforderung
 - Das Prism-Profil `eco` für schwächere Rechner ergänzt und den Release-/Pages-Ablauf auf drei Profile erweitert.
 - Automatische Archivprüfung für Fluffy, Cozy und Eco ergänzt; Testkandidaten mit potenziellen Shader-Konflikten bleiben außerhalb des Stable-Packs.
 
+- Community-Grundlage ergänzt: FTB Chunks, LuckPerms und CoreProtectNeo.
+- Claims sind über die vorhandenen FTB Teams geschützt und mit konservativen Community-Limits vorkonfiguriert.
+- Carry On verlangsamt beim Tragen von Entitäten nur noch auf 25 Prozent.
+- Neue Installationen verwenden `U` für die FTB-Karte; Xaero's Weltkarte bleibt auf `M`.
+
 ## 0.1.0-alpha.2 — 2026-08-02
 
 - NeoForge von `21.1.248` auf `21.1.247` gepinnt, da Prism für den neueren Maven-Build noch keine Komponenten-Metadaten ausliefert.

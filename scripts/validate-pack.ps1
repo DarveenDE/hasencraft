@@ -151,9 +151,17 @@ else {
 }
 
 $forbiddenNames = @("servers.dat", "whitelist.json", "ops.json", "eula.txt", "server.properties")
+$derivedRoots = @(
+    (Join-Path $repoRoot "build").TrimEnd('\') + '\'
+    (Join-Path $repoRoot "dist").TrimEnd('\') + '\'
+)
 foreach ($name in $forbiddenNames) {
     $matches = Get-ChildItem -Path $repoRoot -Recurse -File -Filter $name |
-        Where-Object { $_.FullName -notlike "*\server\server.properties.example" }
+        Where-Object {
+            $fullName = $_.FullName
+            $fullName -notlike "*\server\server.properties.example" -and
+            -not ($derivedRoots | Where-Object { $fullName.StartsWith($_, [System.StringComparison]::OrdinalIgnoreCase) })
+        }
     foreach ($match in $matches) {
         Add-ValidationError "User/server-owned runtime file is present: $($match.FullName)"
     }
