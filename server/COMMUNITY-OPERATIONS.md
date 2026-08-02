@@ -1,52 +1,32 @@
 # Community-Operationen
 
-Diese Schritte gehoeren ausschliesslich in den Beta-/Staging-Kanal. Vor jeder
-Aenderung der Welt einen vollstaendigen, pruefbaren Backup-Snapshot anlegen.
-Stable wird erst nach einem erfolgreichen Staging-Test aktualisiert.
+Vor jeder Aenderung der Welt einen vollstaendigen, pruefbaren Backup-Snapshot
+anlegen. Neue Betriebsverfahren werden zuerst auf Beta/Staging erprobt und erst
+nach erfolgreicher Pruefung auf Stable uebernommen.
 
-## Weltgrenze und einmalige Vorabgenerierung (Issue #6)
+## Entscheidung gegen Weltgrenze und Vorabgenerierung (Issue #6)
 
-Chunky bleibt absichtlich ausserhalb des Modpacks: Distant Horizons dokumentiert
-bei paralleler Nutzung LoD-Luecken. Fuer eine einmalige Vorabgenerierung darf
-ein zur Serverversion passender Chunky-Build deshalb nur voruebergehend auf
-dem Staging-Server liegen. Waerendessen verbindet sich niemand mit Distant
-Horizons.
+Alpha 5 setzt bewusst keine kuenstliche Worldborder und fuehrt kein flaechiges
+Chunky-Pregen aus. Der Vanilla-Grenzwert bleibt unveraendert. Das erhaelt neue
+Weltgeneration fuer spaetere Modupdates, vermeidet grosse Mengen unbesuchter
+Alt-Chunks und schuetzt die 120-GB-SSD vor einem schwer kalkulierbaren modded
+Pregen. Nether, Ende und Moddimensionen werden ebenfalls nur bei Bedarf erzeugt.
 
-Die Community legt vor dem Lauf einen Durchmesser `D` in Bloecken fest. Der
-folgende Ablauf verwendet eine quadratische Weltgrenze um `0 0`; der Chunky-
-Radius ist `D / 2`, damit auch die Ecken innerhalb der Grenze erzeugt werden.
+Die verbleibenden Generierungs-Lagspitzen werden stattdessen begrenzt durch:
 
-1. Staging stoppen und den Backup-Snapshot pruefen. Den temporaeren Chunky-JAR
-   nur in das *Server*-`mods`-Verzeichnis von Staging legen.
-2. Server starten und in der Konsole ausfuehren:
+- `view-distance=5` und `simulation-distance=2`;
+- ServerCore, Noisium, Structure Layout Optimizer und FastSuite;
+- Distant Horizons im Modus `PRE_EXISTING_ONLY`, ohne Client-
+  Generierungsanforderungen und mit einem Worker bei 25 Prozent Laufzeit;
+- regelmaessige Spark-/TPS- und SSD-Beobachtung waehrend neuer Erkundung.
 
-   ```text
-   /worldborder center 0 0
-   /worldborder set <D>
-   /chunky world minecraft:overworld
-   /chunky center 0 0
-   /chunky shape square
-   /chunky radius <D/2>
-   /chunky start
-   ```
-
-3. Zu Beginn und danach mindestens alle 30 Minuten in der Serverkonsole
-   `/chunky progress` ausfuehren. Die Konsolen- beziehungsweise Journal-Ausgabe
-   als Fortschrittsnachweis behalten. Gleichzeitig auf dem Host `free -h`
-   (RAM und Swap) sowie `df -h <Serverdatentraeger>` (freier SSD-Platz)
-   protokollieren. Bei Bedarf mit `/chunky pause` anhalten und mit
-   `/chunky continue` fortsetzen.
-4. Den Lauf erst als abgeschlossen markieren, wenn `/chunky progress` keine
-   ausstehende Arbeit mehr meldet. Zeitstempel, finalen Fortschrittswert,
-   Speicherwerte und die Kennung des vorherigen Backups gemeinsam im
-   Staging-Betriebsprotokoll ablegen. Nether und Ende nur nach einem separaten
-   Beschluss mit ihren eigenen Grenzen vorbereiten.
-5. Nach Abschluss Staging stoppen und den temporaeren Chunky-JAR wieder
-   entfernen. Erst dann einen Distant-Horizons-Client verbinden und die
-   erzeugte Umgebung auf LoD-Luecken pruefen.
-
-Die Grenze ist im Weltstand gespeichert. Sie gehoert daher in die
-Serverdokumentation und in das Backup, nicht in die Client- oder Packdateien.
+Eine Grenze wird erst neu bewertet, wenn wiederholte Profile langsame Ticks
+durch Weltgenerierung belegen oder der freie SSD-Platz unter die betriebliche
+Reserve faellt. Dann wird zuerst auf Beta ein vollstaendiger Snapshot erstellt,
+ein begrenzter Durchmesser beschlossen und jede Dimension separat getestet.
+Eine spaetere Erweiterung erfolgt nur nach erneutem Snapshot, Kapazitaetscheck
+und schrittweise in dokumentierten Ringen. Chunky bleibt bis zu diesem Beschluss
+aus dem Pack und vom Stable-Server entfernt.
 
 ## BlueMap und Create BlueMap (Issue #7)
 

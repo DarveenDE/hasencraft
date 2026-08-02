@@ -1,12 +1,17 @@
 # Validierungsstand
 
-Stand: `0.1.0-alpha.4`, 2. August 2026.
+Stand: `0.1.0-alpha.5`, 2. August 2026.
 
 ## Bestanden
 
+- Alpha5 ist als Tag und GitHub Release veröffentlicht; die drei stabilen Archive und ihre SHA-256-Prüfsummen wurden verifiziert.
+- Der Server wurde nach einem Snapshot auf Alpha5 aktualisiert. Die neuen Mods wurden geladen, der Dienst läuft ohne Neustartschleife.
+- Die produktiven LuckPerms-Gruppen `supporter`, `moderator` und `admin` sind eingerichtet. Der Server-Export bestätigt `Darveen` als Admin, `Amayia` als Moderator, die Gruppenvererbung sowie die expliziten Sperren kritischer Serverbefehle für Moderatoren. In `ops.json` ist ausschließlich `Darveen` mit Level 4 eingetragen.
+- Für Alpha5 wurde bewusst gegen eine harte Worldborder und gegen Chunky-Vorabberechnung entschieden. Stattdessen gelten die bestehenden Sicht-/Simulationsdistanzen, Performance-Mods und das dokumentierte Monitoring.
+
 - LuckPerms `5.4.150` wurde auf dem NeoForge-1.21.1-Server mit der vom Upstream bereitgestellten SHA-512-Summe geprüft. Ein realer Spieler-Join erreichte danach den Spielzustand ohne die zuvor auftretende `UserCapabilityImpl`-Ausnahme.
 
-- Packwiz-Index aktualisiert und 169 gepinnte Eintraege geprueft: 124 beide Seiten, 24 nur Client, 21 nur Server.
+- Packwiz-Index aktualisiert und 172 gepinnte Eintraege geprueft: 128 beide Seiten, 24 nur Client, 20 nur Server.
 - Die neuen P1-Metadaten für FastSuite, Placebo, Structure Layout Optimizer, Resourceful Config und ServerCore sind gepinnt; Indexhash und Seitenzuordnung wurden durch `scripts/validate-pack.ps1` geprüft.
 - Ein isolierter Dedicated-Serverstart mit FTB Chunks `2101.1.21`, FTB Library `2101.1.34`, FTB Teams `2101.1.10` und FTB XMod Compat `21.1.10` erreichte `Done (71.788s)`. Die KubeJS- und Waystones-Integrationen von FTB Chunks wurden aktiviert; die Claim-/Force-Load-Grenzen aus `config/ftbchunks-world.snbt` wurden vom Konfigurationssystem uebernommen.
 - Die alpha.3-Prism-ZIP fuer Fluffy wurde erneut gebaut; die Pre-Launch-Aktualisierung ist enthalten.
@@ -20,7 +25,7 @@ Stand: `0.1.0-alpha.4`, 2. August 2026.
 - Die endgültige Waystones-Konfiguration wurde ohne Laufzeitkorrektur bytegleich übernommen: keine Kosten, keine Cooldowns, kein Haltbarkeitsverlust sowie Transport von Haustieren und angeleinten Tieren.
 - Nach den Hasencraft-Datenkorrekturen blieben keine Rezept-Parsefehler und kein fehlender Kartoffel-Tag zurück.
 - Alle drei Prism-Profile (`fluffy`, `cozy`, `eco`) bestanden die automatisierte Archivprüfung zu Instanzname, Pre-Launch-URL, Speicherprofil, Distant Horizons, Shader- und Ressourcenpack-Auswahl.
-- Der Alpha-2-Release-Snapshot enthält 182 durch `SHA256SUMS` geschützte Dateien. Ein zweiter Bau derselben Version wurde wie vorgesehen abgelehnt; die aktuelle Quellvalidierung umfasst 169 Einträge.
+- Der Alpha-2-Release-Snapshot enthält 182 durch `SHA256SUMS` geschützte Dateien. Ein zweiter Bau derselben Version wurde wie vorgesehen abgelehnt; die aktuelle Alpha-5-Quellvalidierung umfasst 172 Einträge.
 - Sämtliche Bash-Skripte bestanden eine Syntaxprüfung; die aktualisierten PowerShell-Skripte parsen unter Windows PowerShell 5.1 und die Archivprüfung lief dort erfolgreich.
 
 ## Erwartete, nicht fatale Upstream-Meldungen
@@ -33,9 +38,8 @@ Stand: `0.1.0-alpha.4`, 2. August 2026.
 
 Diese Meldungen wurden bis zur jeweiligen bedingten Registrierung beziehungsweise Quelldatei zurückverfolgt. Sie weisen nicht auf eine Create-6.0.10-Inkompatibilität oder beschädigte Welt hin.
 
-## Vor Stable noch manuell prüfen
+## Weiter manuell prüfen
 
-- Die Weltgrenze beschliessen, auf Staging mit dem dokumentierten einmaligen Chunky-Ablauf vorabgenerieren und danach einen Distant-Horizons-Client testen.
 - BlueMap nur ueber einen nicht-oeffentlichen Zugang rendern; erst danach Reverse Proxy, Karten- und Datenschutzregeln entscheiden.
 - Discord Integration mit einem separaten Bot-Token und Testrollen aktivieren; Token, Guild- und Kanal-IDs niemals in Packdateien eintragen.
 
@@ -47,5 +51,5 @@ Diese Meldungen wurden bis zur jeweiligen bedingten Registrierung beziehungsweis
 - Zwei Clients verbinden und Haustierbindung, Tod, Respawn, Waystone-Mitnahme und Dimensionswechsel spielen.
 - Aether, Twilight Forest und Bumblezone betreten sowie einige Create-/AE2-/Mekanism-Rezepte in JEI anklicken.
 - Installation, systemd-Lock, Backup und Rollback auf der vorgesehenen Ubuntu-VM testen.
-- Beta-Staging mit LuckPerms und FTB Chunks starten, einen Claim mit zwei nicht-OP-Spielenden testen und die Berechtigungen nach einem Reconnect erneut prüfen.
-- Erst danach die benötigten TCP-/UDP-Regeln öffnen und `stable` freigeben.
+- In der nächsten gemeinsamen Spielsitzung mit `Amayia` praktisch prüfen: Kick, Ban/Pardon, Whitelist, Teleport und Spectate erlaubt; OP, Stop, Reload, Gamerule und Worldborder verweigert.
+- Mit zwei Nicht-OP-Spielern Claims, Containerzugriff und erneutes Verbinden praktisch prüfen.

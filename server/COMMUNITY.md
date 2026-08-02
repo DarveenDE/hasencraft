@@ -1,7 +1,8 @@
 # Community-Betrieb
 
-Diese Anleitung gilt fuer `0.1.0-alpha.5` und den Beta-/Staging-Kanal. Sie
-beruehrt niemals den Stable-Server ohne vorherigen, erfolgreichen Test.
+Diese Anleitung gilt fuer `0.1.0-alpha.5` und den Communityserver. Aenderungen
+an Rollen oder Weltzustand erhalten vorher einen Offline-Snapshot und werden
+anschliessend gegen den laufenden Serverzustand geprueft.
 
 ## Was Alpha 5 bereitstellt
 
@@ -11,7 +12,7 @@ beruehrt niemals den Stable-Server ohne vorherigen, erfolgreichen Test.
   ohne Login werden nur die Offline-Lasten freigegeben.
 - **LuckPerms** verwaltet die Rollen. Die Claim-Limits sind absichtlich als
   globale, nachvollziehbare Serverwerte konfiguriert; nur Offline-Chunkloading
-  wird gezielt an die Rolle `builder` vergeben.
+  wird gezielt an die Rolle `supporter` vergeben.
 
 FTB Chunks liest die Pack-Vorlage unter `config/ftbchunks-world.snbt` als
 Modpack-Standard und darf sie bei der ersten Benutzung mit kommentierten
@@ -48,32 +49,78 @@ Punkte fehlschlaegt.
 
 ## Rollen mit LuckPerms
 
-Die folgenden Befehle werden als bestehender Server-Operator einmalig in der
-Serverkonsole oder im Spiel ausgefuehrt. `default` bleibt die normale
-Spielerrolle.
+`default` bleibt die normale Spielerrolle. `supporter` darf innerhalb der
+globalen FTB-Chunks-Limits eigene Team-Chunks offline geladen halten.
+`moderator` erbt `supporter` und darf Spielende kicken, bannen und begnadigen,
+die Whitelist verwalten, teleportieren und zuschauen. LuckPerms-Daten sind fuer
+Moderation lesbar, aber nicht veraenderbar. OP, Serverstopp, Reload, Saves,
+Gamerules, Worldborder und weitere Serverkonfiguration bleiben explizit
+verweigert. `admin` erbt `moderator` und ist die einzige Rolle mit vollem
+LuckPerms- und OP-Zugriff.
+
+Die produktive Alpha-5-Zuweisung lautet:
+
+- `Darveen`: `admin`, OP-Level 4
+- `Amayia`: `moderator`, kein OP
+- `supporter`: vorbereitet, derzeit ohne direkte Zuweisung
+
+Die idempotente Einrichtung ueber die Serverkonsole lautet:
 
 ```text
-lp creategroup member
-lp creategroup builder
-lp creategroup moderator
-lp creategroup admin
-lp group member parent add default
-lp group builder parent add member
-lp group moderator parent add member
+lp creategroup supporter 10 Supporter
+lp creategroup moderator 20 Moderator
+lp creategroup admin 100 Admin
+lp group supporter parent add default
+lp group moderator parent add supporter
 lp group admin parent add moderator
-lp group builder permission set ftbchunks.chunk_load_offline true
+lp group supporter permission set ftbchunks.chunk_load_offline true
+lp group moderator permission set minecraft.command.kick true
+lp group moderator permission set minecraft.command.ban true
+lp group moderator permission set minecraft.command.banlist true
+lp group moderator permission set minecraft.command.pardon true
+lp group moderator permission set minecraft.command.whitelist true
+lp group moderator permission set minecraft.command.teleport true
+lp group moderator permission set minecraft.command.spectate true
+lp group moderator permission set luckperms.info true
+lp group moderator permission set luckperms.user.info true
+lp group moderator permission set luckperms.user.permission.check true
+lp group moderator permission set luckperms.group.info true
+lp group moderator permission set luckperms.group.permission.info true
+lp group moderator permission set minecraft.command.op false
+lp group moderator permission set minecraft.command.deop false
+lp group moderator permission set minecraft.command.stop false
+lp group moderator permission set minecraft.command.reload false
+lp group moderator permission set minecraft.command.save-all false
+lp group moderator permission set minecraft.command.save-off false
+lp group moderator permission set minecraft.command.save-on false
+lp group moderator permission set minecraft.command.gamerule false
+lp group moderator permission set minecraft.command.worldborder false
+lp group moderator permission set minecraft.command.difficulty false
+lp group moderator permission set minecraft.command.forceload false
+lp group moderator permission set minecraft.command.setidletimeout false
+lp group moderator permission set minecraft.command.setworldspawn false
 lp group admin permission set luckperms.* true
-lp user <Minecraft-Name> parent add <member|builder|moderator|admin>
+lp user Amayia parent add moderator
+lp user Darveen parent add admin
+deop Amayia
+op Darveen
 ```
 
-`builder` darf seine maximal acht force-geladenen Chunks auch ohne eingeloggtes
-Teammitglied aktiv halten. Das ist eine begrenzte, messbare Ausnahme; die
-globalen Limits werden nicht durch ungetestete numerische Permission-Knoten
-ueberschrieben. Nach dem Einrichten mit einem Nicht-OP-Testkonto pruefen:
+`supporter` darf maximal die global konfigurierten acht force-geladenen Chunks
+auch ohne eingeloggtes Teammitglied aktiv halten. Die globalen Limits werden
+nicht durch numerische Permission-Knoten ueberschrieben. Nach Aenderungen mit
+den benannten Konten pruefen:
 
 ```text
-lp user <Minecraft-Name> permission check ftbchunks.chunk_load_offline
+lp user Amayia permission check ftbchunks.chunk_load_offline
+lp user Amayia permission check minecraft.command.kick
+lp user Amayia permission check minecraft.command.op
+lp user Darveen permission check luckperms.*
 ```
+
+Am 2. August 2026 bestaetigte ein serverlokaler LuckPerms-Export die komplette
+Vererbung und alle True-/False-Nodes beider Konten. `ops.json` enthielt genau
+einen Eintrag (`Darveen`, Level 4); `Amayia` war kein OP.
 
 ## Betriebshinweise
 
