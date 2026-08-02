@@ -30,10 +30,18 @@ Radius ist `D / 2`, damit auch die Ecken innerhalb der Grenze erzeugt werden.
    /chunky start
    ```
 
-3. Fortschritt und TPS beobachten; bei Bedarf mit `/chunky pause` anhalten und
-   mit `/chunky continue` fortsetzen. Nether und Ende nur nach einem separaten
+3. Zu Beginn und danach mindestens alle 30 Minuten in der Serverkonsole
+   `/chunky progress` ausfuehren. Die Konsolen- beziehungsweise Journal-Ausgabe
+   als Fortschrittsnachweis behalten. Gleichzeitig auf dem Host `free -h`
+   (RAM und Swap) sowie `df -h <Serverdatentraeger>` (freier SSD-Platz)
+   protokollieren. Bei Bedarf mit `/chunky pause` anhalten und mit
+   `/chunky continue` fortsetzen.
+4. Den Lauf erst als abgeschlossen markieren, wenn `/chunky progress` keine
+   ausstehende Arbeit mehr meldet. Zeitstempel, finalen Fortschrittswert,
+   Speicherwerte und die Kennung des vorherigen Backups gemeinsam im
+   Staging-Betriebsprotokoll ablegen. Nether und Ende nur nach einem separaten
    Beschluss mit ihren eigenen Grenzen vorbereiten.
-4. Nach Abschluss Staging stoppen und den temporaeren Chunky-JAR wieder
+5. Nach Abschluss Staging stoppen und den temporaeren Chunky-JAR wieder
    entfernen. Erst dann einen Distant-Horizons-Client verbinden und die
    erzeugte Umgebung auf LoD-Luecken pruefen.
 
