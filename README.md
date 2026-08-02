@@ -5,7 +5,7 @@ Tieren, Magie und großen Erkundungszielen. Gemeinsam bauen wir mit Create,
 Immersive Engineering, AE2 und Mekanism, entdecken Aether, Twilight Forest und
 Bumblezone und sorgen dafür, dass auch Haustiere ein sicheres Zuhause haben.
 
-**Aktueller Stand:** `0.1.0-alpha.2` · Minecraft `1.21.1` · NeoForge `21.1.247`
+**Aktueller Stand:** `0.1.0-alpha.3` · Minecraft `1.21.1` · NeoForge `21.1.247`
 
 ## Loslegen
 

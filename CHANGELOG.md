@@ -2,7 +2,7 @@
 
 Alle relevanten Änderungen an Mods, Konfiguration, Quests und Serveranforderungen werden hier dokumentiert.
 
-## Unreleased
+## 0.1.0-alpha.3 — 2026-08-02
 
 - Installationsseite neu gestaltet: Hero mit Wortmarke und Panorama, Profilvergleich Fluffy/Cozy/Eco, Inhaltsübersicht, Bildergalerie und aufklappbarer Technikbereich.
 - Minecraft- und NeoForge-Version werden beim Bauen der Seite aus der `pack.toml` des Stable-Snapshots eingesetzt; unaufgelöste Platzhalter lassen den Build fehlschlagen.
