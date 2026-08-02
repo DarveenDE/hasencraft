@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["##"],
+  "key": { "#": { "item": "snuffles:frosty_fluff" } },
+  "result": { "id": "snuffles:frosty_fluff_carpet", "count": 3 }
+}
