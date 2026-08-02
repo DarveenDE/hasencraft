@@ -1,0 +1,53 @@
+name: Publish Prism release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout tag
+        uses: actions/checkout@v6
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.25.x"
+      - name: Install pinned packwiz toolchain
+        shell: pwsh
+        run: go install github.com/packwiz/packwiz@dfd8b68a4796
+      - name: Validate pack
+        shell: pwsh
+        run: ./scripts/validate-pack.ps1 -Packwiz "$HOME/go/bin/packwiz.exe"
+      - name: Build Prism profiles
+        shell: pwsh
+        run: |
+          $url = "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/channels/stable/pack.toml"
+          ./scripts/build-prism.ps1 -PackUrl $url -Channel stable -Profile fluffy -Force
+          ./scripts/build-prism.ps1 -PackUrl $url -Channel stable -Profile cozy -Force
+      - name: Create checksums
+        shell: pwsh
+        run: |
+          $lines = Get-ChildItem -LiteralPath dist -Filter "*.zip" | Sort-Object Name | ForEach-Object {
+            $hash = (Get-FileHash -Algorithm SHA256 -LiteralPath $_.FullName).Hash.ToLowerInvariant()
+            "$hash  $($_.Name)"
+          }
+          [System.IO.File]::WriteAllLines("$PWD/dist/SHA256SUMS.txt", $lines, [System.Text.UTF8Encoding]::new($false))
+      - name: Publish GitHub Release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $assets = Get-ChildItem -LiteralPath dist -File | ForEach-Object FullName
+          $arguments = @("release", "create", $env:GITHUB_REF_NAME, "--verify-tag", "--generate-notes", "--title", "Hasencraft $($env:GITHUB_REF_NAME.TrimStart('v'))")
+          if ($env:GITHUB_REF_NAME -match '-(alpha|beta|rc)') {
+            $arguments += "--prerelease"
+          }
+          $arguments += $assets
+          & gh @arguments
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

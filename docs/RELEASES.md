@@ -18,6 +18,16 @@
 8. Server auf den neuen Versionsstand bringen und booten.
 9. Erst danach den Stable-Kanal mit `hosting/promote.sh <version> stable` atomar auf das geprüfte Release umstellen. Das Skript verifiziert vorher `SHA256SUMS`.
 10. Changelog und Git-Tag veröffentlichen.
+11. Der Tag-Workflow baut die beiden schlanken Prism-Profile und veröffentlicht sie mit SHA-256-Prüfsummen als GitHub Release.
+
+## Öffentliche Verteilung
+
+`hosting/channels.json` legt fest, welcher unveränderliche Snapshot als `stable` beziehungsweise `beta` veröffentlicht wird. Der GitHub-Pages-Workflow prüft sämtliche SHA-256-Einträge, materialisiert die Kanäle ohne Symlinks und veröffentlicht sie unter:
+
+- `https://darveende.github.io/hasencraft/channels/stable/pack.toml`
+- `https://darveende.github.io/hasencraft/channels/beta/pack.toml`
+
+Mod-JARs werden nicht im Repository oder im Prism-ZIP gebündelt. packwiz lädt sie anhand der geprüften Metadaten von den jeweiligen offiziellen Quellen.
 
 ## Rollback
 

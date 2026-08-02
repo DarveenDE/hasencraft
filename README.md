@@ -29,16 +29,20 @@ Die vollständige, maschinenlesbare Quelle liegt in `pack.toml`, `index.toml` un
 
 ## Einmaliger Client-Import
 
-Nach Festlegung der Pack-URL werden zwei Prism-ZIPs gebaut:
+Die öffentlichen Clients verwenden den Stable-Kanal auf GitHub Pages:
+
+`https://darveende.github.io/hasencraft/channels/stable/pack.toml`
+
+Die beiden Prism-ZIPs werden damit gebaut:
 
 ```powershell
 .\scripts\build-prism.ps1 `
-  -PackUrl "https://packs.example.net/hasencraft/channels/stable/pack.toml" `
+  -PackUrl "https://darveende.github.io/hasencraft/channels/stable/pack.toml" `
   -Channel stable `
   -Profile fluffy
 
 .\scripts\build-prism.ps1 `
-  -PackUrl "https://packs.example.net/hasencraft/channels/stable/pack.toml" `
+  -PackUrl "https://darveende.github.io/hasencraft/channels/stable/pack.toml" `
   -Channel stable `
   -Profile cozy
 ```
@@ -51,4 +55,4 @@ Modversionen werden im Stable-Kanal nicht blind aktualisiert. Ein Release läuft
 
 ## Aktueller Deploymentstand
 
-Das lokale Prism-Profil `Hasencraft Fluffy` ist installiert und Alpha 2 wurde bis zum Titelbildschirm mit aktivem Shader sowie Distant-Horizons-/Iris-Anbindung getestet. Auf der Ubuntu-VM laufen der lokale Pack-Host und die vorbereitete Serverinstallation; der geprüfte Alpha-2-Rollout liegt im Benutzer-Staging und wird durch einen einmaligen administrativen Aufruf aktiviert. Whitelist und Spielerdaten bleiben bewusst außerhalb dieses Repositorys.
+Das lokale Prism-Profil `Hasencraft Fluffy` ist installiert und Alpha 2 wurde bis zum Titelbildschirm mit aktivem Shader sowie Distant-Horizons-/Iris-Anbindung getestet. Der dedizierte Ubuntu-Server läuft mit demselben Alpha-2-Stand. GitHub Pages veröffentlicht die unveränderlichen Releases und die Kanäle `stable` und `beta`; GitHub Releases enthält die schlanken Prism-Importpakete. Whitelist, Welten und Spielerdaten bleiben bewusst außerhalb dieses Repositorys.
