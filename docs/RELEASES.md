@@ -11,14 +11,15 @@
 1. Neue oder aktualisierte Mods einzeln auf 1.21.1/NeoForge prüfen.
 2. Packwiz-Metadaten auf die ausdrücklich gewählte Version setzen.
 3. `packwiz refresh` und `scripts/validate-pack.ps1` ausführen.
-4. Release-Snapshot mit `scripts/make-release.ps1` bauen. Eine vorhandene Versionsnummer wird niemals überschrieben; jede Änderung benötigt eine neue Version.
-5. Beta-Prism-Instanz und Staging-Server starten.
-6. Verbindung, Weltladen, Dimensionen, Haustier-Respawn, JEI-Rezepte und Shader testen.
-7. Vollständiges Server-Backup erstellen.
-8. Server auf den neuen Versionsstand bringen und booten.
-9. Erst danach den Stable-Kanal mit `hosting/promote.sh <version> stable` atomar auf das geprüfte Release umstellen. Das Skript verifiziert vorher `SHA256SUMS`.
-10. Changelog und Git-Tag veröffentlichen.
-11. Der Tag-Workflow baut die drei schlanken Prism-Profile und veröffentlicht sie mit SHA-256-Prüfsummen als GitHub Release.
+4. Den [lokalen Entwicklerclient](DEVELOPMENT.md) mit `scripts/start-client-dev.ps1 -Profile cozy` bis zum Titelbildschirm und mit einer neuen Singleplayer-Welt testen.
+5. Release-Snapshot mit `scripts/make-release.ps1` bauen. Eine vorhandene Versionsnummer wird niemals überschrieben; jede Änderung benötigt eine neue Version.
+6. Beta-Prism-Instanz und Staging-Server starten.
+7. Verbindung, Weltladen, Dimensionen, Haustier-Respawn, JEI-Rezepte und Shader testen.
+8. Vollständiges Server-Backup erstellen.
+9. Server auf den neuen Versionsstand bringen und booten.
+10. Erst danach den Stable-Kanal mit `hosting/promote.sh <version> stable` atomar auf das geprüfte Release umstellen. Das Skript verifiziert vorher `SHA256SUMS`.
+11. Changelog und Git-Tag veröffentlichen.
+12. Der Tag-Workflow baut die drei schlanken Prism-Profile und veröffentlicht sie mit SHA-256-Prüfsummen als GitHub Release.
 
 ## Öffentliche Verteilung
 

@@ -114,3 +114,8 @@ Ausführlichere Hinweise zu Grafik und Distant Horizons stehen in der
 
 Mod-Dateien werden von ihren offiziellen Quellen geladen; alle Rechte liegen bei
 den jeweiligen Autorinnen und Autoren. Siehe [THIRD_PARTY.md](THIRD_PARTY.md).
+
+Technische Release-, Test- und Serverdokumentation liegt für das Team unter
+[`docs/`](docs/). Den aktuellen Arbeitsstand lokal bis zum Titelbildschirm und
+in einer Singleplayer-Welt prüfst du mit dem
+[Entwicklerclient](docs/DEVELOPMENT.md).
