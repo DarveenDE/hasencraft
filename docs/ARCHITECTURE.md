@@ -8,6 +8,7 @@ Git / packwiz
       │
       ├── Prism: Hasencraft Fluffy
       ├── Prism: Hasencraft Cozy
+      ├── Prism: Hasencraft Eco
       └── Ubuntu-Server: explizites Deployment
 ```
 
