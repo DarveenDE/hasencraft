@@ -64,7 +64,7 @@ if (-not (Test-Path -LiteralPath $channelFile -PathType Leaf)) {
     throw "Missing channel configuration: $channelFile"
 }
 
-$channels = Get-Content -Raw -LiteralPath $channelFile | ConvertFrom-Json
+$channels = Get-Content -Raw -Encoding utf8 -LiteralPath $channelFile | ConvertFrom-Json
 foreach ($name in @("stable", "beta")) {
     if (-not $channels.PSObject.Properties.Name.Contains($name)) {
         throw "Missing channel: $name"
@@ -88,7 +88,7 @@ $repository = "DarveenDE/hasencraft"
 $fluffyUrl = "https://github.com/$repository/releases/download/v$stableVersion/Hasencraft-stable-fluffy.zip"
 $cozyUrl = "https://github.com/$repository/releases/download/v$stableVersion/Hasencraft-stable-cozy.zip"
 $indexFile = Join-Path $destinationFull "index.html"
-$index = Get-Content -Raw -LiteralPath $indexFile
+$index = Get-Content -Raw -Encoding utf8 -LiteralPath $indexFile
 $index = $index.Replace("__STABLE_VERSION__", $stableVersion)
 $index = $index.Replace("__FLUFFY_IMPORT_URL__", $fluffyUrl)
 $index = $index.Replace("__COZY_IMPORT_URL__", $cozyUrl)
