@@ -144,14 +144,21 @@ ab.
 Bilder tragen die Stimmung, Vektorgrafik die Struktur. Ein einziges Foto-Asset
 trägt Hero und Profilkarten:
 
-- **Panorama:** dasselbe Bild, das im Spiel den Titelbildschirm trägt. Im Hero
-  als Hintergrund mit radialem Scrim links, in den Profilkarten als Ausschnitt
-  oben links, der in die Kartenfläche ausläuft. Jede Karte zeigt einen anderen
-  Bereich des 360°-Bildes – ein Asset, drei Motive, kein zusätzlicher Download.
-  Ein früher hier gezeichneter Pixelwald ist entfallen; das echte Panorama sagt
-  dasselbe besser und verbindet Seite und Spielstart.
-- **Galeriebilder:** die einzigen weiteren Fotos. Sie stehen bewusst nur in der
-  Galerie, damit die Screenshots ihre Wirkung nicht mit anderen Bildern teilen.
+- **Panorama:** dasselbe Bild, das im Spiel den Titelbildschirm trägt, als
+  Hero-Hintergrund mit radialem Scrim links. Ein früher hier gezeichneter
+  Pixelwald ist entfallen; das echte Panorama sagt dasselbe besser und
+  verbindet Seite und Spielstart.
+- **Kopfband der Profilkarten:** jede Karte trägt ihr eigenes Bild, ausgewählt
+  nach Bedeutung – Weitsicht für Fluffy, die gemütliche Hütte für Cozy, eine
+  ruhige Wiese für Eco. Alle drei sind bereits für Hero oder Galerie geladen,
+  es kommt also kein Download dazu.
+  **Die Verlaufsstopps stehen in Pixeln, nicht in Prozent** (84 / 148 / 172 px).
+  Nur so ist das Band in allen drei Karten gleich hoch; mit Prozentwerten würde
+  es mit der Textlänge wandern und die Reihe sähe schief aus. Aus demselben
+  Grund hat `.profile__desc` eine `min-height`, damit „Mindestens empfohlen“
+  überall auf derselben Linie beginnt.
+- **Galeriebilder:** die Screenshots der Galerie. Zwei davon tauchen verkleinert
+  als Kartenband wieder auf – dort sind sie Stimmung, in der Galerie Inhalt.
 - **Icons:** einheitlich 24×24 Strichzeichnungen, Strichstärke 2, runde
   Enden – neutral genug, um nicht mit der Pixeloptik zu konkurrieren.
 - **Galeriebilder:** die einzigen Fotos der Seite. Sie stehen bewusst nur in der
