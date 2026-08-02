@@ -1,9 +1,9 @@
 # Community-Betrieb
 
-Diese Anleitung gilt fuer `0.1.0-alpha.4` und den Beta-/Staging-Kanal. Sie
+Diese Anleitung gilt fuer `0.1.0-alpha.5` und den Beta-/Staging-Kanal. Sie
 beruehrt niemals den Stable-Server ohne vorherigen, erfolgreichen Test.
 
-## Was Alpha 3 bereitstellt
+## Was Alpha 5 bereitstellt
 
 - **FTB Chunks** nutzt die bereits vorhandenen FTB Teams fuer Claims und
   Schutz. Neue Teams erhalten 64 Claims, hoechstens 128 pro Team und acht
@@ -12,8 +12,6 @@ beruehrt niemals den Stable-Server ohne vorherigen, erfolgreichen Test.
 - **LuckPerms** verwaltet die Rollen. Die Claim-Limits sind absichtlich als
   globale, nachvollziehbare Serverwerte konfiguriert; nur Offline-Chunkloading
   wird gezielt an die Rolle `builder` vergeben.
-- **CoreProtectNeo** protokolliert Block-, Interaktions- und Inventarvorgaenge
-  lokal in SQLite. Die Clients benoetigen diesen Mod nicht.
 
 FTB Chunks liest die Pack-Vorlage unter `config/ftbchunks-world.snbt` als
 Modpack-Standard und darf sie bei der ersten Benutzung mit kommentierten
@@ -34,7 +32,7 @@ sudo systemctl start hasencraft
 
 1. Den Dienst stoppen und das vorhandene Backup-Verfahren ausfuehren.
 2. Den Beta-Kanal mit `hasencraft-deploy beta` ausrollen und den Dienst starten.
-3. Im Log pruefen, dass `FTB Chunks`, `LuckPerms` und `CoreProtectNeo` geladen
+3. Im Log pruefen, dass `FTB Chunks` und `LuckPerms` geladen
    wurden. Danach die geprüfte Pack-Vorlage nur dann als
    `world/serverconfig/ftbchunks-world.snbt` festschreiben, wenn die Werte den
    künftigen, serverlokalen Standard bilden sollen.
@@ -42,9 +40,8 @@ sudo systemctl start hasencraft
    in der anderen Claim-Abgrenzung abbauen/Container oeffnen testen sowie
    Piston und Explosion pruefen. Beide Clients muessen die FTB-Karte mit `U`
    und Xaero's Weltkarte mit `M` konfliktfrei oeffnen koennen.
-5. Einen Testblock setzen, mit `/co i` nachsehen und ausschliesslich im
-   Testgebiet mit `/co rollback area 3 5m` rueckgaengig machen. Vor jedem
-   produktiven Rollback zuerst ein vollstaendiges Server-Backup anlegen.
+5. Nach einem Reconnect erneut testen, dass der Claim, die Team-Zugehoerigkeit
+   und die gewuenschten Containerrechte unveraendert gelten.
 
 Ein Pack-Update darf nicht auf Stable promoted werden, solange einer dieser
 Punkte fehlschlaegt.
@@ -78,20 +75,10 @@ ueberschrieben. Nach dem Einrichten mit einem Nicht-OP-Testkonto pruefen:
 lp user <Minecraft-Name> permission check ftbchunks.chunk_load_offline
 ```
 
-CoreProtectNeo laesst `/co i` fuer alle Spielenden zu. Seine `near`- und
-Rollback-Befehle verlangen derzeit Minecraft-Adminrechte (OP-Stufe 2). Der
-Rang `moderator` erhaelt diese Befehle in Alpha 3 bewusst nicht automatisch:
-CoreProtectNeo dokumentiert keine passenden LuckPerms-Permission-Nodes. Nur
-wenige, namentlich bekannte Personen kommen in `ops.json`. Eine getestete,
-feingranulare Rechte-Bridge ist Voraussetzung, bevor der Moderator-Rang
-Rollbacks ohne OP ausfuehren darf.
-
 ## Betriebshinweise
 
-- CoreProtectNeo speichert seine SQLite-Daten in
-  `config/coreprotectneo/database.db`. Diese Datenbank gehoert in die regulären
-  Serverbackups; sie ist kein Packbestandteil.
-- Bei einem Rollback zuerst mit `/co i` und `/co near <Radius>` die Ursache
-  eingrenzen. Rollbacks immer klein und zeitlich knapp halten.
+- Wiederherstellungen erfolgen ausschliesslich ueber einen pruefbaren
+  Server-Backup-Snapshot. Vor jeder Wiederherstellung zuerst die Ursache im
+  Staging nachvollziehen und den betroffenen Weltstand sichern.
 - Offline-Chunkloading verursacht echte Serverlast. Aenderungen an den
   Limits erst nach einem Spark-/TPS-Test im Staging vornehmen.

@@ -47,5 +47,5 @@ Diese Meldungen wurden bis zur jeweiligen bedingten Registrierung beziehungsweis
 - Zwei Clients verbinden und Haustierbindung, Tod, Respawn, Waystone-Mitnahme und Dimensionswechsel spielen.
 - Aether, Twilight Forest und Bumblezone betreten sowie einige Create-/AE2-/Mekanism-Rezepte in JEI anklicken.
 - Installation, systemd-Lock, Backup und Rollback auf der vorgesehenen Ubuntu-VM testen.
-- Beta-Staging mit LuckPerms und CoreProtectNeo starten, einen Claim mit zwei nicht-OP-Spielenden testen sowie einen bewusst kleinen CoreProtectNeo-Rollback ausführen.
+- Beta-Staging mit LuckPerms und FTB Chunks starten, einen Claim mit zwei nicht-OP-Spielenden testen und die Berechtigungen nach einem Reconnect erneut prüfen.
 - Erst danach die benötigten TCP-/UDP-Regeln öffnen und `stable` freigeben.

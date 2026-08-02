@@ -54,12 +54,12 @@ passenden Strukturen bei der Weltgenerierung verringert.
 Die Distant-Horizons-Vorlage begrenzt LoD-Generierungs- und
 Synchronisierungsanfragen pro Spieler sowie global. Sie deckt weiterhin die
 256-LoD-Chunks des Fluffy-Profils ab, schützt aber die TPS bei mehreren
-gleichzeitigen Anfragen. Die Hintergrund-Neugenerierung bleibt dabei bewusst
-deaktiviert (`PRE_EXISTING_ONLY` und `enableDistantGeneration = false`): Der
-Server soll weder neben dem Spielbetrieb neue, modded Terrain-Chunks erzeugen
-noch beim Login oder in Echtzeit LoD-Daten propagieren. Dadurch behalten die
-Clients ihre lokalen/gecachten Fernansichten, während der Dedicated Server TPS
-priorisiert.
+gleichzeitigen Anfragen. Im Hintergrund darf genau ein Worker mit maximal 25
+Prozent Laufzeit LoDs aus bereits vorhandenen Chunks erstellen
+(`PRE_EXISTING_ONLY`). Der Server erzeugt dabei keine neuen, modded
+Terrain-Chunks und propagiert weder beim Login noch in Echtzeit LoD-Daten.
+Dadurch wachsen die Fernansichten bereits besuchter Gebiete langsam nach,
+während der Dedicated Server TPS priorisiert.
 
 Der Installer kopiert diese Datei nur bei einer neuen Installation. Auf
 bestehenden Servern nach dem Deployment sowohl den
@@ -67,8 +67,8 @@ bestehenden Servern nach dem Deployment sowohl den
 `server/config/DistantHorizons.toml` in
 `/srv/hasencraft/server/config/DistantHorizons.toml` übernehmen und den Dienst
 neu starten. Eine Weltvorabgenerierung erfolgt getrennt, begrenzt und vor dem
-Spielbetrieb; die Hintergrund-Neugenerierung nicht für einen laufenden Stream
-einschalten.
+Spielbetrieb. Die Hintergrundverarbeitung bleibt auf bereits erzeugte Chunks,
+einen Worker und 25 Prozent Laufzeit beschraenkt.
 
 Die Servervorlage verwendet außerdem `view-distance=5` und
 `simulation-distance=2`. Das begrenzt gleichzeitige Chunk-Ladevorgänge und
@@ -107,14 +107,9 @@ Client-Pack oder eine neue Alpha-Version ist dafuer nicht erforderlich:
   `/gamerule spawnChunkRadius 0` sind das konservative Stream-Profil. Hoehere
   Werte erst nach einem neuen Spark-Vergleich aktivieren.
 
-Wenn ein auf langsame Ticks begrenztes Spark-Profil
-(`spark profiler start --only-ticks-over 50 --timeout 120`) vor allem
-`CoreProtectNeo`/SQLite-Flushes zeigt, darf CoreProtectNeo nur fuer den Stream
-voruebergehend serverseitig deaktiviert werden. Die SQLite-Datenbank bleibt
-unveraendert, aber Block-, Inventar- und Interaktionsereignisse werden bis zur
-Reaktivierung nicht protokolliert. Vor der naechsten regulären Spielrunde den
-Mod wieder aktivieren, einen geplanten Neustart durchfuehren und die Audit- und
-Rollback-Funktion testen.
+CoreProtectNeo ist bewusst nicht Teil des Serverprofils. Claims und
+Zugriffsregeln kommen von FTB Chunks; der Wiederherstellungspfad besteht aus
+den regulaeren, pruefbaren Server-Backups.
 
 ## Rollback
 

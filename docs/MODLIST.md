@@ -1,6 +1,6 @@
 # Modliste
 
-Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.4`.
+Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.5`.
 
 - Gesamt: 169 verwaltete Eintraege
 - beide Seiten: 124
@@ -53,7 +53,6 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.4`
 | Comforts | `both` | `comforts-neoforge-9.0.5+1.21.1.jar` | [Modrinth](https://modrinth.com/project/SaCpeal4) |
 | Controlling | `client` | `Controlling-neoforge-1.21.1-19.0.5.jar` | [Modrinth](https://modrinth.com/project/xv94TkTM) |
 | Cooking for Blockheads | `both` | `cookingforblockheads-neoforge-1.21.1-21.1.24.jar` | [Modrinth](https://modrinth.com/project/vJnhuDde) |
-| CoreProtectNeo | `server` | `coreprotectneo-1.0.jar` | [Modrinth](https://modrinth.com/project/J80MzpEK) |
 | Crafting Tweaks | `both` | `craftingtweaks-neoforge-1.21.1-21.1.10.jar` | [Modrinth](https://modrinth.com/project/DMu0oBKf) |
 | Create | `both` | `create-1.21.1-6.0.10.jar` | [Modrinth](https://modrinth.com/project/LNytGWDc) |
 | Create BlueMap | `server` | `create_bluemap-1.1.1.jar` | [Modrinth](https://modrinth.com/project/W9e7rf1y) |

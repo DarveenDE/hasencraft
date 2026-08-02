@@ -132,7 +132,9 @@ foreach ($entry in $profileRequirements.GetEnumerator()) {
 $distantHorizonsServerConfig = Join-Path $repoRoot "server\config\DistantHorizons.toml"
 $distantHorizonsServerValues = @(
     'distantGeneratorMode = "PRE_EXISTING_ONLY"',
-    "enableDistantGeneration = false",
+    "enableDistantGeneration = true",
+    "numberOfThreads = 1",
+    'threadRunTimeRatio = "0.25"',
     "realTimeUpdateDistanceRadiusInChunks = 64",
     "maxSyncOnLoadRequestDistance = 64",
     "synchronizeOnLoad = false",

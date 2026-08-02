@@ -1,14 +1,19 @@
 [common.worldGenerator]
-	# Keep the live server responsive: Distant Horizons may import already
-	# generated chunks for LOD data, but it must not generate missing terrain in
-	# the background. Run intentional, bounded pregeneration separately.
+	# Build LOD data only from chunks that already exist. Missing terrain is never
+	# generated in the background; use intentional, bounded pregeneration for it.
 	distantGeneratorMode = "PRE_EXISTING_ONLY"
-	enableDistantGeneration = false
+	enableDistantGeneration = true
+
+[common.multiThreading]
+	# Keep a small, predictable CPU budget for background LOD conversion on the
+	# six-vCPU server. This must not compete with the server tick thread.
+	numberOfThreads = 1
+	threadRunTimeRatio = "0.25"
 
 [server]
-	# Stream-safe server mode: no server-side LOD generation, login sync, or
-	# realtime propagation. Clients retain their local/cached distant view while
-	# the dedicated server prioritizes TPS.
+	# Stream-safe server mode: existing chunks may be converted locally at the
+	# limited common budget, but the server does not accept client generation
+	# requests, synchronize on login, or send realtime propagation.
 	realTimeUpdateDistanceRadiusInChunks = 64
 	maxSyncOnLoadRequestDistance = 64
 	synchronizeOnLoad = false

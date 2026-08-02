@@ -29,6 +29,10 @@ file = "config/ftbquests/quests/lang/de_de.snbt"
 hash = "5fbce79c8780744de3ee4af7e1544a5c311bbaa9ecff94e4763f0fd7664e3b8f"
 
 [[files]]
+file = "config/rightclickharvest.json5"
+hash = "2c8cd4c6209dc14b8d168706b9b8d2822f7bab30b191bdb7d75abccc55e99b7b"
+
+[[files]]
 file = "config/voicechat/voicechat-server.properties"
 hash = "9cd395573ca9d06122af7fef50f72ac9a86f743df4e4bc3c452d1374d16a6aef"
 
@@ -323,11 +327,6 @@ hash = "d60bad050a7b8d9ba3f0aec1e9931addca2998281b03ccf99420227ffb4cd79f"
 metafile = true
 
 [[files]]
-file = "mods/coreprotectneo.pw.toml"
-hash = "2a27cf9ed9bf91c7e1bd9e190cc2de0b28b83ddeed9fae94b9d1a951bb3095bc"
-metafile = true
-
-[[files]]
 file = "mods/crafting-tweaks.pw.toml"
 hash = "15640250d7a7b74de02bf6266ae60d7bdf1ccd48a6acebc6604e64d11865f4af"
 metafile = true
@@ -598,6 +597,11 @@ hash = "e2366c04ffcdef93c3a78a4a0f8dbb77481d3ec240476cb1886c218addfd97da"
 metafile = true
 
 [[files]]
+file = "mods/jamlib.pw.toml"
+hash = "e0f83df9916962dc308535813db4ec6d092a1604597a13c5b277ff2be36fac47"
+metafile = true
+
+[[files]]
 file = "mods/jei.pw.toml"
 hash = "1e85bc37bdb9f89565db26cd1d779dc19446a6534df2950330687ca8e3c217df"
 metafile = true
@@ -810,6 +814,11 @@ metafile = true
 [[files]]
 file = "mods/ribbits.pw.toml"
 hash = "34752c0445d578e2b15b025872498690322f3f62b2b351966e90d8cc70cc73eb"
+metafile = true
+
+[[files]]
+file = "mods/right-click-harvest.pw.toml"
+hash = "7a0ff3e0a3b98f977f1dc83fca6ab568977aecf9f5928dbf1d09457df719f897"
 metafile = true
 
 [[files]]

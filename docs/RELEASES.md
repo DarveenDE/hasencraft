@@ -18,7 +18,7 @@
 8. Server auf den neuen Versionsstand bringen und booten.
 9. Erst danach den Stable-Kanal mit `hosting/promote.sh <version> stable` atomar auf das geprüfte Release umstellen. Das Skript verifiziert vorher `SHA256SUMS`.
 10. Changelog und Git-Tag veröffentlichen.
-11. Der Tag-Workflow baut die beiden schlanken Prism-Profile und veröffentlicht sie mit SHA-256-Prüfsummen als GitHub Release.
+11. Der Tag-Workflow baut die drei schlanken Prism-Profile und veröffentlicht sie mit SHA-256-Prüfsummen als GitHub Release.
 
 ## Öffentliche Verteilung
 

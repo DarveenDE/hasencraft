@@ -82,8 +82,8 @@ Fuer Staging:
 2. Token, Guild- und Test-Kanal-ID direkt auf dem Staging-Server eintragen.
    Niemals in Git, Releases, Screenshots oder Chat kopieren.
 3. Erst mit einem Testkanal Chat-Bridging und das gewuenschte
-   Whitelist-/Rollenverhalten pruefen. Discord-Rollen verleihen dabei weder Minecraft-OP noch
-   CoreProtect-Rollback-Rechte.
+   Whitelist-/Rollenverhalten pruefen. Discord-Rollen verleihen dabei keine
+   Minecraft-OP-Rechte.
 4. Nach einem erfolgreichen Test die Community festlegen lassen, ob Chat-
    Bridge, Whitelist-Verknuepfung, beide oder keine der Funktionen produktiv
    gewuenscht sind.
