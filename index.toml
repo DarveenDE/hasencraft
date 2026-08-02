@@ -1,6 +1,18 @@
 hash-format = "sha256"
 
 [[files]]
+file = "config/carryon-common.toml"
+hash = "e89cf801c57784593fb2a83c1fc91f04caf4a1da05e8ad5f442f74945e3f82c2"
+
+[[files]]
+file = "config/defaultoptions/keybindings.txt"
+hash = "a7ca11db6e22f04aa7f9c31c234749e25b6443c163a5c4151ea9588320fd3478"
+
+[[files]]
+file = "config/ftbchunks-world.snbt"
+hash = "c5907bbda7d9191c4f5ca5e7605f3aeeebe8f80f2bb946e164d2ac55108c8991"
+
+[[files]]
 file = "config/ftbquests/quests/chapters/hasencraft_start.snbt"
 hash = "2c8a0d981084cdedc64439c95bc12820286f6dbaa5445da3b0550b0a701823ce"
 
@@ -302,6 +314,11 @@ hash = "d60bad050a7b8d9ba3f0aec1e9931addca2998281b03ccf99420227ffb4cd79f"
 metafile = true
 
 [[files]]
+file = "mods/coreprotectneo.pw.toml"
+hash = "2a27cf9ed9bf91c7e1bd9e190cc2de0b28b83ddeed9fae94b9d1a951bb3095bc"
+metafile = true
+
+[[files]]
 file = "mods/crafting-tweaks.pw.toml"
 hash = "15640250d7a7b74de02bf6266ae60d7bdf1ccd48a6acebc6604e64d11865f4af"
 metafile = true
@@ -477,6 +494,11 @@ hash = "ff116f5bd456047da99714c9add30f0bf6a4dbffe95d8201920ba600a45b2312"
 metafile = true
 
 [[files]]
+file = "mods/ftb-chunks-forge.pw.toml"
+hash = "9161c7366bae42da30e0382dbca713e9e727fc90d19580b72288ef9d180c3dcf"
+metafile = true
+
+[[files]]
 file = "mods/ftb-library-forge.pw.toml"
 hash = "0f887b14cd32914113a86258d85a9c3e3ea59ace4c25cd9e675b8abd08e2dceb"
 metafile = true
@@ -589,6 +611,11 @@ metafile = true
 [[files]]
 file = "mods/lootr.pw.toml"
 hash = "8b5efc29959af3eac14e83064aae4a0128afe2d54bbc943266ef3be4b54de718"
+metafile = true
+
+[[files]]
+file = "mods/luckperms.pw.toml"
+hash = "14d4839522eac29a59f688601f8c988f5163b32fb6ff4458c4fdee2386316a3e"
 metafile = true
 
 [[files]]

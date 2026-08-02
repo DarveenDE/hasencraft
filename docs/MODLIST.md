@@ -1,11 +1,11 @@
 # Modliste
 
-Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.2`.
+Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.3`.
 
-- Gesamt: 163 verwaltete Eintraege
-- beide Seiten: 123
+- Gesamt: 166 verwaltete Eintraege
+- beide Seiten: 124
 - nur Client: 24
-- nur Server: 16
+- nur Server: 18
 
 ## Kuratierter Kern
 
@@ -52,6 +52,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.2`
 | Comforts | `both` | `comforts-neoforge-9.0.5+1.21.1.jar` | [Modrinth](https://modrinth.com/project/SaCpeal4) |
 | Controlling | `client` | `Controlling-neoforge-1.21.1-19.0.5.jar` | [Modrinth](https://modrinth.com/project/xv94TkTM) |
 | Cooking for Blockheads | `both` | `cookingforblockheads-neoforge-1.21.1-21.1.24.jar` | [Modrinth](https://modrinth.com/project/vJnhuDde) |
+| CoreProtectNeo | `server` | `coreprotectneo-1.0.jar` | [Modrinth](https://modrinth.com/project/J80MzpEK) |
 | Crafting Tweaks | `both` | `craftingtweaks-neoforge-1.21.1-21.1.10.jar` | [Modrinth](https://modrinth.com/project/DMu0oBKf) |
 | Create | `both` | `create-1.21.1-6.0.10.jar` | [Modrinth](https://modrinth.com/project/LNytGWDc) |
 | Create Crafts & Additions | `both` | `createaddition-1.6.0.jar` | [Modrinth](https://modrinth.com/project/kU1G12Nn) |
@@ -87,6 +88,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.2`
 | FastSuite | `both` | `FastSuite-1.21.1-6.0.7.jar` | [Modrinth](https://modrinth.com/project/roccmqou) |
 | FerriteCore | `both` | `ferritecore-7.0.3-neoforge.jar` | [Modrinth](https://modrinth.com/project/uXXizFIs) |
 | Friends&Foes (Forge/NeoForge) | `both` | `friendsandfoes-neoforge-4.0.26+mc1.21.1.jar` | [Modrinth](https://modrinth.com/project/BOCJKD49) |
+| FTB Chunks (NeoForge) | `both` | `ftb-chunks-neoforge-2101.1.21.jar` | CurseForge #314906 |
 | FTB Library (NeoForge) | `both` | `ftb-library-neoforge-2101.1.34.jar` | CurseForge #404465 |
 | FTB Quests (NeoForge) | `both` | `ftb-quests-neoforge-2101.1.29.jar` | CurseForge #289412 |
 | FTB Teams (NeoForge) | `both` | `ftb-teams-neoforge-2101.1.10.jar` | CurseForge #404468 |
@@ -110,6 +112,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.2`
 | Lithostitched | `both` | `lithostitched-1.7.13-neoforge-21.1.jar` | [Modrinth](https://modrinth.com/project/XaDC71GB) |
 | LootJS: KubeJS Addon | `server` | `lootjs-neoforge-1.21.1-3.7.0.jar` | [Modrinth](https://modrinth.com/project/fJFETWDN) |
 | Lootr | `both` | `lootr-neoforge-1.21.1-1.11.37.122.jar` | [Modrinth](https://modrinth.com/project/EltpO5cN) |
+| LuckPerms | `server` | `LuckPerms-NeoForge-5.4.140.jar` | [Modrinth](https://modrinth.com/project/Vebnzrzj) |
 | Macaw's Bridges | `both` | `mcw-bridges-3.1.2-mc1.21.1neoforge.jar` | [Modrinth](https://modrinth.com/project/GURcjz8O) |
 | Macaw's Doors | `both` | `mcw-doors-1.1.5-mc1.21.1neoforge.jar` | [Modrinth](https://modrinth.com/project/kNxa8z3e) |
 | Macaw's Fences and Walls | `both` | `mcw-mcwfences-1.2.1-mc1.21.1neoforge.jar` | [Modrinth](https://modrinth.com/project/GmwLse2I) |
