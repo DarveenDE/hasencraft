@@ -65,4 +65,6 @@ Inhalte steht in der [Modliste](docs/MODLIST.md).
 ---
 
 Technische Release-, Test- und Serverdokumentation liegt für das Team unter
-[`docs/`](docs/).
+[`docs/`](docs/). Den aktuellen Arbeitsstand lokal bis zum Titelbildschirm und
+in einer Singleplayer-Welt prüfst du mit dem
+[Entwicklerclient](docs/DEVELOPMENT.md).

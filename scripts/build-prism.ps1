@@ -3,7 +3,8 @@ param(
     [Parameter(Mandatory = $true)]
     [uri]$PackUrl,
 
-    [ValidateSet("stable", "beta")]
+    # `dev` only labels a local development archive; it is not a published channel.
+    [ValidateSet("stable", "beta", "dev")]
     [string]$Channel = "stable",
 
     [ValidateSet("fluffy", "cozy", "eco")]
@@ -76,6 +77,7 @@ $profileNames = @{
 }
 $profileName = $profileNames[$Profile]
 if ($Channel -eq "beta") { $profileName += " Beta" }
+elseif ($Channel -eq "dev") { $profileName += " Dev" }
 
 $instance = Get-Content -Raw -LiteralPath $instanceTemplate
 $instance = $instance.Replace("__PACK_URL__", $PackUrl.AbsoluteUri)
