@@ -2,6 +2,12 @@
 
 Alle relevanten Änderungen an Mods, Konfiguration, Quests und Serveranforderungen werden hier dokumentiert.
 
+## Unveröffentlicht
+
+- Installationsseite neu gestaltet: Hero mit Pixelwald, Profilvergleich Fluffy/Cozy, Inhaltsübersicht, Bildergalerie und aufklappbarer Technikbereich.
+- Minecraft- und NeoForge-Version werden beim Bauen der Seite aus der `pack.toml` des Stable-Snapshots eingesetzt; unaufgelöste Platzhalter lassen den Build fehlschlagen.
+- Designkonzept in `docs/DESIGN.md` dokumentiert.
+
 ## 0.1.0-alpha.2 — 2026-08-02
 
 - NeoForge von `21.1.248` auf `21.1.247` gepinnt, da Prism für den neueren Maven-Build noch keine Komponenten-Metadaten ausliefert.

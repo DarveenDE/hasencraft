@@ -3,52 +3,943 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hasencraft</title>
+  <title>Hasencraft – gemütliches Minecraft-Modpack mit Technik, Tieren und Magie</title>
+  <meta name="description" content="Hasencraft ist ein kuratiertes Minecraft-Modpack für 1.21.1: Create, Immersive Engineering, AE2, Ars Nouveau, Aether und ganz viele Tiere. In zwei Minuten über Prism Launcher installiert.">
+  <meta name="theme-color" content="#0d1310">
+  <link rel="icon" href="assets/hasencraft.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/hasencraft.png">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:site_name" content="Hasencraft">
+  <meta property="og:title" content="Hasencraft – gemütliches Minecraft-Modpack">
+  <meta property="og:description" content="Technik, Tiere, Magie und große Erkundungsziele für Minecraft 1.21.1. Ein Klick in Prism Launcher, Updates laufen automatisch.">
+  <meta property="og:url" content="https://darveende.github.io/hasencraft/">
+  <meta property="og:image" content="https://darveende.github.io/hasencraft/assets/galerie-aether.webp">
+  <meta property="og:image:alt" content="Weite Aether-Landschaft in Minecraft mit schwebenden Felsen am Himmel">
+  <meta name="twitter:card" content="summary_large_image">
   <style>
-    :root { color-scheme: dark; font-family: system-ui, sans-serif; }
-    body { max-width: 720px; margin: 10vh auto; padding: 0 24px; background: #171312; color: #f7eee8; }
-    main { padding: 36px; border: 1px solid #604b41; border-radius: 24px; background: #211a18; }
-    h1 { color: #f4b7c3; }
-    a { color: #a9d8a3; }
-    code { overflow-wrap: anywhere; }
-    .install { margin: 8px 8px 8px 0; padding: 12px 16px; border: 0; border-radius: 12px; background: #a9d8a3; color: #182116; cursor: pointer; font: inherit; font-weight: 700; }
-    .muted { color: #b9aaa2; }
+    /* ---------------------------------------------------------------
+       Hasencraft Design System
+       Farben aus dem Pack-Icon: Nachtwald, Honig, Kupfer, Hasenfell.
+       --------------------------------------------------------------- */
+    :root {
+      color-scheme: dark;
+
+      --ink:        #0d1310;
+      --night:      #111a15;
+      --surface:    #18241e;
+      --surface-2:  #1f2d25;
+      --line:       #2c4034;
+      --line-soft:  #223126;
+
+      --cream:      #f7efe6;
+      --muted:      #b6aa9f;
+
+      --moss:       #8ec96f;
+      --honey:      #f6c453;
+      --copper:     #d1813f;
+      --blush:      #f4b7c3;
+      --teal:       #5fb3a8;
+
+      --pine-far:   #1b2c22;
+      --pine-near:  #0f1a14;
+
+      --radius-s: 10px;
+      --radius-m: 16px;
+      --radius-l: 24px;
+
+      --shadow-soft: 0 18px 40px -24px rgb(0 0 0 / 0.9);
+      --shadow-lift: 0 26px 60px -28px rgb(0 0 0 / 0.95);
+
+      --step: clamp(1rem, 0.6rem + 1.6vw, 1.5rem);
+      --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --mono: ui-monospace, SFMono-Regular, "Cascadia Mono", Consolas, "Liberation Mono", monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font);
+      font-size: clamp(1rem, 0.96rem + 0.2vw, 1.075rem);
+      line-height: 1.65;
+      color: var(--cream);
+      background: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3 { line-height: 1.15; letter-spacing: -0.015em; margin: 0; text-wrap: balance; }
+    p { margin: 0; text-wrap: pretty; }
+    img { max-width: 100%; height: auto; }
+
+    a {
+      color: var(--moss);
+      text-decoration-color: color-mix(in srgb, var(--moss) 45%, transparent);
+      text-underline-offset: 3px;
+    }
+    a:hover { color: var(--honey); text-decoration-color: currentColor; }
+
+    :focus-visible {
+      outline: 3px solid var(--honey);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    .wrap { width: min(100% - 2.5rem, 1080px); margin-inline: auto; }
+
+    .skip {
+      position: absolute; left: -9999px; top: 0; z-index: 99;
+      padding: 0.75rem 1.25rem; background: var(--honey); color: var(--ink);
+      font-weight: 700; border-radius: 0 0 var(--radius-s) 0;
+    }
+    .skip:focus { left: 0; }
+
+    /* ---------------- Topbar ---------------- */
+    .topbar {
+      position: sticky; top: 0; z-index: 20;
+      background: color-mix(in srgb, var(--ink) 82%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .topbar__inner {
+      display: flex; align-items: center; gap: 1rem;
+      min-height: 64px; padding-block: 0.6rem;
+    }
+    .brand { display: flex; flex: none; align-items: center; gap: 0.7rem; font-weight: 800; letter-spacing: -0.02em; color: var(--cream); text-decoration: none; }
+    .brand:hover { color: var(--cream); }
+    .brand img { width: 36px; height: 36px; border-radius: 9px; image-rendering: pixelated; box-shadow: 0 0 0 1px var(--line); }
+    .brand span { font-size: 1.15rem; white-space: nowrap; }
+
+    .topnav { display: none; margin-left: auto; gap: 1.35rem; font-size: 0.93rem; }
+    .topnav a { color: var(--muted); text-decoration: none; }
+    .topnav a:hover { color: var(--cream); }
+
+    .pill {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.3rem 0.75rem; border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.02em;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .pill--version { margin-left: auto; color: var(--cream); font-size: 0.78rem; }
+    .topnav + .pill--version { margin-left: 0; }
+    .pill__label { display: none; color: var(--muted); }
+    .dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--moss); box-shadow: 0 0 0 3px color-mix(in srgb, var(--moss) 22%, transparent); }
+
+    @media (min-width: 420px) { .pill__label { display: inline; } }
+    @media (min-width: 960px) { .topnav { display: flex; } }
+
+    /* ---------------- Hero ---------------- */
+    .hero {
+      position: relative; overflow: hidden; isolation: isolate;
+      padding-block: clamp(3.5rem, 8vw, 7rem) clamp(9rem, 20vw, 15rem);
+    }
+    .hero__sky {
+      position: absolute; inset: 0; z-index: -2;
+      background:
+        radial-gradient(1200px 460px at 68% 88%, color-mix(in srgb, var(--copper) 34%, transparent), transparent 62%),
+        radial-gradient(900px 420px at 20% 10%, color-mix(in srgb, var(--teal) 16%, transparent), transparent 65%),
+        linear-gradient(180deg, #0b1a1c 0%, #10201a 45%, var(--ink) 100%);
+    }
+    .hero__scene { position: absolute; inset: auto 0 0 0; z-index: -1; width: 100%; height: clamp(180px, 26vw, 300px); display: block; }
+    .hero__fade { position: absolute; inset: auto 0 0 0; z-index: -1; height: 160px; background: linear-gradient(180deg, transparent, var(--ink)); }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
+      font-size: 0.82rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--honey);
+    }
+    .eyebrow::before { content: ""; width: 28px; height: 2px; background: currentColor; opacity: 0.6; }
+
+    .hero__title {
+      margin-top: 1rem;
+      font-size: clamp(2.9rem, 1.6rem + 6vw, 5.4rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+    }
+    .hero__title em {
+      font-style: normal;
+      color: var(--blush);
+      text-shadow: 4px 4px 0 color-mix(in srgb, var(--copper) 45%, transparent);
+    }
+    .hero__lead {
+      margin-top: 1.1rem;
+      max-width: 46ch;
+      font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.3rem);
+      color: color-mix(in srgb, var(--cream) 86%, var(--muted));
+    }
+
+    .hero__actions { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 2rem; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+      padding: 0.85rem 1.4rem;
+      border: 1px solid transparent; border-radius: var(--radius-s);
+      font: inherit; font-weight: 700;
+      cursor: pointer; text-decoration: none;
+      transition: transform 120ms ease, background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+    .btn--primary { background: var(--honey); color: #1a1206; }
+    .btn--primary:hover { background: #ffd472; color: #1a1206; }
+    .btn--ghost { background: transparent; border-color: var(--line); color: var(--cream); }
+    .btn--ghost:hover { border-color: var(--moss); color: var(--cream); background: color-mix(in srgb, var(--moss) 10%, transparent); }
+
+    /* Faktenband */
+    .facts {
+      position: relative;
+      border-block: 1px solid var(--line-soft);
+      background: var(--ink);
+    }
+    .facts__grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1px; background: var(--line-soft);
+    }
+    .fact { background: var(--ink); padding: 1.15rem 1.25rem; }
+    .fact dt { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .fact dd { margin: 0.25rem 0 0; font-size: clamp(1.05rem, 0.9rem + 0.6vw, 1.35rem); font-weight: 700; letter-spacing: -0.02em; overflow-wrap: anywhere; }
+    @media (min-width: 760px) { .facts__grid { grid-template-columns: repeat(4, 1fr); } }
+
+    /* ---------------- Sections ---------------- */
+    section[id] { scroll-margin-top: 84px; }
+    .band { padding-block: clamp(3.5rem, 8vw, 6rem); }
+    .band--tint { background: linear-gradient(180deg, var(--ink), var(--night) 40%, var(--ink)); }
+
+    .band__head { max-width: 60ch; margin-bottom: clamp(2rem, 4vw, 3rem); }
+    .band__head h2 { font-size: clamp(1.8rem, 1.3rem + 2vw, 2.7rem); font-weight: 800; }
+    .band__head p { margin-top: 0.85rem; color: var(--muted); }
+    .kicker { display: block; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--moss); margin-bottom: 0.7rem; }
+
+    /* Schritte */
+    .steps { display: grid; gap: 1rem; padding: 0; margin: 0 0 clamp(2rem, 4vw, 3rem); list-style: none; counter-reset: step; }
+    @media (min-width: 820px) { .steps { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; } }
+    .step {
+      position: relative; counter-increment: step;
+      padding: 1.4rem 1.4rem 1.4rem 3.9rem;
+      border: 1px solid var(--line-soft); border-radius: var(--radius-m);
+      background: var(--surface);
+    }
+    .step::before {
+      content: counter(step);
+      position: absolute; left: 1.25rem; top: 1.25rem;
+      display: grid; place-items: center;
+      width: 2rem; height: 2rem; border-radius: 8px;
+      background: color-mix(in srgb, var(--moss) 18%, transparent);
+      border: 1px solid color-mix(in srgb, var(--moss) 40%, transparent);
+      color: var(--moss); font-weight: 800; font-size: 0.95rem;
+    }
+    .step h3 { font-size: 1.05rem; font-weight: 700; }
+    .step p { margin-top: 0.35rem; color: var(--muted); font-size: 0.95rem; }
+
+    /* Profilkarten */
+    .profiles { display: grid; gap: 1.25rem; }
+    @media (min-width: 820px) { .profiles { grid-template-columns: repeat(2, 1fr); } }
+
+    .profile {
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column;
+      padding: clamp(1.5rem, 3vw, 2rem);
+      border: 1px solid var(--line); border-radius: var(--radius-l);
+      background: linear-gradient(180deg, var(--surface-2), var(--surface));
+      box-shadow: var(--shadow-soft);
+      transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+    }
+    .profile:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); box-shadow: var(--shadow-lift); }
+    .profile::before {
+      content: ""; position: absolute; inset: 0 0 auto 0; height: 4px;
+      background: linear-gradient(90deg, var(--accent), transparent 85%);
+    }
+    .profile--fluffy { --accent: var(--honey); }
+    .profile--cozy   { --accent: var(--teal); }
+
+    .profile__top { display: flex; align-items: center; gap: 0.85rem; }
+    .profile__icon {
+      display: grid; place-items: center; flex: none;
+      width: 44px; height: 44px; border-radius: 12px;
+      background: color-mix(in srgb, var(--accent) 16%, transparent);
+      border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
+      color: var(--accent);
+    }
+    .profile h3 { font-size: 1.5rem; font-weight: 800; }
+    .profile__tag { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+    .profile__desc { margin-top: 1rem; color: var(--muted); }
+
+    .specs { display: grid; gap: 0.55rem; margin: 1.25rem 0 1.6rem; padding: 0; list-style: none; font-size: 0.93rem; }
+    .specs li { display: flex; gap: 0.6rem; align-items: baseline; color: color-mix(in srgb, var(--cream) 80%, var(--muted)); }
+    .specs li::before { content: ""; flex: none; width: 6px; height: 6px; margin-top: 0.45rem; background: var(--accent); }
+
+    .profile__cta { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
+    .btn--copy { background: var(--accent); color: #14190f; width: 100%; }
+    .profile--cozy .btn--copy { color: #06201d; }
+    .btn--copy:hover { background: color-mix(in srgb, var(--accent) 82%, white); }
+    .btn--copy.is-copied { background: var(--moss); color: #10200c; }
+    .profile__alt { font-size: 0.88rem; color: var(--muted); }
+    .profile__alt a { color: var(--muted); }
+    .profile__alt a:hover { color: var(--honey); }
+
+    .copy-status {
+      margin-top: 1.25rem; min-height: 1.5rem;
+      font-size: 0.93rem; color: var(--moss);
+    }
+    .copy-status:empty { margin-top: 0; }
+    .copy-status.is-error { color: var(--honey); }
+    .copy-fallback { display: none; margin-top: 0.75rem; }
+    .copy-fallback.is-visible { display: block; }
+    .copy-fallback input {
+      width: 100%; padding: 0.6rem 0.75rem;
+      font: inherit; font-family: var(--mono); font-size: 0.85rem;
+      color: var(--cream); background: var(--ink);
+      border: 1px solid var(--line); border-radius: var(--radius-s);
+    }
+
+    .note {
+      display: flex; gap: 0.9rem; align-items: flex-start;
+      margin-top: 1.5rem; padding: 1.1rem 1.25rem;
+      border: 1px solid color-mix(in srgb, var(--honey) 30%, var(--line));
+      border-left-width: 4px;
+      border-radius: var(--radius-m);
+      background: color-mix(in srgb, var(--honey) 7%, var(--surface));
+      font-size: 0.95rem;
+    }
+    .note svg { flex: none; color: var(--honey); margin-top: 0.2rem; }
+    .note strong { color: var(--cream); }
+
+    /* Inhaltskarten */
+    .cards { display: grid; gap: 1.1rem; }
+    @media (min-width: 700px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1000px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+
+    .card {
+      padding: 1.5rem;
+      border: 1px solid var(--line-soft); border-radius: var(--radius-m);
+      background: var(--surface);
+      transition: border-color 180ms ease, transform 180ms ease;
+    }
+    .card:hover { border-color: var(--line); transform: translateY(-2px); }
+    .card__icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; margin-bottom: 1rem; background: color-mix(in srgb, var(--tone) 15%, transparent); color: var(--tone); }
+    .card h3 { font-size: 1.15rem; font-weight: 700; }
+    .card p { margin-top: 0.5rem; color: var(--muted); font-size: 0.95rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; padding: 0; list-style: none; }
+    .chips li {
+      padding: 0.22rem 0.6rem; border-radius: 999px;
+      border: 1px solid var(--line); background: var(--night);
+      font-size: 0.78rem; color: color-mix(in srgb, var(--cream) 72%, var(--muted));
+    }
+    .card--tech { --tone: var(--copper); }
+    .card--pets { --tone: var(--blush); }
+    .card--magic { --tone: var(--teal); }
+    .card--explore { --tone: var(--moss); }
+    .card--mood { --tone: var(--honey); }
+    .card--quests { --tone: #9d8ff0; }
+
+    /* Galerie */
+    .gallery { display: grid; gap: 1.1rem; }
+    @media (min-width: 700px) {
+      .gallery { grid-template-columns: repeat(2, 1fr); }
+      .shot--wide { grid-column: 1 / -1; }
+    }
+
+    .shot {
+      margin: 0; overflow: hidden;
+      border: 1px solid var(--line-soft); border-radius: var(--radius-m);
+      background: var(--surface);
+      transition: border-color 180ms ease, transform 180ms ease;
+    }
+    .shot:hover { border-color: var(--line); transform: translateY(-2px); }
+    .shot__frame { position: relative; background: var(--ink); aspect-ratio: 16 / 9; }
+    .shot--wide .shot__frame { aspect-ratio: 21 / 9; }
+    .shot__frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .shot__frame::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      box-shadow: inset 0 0 42px rgb(0 0 0 / 0.28), inset 0 -1px 0 var(--line-soft);
+    }
+    .shot figcaption { padding: 1.1rem 1.2rem 1.25rem; }
+    .shot figcaption strong { display: block; font-size: 1.02rem; }
+    .shot figcaption p { margin-top: 0.35rem; font-size: 0.92rem; color: var(--muted); }
+    .shot__meta {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+      margin: 0.85rem 0 0; padding: 0; list-style: none;
+    }
+    .shot__meta li {
+      padding: 0.18rem 0.55rem; border-radius: 999px;
+      border: 1px solid var(--line); background: var(--night);
+      font-size: 0.75rem; color: var(--moss);
+    }
+
+    /* Gut zu wissen */
+    .knowledge { display: grid; gap: 1.1rem; }
+    @media (min-width: 760px) { .knowledge { grid-template-columns: repeat(2, 1fr); } }
+    .know {
+      display: flex; gap: 0.9rem;
+      padding: 1.25rem;
+      border: 1px solid var(--line-soft); border-radius: var(--radius-m);
+      background: color-mix(in srgb, var(--surface) 60%, transparent);
+    }
+    .know svg { flex: none; color: var(--moss); margin-top: 0.15rem; }
+    .know h3 { font-size: 1rem; font-weight: 700; }
+    .know p { margin-top: 0.3rem; font-size: 0.93rem; color: var(--muted); }
+
+    /* Technik */
+    .tech { border: 1px solid var(--line-soft); border-radius: var(--radius-m); background: var(--surface); overflow: hidden; }
+    .tech + .tech { margin-top: 0.85rem; }
+    .tech > summary {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 1.1rem 1.25rem; cursor: pointer;
+      font-weight: 700; list-style: none;
+    }
+    .tech > summary::-webkit-details-marker { display: none; }
+    .tech > summary::after {
+      content: ""; margin-left: auto;
+      width: 9px; height: 9px;
+      border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted);
+      transform: rotate(45deg); transition: transform 180ms ease;
+    }
+    .tech[open] > summary::after { transform: rotate(-135deg); }
+    .tech__body { padding: 0 1.25rem 1.35rem; color: var(--muted); font-size: 0.95rem; }
+    .tech__body p + p { margin-top: 0.8rem; }
+    .tech__body code, .feed code { font-family: var(--mono); font-size: 0.87em; overflow-wrap: anywhere; }
+    .feed { display: grid; gap: 0.5rem; margin-top: 0.9rem; }
+    .feed a {
+      display: block; padding: 0.7rem 0.9rem;
+      border: 1px solid var(--line); border-radius: var(--radius-s);
+      background: var(--ink); text-decoration: none;
+    }
+    .feed a:hover { border-color: var(--moss); }
+    .feed strong { display: block; color: var(--cream); font-size: 0.85rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    .feed code { color: var(--moss); }
+
+    /* Footer */
+    .footer { border-top: 1px solid var(--line-soft); padding-block: 2.5rem 3rem; background: var(--night); }
+    .footer__inner { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; justify-content: space-between; }
+    .footer p { font-size: 0.88rem; color: var(--muted); max-width: 52ch; }
+    .footer nav { display: flex; flex-wrap: wrap; gap: 1.25rem; font-size: 0.9rem; }
+
+    /* Pixel-Deko */
+    .firefly { animation: drift 9s ease-in-out infinite alternate; transform-origin: center; }
+    .firefly--b { animation-duration: 12s; animation-delay: -3s; }
+    .firefly--c { animation-duration: 15s; animation-delay: -7s; }
+    @keyframes drift {
+      from { transform: translate(0, 0); opacity: 0.35; }
+      50%  { opacity: 1; }
+      to   { transform: translate(26px, -18px); opacity: 0.45; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+      .btn:hover, .card:hover, .profile:hover { transform: none; }
+    }
   </style>
 </head>
 <body>
-  <main>
-    <h1>Hasencraft 🐰</h1>
-    <p>Gemütliches Technik-, Tier- und Abenteuer-Modpack für Minecraft 1.21.1.</p>
-    <p><strong>Stable: Hasencraft __STABLE_VERSION__</strong></p>
-    <h2>In Prism installieren</h2>
-    <p>In Prism Launcher <strong>Instanz hinzufügen → Importieren</strong> wählen. Dann den passenden Knopf klicken und die Adresse in Prism einfügen:</p>
-    <p>
-      <button class="install" type="button" data-import-url="__FLUFFY_IMPORT_URL__">Fluffy-Importadresse kopieren</button>
-      <button class="install" type="button" data-import-url="__COZY_IMPORT_URL__">Cozy-Importadresse kopieren</button>
-    </p>
-    <p id="copy-status" class="muted" aria-live="polite"></p>
-    <p class="muted">Fluffy ist für stärkere Rechner, Cozy für sparsamere Grafik. Beide Profile enthalten dieselben Spielinhalte. Nach dem ersten Import werden Updates beim Start automatisch installiert.</p>
-    <p><strong>Stable packwiz feed:</strong><br>
-      <code><a href="channels/stable/pack.toml">channels/stable/pack.toml</a></code>
-    </p>
-    <p><strong>Beta packwiz feed:</strong><br>
-      <code><a href="channels/beta/pack.toml">channels/beta/pack.toml</a></code>
-    </p>
-    <p><a href="https://github.com/DarveenDE/hasencraft/releases">Prism-Pakete und Releases</a></p>
-    <p class="muted">Mod-Dateien werden von ihren offiziellen Quellen geladen.</p>
+  <a class="skip" href="#install">Direkt zur Installation</a>
+
+  <header class="topbar">
+    <div class="wrap topbar__inner">
+      <a class="brand" href="#top">
+        <img src="assets/hasencraft.png" alt="" width="36" height="36">
+        <span>Hasencraft</span>
+      </a>
+      <nav class="topnav" aria-label="Seitenbereiche">
+        <a href="#install">Installieren</a>
+        <a href="#inhalte">Inhalte</a>
+        <a href="#bilder">Bilder</a>
+        <a href="#wissen">Gut zu wissen</a>
+        <a href="#technik">Technik</a>
+      </nav>
+      <span class="pill pill--version"><span class="dot"></span><span class="pill__label">Stable</span>__STABLE_VERSION__</span>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <div class="hero__sky" aria-hidden="true"></div>
+      <svg class="hero__scene" viewBox="0 0 1600 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+        <defs>
+          <symbol id="pine" viewBox="0 0 16 26">
+            <rect x="7" y="21" width="2" height="5"></rect>
+            <rect x="7" y="1"  width="2" height="3"></rect>
+            <rect x="6" y="4"  width="4" height="3"></rect>
+            <rect x="5" y="7"  width="6" height="3"></rect>
+            <rect x="4" y="10" width="8" height="3"></rect>
+            <rect x="3" y="13" width="10" height="3"></rect>
+            <rect x="2" y="16" width="12" height="3"></rect>
+            <rect x="1" y="19" width="14" height="2"></rect>
+          </symbol>
+        </defs>
+
+        <!-- Sterne -->
+        <g fill="#f7efe6" opacity="0.5">
+          <rect x="120" y="34" width="3" height="3"></rect>
+          <rect x="310" y="18" width="3" height="3"></rect>
+          <rect x="470" y="52" width="3" height="3"></rect>
+          <rect x="905" y="26" width="3" height="3"></rect>
+          <rect x="1180" y="44" width="3" height="3"></rect>
+          <rect x="1420" y="20" width="3" height="3"></rect>
+        </g>
+
+        <!-- Fernes Waldband -->
+        <g style="fill: var(--pine-far)" opacity="0.85">
+          <use href="#pine" x="20"   y="130" width="118" height="192"></use>
+          <use href="#pine" x="150"  y="150" width="96"  height="156"></use>
+          <use href="#pine" x="255"  y="118" width="132" height="214"></use>
+          <use href="#pine" x="400"  y="152" width="92"  height="150"></use>
+          <use href="#pine" x="505"  y="128" width="120" height="196"></use>
+          <use href="#pine" x="640"  y="156" width="88"  height="144"></use>
+          <use href="#pine" x="745"  y="124" width="126" height="204"></use>
+          <use href="#pine" x="890"  y="150" width="98"  height="158"></use>
+          <use href="#pine" x="1000" y="120" width="128" height="208"></use>
+          <use href="#pine" x="1145" y="154" width="90"  height="148"></use>
+          <use href="#pine" x="1250" y="126" width="122" height="200"></use>
+          <use href="#pine" x="1390" y="148" width="100" height="162"></use>
+          <use href="#pine" x="1500" y="132" width="116" height="188"></use>
+        </g>
+
+        <!-- Glühwürmchen -->
+        <g fill="#f6c453">
+          <rect class="firefly" x="360" y="196" width="5" height="5" opacity="0.7"></rect>
+          <rect class="firefly firefly--b" x="880" y="214" width="4" height="4" opacity="0.6"></rect>
+          <rect class="firefly firefly--c" x="1230" y="188" width="5" height="5" opacity="0.65"></rect>
+        </g>
+
+        <!-- Naher Wald -->
+        <g style="fill: var(--pine-near)">
+          <use href="#pine" x="-30"  y="186" width="150" height="146"></use>
+          <use href="#pine" x="115"  y="204" width="126" height="126"></use>
+          <use href="#pine" x="230"  y="180" width="164" height="160"></use>
+          <use href="#pine" x="400"  y="210" width="120" height="120"></use>
+          <use href="#pine" x="520"  y="188" width="152" height="148"></use>
+          <use href="#pine" x="680"  y="212" width="118" height="118"></use>
+          <use href="#pine" x="795"  y="182" width="160" height="156"></use>
+          <use href="#pine" x="960"  y="208" width="124" height="124"></use>
+          <use href="#pine" x="1080" y="186" width="154" height="150"></use>
+          <use href="#pine" x="1240" y="210" width="120" height="120"></use>
+          <use href="#pine" x="1355" y="184" width="158" height="154"></use>
+          <use href="#pine" x="1510" y="206" width="128" height="128"></use>
+          <rect x="0" y="292" width="1600" height="12"></rect>
+        </g>
+      </svg>
+      <div class="hero__fade" aria-hidden="true"></div>
+
+      <div class="wrap">
+        <p class="eyebrow">Minecraft 1.21.1 · NeoForge · Deutsch</p>
+        <h1 class="hero__title">Bau mit. <em>Hasencraft.</em></h1>
+        <p class="hero__lead">
+          Ein gemütliches Modpack aus Technik, Tieren, Magie und großen Erkundungszielen –
+          kuratiert, getestet und in zwei Minuten spielbereit.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#install">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></svg>
+            Jetzt installieren
+          </a>
+          <a class="btn btn--ghost" href="#inhalte">Was drin ist</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="facts">
+      <div class="wrap">
+        <dl class="facts__grid">
+          <div class="fact"><dt>Mods</dt><dd>über 150 kuratiert</dd></div>
+          <div class="fact"><dt>Minecraft</dt><dd>__MINECRAFT_VERSION__</dd></div>
+          <div class="fact"><dt>NeoForge</dt><dd>__NEOFORGE_VERSION__</dd></div>
+          <div class="fact"><dt>Updates</dt><dd>automatisch</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <!-- ================= INSTALL ================= -->
+    <section class="band" id="install">
+      <div class="wrap">
+        <div class="band__head">
+          <span class="kicker">Installation</span>
+          <h2>In zwei Minuten spielbereit</h2>
+          <p>
+            Hasencraft läuft über den <a href="https://prismlauncher.org/" rel="noopener">Prism Launcher</a>.
+            Du kopierst eine Importadresse, fügst sie in Prism ein – den Rest erledigt der Launcher.
+          </p>
+        </div>
+
+        <ol class="steps">
+          <li class="step">
+            <h3>Prism vorbereiten</h3>
+            <p>Prism Launcher installieren und dein Microsoft-Konto anmelden. Java 21 richtet Prism selbst ein.</p>
+          </li>
+          <li class="step">
+            <h3>Adresse kopieren</h3>
+            <p>Unten das passende Profil wählen und die Importadresse in die Zwischenablage kopieren.</p>
+          </li>
+          <li class="step">
+            <h3>In Prism importieren</h3>
+            <p><strong>Instanz hinzufügen → Importieren</strong>, Adresse einfügen, einmal starten. Fertig.</p>
+          </li>
+        </ol>
+
+        <div class="profiles">
+          <article class="profile profile--fluffy">
+            <div class="profile__top">
+              <span class="profile__icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-9 12h7l-1 8 9-12h-7z"/></svg>
+              </span>
+              <div>
+                <span class="profile__tag">Für starke Rechner</span>
+                <h3>Fluffy</h3>
+              </div>
+            </div>
+            <p class="profile__desc">Volle Weite, volle Details. Gedacht für Karten der Klasse RX&nbsp;7900&nbsp;XT aufwärts.</p>
+            <ul class="specs">
+              <li>10 GiB Heap, 14 Chunks Vanilla-Sichtweite</li>
+              <li>Distant Horizons bis 256 Chunks LoD</li>
+              <li>Complementary Reimagined auf High</li>
+            </ul>
+            <div class="profile__cta">
+              <button class="btn btn--copy" type="button" data-import-url="__FLUFFY_IMPORT_URL__" data-label="Fluffy-Importadresse kopieren">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <span>Fluffy-Importadresse kopieren</span>
+              </button>
+              <p class="profile__alt">oder <a href="__FLUFFY_IMPORT_URL__">ZIP direkt herunterladen</a></p>
+            </div>
+          </article>
+
+          <article class="profile profile--cozy">
+            <div class="profile__top">
+              <span class="profile__icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M9.5 20v-5h5v5"/></svg>
+              </span>
+              <div>
+                <span class="profile__tag">Für sparsame Rechner</span>
+                <h3>Cozy</h3>
+              </div>
+            </div>
+            <p class="profile__desc">Gleiche Welt, ruhigere Grafik. Läuft angenehm ab Karten der Klasse GTX&nbsp;1080.</p>
+            <ul class="specs">
+              <li>8 GiB Heap, 10 Chunks Vanilla-Sichtweite</li>
+              <li>Distant Horizons 96–128 Chunks LoD</li>
+              <li>Complementary auf Medium, ohne teure Effekte</li>
+            </ul>
+            <div class="profile__cta">
+              <button class="btn btn--copy" type="button" data-import-url="__COZY_IMPORT_URL__" data-label="Cozy-Importadresse kopieren">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <span>Cozy-Importadresse kopieren</span>
+              </button>
+              <p class="profile__alt">oder <a href="__COZY_IMPORT_URL__">ZIP direkt herunterladen</a></p>
+            </div>
+          </article>
+        </div>
+
+        <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+        <div class="copy-fallback" id="copy-fallback">
+          <label for="copy-input">Importadresse manuell kopieren:</label>
+          <input id="copy-input" type="text" readonly value="">
+        </div>
+
+        <div class="note">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-6.2-8.6"/><path d="m9 12 2 2 5-5"/></svg>
+          <p>
+            <strong>Beide Profile enthalten dieselben Spielinhalte.</strong>
+            Sie unterscheiden sich nur bei lokalen Grafik- und Speicherwerten – ihr spielt problemlos zusammen.
+            Nach dem ersten Import werden Updates bei jedem Start automatisch installiert.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= INHALTE ================= -->
+    <section class="band band--tint" id="inhalte">
+      <div class="wrap">
+        <div class="band__head">
+          <span class="kicker">Inhalte</span>
+          <h2>Was dich erwartet</h2>
+          <p>Über 150 Mods, aufeinander abgestimmt statt einfach zusammengeworfen. Sechs Schwerpunkte, ein gemeinsames Tempo.</p>
+        </div>
+
+        <div class="cards">
+          <article class="card card--tech">
+            <span class="card__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M4.9 4.9l2.2 2.2m9.8 9.8 2.2 2.2M19.1 4.9l-2.2 2.2M7.1 16.9l-2.2 2.2"/></svg>
+            </span>
+            <h3>Technik</h3>
+            <p>Von der ersten Handkurbel bis zur vollautomatischen Fabrik. Create als Herzstück, Mekanism und AE2 für den späten Ausbau.</p>
+            <ul class="chips"><li>Create</li><li>Immersive Engineering</li><li>Applied Energistics 2</li><li>Mekanism</li></ul>
+          </article>
+
+          <article class="card card--pets">
+            <span class="card__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-3.5 0-6-2.2-6-4.8 0-2 1.6-3.4 3.2-4.4C10.6 11 11 10 12 10s1.4 1 2.8 1.8C16.4 12.8 18 14.2 18 16.2 18 18.8 15.5 21 12 21Z"/><circle cx="6.5" cy="7.5" r="2"/><circle cx="17.5" cy="7.5" r="2"/><circle cx="11" cy="4.5" r="1.8"/></svg>
+            </span>
+            <h3>Tiere</h3>
+            <p>Hamster, Hunde, Otter, Bienen und ein ganzer Zoo an neuen Nachbarn – inklusive sicherem Zuhause und Betten für alle.</p>
+            <ul class="chips"><li>Naturalist</li><li>Doggy Talents Next</li><li>Adorable Hamster Pets</li><li>Animal Garden</li><li>Productive Bees</li></ul>
+          </article>
+
+          <article class="card card--magic">
+            <span class="card__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 19 9-9"/><path d="m13 5 2 2-3 3-2-2z"/><path d="M18 3v4M16 5h4M18 15v3M16.5 16.5h3"/></svg>
+            </span>
+            <h3>Magie</h3>
+            <p>Eigene Zauber bauen, Rituale wirken und Magie mit Maschinen verzahnen. Ars Nouveau spricht direkt mit Create.</p>
+            <ul class="chips"><li>Ars Nouveau</li><li>Ars Creo</li></ul>
+          </article>
+
+          <article class="card card--explore">
+            <span class="card__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg>
+            </span>
+            <h3>Erkundung</h3>
+            <p>Größere Berge, neue Biome, bewohnte Ruinen – und mit Aether, Twilight Forest und Bumblezone drei ganze Dimensionen extra.</p>
+            <ul class="chips"><li>Tectonic</li><li>Regions Unexplored</li><li>Aether</li><li>Twilight Forest</li><li>YUNG's Structures</li></ul>
+          </article>
+
+          <article class="card card--mood">
+            <span class="card__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h18"/><path d="M6 17V9l6-5 6 5v8"/><path d="M9 17v-4h6v4"/></svg>
+            </span>
+            <h3>Atmosphäre</h3>
+            <p>Shader, echte Fernsicht bis zum Horizont, lebendige Tieranimationen und Waldgeräusche, die nach Feierabend klingen.</p>
+            <ul class="chips"><li>Distant Horizons</li><li>Complementary Reimagined</li><li>Fresh Animations</li><li>AmbientSounds</li></ul>
+          </article>
+
+          <article class="card card--quests">
+            <span class="card__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M8 7h8M8 11h6"/></svg>
+            </span>
+            <h3>Zusammen spielen</h3>
+            <p>Quests führen sanft durch den Einstieg, Wegpunkte und Sprachchat halten die Gruppe zusammen – Serveradresse gibt's in der Community.</p>
+            <ul class="chips"><li>FTB Quests</li><li>Simple Voice Chat</li><li>Xaero's Map</li><li>Waystones</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= GALERIE ================= -->
+    <section class="band" id="bilder">
+      <div class="wrap">
+        <div class="band__head">
+          <span class="kicker">Bilder</span>
+          <h2>Ein Blick in die Welt</h2>
+          <p>
+            Nichts davon ist gestellt. Alles hier haben Leute gebaut, gefunden oder
+            zum Laufen gebracht, die mit demselben Pack angefangen haben wie du gleich.
+          </p>
+        </div>
+
+        <div class="gallery">
+          <!-- 1 – Aether (Foto) -->
+          <figure class="shot shot--wide">
+            <div class="shot__frame">
+              <img src="assets/galerie-aether.webp" width="1920" height="1010" loading="lazy" decoding="async"
+                   alt="Weite Landschaft in blassen Blau- und Grüntönen mit schwebenden Felsbrocken am Himmel und hellem Boden">
+            </div>
+            <figcaption>
+              <strong>Und dann stehst du plötzlich hier</strong>
+              <p>Drei zusätzliche Dimensionen warten darauf, dass du sie findest. Der Aether ist nur die erste – und der Moment, in dem du das erste Mal hindurchgehst, gehört zu den besten im ganzen Pack.</p>
+              <ul class="shot__meta"><li>Aether</li><li>Twilight Forest</li><li>Bumblezone</li></ul>
+            </figcaption>
+          </figure>
+
+          <!-- 2 – Magierturm (Foto) -->
+          <figure class="shot">
+            <div class="shot__frame">
+              <img src="assets/galerie-magierturm.webp" width="1280" height="720" loading="lazy" decoding="async"
+                   alt="Hoher Turm aus dunklem Stein mit leuchtenden Portalen und Laternen, dahinter Kirschblütenwald und ein Fluss">
+            </div>
+            <figcaption>
+              <strong>Bau das, was du im Kopf hast</strong>
+              <p>Irgendwann reicht die Erdhütte nicht mehr. Ein paar hundert Blockvarianten, Möbel, Laternen und Magie später steht da genau der Turm, den du dir vorgenommen hattest.</p>
+              <ul class="shot__meta"><li>Ars Nouveau</li><li>Chipped</li><li>Another Furniture</li></ul>
+            </figcaption>
+          </figure>
+
+          <!-- 3 – Bienenwand (Foto) -->
+          <figure class="shot">
+            <div class="shot__frame">
+              <img src="assets/galerie-bienen.webp" width="1280" height="720" loading="lazy" decoding="async"
+                   alt="Große Wand aus Honigwaben in einem Hang, davor fliegt eine Biene im Gegenlicht">
+            </div>
+            <figcaption>
+              <strong>Es fängt mit einem Volk an</strong>
+              <p>Dann sind es fünf, dann produzieren sie für dich, und irgendwann ist aus der Imkerei ein Bauprojekt geworden. Niemand plant das – es passiert einfach.</p>
+              <ul class="shot__meta"><li>Productive Bees</li><li>Automatisierung</li></ul>
+            </figcaption>
+          </figure>
+
+          <!-- 4 – Fernsicht (Foto) -->
+          <figure class="shot">
+            <div class="shot__frame">
+              <img src="assets/galerie-fernsicht.webp" width="860" height="484" loading="lazy" decoding="async"
+                   alt="Sonnenaufgang über bewaldeten Hügeln, Nebelschwaden in den Tälern, eine Biene fliegt durchs Bild">
+            </div>
+            <figcaption>
+              <strong>Lauf einfach los</strong>
+              <p>Der Berg am Horizont ist wirklich da, und du kannst hin. Morgens aufbrechen, ohne zu wissen, wo du abends schläfst – genau dafür ist dieses Pack gebaut.</p>
+              <ul class="shot__meta"><li>Distant Horizons</li><li>Complementary Reimagined</li></ul>
+            </figcaption>
+          </figure>
+
+          <!-- 5 – Create-Fabrik (Foto) -->
+          <figure class="shot">
+            <div class="shot__frame">
+              <img src="assets/galerie-create.webp" width="1280" height="800" loading="lazy" decoding="async"
+                   alt="Reihe mechanischer Pressen über einem Förderband, daneben eine hohe Maschinenkonstruktion auf einer Wiese">
+            </div>
+            <figcaption>
+              <strong>Irgendwann läuft es ohne dich</strong>
+              <p>Erst kurbelst du von Hand. Dann steht die erste Presse, dann eine ganze Halle. Und dann sitzt du daneben, schaust zu und musst nichts mehr tun.</p>
+              <ul class="shot__meta"><li>Create</li><li>Immersive Engineering</li><li>Mekanism</li></ul>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= GUT ZU WISSEN ================= -->
+    <section class="band" id="wissen">
+      <div class="wrap">
+        <div class="band__head">
+          <span class="kicker">Gut zu wissen</span>
+          <h2>Vier Dinge vor dem ersten Start</h2>
+        </div>
+
+        <div class="knowledge">
+          <div class="know">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg>
+            <div>
+              <h3>Mods nicht selbst aktualisieren</h3>
+              <p>Das Pack ist eine getestete Kombination. „Alle aktualisieren“ in Prism kann Server-Verbindung und Shader brechen – der Updater erledigt das beim Start.</p>
+            </div>
+          </div>
+          <div class="know">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10a7 7 0 0 1-14 0"/><path d="M12 17v4"/></svg>
+            <div>
+              <h3>Mikrofon freigeben</h3>
+              <p>Für den Sprachchat braucht Minecraft Zugriff auf dein Mikrofon. Die Abfrage erscheint meist beim ersten Betreten des Servers.</p>
+            </div>
+          </div>
+          <div class="know">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16l-7-4z"/></svg>
+            <div>
+              <h3>Deine Einstellungen bleiben</h3>
+              <p>Tastenbelegung, Screenshots, Xaero-Karten samt Wegpunkten und die Distant-Horizons-Caches überstehen jedes Pack-Update.</p>
+            </div>
+          </div>
+          <div class="know">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.4 1 2.5h6c0-1.1.3-1.8 1-2.5A6 6 0 0 0 12 3z"/><path d="M10 19h4M11 22h2"/></svg>
+            <div>
+              <h3>Wenn es ruckelt</h3>
+              <p>Erst die LoD-Distanz von Distant Horizons senken, dann die Shader-Details. Hilft das nicht, ist Cozy das bessere Profil.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TECHNIK ================= -->
+    <section class="band band--tint" id="technik">
+      <div class="wrap">
+        <div class="band__head">
+          <span class="kicker">Für Neugierige</span>
+          <h2>Technik &amp; Feeds</h2>
+          <p>Alles, was du zum Spielen brauchst, steht oben. Hier liegt der Unterbau – für alle, die es genau wissen wollen.</p>
+        </div>
+
+        <details class="tech">
+          <summary>packwiz-Feeds</summary>
+          <div class="tech__body">
+            <p>Die Instanzen ziehen ihren Stand direkt aus diesen Feeds. Der Stable-Kanal ist der freigegebene Spielstand, Beta dient dem Test vor einer Freigabe.</p>
+            <div class="feed">
+              <a href="channels/stable/pack.toml"><strong>Stable</strong><code>channels/stable/pack.toml</code></a>
+              <a href="channels/beta/pack.toml"><strong>Beta</strong><code>channels/beta/pack.toml</code></a>
+            </div>
+          </div>
+        </details>
+
+        <details class="tech">
+          <summary>Releases &amp; Prüfsummen</summary>
+          <div class="tech__body">
+            <p>Jede Version wird als unveränderliches Release abgelegt, inklusive SHA-256-Summen für alle Pakete.</p>
+            <div class="feed">
+              <a href="https://github.com/DarveenDE/hasencraft/releases" rel="noopener"><strong>GitHub Releases</strong><code>Prism-Pakete, Changelog, SHA256SUMS</code></a>
+            </div>
+          </div>
+        </details>
+
+        <details class="tech">
+          <summary>Woher die Mods kommen</summary>
+          <div class="tech__body">
+            <p>Hasencraft verteilt keine fremden Mod-Dateien. Der Launcher lädt jede Datei bei jedem Update von der offiziellen Quelle – Modrinth oder CurseForge – und prüft sie gegen die hinterlegte Prüfsumme.</p>
+            <p>Die vollständige Liste aller Inhalte steht in der <a href="https://github.com/DarveenDE/hasencraft/blob/main/docs/MODLIST.md" rel="noopener">Modliste</a>, ausführliche Grafikhinweise in der <a href="https://github.com/DarveenDE/hasencraft/blob/main/docs/INSTALL-CLIENT.md" rel="noopener">Installationshilfe</a>.</p>
+          </div>
+        </details>
+
+        <details class="tech">
+          <summary>Hilfe bei Problemen</summary>
+          <div class="tech__body">
+            <p>Schick dem Team einen Screenshot der Fehlermeldung und – wenn möglich – die angezeigte Hasencraft-Version mit. Bitte keine Dateien im <code>mods</code>-Ordner löschen: mit dem Originalzustand lässt sich der Fehler deutlich schneller nachvollziehen.</p>
+          </div>
+        </details>
+      </div>
+    </section>
   </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <p>
+        Hasencraft ist ein privat gepflegtes Modpack für Minecraft __MINECRAFT_VERSION__.
+        Mod-Dateien werden von ihren offiziellen Quellen geladen; alle Rechte liegen bei den jeweiligen Autorinnen und Autoren.
+      </p>
+      <nav aria-label="Weiterführende Links">
+        <a href="https://github.com/DarveenDE/hasencraft" rel="noopener">GitHub</a>
+        <a href="https://github.com/DarveenDE/hasencraft/releases" rel="noopener">Releases</a>
+        <a href="https://prismlauncher.org/" rel="noopener">Prism Launcher</a>
+      </nav>
+    </div>
+  </footer>
+
   <script>
-    const status = document.getElementById('copy-status');
-    document.querySelectorAll('[data-import-url]').forEach((button) => {
-      button.addEventListener('click', async () => {
-        try {
-          await navigator.clipboard.writeText(button.dataset.importUrl);
-          status.textContent = 'Importadresse kopiert – jetzt in Prism einfügen.';
-        } catch {
-          status.textContent = 'Kopieren nicht möglich. Bitte diese Seite über HTTPS im Browser öffnen.';
-        }
+    (() => {
+      const status = document.getElementById('copy-status');
+      const fallback = document.getElementById('copy-fallback');
+      const fallbackInput = document.getElementById('copy-input');
+      let resetTimer;
+
+      document.querySelectorAll('[data-import-url]').forEach((button) => {
+        const label = button.querySelector('span');
+        const original = button.dataset.label;
+
+        button.addEventListener('click', async () => {
+          const url = button.dataset.importUrl;
+          clearTimeout(resetTimer);
+
+          try {
+            await navigator.clipboard.writeText(url);
+            button.classList.add('is-copied');
+            if (label) label.textContent = 'Kopiert!';
+            status.classList.remove('is-error');
+            status.textContent = 'Importadresse kopiert – in Prism auf „Instanz hinzufügen → Importieren“ einfügen.';
+            fallback.classList.remove('is-visible');
+
+            resetTimer = setTimeout(() => {
+              button.classList.remove('is-copied');
+              if (label) label.textContent = original;
+            }, 2600);
+          } catch {
+            status.classList.add('is-error');
+            status.textContent = 'Kopieren hat nicht geklappt – bitte die Adresse unten von Hand kopieren.';
+            fallbackInput.value = url;
+            fallback.classList.add('is-visible');
+            fallbackInput.focus();
+            fallbackInput.select();
+          }
+        });
       });
-    });
+    })();
   </script>
 </body>
 </html>
