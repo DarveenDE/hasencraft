@@ -12,4 +12,5 @@
 - Doggy Talents besitzt ein eigenes Rückkehrsystem und wird deshalb von Redomesticate-Pet-Betten und Halsbändern ausgenommen.
 - Adorable Hamster Pets und Redomesticate starten gemeinsam fehlerfrei; Bettbindung, Tod, Dimensionswechsel und Respawn benötigen noch einen echten Zwei-Client-Spieltest.
 - Simple Voice Chat benötigt UDP-Port `24454` auf VM-, Proxmox- und Router-Firewall.
+- More Culling und BadOptimizations bleiben absichtlich außerhalb des stabilen Packs. Beide sind erst nach einem vollständigen Shader-/Distant-Horizons-Test auf einem frischen Client als mögliche A/B-Kandidaten zu bewerten.
 - Der Headless-Server ist validiert, ein echter Prism-GUI-Import samt Shaderbild und GTX-1080-FPS-Test steht noch aus.

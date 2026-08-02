@@ -44,6 +44,29 @@ sudo -u hasencraft /usr/local/libexec/hasencraft-backup
 sudo systemctl start hasencraft
 ```
 
+## Performance-Staging
+
+FastSuite, Structure Layout Optimizer und ServerCore sind mit konservativen
+Standardwerten Teil des Packs. FastSuite beschleunigt unter anderem die
+Rezept- und Tagverarbeitung, während Structure Layout Optimizer die Suche nach
+passenden Strukturen bei der Weltgenerierung verringert.
+
+Die Distant-Horizons-Vorlage begrenzt LoD-Generierungs- und
+Synchronisierungsanfragen pro Spieler sowie global. Sie deckt weiterhin die
+256-LoD-Chunks des Fluffy-Profils ab, schützt aber die TPS bei mehreren
+gleichzeitigen Anfragen. Der Installer kopiert diese Datei nur bei einer neuen
+Installation. Auf bestehenden Servern nach dem Deployment den `[server]`-Block
+aus `server/config/DistantHorizons.toml` in
+`/srv/hasencraft/server/config/DistantHorizons.toml` übernehmen und den Dienst
+neu starten.
+
+Vor Stable mit zwei bis vier gleichzeitig spielenden Clients eine neue Gegend
+erkunden und dabei TPS, Speicher sowie Chunk-Latenz beobachten. Bei einem
+Spike im Chat oder in der Konsole `spark profiler start --timeout 300` ausführen,
+die Situation nachstellen und den erzeugten Profil-Link dokumentieren. Keine
+aggressiveren ServerCore- oder Distant-Horizons-Threadwerte ohne Vergleichsprofil
+aktivieren.
+
 ## Rollback
 
 Zuerst den gehosteten Stable-Kanal auf das alte Release zurückstellen. Dann:

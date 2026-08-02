@@ -1,0 +1,14 @@
+[common.worldGenerator]
+	distantGeneratorMode = "FEATURES"
+	enableDistantGeneration = true
+
+[client.advanced.graphics.quality]
+	maxHorizontalResolution = "FOUR_BLOCKS"
+	verticalQuality = "MEDIUM"
+	lodChunkRenderDistanceRadius = 64
+	horizontalQuality = "MEDIUM"
+	lodBiomeBlending = 1
+
+[client.advanced.graphics.experimental]
+	ignoredDimensionCsv = "ae2:spatial_storage"
+	renderingEngine = "AUTO"

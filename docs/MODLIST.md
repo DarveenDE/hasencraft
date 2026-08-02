@@ -2,10 +2,10 @@
 
 Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.2`.
 
-- Gesamt: 158 verwaltete Eintraege
-- beide Seiten: 121
+- Gesamt: 163 verwaltete Eintraege
+- beide Seiten: 123
 - nur Client: 24
-- nur Server: 13
+- nur Server: 16
 
 ## Kuratierter Kern
 
@@ -84,6 +84,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.2`
 | Falling Leaves | `client` | `Falling Leaves-1.0.jar` | [Modrinth](https://modrinth.com/project/ALTwwcC5) |
 | Farmer's Delight | `both` | `FarmersDelight-1.21.1-1.3.2.jar` | [Modrinth](https://modrinth.com/project/R2OftAxM) |
 | Fast IP Ping | `client` | `fast-ip-ping-v1.0.11-mc1.21.1-neoforge.jar` | [Modrinth](https://modrinth.com/project/9mtu0sUO) |
+| FastSuite | `both` | `FastSuite-1.21.1-6.0.7.jar` | [Modrinth](https://modrinth.com/project/roccmqou) |
 | FerriteCore | `both` | `ferritecore-7.0.3-neoforge.jar` | [Modrinth](https://modrinth.com/project/uXXizFIs) |
 | Friends&Foes (Forge/NeoForge) | `both` | `friendsandfoes-neoforge-4.0.26+mc1.21.1.jar` | [Modrinth](https://modrinth.com/project/BOCJKD49) |
 | FTB Library (NeoForge) | `both` | `ftb-library-neoforge-2101.1.34.jar` | CurseForge #404465 |
@@ -131,6 +132,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.2`
 | Not Enough Animations | `client` | `notenoughanimations-neoforge-1.12.4-mc1.21.1.jar` | [Modrinth](https://modrinth.com/project/MPCX6s5C) |
 | oωo (owo-lib) | `both` | `owo-lib-neoforge-0.12.15.5-beta.1+1.21.jar` | [Modrinth](https://modrinth.com/project/ccKDOlHs) |
 | Patchouli | `both` | `Patchouli-1.21.1-93-NEOFORGE.jar` | [Modrinth](https://modrinth.com/project/nU0bVIaL) |
+| Placebo | `both` | `Placebo-1.21.1-9.9.2.jar` | [Modrinth](https://modrinth.com/project/tCkE8p2N) |
 | Polymorph | `both` | `polymorph-neoforge-1.1.0+1.21.1.jar` | [Modrinth](https://modrinth.com/project/tagwiZkJ) |
 | Prickle | `both` | `prickle-neoforge-1.21.1-21.1.11.jar` | [Modrinth](https://modrinth.com/project/aaRl8GiW) |
 | Productive Bees | `both` | `productivebees-1.21.1-13.13.5.jar` | CurseForge #377897 |
@@ -139,10 +141,12 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.2`
 | Rechiseled: Create | `both` | `rechiseledcreate-1.1.1-neoforge-mc1.21.jar` | [Modrinth](https://modrinth.com/project/E6867niZ) |
 | Redomesticate | `both` | `redomesticate-neoforge-1.21.1-1.10.1.jar` | [Modrinth](https://modrinth.com/project/4QTKALKe) |
 | Regions Unexplored | `both` | `regions-unexplored-0.6.2-neoforge-21.1.jar` | [Modrinth](https://modrinth.com/project/Tkikq67H) |
+| Resourceful Config | `server` | `resourcefulconfig-neoforge-1.21-3.0.11.jar` | [Modrinth](https://modrinth.com/project/M1953qlQ) |
 | Resourceful Lib | `both` | `resourcefullib-neoforge-1.21-3.0.12.jar` | [Modrinth](https://modrinth.com/project/G1hIVOrD) |
 | Rhino | `both` | `rhino-2101.2.7-build.85.jar` | [Modrinth](https://modrinth.com/project/sk9knFPE) |
 | Ribbits | `both` | `Ribbits-1.21.1-NeoForge-4.1.6.jar` | [Modrinth](https://modrinth.com/project/8YcE8y4T) |
 | Searchables | `client` | `Searchables-neoforge-1.21.1-1.0.2.jar` | [Modrinth](https://modrinth.com/project/fuuu3xnx) |
+| ServerCore | `server` | `servercore-neoforge-1.5.19+1.21.1.jar` | [Modrinth](https://modrinth.com/project/4WWQxlQP) |
 | Shulker Box Tooltip | `both` | `shulkerboxtooltip-neoforge-5.1.9+1.21.1.jar` | [Modrinth](https://modrinth.com/project/2M01OLQq) |
 | Simple Voice Chat | `both` | `voicechat-neoforge-1.21.1-2.6.21.jar` | [Modrinth](https://modrinth.com/project/9eGKb6K1) |
 | Snuffles | `both` | `snuffles-1.1.2.jar` | [Modrinth](https://modrinth.com/project/NYGhKUS6) |
@@ -151,6 +155,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.2`
 | Sophisticated Core | `both` | `sophisticatedcore-1.21.1-1.4.80.2194.jar` | [Modrinth](https://modrinth.com/project/nmoqTijg) |
 | Sophisticated Storage | `both` | `sophisticatedstorage-1.21.1-1.5.83.2017.jar` | [Modrinth](https://modrinth.com/project/hMlaZH8f) |
 | spark | `server` | `spark-1.10.124-neoforge.jar` | [Modrinth](https://modrinth.com/project/l6YH9Als) |
+| Structure Layout Optimizer | `server` | `structure_layout_optimizer-neoforge-1.0.12.jar` | [Modrinth](https://modrinth.com/project/ayPU0OHc) |
 | SuperMartijn642's Config Lib | `both` | `supermartijn642configlib-1.1.8-neoforge-mc1.21.jar` | [Modrinth](https://modrinth.com/project/LN9BxssP) |
 | SuperMartijn642's Core Lib | `both` | `supermartijn642corelib-1.1.22-neoforge-mc1.21.jar` | [Modrinth](https://modrinth.com/project/rOUBggPv) |
 | Supplementaries | `both` | `supplementaries-neoforge-1.21.1-3.8.5.jar` | [Modrinth](https://modrinth.com/project/fFEIiSDQ) |

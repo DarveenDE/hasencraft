@@ -2,6 +2,16 @@
 	distantGeneratorMode = "FEATURES"
 	enableDistantGeneration = true
 
+[server]
+	# Bound per-player LOD generation and synchronization to preserve TPS while
+	# still covering the 256-chunk Fluffy profile.
+	generationRequestRateLimit = 8
+	maxGenerationRequestDistance = 256
+	syncOnLoadRateLimit = 16
+	maxSyncOnLoadRequestDistance = 256
+	playerBandwidthLimit = 500
+	globalBandwidthLimit = 2000
+
 [client.advanced.graphics.experimental]
 	ignoredDimensionCsv = "ae2:spatial_storage"
 	renderingEngine = "AUTO"
