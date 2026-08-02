@@ -15,7 +15,7 @@
     # ftbchunks.chunk_load_offline LuckPerms permission.
     force_load_mode: "default"
     max_force_loaded_chunks: 8
-    hard_team_force_limit: 16
+    hard_team_force_limit: 8
     max_idle_days_before_unforce: 30.0d
   }
   protect_unknown_explosions: true

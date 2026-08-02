@@ -10,7 +10,7 @@ hash = "a7ca11db6e22f04aa7f9c31c234749e25b6443c163a5c4151ea9588320fd3478"
 
 [[files]]
 file = "config/ftbchunks-world.snbt"
-hash = "3baf3c9b9ff4d49e6bc7c626a94c2c108d11f04e57945646a1216a2b400a4fbd"
+hash = "c5907bbda7d9191c4f5ca5e7605f3aeeebe8f80f2bb946e164d2ac55108c8991"
 
 [[files]]
 file = "config/ftbquests/quests/chapters/hasencraft_start.snbt"

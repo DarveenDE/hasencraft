@@ -79,9 +79,12 @@ lp user <Minecraft-Name> permission check ftbchunks.chunk_load_offline
 ```
 
 CoreProtectNeo laesst `/co i` fuer alle Spielenden zu. Seine `near`- und
-Rollback-Befehle verlangen derzeit Minecraft-Adminrechte (OP-Stufe 2). Diese
-Rechte werden bewusst nicht automatisch aus einer Discord- oder LuckPerms-Rolle
-abgeleitet: Nur wenige, namentlich bekannte Personen kommen in `ops.json`.
+Rollback-Befehle verlangen derzeit Minecraft-Adminrechte (OP-Stufe 2). Der
+Rang `moderator` erhaelt diese Befehle in Alpha 3 bewusst nicht automatisch:
+CoreProtectNeo dokumentiert keine passenden LuckPerms-Permission-Nodes. Nur
+wenige, namentlich bekannte Personen kommen in `ops.json`. Eine getestete,
+feingranulare Rechte-Bridge ist Voraussetzung, bevor der Moderator-Rang
+Rollbacks ohne OP ausfuehren darf.
 
 ## Betriebshinweise
 

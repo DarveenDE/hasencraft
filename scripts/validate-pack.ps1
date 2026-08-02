@@ -151,15 +151,17 @@ else {
 }
 
 $forbiddenNames = @("servers.dat", "whitelist.json", "ops.json", "eula.txt", "server.properties")
+$separatorChars = [char[]]@([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)
 $derivedRoots = @(
-    (Join-Path $repoRoot "build").TrimEnd('\') + '\'
-    (Join-Path $repoRoot "dist").TrimEnd('\') + '\'
-)
+    (Join-Path $repoRoot "build")
+    (Join-Path $repoRoot "dist")
+) | ForEach-Object {
+    [System.IO.Path]::GetFullPath($_).TrimEnd($separatorChars) + [System.IO.Path]::DirectorySeparatorChar
+}
 foreach ($name in $forbiddenNames) {
     $matches = Get-ChildItem -Path $repoRoot -Recurse -File -Filter $name |
         Where-Object {
-            $fullName = $_.FullName
-            $fullName -notlike "*\server\server.properties.example" -and
+            $fullName = [System.IO.Path]::GetFullPath($_.FullName)
             -not ($derivedRoots | Where-Object { $fullName.StartsWith($_, [System.StringComparison]::OrdinalIgnoreCase) })
         }
     foreach ($match in $matches) {
