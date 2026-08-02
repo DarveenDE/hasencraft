@@ -29,6 +29,10 @@ file = "config/ftbquests/quests/lang/de_de.snbt"
 hash = "5fbce79c8780744de3ee4af7e1544a5c311bbaa9ecff94e4763f0fd7664e3b8f"
 
 [[files]]
+file = "config/treeharvester.json5"
+hash = "23023663aea4f0cc9a1b15c2918438acdb93de5749f80f5a08b4061cca17beea"
+
+[[files]]
 file = "config/voicechat/voicechat-server.properties"
 hash = "9cd395573ca9d06122af7fef50f72ac9a86f743df4e4bc3c452d1374d16a6aef"
 
@@ -300,6 +304,11 @@ metafile = true
 [[files]]
 file = "mods/cloth-config.pw.toml"
 hash = "18ba60564127fcb4919353d7b0a00c875a1da289588f7e600e04918949687760"
+metafile = true
+
+[[files]]
+file = "mods/collective.pw.toml"
+hash = "2e2b6b8ba3596ac43c3b17f3afcf78e6668d6892cbd22a00fc65c8f151d5abb0"
 metafile = true
 
 [[files]]
@@ -900,6 +909,11 @@ metafile = true
 [[files]]
 file = "mods/the-twilight-forest.pw.toml"
 hash = "a3c5f55308b8b4c445b1ad504b7ba118626bf031cd09db90e15f29a6bcb58426"
+metafile = true
+
+[[files]]
+file = "mods/tree-harvester.pw.toml"
+hash = "99be0fe38335ac07b86bec2966faedb1bf4098eb4dc70b96db964fc8e6e5350a"
 metafile = true
 
 [[files]]

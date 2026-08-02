@@ -2,8 +2,8 @@
 
 Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.4`.
 
-- Gesamt: 169 verwaltete Eintraege
-- beide Seiten: 124
+- Gesamt: 171 verwaltete Eintraege
+- beide Seiten: 126
 - nur Client: 24
 - nur Server: 21
 
@@ -49,6 +49,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.4`
 | Carry On | `both` | `carryon-neoforge-1.21.1-2.2.6.13.jar` | [Modrinth](https://modrinth.com/project/joEfVgkn) |
 | Chipped | `both` | `chipped-neoforge-1.21.1-4.0.2.jar` | [Modrinth](https://modrinth.com/project/BAscRYKm) |
 | Cloth Config API | `both` | `cloth-config-15.0.140-neoforge.jar` | [Modrinth](https://modrinth.com/project/9s6osm5g) |
+| Collective | `both` | `collective-1.21.1-8.39.jar` | [Modrinth](https://modrinth.com/project/e0M1UDsY) |
 | Clumps | `both` | `Clumps-neoforge-1.21.1-19.0.0.1.jar` | [Modrinth](https://modrinth.com/project/Wnxd13zP) |
 | Comforts | `both` | `comforts-neoforge-9.0.5+1.21.1.jar` | [Modrinth](https://modrinth.com/project/SaCpeal4) |
 | Controlling | `client` | `Controlling-neoforge-1.21.1-19.0.5.jar` | [Modrinth](https://modrinth.com/project/xv94TkTM) |
@@ -169,6 +170,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.4`
 | The Aether | `both` | `aether-1.21.1-1.5.10-neoforge.jar` | [Modrinth](https://modrinth.com/project/YhmgMVyu) |
 | The Bumblezone - NeoForge/Forge | `both` | `the_bumblezone-7.15.3+1.21.1-neoforge.jar` | [Modrinth](https://modrinth.com/project/38tpSycf) |
 | The Twilight Forest | `both` | `twilightforest-1.21.1-4.8.3345-universal.jar` | CurseForge #227639 |
+| Tree Harvester | `both` | `treeharvester-1.21.1-9.1.jar` | [Modrinth](https://modrinth.com/project/abooMhox) |
 | TrashSlot | `both` | `trashslot-neoforge-1.21.1-21.1.11.jar` | [Modrinth](https://modrinth.com/project/vRYk0bv7) |
 | Visual Workbench | `both` | `VisualWorkbench-v21.1.1-1.21.1-NeoForge.jar` | [Modrinth](https://modrinth.com/project/kfqD1JRw) |
 | Waystones | `both` | `waystones-neoforge-1.21.1-21.1.39.jar` | [Modrinth](https://modrinth.com/project/LOpKHB2A) |
