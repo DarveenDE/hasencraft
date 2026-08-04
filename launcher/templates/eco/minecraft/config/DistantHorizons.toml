@@ -1,5 +1,5 @@
 [common.worldGenerator]
-	distantGeneratorMode = "FEATURES"
+	distantGeneratorMode = "PRE_EXISTING_ONLY"
 	enableDistantGeneration = true
 
 [client.advanced.graphics.quality]

@@ -83,9 +83,10 @@ Synchronisierungsanfragen pro Spieler sowie global. Sie deckt weiterhin die
 gleichzeitigen Anfragen. Im Hintergrund darf genau ein Worker mit maximal 25
 Prozent Laufzeit LoDs aus bereits vorhandenen Chunks erstellen
 (`PRE_EXISTING_ONLY`). Der Server erzeugt dabei keine neuen, modded
-Terrain-Chunks und propagiert weder beim Login noch in Echtzeit LoD-Daten.
-Dadurch wachsen die Fernansichten bereits besuchter Gebiete langsam nach,
-während der Dedicated Server TPS priorisiert.
+Terrain-Chunks. Vorbereitete LoDs können über normale Clientanfragen
+ausgeliefert werden; automatische Synchronisierung beim Login und
+Echtzeit-Updates bleiben deaktiviert. Dadurch wachsen die Fernansichten bereits
+besuchter Gebiete langsam nach, während der Dedicated Server TPS priorisiert.
 
 Der Installer kopiert diese Datei nur bei einer neuen Installation. Auf
 bestehenden Servern nach dem Deployment sowohl den

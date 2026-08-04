@@ -11,8 +11,9 @@ Stand: `0.1.0-alpha.5`, 2. August 2026.
 
 - LuckPerms `5.4.150` wurde auf dem NeoForge-1.21.1-Server mit der vom Upstream bereitgestellten SHA-512-Summe geprüft. Ein realer Spieler-Join erreichte danach den Spielzustand ohne die zuvor auftretende `UserCapabilityImpl`-Ausnahme.
 
-- Packwiz-Index aktualisiert und 172 gepinnte Eintraege geprueft: 128 beide Seiten, 24 nur Client, 20 nur Server.
+- Packwiz-Index aktualisiert und 172 gepinnte Eintraege geprueft: 126 beide Seiten, 26 nur Client, 20 nur Server.
 - Die neuen P1-Metadaten für FastSuite, Placebo, Structure Layout Optimizer, Resourceful Config und ServerCore sind gepinnt; Indexhash und Seitenzuordnung wurden durch `scripts/validate-pack.ps1` geprüft.
+- CreativeCore und Enchantment Descriptions werden ausschließlich an Clients ausgeliefert. Das Eco-Profil verarbeitet mit Distant Horizons nur bereits vorhandene Chunks; beide Vorgaben sind validatorgeschützt.
 - Der Performance-Audit prüft die Minecraft-1.21.1-Servervorlage auf LZ4-Regiondateien, asynchrone Chunk-Writes und das Fehlen der später eingeführten Idle-Pause-Option. Das Java-21-ZGC-Profil bleibt ohne String-Deduplication; die drei ausgewählten ServerCore-Optimierungen sind versioniert und validatorgeschützt.
 - Ein isolierter Dedicated-Serverstart mit FTB Chunks `2101.1.21`, FTB Library `2101.1.34`, FTB Teams `2101.1.10` und FTB XMod Compat `21.1.10` erreichte `Done (71.788s)`. Die KubeJS- und Waystones-Integrationen von FTB Chunks wurden aktiviert; die Claim-/Force-Load-Grenzen aus `config/ftbchunks-world.snbt` wurden vom Konfigurationssystem uebernommen.
 - Die alpha.3-Prism-ZIP fuer Fluffy wurde erneut gebaut; die Pre-Launch-Aktualisierung ist enthalten.

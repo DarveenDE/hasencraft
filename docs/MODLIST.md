@@ -2,10 +2,10 @@
 
 Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.5`.
 
-- Gesamt: 171 verwaltete Eintraege
+- Gesamt: 172 verwaltete Eintraege
 - beide Seiten: 126
-- nur Client: 24
-- nur Server: 21
+- nur Client: 26
+- nur Server: 20
 
 ## Kuratierter Kern
 
@@ -49,8 +49,8 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.5`
 | Carry On | `both` | `carryon-neoforge-1.21.1-2.2.6.13.jar` | [Modrinth](https://modrinth.com/project/joEfVgkn) |
 | Chipped | `both` | `chipped-neoforge-1.21.1-4.0.2.jar` | [Modrinth](https://modrinth.com/project/BAscRYKm) |
 | Cloth Config API | `both` | `cloth-config-15.0.140-neoforge.jar` | [Modrinth](https://modrinth.com/project/9s6osm5g) |
-| Collective | `both` | `collective-1.21.1-8.39.jar` | [Modrinth](https://modrinth.com/project/e0M1UDsY) |
 | Clumps | `both` | `Clumps-neoforge-1.21.1-19.0.0.1.jar` | [Modrinth](https://modrinth.com/project/Wnxd13zP) |
+| Collective | `both` | `collective-1.21.1-8.39.jar` | [Modrinth](https://modrinth.com/project/e0M1UDsY) |
 | Comforts | `both` | `comforts-neoforge-9.0.5+1.21.1.jar` | [Modrinth](https://modrinth.com/project/SaCpeal4) |
 | Controlling | `client` | `Controlling-neoforge-1.21.1-19.0.5.jar` | [Modrinth](https://modrinth.com/project/xv94TkTM) |
 | Cooking for Blockheads | `both` | `cookingforblockheads-neoforge-1.21.1-21.1.24.jar` | [Modrinth](https://modrinth.com/project/vJnhuDde) |
@@ -65,7 +65,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.5`
 | Create: Connected | `both` | `create_connected-1.3.2-mc1.21.1.jar` | [Modrinth](https://modrinth.com/project/Vg5TIO6d) |
 | Create: Dragons Plus | `both` | `CreateDragonsPlus-1.11.3.jar` | [Modrinth](https://modrinth.com/project/dzb1a5WV) |
 | Create: Enchantment Industry | `both` | `create-enchantment-industry-2.4.2.jar` | [Modrinth](https://modrinth.com/project/JWGBpFUP) |
-| CreativeCore | `both` | `CreativeCore_NEOFORGE_v2.13.41_mc1.21.1.jar` | [Modrinth](https://modrinth.com/project/OsZiaDHq) |
+| CreativeCore | `client` | `CreativeCore_NEOFORGE_v2.13.41_mc1.21.1.jar` | [Modrinth](https://modrinth.com/project/OsZiaDHq) |
 | Critters and Companions | `both` | `crittersandcompanions-neoforge-1.21.1-2.6.2.jar` | [Modrinth](https://modrinth.com/project/Yd4wb5wZ) |
 | Curios API | `both` | `curios-neoforge-9.5.1+1.21.1.jar` | [Modrinth](https://modrinth.com/project/vvuO3ImH) |
 | Default Options | `client` | `defaultoptions-neoforge-1.21.1-21.1.8.jar` | [Modrinth](https://modrinth.com/project/WEg59z5b) |
@@ -81,7 +81,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.5`
 | Easy Magic | `both` | `EasyMagic-v21.1.4-1.21.1-NeoForge.jar` | [Modrinth](https://modrinth.com/project/9hx3AbJM) |
 | Easy Shulker Boxes | `both` | `EasyShulkerBoxes-v21.1.3-1.21.1-NeoForge.jar` | [Modrinth](https://modrinth.com/project/gA5euN8S) |
 | Ecologics | `both` | `ecologics-1.21.1-2.3.7.jar` | [Modrinth](https://modrinth.com/project/NCKpPR0Z) |
-| Enchantment Descriptions | `both` | `enchdesc-neoforge-1.21.1-21.1.10.jar` | [Modrinth](https://modrinth.com/project/UVtY3ZAC) |
+| Enchantment Descriptions | `client` | `enchdesc-neoforge-1.21.1-21.1.10.jar` | [Modrinth](https://modrinth.com/project/UVtY3ZAC) |
 | Entity Culling | `client` | `entityculling-neoforge-1.10.5-mc1.21.1.jar` | [Modrinth](https://modrinth.com/project/NNAgCjsB) |
 | Equipment Compare | `client` | `EquipmentCompare-1.21.1-neoforge-1.3.13.jar` | [Modrinth](https://modrinth.com/project/CYSUVOdj) |
 | Explorer's Compass | `both` | `ExplorersCompass-1.21.1-3.4.0-neoforge.jar` | [Modrinth](https://modrinth.com/project/RV1qfVQ8) |
@@ -108,6 +108,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.5`
 | Iris Shaders | `client` | `iris-neoforge-1.8.14-beta.1+mc1.21.1.jar` | [Modrinth](https://modrinth.com/project/YL57xq9U) |
 | Jade Addons (Neo/Forge) | `both` | `JadeAddons-1.21.1-NeoForge-6.0.1.jar` | [Modrinth](https://modrinth.com/project/xuDOzCLy) |
 | Jade 🔍 | `both` | `Jade-1.21.1-NeoForge-15.10.5.jar` | [Modrinth](https://modrinth.com/project/nvQzSEkH) |
+| JamLib | `both` | `jamlib-neoforge-1.3.6+1.21.1.jar` | [Modrinth](https://modrinth.com/project/IYY9Siz8) |
 | Just Enough Items (JEI) | `both` | `jei-1.21.1-neoforge-19.43.0.392.jar` | [Modrinth](https://modrinth.com/project/u6dRKJwZ) |
 | Kotlin for Forge | `both` | `kotlinforforge-5.12.0-all.jar` | [Modrinth](https://modrinth.com/project/ordsPcFz) |
 | KubeJS | `both` | `kubejs-neoforge-2101.7.2-build.368.jar` | [Modrinth](https://modrinth.com/project/umyGl7zF) |
@@ -151,6 +152,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.5`
 | Resourceful Lib | `both` | `resourcefullib-neoforge-1.21-3.0.12.jar` | [Modrinth](https://modrinth.com/project/G1hIVOrD) |
 | Rhino | `both` | `rhino-2101.2.7-build.85.jar` | [Modrinth](https://modrinth.com/project/sk9knFPE) |
 | Ribbits | `both` | `Ribbits-1.21.1-NeoForge-4.1.6.jar` | [Modrinth](https://modrinth.com/project/8YcE8y4T) |
+| RightClickHarvest | `both` | `rightclickharvest-neoforge-4.6.1+1.21.1.jar` | [Modrinth](https://modrinth.com/project/Cnejf5xM) |
 | Searchables | `client` | `Searchables-neoforge-1.21.1-1.0.2.jar` | [Modrinth](https://modrinth.com/project/fuuu3xnx) |
 | ServerCore | `server` | `servercore-neoforge-1.5.19+1.21.1.jar` | [Modrinth](https://modrinth.com/project/4WWQxlQP) |
 | Shulker Box Tooltip | `both` | `shulkerboxtooltip-neoforge-5.1.9+1.21.1.jar` | [Modrinth](https://modrinth.com/project/2M01OLQq) |
@@ -169,8 +171,8 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.5`
 | The Aether | `both` | `aether-1.21.1-1.5.10-neoforge.jar` | [Modrinth](https://modrinth.com/project/YhmgMVyu) |
 | The Bumblezone - NeoForge/Forge | `both` | `the_bumblezone-7.15.3+1.21.1-neoforge.jar` | [Modrinth](https://modrinth.com/project/38tpSycf) |
 | The Twilight Forest | `both` | `twilightforest-1.21.1-4.8.3345-universal.jar` | CurseForge #227639 |
-| Tree Harvester | `both` | `treeharvester-1.21.1-9.1.jar` | [Modrinth](https://modrinth.com/project/abooMhox) |
 | TrashSlot | `both` | `trashslot-neoforge-1.21.1-21.1.11.jar` | [Modrinth](https://modrinth.com/project/vRYk0bv7) |
+| Tree Harvester | `both` | `treeharvester-1.21.1-9.1.jar` | [Modrinth](https://modrinth.com/project/abooMhox) |
 | Visual Workbench | `both` | `VisualWorkbench-v21.1.1-1.21.1-NeoForge.jar` | [Modrinth](https://modrinth.com/project/kfqD1JRw) |
 | Waystones | `both` | `waystones-neoforge-1.21.1-21.1.39.jar` | [Modrinth](https://modrinth.com/project/LOpKHB2A) |
 | Xaero's Minimap | `both` | `xaerominimap-neoforge-1.21.1-26.4.2.jar` | [Modrinth](https://modrinth.com/project/1bokaNcj) |

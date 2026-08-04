@@ -12,8 +12,8 @@
 
 [server]
 	# Stream-safe server mode: existing chunks may be converted locally at the
-	# limited common budget, but the server does not accept client generation
-	# requests, synchronize on login, or send realtime propagation.
+	# limited common budget and served for normal LOD requests. Missing terrain
+	# is never generated; login synchronization and realtime propagation stay off.
 	realTimeUpdateDistanceRadiusInChunks = 64
 	maxSyncOnLoadRequestDistance = 64
 	synchronizeOnLoad = false

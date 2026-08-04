@@ -136,10 +136,24 @@ foreach ($entry in $critical.GetEnumerator()) {
     }
 }
 
+$sideRequirements = @{
+    "mods/creativecore.pw.toml" = 'side = "client"'
+    "mods/enchantment-descriptions.pw.toml" = 'side = "client"'
+}
+foreach ($entry in $sideRequirements.GetEnumerator()) {
+    $candidate = Join-Path $repoRoot ($entry.Key.Replace('/', '\'))
+    if (-not (Test-Path -LiteralPath $candidate -PathType Leaf)) {
+        Add-ValidationError "Missing side-specific metadata: $($entry.Key)"
+    }
+    elseif ((Get-Content -Raw -Encoding utf8 -LiteralPath $candidate) -notmatch [regex]::Escape($entry.Value)) {
+        Add-ValidationError "Incorrect side assignment in $($entry.Key); expected $($entry.Value)"
+    }
+}
+
 $profileRequirements = @{
     "launcher/templates/eco/instance.cfg.in" = @("MinMemAlloc=3072", "MaxMemAlloc=6144")
     "launcher/templates/eco/minecraft/options.txt" = @("graphicsMode:0", "maxFps:60", "renderDistance:8", "simulationDistance:5", 'resourcePacks:["vanilla"]')
-    "launcher/templates/eco/minecraft/config/DistantHorizons.toml" = @("lodChunkRenderDistanceRadius = 64", 'renderingEngine = "AUTO"')
+    "launcher/templates/eco/minecraft/config/DistantHorizons.toml" = @("lodChunkRenderDistanceRadius = 64", 'renderingEngine = "AUTO"', 'distantGeneratorMode = "PRE_EXISTING_ONLY"')
     "launcher/templates/eco/minecraft/config/iris.properties" = @("enableShaders=false")
 }
 foreach ($entry in $profileRequirements.GetEnumerator()) {

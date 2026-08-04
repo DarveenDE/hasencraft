@@ -386,7 +386,7 @@ metafile = true
 
 [[files]]
 file = "mods/creativecore.pw.toml"
-hash = "d8339046fa81a88574c4c4adaf0c45e559772f23bd9c60fd3fc11bcfabfdfa61"
+hash = "787a119e43f0e69553fb79c2c3a100c5c2b4cbeb0e73443f5c19a0ac2bfe61b3"
 metafile = true
 
 [[files]]
@@ -466,7 +466,7 @@ metafile = true
 
 [[files]]
 file = "mods/enchantment-descriptions.pw.toml"
-hash = "e6dbc0ed844f98a17b5767e86693a58922b68444b02f6b82c3a4f6dbe401037d"
+hash = "b04ec836669d7edd9bb2bd8479dffbc37a070aa609127f57cfd71037f4a41de8"
 metafile = true
 
 [[files]]
