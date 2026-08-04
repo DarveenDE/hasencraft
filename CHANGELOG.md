@@ -2,6 +2,16 @@
 
 Alle relevanten Änderungen an Mods, Konfiguration, Quests und Serveranforderungen werden hier dokumentiert.
 
+## 0.1.0-alpha.6 — 2026-08-04
+
+- Die drei Prism-Profile verwenden Java 21 mit generational ZGC; die problematische String-Deduplication bleibt deaktiviert.
+- Das Hauptmenü zeigt die Hasencraft-Version, `/hasencraft` erinnert an Karten-Tasten und Questbuch, und Waystones sind direkt aus dem Inventar erreichbar.
+- CreativeCore und Enchantment Descriptions werden nur noch an Clients ausgeliefert; Eco verarbeitet mit Distant Horizons ausschließlich bereits vorhandene Chunks.
+- ServerCore entlastet gezielt synchrone Chunk-Ladevorgänge, tickende Chunk-Listen und Command-Block-Parsing. Aggressivere Gameplay-Eingriffe bleiben deaktiviert.
+- Der Server verwendet LZ4-Regiondateien, asynchrone Chunk-Writes und eine Sicht- sowie Simulationsdistanz von 5. Das Deployment migriert ausschließlich den bisherigen Standardwert 2 und erhält individuelle Serverwerte.
+- Distant Horizons, BlueMap, Discord-Integration sowie Backup-, Deployment- und Rollback-Abläufe wurden für den Communityserver weiter abgesichert.
+- Pack-, Release- und Prism-Validatoren prüfen Seitenzuordnungen, Profile, kritische Pins, Servervorlagen, Shell-Syntax und den Ausschluss lokaler beziehungsweise geheimer Laufzeitdateien.
+
 ## 0.1.0-alpha.4 — 2026-08-02
 
 - LuckPerms wurde auf dem NeoForge-Server von `5.4.140` auf `5.4.150` aktualisiert. Das behebt den Join-Abbruch durch eine nicht initialisierte Spieler-Capability; Clients benötigen dafür keine zusätzliche Änderung.

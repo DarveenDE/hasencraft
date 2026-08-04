@@ -76,9 +76,9 @@ try {
         $hash = (Get-FileHash -Algorithm SHA256 -LiteralPath $_.FullName).Hash.ToLowerInvariant()
         "$hash  $relative"
     }
-    [System.IO.File]::WriteAllLines(
+    [System.IO.File]::WriteAllText(
         (Join-Path $staging "SHA256SUMS"),
-        $manifest,
+        (($manifest -join "`n") + "`n"),
         [System.Text.UTF8Encoding]::new($false)
     )
 

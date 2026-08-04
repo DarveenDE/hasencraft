@@ -8,4 +8,4 @@
 - **Simulationsreichweite:** Der Dedicated Server tickt mit Distanz 5 den gesamten sichtbaren Bereich, damit Felder und Maschinen am Rand nicht unerwartet pausieren.
 - **Pack-Grenzen:** Der Validator lehnt lokale Anweisungen und servereigene Laufzeitdateien im Pack-Index ab.
 
-Der Roadmap-Eintrag ist eine Planung und verändert weder den aktuellen Beta- noch den Stable-Packstand.
+Die aufgeführten Punkte bilden den Umfang des Alpha-6-Release-Kandidaten.

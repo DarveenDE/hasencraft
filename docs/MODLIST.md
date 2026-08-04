@@ -1,6 +1,6 @@
 # Modliste
 
-Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.5`.
+Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.6`.
 
 - Gesamt: 172 verwaltete Eintraege
 - beide Seiten: 126

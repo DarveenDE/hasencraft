@@ -1,8 +1,10 @@
 # Validierungsstand
 
-Stand: `0.1.0-alpha.5`, 2. August 2026.
+Stand: Release-Kandidat `0.1.0-alpha.6`, 4. August 2026.
 
 ## Bestanden
+
+- Der Alpha-6-Quellstand besteht die Packwiz-, Prism-Profil- und Shell-Syntax-Prüfungen; der unveränderliche Release-Snapshot und der Server-Rollout folgen als getrennte Gates.
 
 - Alpha5 ist als Tag und GitHub Release veröffentlicht; die drei stabilen Archive und ihre SHA-256-Prüfsummen wurden verifiziert.
 - Der Server wurde nach einem Snapshot auf Alpha5 aktualisiert. Die neuen Mods wurden geladen, der Dienst läuft ohne Neustartschleife.
@@ -27,7 +29,7 @@ Stand: `0.1.0-alpha.5`, 2. August 2026.
 - Die endgültige Waystones-Konfiguration wurde ohne Laufzeitkorrektur bytegleich übernommen: keine Kosten, keine Cooldowns, kein Haltbarkeitsverlust sowie Transport von Haustieren und angeleinten Tieren.
 - Nach den Hasencraft-Datenkorrekturen blieben keine Rezept-Parsefehler und kein fehlender Kartoffel-Tag zurück.
 - Alle drei Prism-Profile (`fluffy`, `cozy`, `eco`) bestanden die automatisierte Archivprüfung zu Instanzname, Pre-Launch-URL, Speicherprofil, Distant Horizons, Shader- und Ressourcenpack-Auswahl.
-- Der Alpha-2-Release-Snapshot enthält 182 durch `SHA256SUMS` geschützte Dateien. Ein zweiter Bau derselben Version wurde wie vorgesehen abgelehnt; die aktuelle Alpha-5-Quellvalidierung umfasst 172 Einträge.
+- Der Alpha-2-Release-Snapshot enthält 182 durch `SHA256SUMS` geschützte Dateien. Ein zweiter Bau derselben Version wurde wie vorgesehen abgelehnt; die aktuelle Alpha-6-Quellvalidierung umfasst 172 Einträge.
 - Sämtliche Bash-Skripte bestanden eine Syntaxprüfung; die aktualisierten PowerShell-Skripte parsen unter Windows PowerShell 5.1 und die Archivprüfung lief dort erfolgreich.
 
 ## Erwartete, nicht fatale Upstream-Meldungen
