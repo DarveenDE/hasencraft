@@ -33,6 +33,11 @@ fi
 
 tmp="$backup_root/.manual-$stamp.tar.zst.tmp"
 final="$backup_root/manual-$stamp.tar.zst"
-tar --zstd -C "$live" -cf "$tmp" .
+# Discord Integration stores the bot token in the world config.  Keep that
+# server-local secret out of every backup archive; rollback preserves the
+# current file separately when it is available.
+tar --zstd -C "$live" \
+  --exclude='./world/serverconfig/discordintegration-server.toml' \
+  -cf "$tmp" .
 mv -T "$tmp" "$final"
 echo "$final"

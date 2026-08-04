@@ -21,6 +21,7 @@ PrivateTmp=true
 ProtectSystem=strict
 ProtectHome=true
 ReadWritePaths=/srv/hasencraft/server /srv/hasencraft/.lifecycle.lock
+ExecStartPre=/usr/local/libexec/hasencraft-discord-guard
 
 [Install]
 WantedBy=multi-user.target

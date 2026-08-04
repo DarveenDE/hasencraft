@@ -35,6 +35,7 @@ fi
 install -m 0755 "$script_dir/bin/hasencraft-deploy" "$libexec_dir/hasencraft-deploy"
 install -m 0755 "$script_dir/bin/hasencraft-backup" "$libexec_dir/hasencraft-backup"
 install -m 0755 "$script_dir/bin/hasencraft-rollback" "$libexec_dir/hasencraft-rollback"
+install -m 0755 "$script_dir/bin/hasencraft-discord-guard" "$libexec_dir/hasencraft-discord-guard"
 install -m 0644 "$script_dir/hasencraft.service" "$service_file"
 if [[ ! -e "$server_dir/user_jvm_args.txt" ]]; then
   install -m 0640 -o hasencraft -g hasencraft "$script_dir/user_jvm_args.txt" "$server_dir/user_jvm_args.txt"

@@ -9,7 +9,7 @@
 ## Release-Ablauf
 
 1. Neue oder aktualisierte Mods einzeln auf 1.21.1/NeoForge prüfen.
-2. Packwiz-Metadaten auf die ausdrücklich gewählte Version setzen.
+2. Packwiz-Metadaten auf die ausdrücklich gewählte Version setzen und `scripts/update-title-edition.ps1` ausführen. Das erzeugt die im Hauptmenü sichtbare Hasencraft-Version aus der `pack.toml`.
 3. `packwiz refresh` und `scripts/validate-pack.ps1` ausführen.
 4. Die [lokale Entwicklerinstanz](DEVELOPMENT.md) bis zum Titelbildschirm und mit einer neuen Singleplayer-Welt testen.
 5. Release-Snapshot mit `scripts/make-release.ps1` bauen. Eine vorhandene Versionsnummer wird niemals überschrieben; jede Änderung benötigt eine neue Version.

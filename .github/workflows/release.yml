@@ -38,7 +38,7 @@ jobs:
             $hash = (Get-FileHash -Algorithm SHA256 -LiteralPath $_.FullName).Hash.ToLowerInvariant()
             "$hash  $($_.Name)"
           }
-          [System.IO.File]::WriteAllLines("$PWD/dist/SHA256SUMS.txt", $lines, [System.Text.UTF8Encoding]::new($false))
+          [System.IO.File]::WriteAllText("$PWD/dist/SHA256SUMS.txt", (($lines -join "`n") + "`n"), [System.Text.UTF8Encoding]::new($false))
       - name: Publish GitHub Release
         shell: pwsh
         env:

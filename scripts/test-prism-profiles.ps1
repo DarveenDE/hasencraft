@@ -30,21 +30,21 @@ function Get-ZipText([System.IO.Compression.ZipArchive]$Archive, [string]$Name) 
 $profiles = @{
     fluffy = @{
         Name = "Hasencraft Fluffy Beta"
-        Instance = @("MinMemAlloc=4096", "MaxMemAlloc=10240")
+        Instance = @("OverrideJavaArgs=true", "JvmArgs=-XX:+UseZGC -XX:+ZGenerational", "MinMemAlloc=4096", "MaxMemAlloc=10240")
         Options = @("renderDistance:14", "simulationDistance:8", 'resourcePacks:["vanilla","file/FreshAnimations_v1.10.4.zip"]')
         Dh = @("lodChunkRenderDistanceRadius = 256", 'renderingEngine = "AUTO"')
         Iris = @("enableShaders=true")
     }
     cozy = @{
         Name = "Hasencraft Cozy Beta"
-        Instance = @("MinMemAlloc=3072", "MaxMemAlloc=8192")
+        Instance = @("OverrideJavaArgs=true", "JvmArgs=-XX:+UseZGC -XX:+ZGenerational", "MinMemAlloc=3072", "MaxMemAlloc=8192")
         Options = @("renderDistance:10", "simulationDistance:6", 'resourcePacks:["vanilla","file/FreshAnimations_v1.10.4.zip"]')
         Dh = @("lodChunkRenderDistanceRadius = 128", 'renderingEngine = "AUTO"')
         Iris = @("enableShaders=true")
     }
     eco = @{
         Name = "Hasencraft Eco Beta"
-        Instance = @("MinMemAlloc=3072", "MaxMemAlloc=6144")
+        Instance = @("OverrideJavaArgs=true", "JvmArgs=-XX:+UseZGC -XX:+ZGenerational", "MinMemAlloc=3072", "MaxMemAlloc=6144")
         Options = @("graphicsMode:0", "maxFps:60", "mipmapLevels:2", "particles:2", "renderDistance:8", "simulationDistance:5", 'resourcePacks:["vanilla"]')
         Dh = @("lodChunkRenderDistanceRadius = 64", 'renderingEngine = "AUTO"')
         Iris = @("enableShaders=false")

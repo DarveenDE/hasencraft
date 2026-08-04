@@ -34,7 +34,7 @@ sudo -u hasencraft /usr/local/libexec/hasencraft-deploy stable
 sudo systemctl start hasencraft
 ```
 
-Der Deploy-Befehl prüft die SHA-256-Summe des Updatewerkzeugs und lehnt Packs mit einer anderen NeoForge-Version ab. Vor jeder Änderung erstellt er ein vollständiges `.tar.zst` unter `/srv/hasencraft/backups/`. Vorher prüft er, ob mindestens die unkomprimierte Größe des Servers plus 2 GiB Reserve frei sind. Alte Backups werden absichtlich nicht automatisch gelöscht; bei der 120-GiB-SSD sollte ihre Belegung regelmäßig geprüft werden.
+Der Deploy-Befehl prüft die SHA-256-Summe des Updatewerkzeugs und lehnt Packs mit einer anderen NeoForge-Version ab. Vor jeder Änderung erstellt er ein `.tar.zst` unter `/srv/hasencraft/backups/`; die einzige bewusste Ausnahme ist `world/serverconfig/discordintegration-server.toml`, weil diese Datei den Bot-Token enthält. Vorher prüft er, ob mindestens die unkomprimierte Größe des Servers plus 2 GiB Reserve frei sind. Alte Backups werden absichtlich nicht automatisch gelöscht; bei der 120-GiB-SSD sollte ihre Belegung regelmäßig geprüft werden.
 
 Serverlauf, Deployment, manuelle Backups und Rollback teilen sich denselben exklusiven Lifecycle-Lock. Ein konsistentes manuelles Backup wird deshalb nur bei gestopptem Dienst erstellt:
 
@@ -44,12 +44,38 @@ sudo -u hasencraft /usr/local/libexec/hasencraft-backup
 sudo systemctl start hasencraft
 ```
 
+Ein Rollback übernimmt die aktuelle lokale DI-Konfiguration direkt in den
+wiederhergestellten Serverbaum. Der Token wird dadurch weder archiviert noch in
+das Quarantäneverzeichnis verschoben. Die `ExecStartPre`-Prüfung startet einen
+Server mit aktivem DI außerdem nur, wenn der letzte Deploy aus dem `beta`-Kanal
+kam.
+
+Backups aus der Zeit vor diesem Schutz werden nicht automatisch verändert. Falls
+ein solches Archiv jemals eine aktive DI-Konfiguration enthielt, darf es nicht
+weitergegeben werden; den betroffenen Discord-Bot-Token im Developer Portal
+sofort regenerieren.
+
 ## Performance-Staging
 
-FastSuite, Structure Layout Optimizer und ServerCore sind mit konservativen
-Standardwerten Teil des Packs. FastSuite beschleunigt unter anderem die
-Rezept- und Tagverarbeitung, während Structure Layout Optimizer die Suche nach
-passenden Strukturen bei der Weltgenerierung verringert.
+FastSuite, Structure Layout Optimizer und ServerCore sind Teil des Packs.
+FastSuite beschleunigt unter anderem die Rezept- und Tagverarbeitung, während
+Structure Layout Optimizer die Suche nach passenden Strukturen bei der
+Weltgenerierung verringert. Die versionierte
+`config/servercore/optimizations.yml` aktiviert drei gezielte Entlastungen:
+synchrone Chunk-Ladevorgänge werden reduziert, die Liste tickender Chunks wird
+einmal pro Sekunde gecacht und Command-Block-Befehle werden wiederverwendet.
+`reduce-sync-loads` kann bewirken, dass Karten nur noch geladene Chunks sehen;
+die Einstellung bleibt deshalb bewusst auf diese drei Optionen begrenzt und
+aktiviert keine Mob-, Fluid- oder Aktivierungsbereichsänderungen.
+
+Die Servervorlage nutzt auf der Linux-SSD `region-file-compression=lz4` und
+`sync-chunk-writes=false`, damit Kompression und Flushes nicht unnötig im
+Tick-Pfad blockieren. Die Lifecycle-Skripte stoppen den Dienst vor Backups und
+Updates. `pause-when-empty-seconds` ist absichtlich nicht enthalten: diese
+Option gehört nicht zum Minecraft-1.21.1-Server. Das Java-21-Profil verwendet
+generational ZGC ohne `UseStringDeduplication`, weil diese Kombination bei
+kurzlebigen Strings zusätzlichen Retention- und Verarbeitungsaufwand erzeugen
+kann.
 
 Die Distant-Horizons-Vorlage begrenzt LoD-Generierungs- und
 Synchronisierungsanfragen pro Spieler sowie global. Sie deckt weiterhin die
@@ -57,9 +83,10 @@ Synchronisierungsanfragen pro Spieler sowie global. Sie deckt weiterhin die
 gleichzeitigen Anfragen. Im Hintergrund darf genau ein Worker mit maximal 25
 Prozent Laufzeit LoDs aus bereits vorhandenen Chunks erstellen
 (`PRE_EXISTING_ONLY`). Der Server erzeugt dabei keine neuen, modded
-Terrain-Chunks und propagiert weder beim Login noch in Echtzeit LoD-Daten.
-Dadurch wachsen die Fernansichten bereits besuchter Gebiete langsam nach,
-während der Dedicated Server TPS priorisiert.
+Terrain-Chunks. Vorbereitete LoDs können über normale Clientanfragen
+ausgeliefert werden; automatische Synchronisierung beim Login und
+Echtzeit-Updates bleiben deaktiviert. Dadurch wachsen die Fernansichten bereits
+besuchter Gebiete langsam nach, während der Dedicated Server TPS priorisiert.
 
 Der Installer kopiert diese Datei nur bei einer neuen Installation. Auf
 bestehenden Servern nach dem Deployment sowohl den
@@ -71,18 +98,21 @@ Spielbetrieb. Die Hintergrundverarbeitung bleibt auf bereits erzeugte Chunks,
 einen Worker und 25 Prozent Laufzeit beschraenkt.
 
 Die Servervorlage verwendet außerdem `view-distance=5` und
-`simulation-distance=2`. Das begrenzt gleichzeitige Chunk-Ladevorgänge und
-die dauerhaft tickende Umgebung auf dem 16-GiB-Streamserver. Die Spawn-Chunks
-werden pro Welt mit `/gamerule spawnChunkRadius 0` deaktiviert, nicht über
-`server.properties`. Für farm- oder redstoneintensive Welten die Werte erst
-nach einem Spark-Vergleichsprofil erhöhen.
+`simulation-distance=5`. Damit tickt der gesamte an Clients ausgelieferte
+Bereich, sodass Felder und einfache Maschinen am Rand der Sichtweite nicht
+unerwartet stehen bleiben. Ein zusätzlicher, unsichtbarer Simulationsring wird
+auf dem 16-GiB-Streamserver vermieden. Die Spawn-Chunks werden pro Welt mit
+`/gamerule spawnChunkRadius 0` deaktiviert, nicht über `server.properties`.
+Höhere Werte erst nach einem Spark-Vergleichsprofil setzen.
 
-Vor Stable mit zwei bis vier gleichzeitig spielenden Clients eine neue Gegend
-erkunden und dabei TPS, Speicher sowie Chunk-Latenz beobachten. Bei einem
-Spike im Chat oder in der Konsole `spark profiler start --timeout 300` ausführen,
-die Situation nachstellen und den erzeugten Profil-Link dokumentieren. Keine
-aggressiveren ServerCore- oder Distant-Horizons-Threadwerte ohne Vergleichsprofil
-aktivieren.
+Beim Alpha-6-Deployment migriert `hasencraft-deploy` ausschließlich den
+bisherigen Hasencraft-Standard `simulation-distance=2` auf `5`. Ein bewusst
+abweichender serverlokaler Wert bleibt erhalten. Die Änderung erfolgt nach dem
+automatischen Pre-Update-Backup und vor dem nächsten Serverstart.
+
+Für eine spätere Laufzeitdiagnose kann bei einem reproduzierbaren Spike
+`spark profiler start --timeout 300` verwendet werden. Die Profilerstellung ist
+eine Diagnosehilfe und kein Bestandteil der automatischen Packvalidierung.
 
 Zeigt ein Vergleichsprofil synchrone Chunk-Ladevorgänge auf dem Server-Thread,
 kann ServerCore vorübergehend mit
@@ -103,9 +133,10 @@ Client-Pack oder eine neue Alpha-Version ist dafuer nicht erforderlich:
 - `features.prevent-moving-into-unloaded-chunks: true` schuetzt gegen
   synchrone Struktur-/Chunk-Ladevorgange. An neuen Chunkgrenzen ist ein kurzer
   Bewegungs-Reset besser als ein globaler Tick-Stall.
-- Die Werte `view-distance=5`, `simulation-distance=2` und
-  `/gamerule spawnChunkRadius 0` sind das konservative Stream-Profil. Hoehere
-  Werte erst nach einem neuen Spark-Vergleich aktivieren.
+- Die Werte `view-distance=5`, `simulation-distance=5` und
+  `/gamerule spawnChunkRadius 0` sind das ausgewogene Stream-Profil: Der
+  sichtbare Bereich tickt vollständig, zusätzliche unsichtbare Ringe bleiben
+  aus. Höhere Werte erst nach einem neuen Spark-Vergleich aktivieren.
 
 CoreProtectNeo ist bewusst nicht Teil des Serverprofils. Claims und
 Zugriffsregeln kommen von FTB Chunks; der Wiederherstellungspfad besteht aus

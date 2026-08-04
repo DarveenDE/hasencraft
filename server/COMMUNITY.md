@@ -1,10 +1,10 @@
 # Community-Betrieb
 
-Diese Anleitung gilt fuer `0.1.0-alpha.5` und den Communityserver. Aenderungen
+Diese Anleitung gilt fuer `0.1.0-alpha.6` und den Communityserver. Aenderungen
 an Rollen oder Weltzustand erhalten vorher einen Offline-Snapshot und werden
 anschliessend gegen den laufenden Serverzustand geprueft.
 
-## Was Alpha 5 bereitstellt
+## Was der Communityserver bereitstellt
 
 - **FTB Chunks** nutzt die bereits vorhandenen FTB Teams fuer Claims und
   Schutz. Neue Teams erhalten 64 Claims, hoechstens 128 pro Team und acht

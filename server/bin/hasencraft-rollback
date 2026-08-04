@@ -34,6 +34,7 @@ quarantine="$root/server.failed-$stamp"
 restore="$root/.restore-$stamp-$$"
 [[ ! -e "$quarantine" ]] || { echo "Quarantine path exists: $quarantine" >&2; exit 1; }
 [[ "$restore" == "$root/.restore-"* && ! -e "$restore" ]] || { echo "Unsafe restore path: $restore" >&2; exit 1; }
+discord_config="$live/world/serverconfig/discordintegration-server.toml"
 
 while IFS= read -r member; do
   [[ -n "$member" ]] || { echo "Backup contains an empty member name." >&2; exit 1; }
@@ -61,6 +62,19 @@ runuser -u hasencraft -- tar --zstd -xf "$backup" -C "$restore" \
   echo "Extracted backup is not a complete managed server." >&2
   exit 1
 }
+
+# The backup deliberately excludes the Discord bot token.  Carry the current
+# local configuration into the restored server tree without putting it into
+# the archive or the rollback quarantine.
+if [[ -e "$discord_config" ]]; then
+  [[ -f "$discord_config" && ! -L "$discord_config" ]] || {
+    echo "Discord Integration config must be a regular file; refusing rollback." >&2
+    exit 1
+  }
+  install -d -o hasencraft -g hasencraft -m 0750 "$restore/world/serverconfig"
+  install -o hasencraft -g hasencraft -m 0640 \
+    "$discord_config" "$restore/world/serverconfig/discordintegration-server.toml"
+fi
 
 mv -T "$live" "$quarantine"
 if ! mv -T "$restore" "$live"; then

@@ -105,6 +105,7 @@ Ausführlichere Hinweise zu Grafik und Distant Horizons stehen in der
 |---|---|
 | [Architektur](docs/ARCHITECTURE.md) | Kanäle, Dateibesitz, Sicherheitsgrenze |
 | [Releases](docs/RELEASES.md) | Ablauf vom Build bis zur Freigabe |
+| [Roadmap](docs/ROADMAP.md) | Geplante Inhalte kommender Alpha-Versionen |
 | [Validierung](docs/VALIDATION.md) | Prüfungen vor einer Freigabe |
 | [Branding](docs/BRANDING.md) | Wortmarke, Farben, Titelbildschirm |
 | [Designkonzept](docs/DESIGN.md) | Gestaltung der Installationsseite |

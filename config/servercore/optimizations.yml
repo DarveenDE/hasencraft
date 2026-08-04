@@ -1,0 +1,5 @@
+# ServerCore 1.5.19 performance profile for the shared server.
+# Keep the more behavior-changing options out of the pack.
+reduce-sync-loads: true
+cache-ticking-chunks: true
+optimize-command-blocks: true

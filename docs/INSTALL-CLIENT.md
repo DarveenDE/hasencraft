@@ -14,6 +14,13 @@
 
 Alle drei Profile verwenden exakt dieselben Spielinhalte. Nur lokale Grafik-, Ressourcenpack- und Speicherwerte unterscheiden sich.
 
+Das Eco-Profil erzeugt keine Fernsicht für unbetretenes Terrain. Distant
+Horizons übernimmt dort nur bereits vorhandene Chunks (`PRE_EXISTING_ONLY`).
+
+Die Profile verwenden mit der mitgelieferten Java-21-Laufzeit ZGC (`-XX:+UseZGC -XX:+ZGenerational`). Das vermeidet den Distant-Horizons-Hinweis zum pausierenden G1-Garbage-Collector.
+
+Im Spiel zeigt `/hasencraft` die wichtigsten Karten-Tasten; die Questreihe im FTB-Quests-Buch erklärt die zentralen Pack-Systeme.
+
 ## Import
 
 1. In Prism `Instanz hinzufügen` → `Importieren` wählen.
@@ -42,6 +49,7 @@ Alle drei Profile verwenden exakt dieselben Spielinhalte. Nur lokale Grafik-, Re
 ### Eco / schwächere Rechner
 
 - LoD-Distanz: 64; höchstens 96 erst nach einem ruckelfreien Test
+- LoD-Quelle: nur bereits vorhandene Chunks; keine zusätzliche Terrain-Generierung
 - CPU-Auslastung: `Low Impact`
 - Vanilla-Sichtweite: 6–8
 - Shader aus lassen; Fresh Animations bei Bedarf später bewusst aktivieren

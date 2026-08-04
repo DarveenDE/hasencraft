@@ -20,8 +20,10 @@ Badges und Beschreibungen, aber keine abweichende Farbwelt oder Wortmarke.
 ## Auslieferung
 
 - `kubejs/assets/` wird als immer aktives Resource Pack geladen. Es liefert
-  Wortmarke, alternativen Feiertags-Schriftzug, Unterzeile, Panorama und
-  Splash-Texte aus.
+  Wortmarke, alternativen Feiertags-Schriftzug, die Unterzeile mit
+  Hasencraft-Version, Panorama und Splash-Texte aus. Die Unterzeile wird vor
+  jedem Release mit `scripts/update-title-edition.ps1` aus der `pack.toml`
+  erzeugt.
 - `kubejs/config/client.json` setzt den Fenstertitel; `packicon.png` liefert
   ein 32-Bit-Fenster-/Taskleisten-Icon.
 - `hosting/pages/assets/` enthält die für die Installationsseite optimierten
