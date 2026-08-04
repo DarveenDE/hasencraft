@@ -52,7 +52,7 @@ Die umgesetzte Datenschutz-/Lastpolitik ist:
 Für neue Installationen bleibt `config/bluemap/webserver.conf` bewusst auf
 Loopback. Auf einem Host mit öffentlichem Reverse Proxy wird die konkrete
 Tailscale-Adresse über `BLUEMAP_BIND_IP` in der serverlokalen
-` hasencraft.env` gesetzt; der Deploy-Befehl wendet sie nach einem Pack-Update
+`hasencraft.env` gesetzt; der Deploy-Befehl wendet sie nach einem Pack-Update
 erneut an. So gelangen private Hostadressen nicht in Release-Dateien.
 
 Vor einer weiteren Dimension oder einer höheren Renderlast:
