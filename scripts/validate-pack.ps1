@@ -203,7 +203,7 @@ else {
 $serverPropertiesTemplate = Join-Path $repoRoot "server\server.properties.example"
 $serverPropertiesValues = @(
     "view-distance=5",
-    "simulation-distance=2",
+    "simulation-distance=5",
     "region-file-compression=lz4",
     "sync-chunk-writes=false"
 )

@@ -98,11 +98,12 @@ Spielbetrieb. Die Hintergrundverarbeitung bleibt auf bereits erzeugte Chunks,
 einen Worker und 25 Prozent Laufzeit beschraenkt.
 
 Die Servervorlage verwendet außerdem `view-distance=5` und
-`simulation-distance=2`. Das begrenzt gleichzeitige Chunk-Ladevorgänge und
-die dauerhaft tickende Umgebung auf dem 16-GiB-Streamserver. Die Spawn-Chunks
-werden pro Welt mit `/gamerule spawnChunkRadius 0` deaktiviert, nicht über
-`server.properties`. Für farm- oder redstoneintensive Welten die Werte erst
-nach einem Spark-Vergleichsprofil erhöhen.
+`simulation-distance=5`. Damit tickt der gesamte an Clients ausgelieferte
+Bereich, sodass Felder und einfache Maschinen am Rand der Sichtweite nicht
+unerwartet stehen bleiben. Ein zusätzlicher, unsichtbarer Simulationsring wird
+auf dem 16-GiB-Streamserver vermieden. Die Spawn-Chunks werden pro Welt mit
+`/gamerule spawnChunkRadius 0` deaktiviert, nicht über `server.properties`.
+Höhere Werte erst nach einem Spark-Vergleichsprofil setzen.
 
 Für eine spätere Laufzeitdiagnose kann bei einem reproduzierbaren Spike
 `spark profiler start --timeout 300` verwendet werden. Die Profilerstellung ist
@@ -127,9 +128,10 @@ Client-Pack oder eine neue Alpha-Version ist dafuer nicht erforderlich:
 - `features.prevent-moving-into-unloaded-chunks: true` schuetzt gegen
   synchrone Struktur-/Chunk-Ladevorgange. An neuen Chunkgrenzen ist ein kurzer
   Bewegungs-Reset besser als ein globaler Tick-Stall.
-- Die Werte `view-distance=5`, `simulation-distance=2` und
-  `/gamerule spawnChunkRadius 0` sind das konservative Stream-Profil. Hoehere
-  Werte erst nach einem neuen Spark-Vergleich aktivieren.
+- Die Werte `view-distance=5`, `simulation-distance=5` und
+  `/gamerule spawnChunkRadius 0` sind das ausgewogene Stream-Profil: Der
+  sichtbare Bereich tickt vollständig, zusätzliche unsichtbare Ringe bleiben
+  aus. Höhere Werte erst nach einem neuen Spark-Vergleich aktivieren.
 
 CoreProtectNeo ist bewusst nicht Teil des Serverprofils. Claims und
 Zugriffsregeln kommen von FTB Chunks; der Wiederherstellungspfad besteht aus

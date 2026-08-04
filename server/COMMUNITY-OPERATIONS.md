@@ -14,7 +14,8 @@ Pregen. Nether, Ende und Moddimensionen werden ebenfalls nur bei Bedarf erzeugt.
 
 Die verbleibenden Generierungs-Lagspitzen werden stattdessen begrenzt durch:
 
-- `view-distance=5` und `simulation-distance=2`;
+- `view-distance=5` und `simulation-distance=5`, damit der gesamte sichtbare
+  Bereich tickt und Felder am Rand der Sichtweite weiterwachsen;
 - ServerCore, Noisium, Structure Layout Optimizer und FastSuite;
 - Distant Horizons im Modus `PRE_EXISTING_ONLY`, ohne Client-
   Generierungsanforderungen und mit einem Worker bei 25 Prozent Laufzeit;
