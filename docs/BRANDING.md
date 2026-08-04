@@ -23,7 +23,9 @@ Badges und Beschreibungen, aber keine abweichende Farbwelt oder Wortmarke.
   Wortmarke, alternativen Feiertags-Schriftzug, die Unterzeile mit
   Hasencraft-Version, Panorama und Splash-Texte aus. Die Unterzeile wird vor
   jedem Release mit `scripts/update-title-edition.ps1` aus der `pack.toml`
-  erzeugt.
+  erzeugt. Ihre obere Texturhälfte bleibt transparent, damit Minecrafts feste
+  Positionierung die Unterzeile auch in kleinen Fenstern nicht über die
+  Wortmarke legt; der Pack-Validator prüft diese Freifläche automatisch.
 - `kubejs/config/client.json` setzt den Fenstertitel; `packicon.png` liefert
   ein 32-Bit-Fenster-/Taskleisten-Icon.
 - `hosting/pages/assets/` enthält die für die Installationsseite optimierten

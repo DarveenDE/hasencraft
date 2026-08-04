@@ -1,5 +1,13 @@
 # Roadmap
 
+## 0.1.0-alpha.7
+
+- **Titelbildschirm:** Versionsnummer und Claim stehen in einer kompakten
+  Unterzeile unterhalb der Wortmarke. Ein automatischer Transparenztest
+  verhindert, dass die Zeile erneut in das Hasencraft-Logo rutscht.
+
+Weitere Alpha-7-Punkte werden ergänzt, sobald sie feststehen.
+
 ## 0.1.0-alpha.6
 
 - **Versionsanzeige:** Das Hauptmenü zeigt die Hasencraft-Version unter der Wortmarke, damit Screenshots und Fehlermeldungen eindeutig zugeordnet werden können.

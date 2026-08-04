@@ -113,6 +113,40 @@ $titleEditionFile = Join-Path $repoRoot "kubejs\assets\minecraft\textures\gui\ti
 if (-not (Test-Path -LiteralPath $titleEditionFile -PathType Leaf)) {
     Add-ValidationError "Missing Hasencraft title edition texture"
 }
+else {
+    Add-Type -AssemblyName System.Drawing
+    $titleEdition = [System.Drawing.Bitmap]::new($titleEditionFile)
+    try {
+        if ($titleEdition.Width -ne 512 -or $titleEdition.Height -ne 64) {
+            Add-ValidationError "Hasencraft title edition texture must be 512x64 pixels"
+        }
+        else {
+            $visibleMinY = $titleEdition.Height
+            $visibleMaxY = -1
+            for ($y = 0; $y -lt $titleEdition.Height; $y++) {
+                for ($x = 0; $x -lt $titleEdition.Width; $x++) {
+                    if ($titleEdition.GetPixel($x, $y).A -gt 0) {
+                        $visibleMinY = [Math]::Min($visibleMinY, $y)
+                        $visibleMaxY = [Math]::Max($visibleMaxY, $y)
+                    }
+                }
+            }
+
+            if ($visibleMaxY -lt 0) {
+                Add-ValidationError "Hasencraft title edition texture contains no visible label"
+            }
+            elseif ($visibleMinY -lt 32) {
+                Add-ValidationError "Hasencraft title edition label overlaps the reserved transparent logo area"
+            }
+            elseif ($visibleMaxY -ge 63) {
+                Add-ValidationError "Hasencraft title edition label is clipped at the bottom edge"
+            }
+        }
+    }
+    finally {
+        $titleEdition.Dispose()
+    }
+}
 
 $critical = @{
     "mods/distanthorizons.pw.toml" = 'filename = "DistantHorizons-3.2.0-b-1.21.1-fabric-neoforge.jar"'

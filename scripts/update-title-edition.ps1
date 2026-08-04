@@ -38,29 +38,25 @@ $graphics.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::HighQuality
 $graphics.TextRenderingHint = [System.Drawing.Text.TextRenderingHint]::AntiAliasGridFit
 
 try {
-    $brandFont = [System.Drawing.Font]::new("Bahnschrift SemiBold", 20, [System.Drawing.FontStyle]::Bold, [System.Drawing.GraphicsUnit]::Pixel)
-    $taglineFont = [System.Drawing.Font]::new("Bahnschrift SemiBold", 14, [System.Drawing.FontStyle]::Bold, [System.Drawing.GraphicsUnit]::Pixel)
-    $brandText = "HASENCRAFT | $Version"
-    $taglineText = "GEM$([char]0x00DC)TLICH BAUEN | WEIT ENTDECKEN"
+    # Minecraft positions edition.png across the lower edge of the main logo
+    # and scales this 512x64 texture down. Keep the upper half transparent so
+    # the label cannot cover the Hasencraft wordmark at smaller window sizes.
+    $labelFont = [System.Drawing.Font]::new("Bahnschrift SemiBold", 14, [System.Drawing.FontStyle]::Bold, [System.Drawing.GraphicsUnit]::Pixel)
+    $labelText = "$Version | GEM$([char]0x00DC)TLICH BAUEN | WEIT ENTDECKEN"
+    $labelY = 34
     $gold = [System.Drawing.SolidBrush]::new([System.Drawing.ColorTranslator]::FromHtml("#FFD166"))
     $shadow = [System.Drawing.SolidBrush]::new([System.Drawing.ColorTranslator]::FromHtml("#071E1C"))
 
     try {
-        foreach ($line in @(
-            @{ Text = $brandText; Font = $brandFont; Y = 1 },
-            @{ Text = $taglineText; Font = $taglineFont; Y = 34 }
-        )) {
-            $size = $graphics.MeasureString($line.Text, $line.Font)
-            $x = [math]::Round((512 - $size.Width) / 2)
-            $graphics.DrawString($line.Text, $line.Font, $shadow, $x + 1, $line.Y + 1)
-            $graphics.DrawString($line.Text, $line.Font, $gold, $x, $line.Y)
-        }
+        $size = $graphics.MeasureString($labelText, $labelFont)
+        $x = [math]::Round((512 - $size.Width) / 2)
+        $graphics.DrawString($labelText, $labelFont, $shadow, $x + 1, $labelY + 1)
+        $graphics.DrawString($labelText, $labelFont, $gold, $x, $labelY)
     }
     finally {
         $gold.Dispose()
         $shadow.Dispose()
-        $brandFont.Dispose()
-        $taglineFont.Dispose()
+        $labelFont.Dispose()
     }
 
     $parent = Split-Path -Parent $editionFile
