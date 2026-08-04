@@ -20,7 +20,7 @@ NoNewPrivileges=true
 PrivateTmp=true
 ProtectSystem=strict
 ProtectHome=true
-ReadWritePaths=/srv/hasencraft/server /srv/hasencraft/.lifecycle.lock
+ReadWritePaths=/srv/hasencraft/server /srv/hasencraft/.cache /srv/hasencraft/.local /srv/hasencraft/.lifecycle.lock
 ExecStartPre=/usr/local/libexec/hasencraft-discord-guard
 
 [Install]

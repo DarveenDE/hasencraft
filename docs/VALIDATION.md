@@ -1,10 +1,12 @@
 # Validierungsstand
 
-Stand: Release-Kandidat `0.1.0-alpha.6`, 4. August 2026.
+Stand: freigegebener Stand `0.1.0-alpha.6`, 4. August 2026.
 
 ## Bestanden
 
-- Der Alpha-6-Quellstand besteht die Packwiz-, Prism-Profil- und Shell-Syntax-Prüfungen; der unveränderliche Release-Snapshot und der Server-Rollout folgen als getrennte Gates.
+- Der Alpha-6-Quellstand besteht die Packwiz-, Prism-Profil- und Shell-Syntax-Prüfungen. Der unveränderliche Release-Snapshot enthält 215 per SHA-256 geschützte Dateien; der Beta-Feed wurde daraus erfolgreich veröffentlicht.
+- Der Communityserver wurde nach einem 811-MB-Pre-Update-Snapshot aus dem Beta-Kanal auf Alpha 6 aktualisiert. Der Snapshot enthält keine Discord-Zugangsdaten; CreativeCore und Enchantment Descriptions wurden serverseitig entfernt, ServerCore geladen und die bisherige `simulation-distance=2` gezielt auf `5` migriert.
+- Der bereinigte Alpha-6-Serverstart erreichte `Done (4.434s)`: Minecraft lauscht auf TCP `25565`, Simple Voice Chat auf UDP `24454`, der Dienst blieb ohne Restarts und die systemd-Sandbox erlaubt ResourcefulLib ausschließlich die benötigten Cache- und Datenverzeichnisse.
 
 - Alpha5 ist als Tag und GitHub Release veröffentlicht; die drei stabilen Archive und ihre SHA-256-Prüfsummen wurden verifiziert.
 - Der Server wurde nach einem Snapshot auf Alpha5 aktualisiert. Die neuen Mods wurden geladen, der Dienst läuft ohne Neustartschleife.
