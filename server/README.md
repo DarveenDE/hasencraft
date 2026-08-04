@@ -105,6 +105,11 @@ auf dem 16-GiB-Streamserver vermieden. Die Spawn-Chunks werden pro Welt mit
 `/gamerule spawnChunkRadius 0` deaktiviert, nicht über `server.properties`.
 Höhere Werte erst nach einem Spark-Vergleichsprofil setzen.
 
+Beim Alpha-6-Deployment migriert `hasencraft-deploy` ausschließlich den
+bisherigen Hasencraft-Standard `simulation-distance=2` auf `5`. Ein bewusst
+abweichender serverlokaler Wert bleibt erhalten. Die Änderung erfolgt nach dem
+automatischen Pre-Update-Backup und vor dem nächsten Serverstart.
+
 Für eine spätere Laufzeitdiagnose kann bei einem reproduzierbaren Spike
 `spark profiler start --timeout 300` verwendet werden. Die Profilerstellung ist
 eine Diagnosehilfe und kein Bestandteil der automatischen Packvalidierung.

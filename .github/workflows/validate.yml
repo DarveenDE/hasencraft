@@ -20,6 +20,8 @@ jobs:
       - name: Validate pack
         shell: pwsh
         run: ./scripts/validate-pack.ps1 -Packwiz "$HOME/go/bin/packwiz"
+      - name: Verify server script syntax
+        run: bash -n server/install-server.sh server/bin/hasencraft-*
 
   prism-profiles:
     runs-on: windows-latest

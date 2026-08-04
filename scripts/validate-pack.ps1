@@ -222,6 +222,24 @@ else {
     }
 }
 
+$deployScript = Join-Path $repoRoot "server\bin\hasencraft-deploy"
+$deploySimulationMigration = @(
+    "simulation-distance=2",
+    "simulation-distance=5",
+    "Preserving custom simulation-distance="
+)
+if (-not (Test-Path -LiteralPath $deployScript -PathType Leaf)) {
+    Add-ValidationError "Missing server deployment script"
+}
+else {
+    $content = Get-Content -Raw -Encoding utf8 -LiteralPath $deployScript
+    foreach ($expected in $deploySimulationMigration) {
+        if ($content -notmatch [regex]::Escape($expected)) {
+            Add-ValidationError "Server deployment script is missing simulation-distance migration marker '$expected'"
+        }
+    }
+}
+
 $serverCoreOptimizations = Join-Path $repoRoot "config\servercore\optimizations.yml"
 $serverCoreOptimizationValues = @(
     "reduce-sync-loads: true",

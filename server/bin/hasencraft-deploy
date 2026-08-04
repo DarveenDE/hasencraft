@@ -97,6 +97,22 @@ echo "Applying Hasencraft channel '$channel'"
   --meta-file packwiz.json \
   "$pack_url"
 
+# Alpha 6 raises the shared simulation radius. Migrate only the known previous
+# Hasencraft default; preserve deliberate server-local overrides.
+server_properties="$live/server.properties"
+if [[ -f "$server_properties" ]]; then
+  simulation_distance="$(awk -F= '$1 == "simulation-distance" { gsub(/\r/, "", $2); print $2; exit }' "$server_properties")"
+  case "$simulation_distance" in
+    2)
+      sed -i -E 's/^simulation-distance=2\r?$/simulation-distance=5/' "$server_properties"
+      echo "Migrated simulation-distance from 2 to 5."
+      ;;
+    5) ;;
+    "") echo "server.properties has no simulation-distance; leaving it unchanged." >&2 ;;
+    *) echo "Preserving custom simulation-distance=$simulation_distance." ;;
+  esac
+fi
+
 if [[ -n "${BLUEMAP_BIND_IP:-}" ]]; then
   [[ "$BLUEMAP_BIND_IP" =~ ^[0-9A-Fa-f:.]+$ ]] || {
     echo "Invalid BLUEMAP_BIND_IP; expected an IP address." >&2
