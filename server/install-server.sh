@@ -21,7 +21,8 @@ if ! id hasencraft >/dev/null 2>&1; then
   useradd --system --home-dir "$root" --create-home --shell /usr/sbin/nologin hasencraft
 fi
 
-install -d -o hasencraft -g hasencraft -m 0750 "$server_dir" "$root/backups"
+install -d -o hasencraft -g hasencraft -m 0750 \
+  "$server_dir" "$root/backups" "$root/.cache" "$root/.local" "$root/.local/share"
 install -d -o root -g hasencraft -m 0750 "$tools_dir"
 touch "$root/.lifecycle.lock"
 chown root:hasencraft "$root/.lifecycle.lock"
