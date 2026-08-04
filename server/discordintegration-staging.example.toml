@@ -1,0 +1,38 @@
+# Staging-only reference for Discord Integration 4.x.
+# Merge these values into the generated
+# world/serverconfig/discordintegration-server.toml on the beta server.
+# Never use this file as a production credential store.
+
+[bot]
+active = true
+bot_token = "REPLACE_WITH_STAGING_BOT_TOKEN"
+guild_id = 0
+
+[bot.discord_presence]
+show_discord_presence = false
+
+[chat]
+enabled = true
+channel_id = 0
+max_char_count = 300
+transmit_bot_messages = false
+suppress_server_messages = false
+
+[management]
+enabled = true
+channel_id = 0
+role_id = 0
+
+[whitelist]
+enabled = false
+use_role = true
+role_id = 0
+use_single_linking_management = true
+single_linking_management_role_id = 0
+linking_management_channel_id = 0
+
+[command_settings]
+command_prefix = "!"
+command_normal_user_permission_level = 0
+command_management_user_permission_level = 2
+other_bots_command_prefixes = []

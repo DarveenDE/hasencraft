@@ -13,9 +13,10 @@ Stand: `0.1.0-alpha.5`, 2. August 2026.
 
 - Packwiz-Index aktualisiert und 172 gepinnte Eintraege geprueft: 128 beide Seiten, 24 nur Client, 20 nur Server.
 - Die neuen P1-Metadaten für FastSuite, Placebo, Structure Layout Optimizer, Resourceful Config und ServerCore sind gepinnt; Indexhash und Seitenzuordnung wurden durch `scripts/validate-pack.ps1` geprüft.
+- Der Performance-Audit prüft die Minecraft-1.21.1-Servervorlage auf LZ4-Regiondateien, asynchrone Chunk-Writes und das Fehlen der später eingeführten Idle-Pause-Option. Das Java-21-ZGC-Profil bleibt ohne String-Deduplication; die drei ausgewählten ServerCore-Optimierungen sind versioniert und validatorgeschützt.
 - Ein isolierter Dedicated-Serverstart mit FTB Chunks `2101.1.21`, FTB Library `2101.1.34`, FTB Teams `2101.1.10` und FTB XMod Compat `21.1.10` erreichte `Done (71.788s)`. Die KubeJS- und Waystones-Integrationen von FTB Chunks wurden aktiviert; die Claim-/Force-Load-Grenzen aus `config/ftbchunks-world.snbt` wurden vom Konfigurationssystem uebernommen.
 - Die alpha.3-Prism-ZIP fuer Fluffy wurde erneut gebaut; die Pre-Launch-Aktualisierung ist enthalten.
-- BlueMap, Create BlueMap und Discord Integration sind als gepinnte serverseitige Metadaten aufgenommen. Ein echter Lauf bleibt Teil des Beta-Stagings, damit weder eine Karte noch ein Discord-Bot vor der Zugriffskontrolle oeffentlich werden.
+- BlueMap 5.7 und Create BlueMap 1.1.1 wurden auf der vorgesehenen VM initialisiert. HTTPS-Reverse-Proxy, sechs freigegebene Karten, AE2-Ausschluss, 8100-Bindung nur auf Tailscale und deaktivierte Live-Spielermarker sind als Serverpolicy dokumentiert.
 - Den offiziellen NeoForge-Installer `21.1.247` per Upstream-SHA-1 geprüft und mit Minecraft `1.21.1` sowie Java `21.0.12` lokal installiert.
 - Den vollständigen Alpha-2-Serverstand bis `Done (3.217s)` gestartet und danach kontrolliert beendet; auch der vorausgehende Loader-Abgleich erreichte `Done (3.380s)`. Der Lauf ist die Baseline vor den neuen Performance-Mods.
 - Das installierte Prism-Profil `Hasencraft Fluffy` im Online-Modus bis zum Titelbildschirm gestartet: NeoForge `21.1.247`, JEI `19.43.0.392`, Sodium `0.8.12` und Iris `1.8.14-beta.1` wurden gemeinsam geladen. Das ist die Shaderstack-Baseline vor dem neuen Eco-Profil.
@@ -37,19 +38,3 @@ Stand: `0.1.0-alpha.5`, 2. August 2026.
 - Fehlende optionale Shader-Uniforms von Complementary Reimagined sowie die fehlende Access-Transformer-Datei der aktuellen Iris/Flywheel-Bridge; beide Meldungen waren beim erfolgreichen Titelbildschirm-Start nicht fatal.
 
 Diese Meldungen wurden bis zur jeweiligen bedingten Registrierung beziehungsweise Quelldatei zurückverfolgt. Sie weisen nicht auf eine Create-6.0.10-Inkompatibilität oder beschädigte Welt hin.
-
-## Weiter manuell prüfen
-
-- BlueMap nur ueber einen nicht-oeffentlichen Zugang rendern; erst danach Reverse Proxy, Karten- und Datenschutzregeln entscheiden.
-- Discord Integration mit einem separaten Bot-Token und Testrollen aktivieren; Token, Guild- und Kanal-IDs niemals in Packdateien eintragen.
-
-- Das Prism-Profil `cozy` importieren und mit dem zweiten Microsoft-Konto starten.
-- Das Prism-Profil `eco` importieren, seine deaktivierten Shader und Fresh Animations prüfen und mit Cozy vergleichen.
-- Iris, Complementary Reimagined, Fresh Animations und Distant Horizons im Spiel auf RX 7900 XT sowie vollständig auf GTX 1080 prüfen.
-- Zwei bis vier Clients gleichzeitig neue Gebiete erkunden lassen und Spark-Profile vor und nach den Distant-Horizons-Limits vergleichen.
-- More Culling und BadOptimizations ausschließlich auf einer frischen Testinstanz gegen den Shader-/Distant-Horizons-Stack testen; bei Fehlern nicht in den Stable-Feed übernehmen.
-- Zwei Clients verbinden und Haustierbindung, Tod, Respawn, Waystone-Mitnahme und Dimensionswechsel spielen.
-- Aether, Twilight Forest und Bumblezone betreten sowie einige Create-/AE2-/Mekanism-Rezepte in JEI anklicken.
-- Installation, systemd-Lock, Backup und Rollback auf der vorgesehenen Ubuntu-VM testen.
-- In der nächsten gemeinsamen Spielsitzung mit `Amayia` praktisch prüfen: Kick, Ban/Pardon, Whitelist, Teleport und Spectate erlaubt; OP, Stop, Reload, Gamerule und Worldborder verweigert.
-- Mit zwei Nicht-OP-Spielern Claims, Containerzugriff und erneutes Verbinden praktisch prüfen.

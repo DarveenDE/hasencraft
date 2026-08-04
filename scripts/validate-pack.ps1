@@ -78,12 +78,40 @@ if (Test-Path -LiteralPath $indexFile) {
     $index = Get-Content -Raw -Encoding utf8 -LiteralPath $indexFile
     $listed = [regex]::Matches($index, '(?m)^file = "([^"]+)"$') |
         ForEach-Object { $_.Groups[1].Value }
+    $forbiddenIndexPrefixes = @(
+        "AGENTS.md",
+        "server/private/",
+        "server/world/",
+        "world/",
+        "backups/"
+    )
     foreach ($relative in $listed) {
+        foreach ($forbidden in $forbiddenIndexPrefixes) {
+            $isForbidden = $relative -eq $forbidden.TrimEnd('/') -or
+                $relative.StartsWith($forbidden, [System.StringComparison]::OrdinalIgnoreCase)
+            if ($isForbidden) {
+                Add-ValidationError "Local/server-owned file is present in index.toml: $relative"
+                break
+            }
+        }
         $candidate = Join-Path $repoRoot ($relative.Replace('/', '\'))
         if (-not (Test-Path -LiteralPath $candidate -PathType Leaf)) {
             Add-ValidationError "index.toml references missing file: $relative"
         }
     }
+}
+
+$waystonesConfig = Join-Path $repoRoot "config\waystones-common.toml"
+if (-not (Test-Path -LiteralPath $waystonesConfig -PathType Leaf)) {
+    Add-ValidationError "Missing Waystones configuration"
+}
+elseif ((Get-Content -Raw -Encoding utf8 -LiteralPath $waystonesConfig) -notmatch '(?m)^\s*inventoryButton = "ANY"$') {
+    Add-ValidationError "Waystones inventory button is not configured for the shared menu"
+}
+
+$titleEditionFile = Join-Path $repoRoot "kubejs\assets\minecraft\textures\gui\title\edition.png"
+if (-not (Test-Path -LiteralPath $titleEditionFile -PathType Leaf)) {
+    Add-ValidationError "Missing Hasencraft title edition texture"
 }
 
 $critical = @{
@@ -161,7 +189,9 @@ else {
 $serverPropertiesTemplate = Join-Path $repoRoot "server\server.properties.example"
 $serverPropertiesValues = @(
     "view-distance=5",
-    "simulation-distance=2"
+    "simulation-distance=2",
+    "region-file-compression=lz4",
+    "sync-chunk-writes=false"
 )
 if (-not (Test-Path -LiteralPath $serverPropertiesTemplate -PathType Leaf)) {
     Add-ValidationError "Missing server.properties template"
@@ -173,9 +203,70 @@ else {
             Add-ValidationError "Server properties template is missing '$expected'"
         }
     }
+    if ($content -match '(?m)^pause-when-empty-seconds=') {
+        Add-ValidationError "Server properties template contains an option introduced after Minecraft 1.21.1: pause-when-empty-seconds"
+    }
 }
 
-$forbiddenNames = @("servers.dat", "whitelist.json", "ops.json", "eula.txt", "server.properties")
+$serverCoreOptimizations = Join-Path $repoRoot "config\servercore\optimizations.yml"
+$serverCoreOptimizationValues = @(
+    "reduce-sync-loads: true",
+    "cache-ticking-chunks: true",
+    "optimize-command-blocks: true"
+)
+if (-not (Test-Path -LiteralPath $serverCoreOptimizations -PathType Leaf)) {
+    Add-ValidationError "Missing ServerCore optimization configuration"
+}
+else {
+    $content = Get-Content -Raw -Encoding utf8 -LiteralPath $serverCoreOptimizations
+    foreach ($expected in $serverCoreOptimizationValues) {
+        if ($content -notmatch [regex]::Escape($expected)) {
+            Add-ValidationError "ServerCore optimization configuration is missing '$expected'"
+        }
+    }
+}
+
+$serverJvmArgs = Join-Path $repoRoot "server\user_jvm_args.txt"
+if (-not (Test-Path -LiteralPath $serverJvmArgs -PathType Leaf)) {
+    Add-ValidationError "Missing server JVM arguments"
+}
+else {
+    $content = Get-Content -Raw -Encoding utf8 -LiteralPath $serverJvmArgs
+    foreach ($expected in @("-XX:+UseZGC", "-XX:+ZGenerational")) {
+        if ($content -notmatch [regex]::Escape($expected)) {
+            Add-ValidationError "Server JVM arguments are missing '$expected'"
+        }
+    }
+    if ($content -match "UseStringDeduplication") {
+        Add-ValidationError "Server JVM arguments must not enable StringDeduplication with the Java 21 ZGC profile"
+    }
+}
+
+$discordSecretControls = @{
+    "server/bin/hasencraft-backup" = "--exclude='./world/serverconfig/discordintegration-server.toml'"
+    "server/bin/hasencraft-deploy" = "--exclude='./world/serverconfig/discordintegration-server.toml'"
+    "server/bin/hasencraft-rollback" = "discord_config"
+    "server/hasencraft.service" = "ExecStartPre=/usr/local/libexec/hasencraft-discord-guard"
+    "server/install-server.sh" = "hasencraft-discord-guard"
+}
+foreach ($entry in $discordSecretControls.GetEnumerator()) {
+    $candidate = Join-Path $repoRoot ($entry.Key.Replace('/', '\'))
+    if (-not (Test-Path -LiteralPath $candidate -PathType Leaf)) {
+        Add-ValidationError "Missing Discord secret control: $($entry.Key)"
+    }
+    elseif ((Get-Content -Raw -Encoding utf8 -LiteralPath $candidate) -notmatch [regex]::Escape($entry.Value)) {
+        Add-ValidationError "Discord secret control missing '$($entry.Value)' in $($entry.Key)"
+    }
+}
+
+$forbiddenNames = @(
+    "servers.dat",
+    "whitelist.json",
+    "ops.json",
+    "eula.txt",
+    "server.properties",
+    "discordintegration-server.toml"
+)
 $separatorChars = [char[]]@([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)
 $derivedRoots = @(
     (Join-Path $repoRoot "build")

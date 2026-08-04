@@ -79,8 +79,12 @@ fi
 tmp_backup="$backup_root/.pre-update-$stamp.tar.zst.tmp"
 backup="$backup_root/pre-update-$stamp.tar.zst"
 
-echo "Creating complete pre-update snapshot: $backup"
-tar --zstd -C "$live" -cf "$tmp_backup" .
+echo "Creating pre-update snapshot without Discord secrets: $backup"
+# Discord Integration stores the bot token in the world config.  It must stay
+# on the server and must never enter a release or backup archive.
+tar --zstd -C "$live" \
+  --exclude='./world/serverconfig/discordintegration-server.toml' \
+  -cf "$tmp_backup" .
 mv -T "$tmp_backup" "$backup"
 tmp_backup=""
 
@@ -92,6 +96,18 @@ echo "Applying Hasencraft channel '$channel'"
   --pack-folder "$live" \
   --meta-file packwiz.json \
   "$pack_url"
+
+if [[ -n "${BLUEMAP_BIND_IP:-}" ]]; then
+  [[ "$BLUEMAP_BIND_IP" =~ ^[0-9A-Fa-f:.]+$ ]] || {
+    echo "Invalid BLUEMAP_BIND_IP; expected an IP address." >&2
+    exit 1
+  }
+  bluemap_webserver_conf="$live/config/bluemap/webserver.conf"
+  if [[ -f "$bluemap_webserver_conf" ]]; then
+    sed -i -E "s#^ip:.*#ip: \"$BLUEMAP_BIND_IP\"#" "$bluemap_webserver_conf"
+    echo "Applied BlueMap bind address from BLUEMAP_BIND_IP."
+  fi
+fi
 
 [[ -f "$live/packwiz.json" ]] || {
   echo "packwiz did not create $live/packwiz.json" >&2

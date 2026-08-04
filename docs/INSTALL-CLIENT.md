@@ -16,6 +16,8 @@ Alle drei Profile verwenden exakt dieselben Spielinhalte. Nur lokale Grafik-, Re
 
 Die Profile verwenden mit der mitgelieferten Java-21-Laufzeit ZGC (`-XX:+UseZGC -XX:+ZGenerational`). Das vermeidet den Distant-Horizons-Hinweis zum pausierenden G1-Garbage-Collector.
 
+Im Spiel zeigt `/hasencraft` die wichtigsten Karten-Tasten; die Questreihe im FTB-Quests-Buch erklärt die zentralen Pack-Systeme.
+
 ## Import
 
 1. In Prism `Instanz hinzufügen` → `Importieren` wählen.

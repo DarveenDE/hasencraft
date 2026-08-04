@@ -26,11 +26,15 @@ hash = "925bb2e607a00925690cda1ca0877043a27e66ca0079051a7c430da97d0a7795"
 
 [[files]]
 file = "config/ftbquests/quests/lang/de_de.snbt"
-hash = "5fbce79c8780744de3ee4af7e1544a5c311bbaa9ecff94e4763f0fd7664e3b8f"
+hash = "ed8c4411f3f4d6870f4b274f0cfc3c8378bd17d06fe74776353abef41ad12060"
 
 [[files]]
 file = "config/rightclickharvest.json5"
 hash = "2c8cd4c6209dc14b8d168706b9b8d2822f7bab30b191bdb7d75abccc55e99b7b"
+
+[[files]]
+file = "config/servercore/optimizations.yml"
+hash = "d47911e7f1d3a536f85890c1cd6cb31bfeff1a0781a67b292432f06691d65996"
 
 [[files]]
 file = "config/treeharvester.json5"
@@ -42,11 +46,11 @@ hash = "9cd395573ca9d06122af7fef50f72ac9a86f743df4e4bc3c452d1374d16a6aef"
 
 [[files]]
 file = "config/waystones-common.toml"
-hash = "925bb8d2f9b63891653273d5edbb73216b8e1a4dcdfb15a8a3bb7a2cac034cef"
+hash = "7aec04942a67c3fb0d9f2c0e3f2ead66088b4fac9250728efbdd5a2afaf73594"
 
 [[files]]
 file = "kubejs/README.txt"
-hash = "ddec923f1297652196702cabfebc1eb29b70c361f2e5bf3bf6d3bb9f21f68bd8"
+hash = "ded0ae95d3f8b95548e94072f1a1d8bb0591888a172a6d51a81ef345fa33da02"
 
 [[files]]
 file = "kubejs/assets/minecraft/texts/splashes.txt"
@@ -78,7 +82,7 @@ hash = "7085fd04c1d807178ad8387aa31207abed87a30cf773b892c5483725110255cc"
 
 [[files]]
 file = "kubejs/assets/minecraft/textures/gui/title/edition.png"
-hash = "701209dbd97853bb2cfa8aa52cdcb1439bfbba078a97de0366846ac20918fca7"
+hash = "9b40d644a422b05fefcb2fd8272763b55989b6e53b9e186740f7bff98de8a9bf"
 
 [[files]]
 file = "kubejs/assets/minecraft/textures/gui/title/minceraft.png"
@@ -154,7 +158,7 @@ hash = "015e31bf30db0241efa27fc8eee86a000c3da820972873e1bfac68120af3a017"
 
 [[files]]
 file = "kubejs/server_scripts/hasencraft.js"
-hash = "8701e735fe5ad185b5d28cc28ef82b9929ddee6afaf77126c26b0ceb8e04a792"
+hash = "a5b3f56b7bbb81c1628fc64082284f4da3c54a565ffdf1aa44af33f92aa767cc"
 
 [[files]]
 file = "kubejs/startup_scripts/hasencraft.js"
@@ -311,13 +315,13 @@ hash = "18ba60564127fcb4919353d7b0a00c875a1da289588f7e600e04918949687760"
 metafile = true
 
 [[files]]
-file = "mods/collective.pw.toml"
-hash = "2e2b6b8ba3596ac43c3b17f3afcf78e6668d6892cbd22a00fc65c8f151d5abb0"
+file = "mods/clumps.pw.toml"
+hash = "53658e38568ca244c94cca913937821277b40a6293fb28d52389b58928f1644e"
 metafile = true
 
 [[files]]
-file = "mods/clumps.pw.toml"
-hash = "53658e38568ca244c94cca913937821277b40a6293fb28d52389b58928f1644e"
+file = "mods/collective.pw.toml"
+hash = "2e2b6b8ba3596ac43c3b17f3afcf78e6668d6892cbd22a00fc65c8f151d5abb0"
 metafile = true
 
 [[files]]
@@ -921,13 +925,13 @@ hash = "a3c5f55308b8b4c445b1ad504b7ba118626bf031cd09db90e15f29a6bcb58426"
 metafile = true
 
 [[files]]
-file = "mods/tree-harvester.pw.toml"
-hash = "99be0fe38335ac07b86bec2966faedb1bf4098eb4dc70b96db964fc8e6e5350a"
+file = "mods/trashslot.pw.toml"
+hash = "496e190fe07d172c99a8790caeeeb1142e86c35d524bff1b128f4acfd3efa2a5"
 metafile = true
 
 [[files]]
-file = "mods/trashslot.pw.toml"
-hash = "496e190fe07d172c99a8790caeeeb1142e86c35d524bff1b128f4acfd3efa2a5"
+file = "mods/tree-harvester.pw.toml"
+hash = "99be0fe38335ac07b86bec2966faedb1bf4098eb4dc70b96db964fc8e6e5350a"
 metafile = true
 
 [[files]]

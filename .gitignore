@@ -1,6 +1,10 @@
 /build/
 /dist/
 /hosting/channels/
+
+# Local agent instructions may contain private infrastructure details.
+/AGENTS.md
+
 /.idea/
 /.vscode/
 /.packwiz-cache/
@@ -11,6 +15,9 @@
 /world/
 /world_nether/
 /world_the_end/
+# A checkout may also be used as a local server root. Keep its world state
+# outside Git for the same reason as the normal repository-root runtime data.
+/server/world/
 /backups/
 /logs/
 /crash-reports/

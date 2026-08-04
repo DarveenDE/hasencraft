@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+root=/srv/hasencraft
+discord_config="$root/server/world/serverconfig/discordintegration-server.toml"
+
+# DI creates this file only when the server has been started once.  The normal
+# inactive/default state therefore needs no special handling.
+[[ -f "$discord_config" ]] || exit 0
+
+active="$({
+  awk '
+    /^\[bot\][[:space:]]*$/ { in_bot=1; next }
+    /^\[/ { in_bot=0 }
+    in_bot && /^[[:space:]]*active[[:space:]]*=/ {
+      line=$0
+      sub(/^[^=]*=/, "", line)
+      sub(/#.*/, "", line)
+      gsub(/[[:space:]]/, "", line)
+      print tolower(line)
+      exit
+    }
+  ' "$discord_config"
+} || true)"
+
+[[ "$active" == "true" ]] || exit 0
+
+deployed_channel=""
+if [[ -r "$root/.last-deploy" ]]; then
+  IFS=$'\t' read -r _ deployed_channel _ < "$root/.last-deploy" || true
+fi
+
+if [[ "$deployed_channel" != "beta" ]]; then
+  echo "Discord Integration is active, but the server was not deployed from the beta channel; refusing to start." >&2
+  exit 1
+fi

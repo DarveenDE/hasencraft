@@ -34,7 +34,7 @@ sudo -u hasencraft /usr/local/libexec/hasencraft-deploy stable
 sudo systemctl start hasencraft
 ```
 
-Der Deploy-Befehl prüft die SHA-256-Summe des Updatewerkzeugs und lehnt Packs mit einer anderen NeoForge-Version ab. Vor jeder Änderung erstellt er ein vollständiges `.tar.zst` unter `/srv/hasencraft/backups/`. Vorher prüft er, ob mindestens die unkomprimierte Größe des Servers plus 2 GiB Reserve frei sind. Alte Backups werden absichtlich nicht automatisch gelöscht; bei der 120-GiB-SSD sollte ihre Belegung regelmäßig geprüft werden.
+Der Deploy-Befehl prüft die SHA-256-Summe des Updatewerkzeugs und lehnt Packs mit einer anderen NeoForge-Version ab. Vor jeder Änderung erstellt er ein `.tar.zst` unter `/srv/hasencraft/backups/`; die einzige bewusste Ausnahme ist `world/serverconfig/discordintegration-server.toml`, weil diese Datei den Bot-Token enthält. Vorher prüft er, ob mindestens die unkomprimierte Größe des Servers plus 2 GiB Reserve frei sind. Alte Backups werden absichtlich nicht automatisch gelöscht; bei der 120-GiB-SSD sollte ihre Belegung regelmäßig geprüft werden.
 
 Serverlauf, Deployment, manuelle Backups und Rollback teilen sich denselben exklusiven Lifecycle-Lock. Ein konsistentes manuelles Backup wird deshalb nur bei gestopptem Dienst erstellt:
 
@@ -44,12 +44,38 @@ sudo -u hasencraft /usr/local/libexec/hasencraft-backup
 sudo systemctl start hasencraft
 ```
 
+Ein Rollback übernimmt die aktuelle lokale DI-Konfiguration direkt in den
+wiederhergestellten Serverbaum. Der Token wird dadurch weder archiviert noch in
+das Quarantäneverzeichnis verschoben. Die `ExecStartPre`-Prüfung startet einen
+Server mit aktivem DI außerdem nur, wenn der letzte Deploy aus dem `beta`-Kanal
+kam.
+
+Backups aus der Zeit vor diesem Schutz werden nicht automatisch verändert. Falls
+ein solches Archiv jemals eine aktive DI-Konfiguration enthielt, darf es nicht
+weitergegeben werden; den betroffenen Discord-Bot-Token im Developer Portal
+sofort regenerieren.
+
 ## Performance-Staging
 
-FastSuite, Structure Layout Optimizer und ServerCore sind mit konservativen
-Standardwerten Teil des Packs. FastSuite beschleunigt unter anderem die
-Rezept- und Tagverarbeitung, während Structure Layout Optimizer die Suche nach
-passenden Strukturen bei der Weltgenerierung verringert.
+FastSuite, Structure Layout Optimizer und ServerCore sind Teil des Packs.
+FastSuite beschleunigt unter anderem die Rezept- und Tagverarbeitung, während
+Structure Layout Optimizer die Suche nach passenden Strukturen bei der
+Weltgenerierung verringert. Die versionierte
+`config/servercore/optimizations.yml` aktiviert drei gezielte Entlastungen:
+synchrone Chunk-Ladevorgänge werden reduziert, die Liste tickender Chunks wird
+einmal pro Sekunde gecacht und Command-Block-Befehle werden wiederverwendet.
+`reduce-sync-loads` kann bewirken, dass Karten nur noch geladene Chunks sehen;
+die Einstellung bleibt deshalb bewusst auf diese drei Optionen begrenzt und
+aktiviert keine Mob-, Fluid- oder Aktivierungsbereichsänderungen.
+
+Die Servervorlage nutzt auf der Linux-SSD `region-file-compression=lz4` und
+`sync-chunk-writes=false`, damit Kompression und Flushes nicht unnötig im
+Tick-Pfad blockieren. Die Lifecycle-Skripte stoppen den Dienst vor Backups und
+Updates. `pause-when-empty-seconds` ist absichtlich nicht enthalten: diese
+Option gehört nicht zum Minecraft-1.21.1-Server. Das Java-21-Profil verwendet
+generational ZGC ohne `UseStringDeduplication`, weil diese Kombination bei
+kurzlebigen Strings zusätzlichen Retention- und Verarbeitungsaufwand erzeugen
+kann.
 
 Die Distant-Horizons-Vorlage begrenzt LoD-Generierungs- und
 Synchronisierungsanfragen pro Spieler sowie global. Sie deckt weiterhin die
@@ -77,12 +103,9 @@ werden pro Welt mit `/gamerule spawnChunkRadius 0` deaktiviert, nicht über
 `server.properties`. Für farm- oder redstoneintensive Welten die Werte erst
 nach einem Spark-Vergleichsprofil erhöhen.
 
-Vor Stable mit zwei bis vier gleichzeitig spielenden Clients eine neue Gegend
-erkunden und dabei TPS, Speicher sowie Chunk-Latenz beobachten. Bei einem
-Spike im Chat oder in der Konsole `spark profiler start --timeout 300` ausführen,
-die Situation nachstellen und den erzeugten Profil-Link dokumentieren. Keine
-aggressiveren ServerCore- oder Distant-Horizons-Threadwerte ohne Vergleichsprofil
-aktivieren.
+Für eine spätere Laufzeitdiagnose kann bei einem reproduzierbaren Spike
+`spark profiler start --timeout 300` verwendet werden. Die Profilerstellung ist
+eine Diagnosehilfe und kein Bestandteil der automatischen Packvalidierung.
 
 Zeigt ein Vergleichsprofil synchrone Chunk-Ladevorgänge auf dem Server-Thread,
 kann ServerCore vorübergehend mit
