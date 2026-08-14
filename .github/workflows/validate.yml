@@ -27,6 +27,9 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Verify title edition texture
+        shell: pwsh
+        run: ./scripts/test-title-edition.ps1
       - name: Verify Prism profiles
         shell: pwsh
         run: ./scripts/test-prism-profiles.ps1
