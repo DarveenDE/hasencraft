@@ -1,5 +1,15 @@
 # Roadmap
 
+## 0.1.0-alpha.7
+
+- **Titelbildschirm:** Versionsnummer und Claim stehen in einer kompakten
+  Unterzeile unterhalb der Wortmarke. Ein automatischer Transparenztest
+  verhindert, dass die Zeile erneut in das Hasencraft-Logo rutscht.
+- **Inventarsortierung:** Inventory Essentials sortiert Spielerinventare,
+  Kisten und kompatible Mod-Container per mittlerer Maustaste. Die
+  überlappende Shift-Ziehfunktion bleibt bei Mouse Tweaks und ist in
+  Inventory Essentials deaktiviert.
+
 ## 0.1.0-alpha.6
 
 - **Versionsanzeige:** Das Hauptmenü zeigt die Hasencraft-Version unter der Wortmarke, damit Screenshots und Fehlermeldungen eindeutig zugeordnet werden können.

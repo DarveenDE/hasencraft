@@ -1,8 +1,13 @@
 # Validierungsstand
 
-Stand: freigegebener Stand `0.1.0-alpha.6`, 4. August 2026.
+Stand: Release Candidate `0.1.0-alpha.7`, 14. August 2026.
 
 ## Bestanden
+
+- Der Alpha-7-Quellstand besteht die Packwiz- und Prism-Profilpruefungen mit 173 gepinnten Eintraegen: 126 beide Seiten, 27 nur Client und 20 nur Server. Der unveraenderliche Release-Snapshot enthaelt 217 per SHA-256 geschuetzte Dateien.
+- Eine frisch importierte Cozy-Dev-Instanz wartete vor dem Minecraft-Start auf den vollstaendigen Packwiz-Download. NeoForge `21.1.247` erkannte danach 180 Mods einschliesslich Inventory Essentials `21.1.17`, erreichte den Alpha-7-Titelbildschirm und lud eine neue Kreativ-Testwelt.
+- In der frischen Testwelt sortierte ein Mittelklick sowohl absichtlich verstreute Kisteninhalte als auch das Spielerinventar kompakt nach der Creative-Reihenfolge. Die Shift-Drag-Funktion von Inventory Essentials bleibt deaktiviert, damit Mouse Tweaks allein fuer dieses Verhalten zustaendig ist.
+- Der lokale Dev-Bootstrap verwendet fuer Packwiz das zu Prisms `javaw.exe` gehoerende `java.exe`. Dadurch wartet PowerShell auf den Bootstrap-Prozess und NeoForge kann nicht mehr parallel zu noch laufenden Mod-Downloads starten.
 
 - Der Alpha-6-Quellstand besteht die Packwiz-, Prism-Profil- und Shell-Syntax-Prüfungen. Der unveränderliche Release-Snapshot enthält 215 per SHA-256 geschützte Dateien; der Beta-Feed wurde daraus erfolgreich veröffentlicht.
 - Der Communityserver wurde nach einem 811-MB-Pre-Update-Snapshot aus dem Beta-Kanal auf Alpha 6 aktualisiert. Der Snapshot enthält keine Discord-Zugangsdaten; CreativeCore und Enchantment Descriptions wurden serverseitig entfernt, ServerCore geladen und die bisherige `simulation-distance=2` gezielt auf `5` migriert.
