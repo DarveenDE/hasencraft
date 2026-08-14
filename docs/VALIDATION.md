@@ -1,6 +1,6 @@
 # Validierungsstand
 
-Stand: Release Candidate `0.1.0-alpha.7`, 14. August 2026.
+Stand: Freigabestand `0.1.0-alpha.7`, 14. August 2026.
 
 ## Bestanden
 
@@ -8,6 +8,8 @@ Stand: Release Candidate `0.1.0-alpha.7`, 14. August 2026.
 - Eine frisch importierte Cozy-Dev-Instanz wartete vor dem Minecraft-Start auf den vollstaendigen Packwiz-Download. NeoForge `21.1.247` erkannte danach 180 Mods einschliesslich Inventory Essentials `21.1.17`, erreichte den Alpha-7-Titelbildschirm und lud eine neue Kreativ-Testwelt.
 - In der frischen Testwelt sortierte ein Mittelklick sowohl absichtlich verstreute Kisteninhalte als auch das Spielerinventar kompakt nach der Creative-Reihenfolge. Die Shift-Drag-Funktion von Inventory Essentials bleibt deaktiviert, damit Mouse Tweaks allein fuer dieses Verhalten zustaendig ist.
 - Der lokale Dev-Bootstrap verwendet fuer Packwiz das zu Prisms `javaw.exe` gehoerende `java.exe`. Dadurch wartet PowerShell auf den Bootstrap-Prozess und NeoForge kann nicht mehr parallel zu noch laufenden Mod-Downloads starten.
+- Der Communityserver wurde nach dem atomar fertiggestellten Pre-Update-Snapshot `pre-update-20260814T192820Z.tar.zst` (818.709.277 Bytes) aus dem Beta-Kanal auf den unveraenderlichen Alpha-7-Snapshot aktualisiert. Der Dienst startete ohne Neustartschleife bis `Done (4.375s)`; Minecraft lauscht auf TCP `25565` und Simple Voice Chat auf UDP `24454`.
+- Ein echter Login mit dem Alpha-7-Cozy-Client lud die bestehende Serverwelt vollstaendig; der anschliessende Disconnect wurde sauber verarbeitet. Die beim Start sichtbaren 24 Loot-Table-, eine Advancement-, vier Bumblezone- und zwei HTTP-Timeout-Meldungen sind gegen das unmittelbar vorher gesicherte Alpha-6-Debuglog byteweise nach Signatur und Anzahl abgeglichen und keine Alpha-7-Regression. Auch die beim Join sichtbare ShulkerBoxTooltip/Supplementaries-Dist-Ausnahme war bereits unter Alpha 6 vorhanden.
 
 - Der Alpha-6-Quellstand besteht die Packwiz-, Prism-Profil- und Shell-Syntax-Prüfungen. Der unveränderliche Release-Snapshot enthält 215 per SHA-256 geschützte Dateien; der Beta-Feed wurde daraus erfolgreich veröffentlicht.
 - Der Communityserver wurde nach einem 811-MB-Pre-Update-Snapshot aus dem Beta-Kanal auf Alpha 6 aktualisiert. Der Snapshot enthält keine Discord-Zugangsdaten; CreativeCore und Enchantment Descriptions wurden serverseitig entfernt, ServerCore geladen und die bisherige `simulation-distance=2` gezielt auf `5` migriert.
