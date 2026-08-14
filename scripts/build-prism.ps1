@@ -122,7 +122,7 @@ if ($Channel -eq "dev") {
     # instance.cfg uses INI escaping, so a Windows backslash before the script
     # name is consumed when Prism reads the setting. A forward slash is valid
     # for Windows paths; braces make the Prism variable boundary explicit.
-    $preLaunchCommand = 'powershell.exe -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "${INST_MC_DIR}/hasencraft-dev-bootstrap.ps1"'
+    $preLaunchCommand = 'powershell.exe -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "${INST_MC_DIR}/hasencraft-dev-bootstrap.ps1" -JavaExecutable "${INST_JAVA}"'
 }
 
 $instance = Get-Content -Raw -LiteralPath $instanceTemplate

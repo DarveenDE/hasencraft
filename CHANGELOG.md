@@ -2,6 +2,13 @@
 
 Alle relevanten Änderungen an Mods, Konfiguration, Quests und Serveranforderungen werden hier dokumentiert.
 
+## 0.1.0-alpha.7 — 2026-08-14
+
+- Inventare, Kisten und kompatible Mod-Container lassen sich mit Inventory Essentials per mittlerer Maustaste sortieren.
+- Inventory Essentials wird ausschließlich an Clients ausgeliefert; das bereits enthaltene Balm erfüllt die Abhängigkeit. Die überlappende Shift-Ziehfunktion bleibt bei Mouse Tweaks und ist in Inventory Essentials deaktiviert.
+- Versionsnummer und Claim stehen im Hauptmenü kompakt unter der Hasencraft-Wortmarke; ein automatischer Transparenztest schützt den reservierten Logo-Bereich.
+- Die lokale Prism-Entwicklerinstanz übergibt Java nun als quotiertes Argument und wartet über `java.exe` auf den vollständigen Packwiz-Download. Damit funktionieren Installationspfade mit Leerzeichen, und NeoForge startet nicht mehr mit einem unvollständigen Mod-Ordner.
+
 ## 0.1.0-alpha.6 — 2026-08-04
 
 - Die drei Prism-Profile verwenden Java 21 mit generational ZGC; die problematische String-Deduplication bleibt deaktiviert.

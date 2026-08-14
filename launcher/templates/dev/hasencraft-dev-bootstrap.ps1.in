@@ -1,3 +1,8 @@
+param(
+    [Parameter(Mandatory = $true)]
+    [string]$JavaExecutable
+)
+
 $ErrorActionPreference = "Stop"
 
 $packRoot = __PACK_ROOT__
@@ -5,8 +10,8 @@ $packwiz = __PACKWIZ_EXECUTABLE__
 $packTomlUri = __PACK_TOML_URI__
 $bootstrap = Join-Path $env:INST_MC_DIR "packwiz-installer-bootstrap.jar"
 
-if (-not $env:INST_JAVA) {
-    throw "Prism did not provide the Java runtime (INST_JAVA)."
+if (-not (Test-Path -LiteralPath $JavaExecutable -PathType Leaf)) {
+    throw "Prism did not provide a usable Java runtime: $JavaExecutable"
 }
 if (-not (Test-Path -LiteralPath $packRoot -PathType Container)) {
     throw "The Hasencraft source directory is unavailable: $packRoot"
@@ -16,6 +21,18 @@ if (-not (Test-Path -LiteralPath $packwiz -PathType Leaf)) {
 }
 if (-not (Test-Path -LiteralPath $bootstrap -PathType Leaf)) {
     throw "Missing packwiz bootstrap: $bootstrap"
+}
+
+# Prism normally supplies javaw.exe. PowerShell does not wait for GUI-subsystem
+# executables invoked with the call operator, so Minecraft could start while
+# packwiz was still downloading mods. Prefer the matching console executable,
+# which blocks until the bootstrap has completed.
+$bootstrapJava = $JavaExecutable
+if ([System.IO.Path]::GetFileName($bootstrapJava) -ieq "javaw.exe") {
+    $consoleJava = Join-Path (Split-Path -Parent $bootstrapJava) "java.exe"
+    if (Test-Path -LiteralPath $consoleJava -PathType Leaf) {
+        $bootstrapJava = $consoleJava
+    }
 }
 
 Write-Host "Preparing the local Hasencraft development pack..."
@@ -32,7 +49,7 @@ if ($refreshExitCode -ne 0) {
     exit $refreshExitCode
 }
 
-& $env:INST_JAVA -jar $bootstrap $packTomlUri
+& $bootstrapJava -jar $bootstrap $packTomlUri
 if ($LASTEXITCODE -ne 0) {
     exit $LASTEXITCODE
 }

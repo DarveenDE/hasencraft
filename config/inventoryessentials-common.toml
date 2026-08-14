@@ -1,0 +1,38 @@
+# Hasencraft keeps Mouse Tweaks responsible for shift-drag transfers and uses
+# Inventory Essentials for middle-click sorting and its distinct shortcuts.
+
+# Use the client implementation even on servers that have the mod installed.
+forceClientImplementation = false
+
+# Move all items when space-clicking an empty slot.
+allowBulkTransferAllOnEmptySlot = false
+
+# Swap matching armor sets with space-click.
+bulkTransferArmorSets = true
+
+# Move a single item instead of a full stack with Ctrl-click.
+enableSingleTransfer = true
+
+# Move every stack of the same item with Shift-Ctrl-click.
+enableBulkTransfer = true
+
+# Move one of each item with Ctrl-Space-click.
+enableBulkTransferSingle = true
+
+# Move all items with Space-click.
+enableBulkTransferAll = true
+
+# Drop all items of the same type with Shift-Ctrl-drop.
+enableBulkDrop = true
+
+# Disabled to avoid overlapping Mouse Tweaks' shift-drag transfer behavior.
+enableShiftDrag = false
+
+# Refill broken tools from the inventory.
+enableToolRefill = true
+
+# Refill depleted block stacks from the inventory.
+enableStackRefill = true
+
+# Sort inventories by creative-menu order when the middle mouse button is used.
+inventorySorting = "CREATIVE"

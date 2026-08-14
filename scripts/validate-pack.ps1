@@ -159,6 +159,7 @@ $critical = @{
     "mods/structure-layout-optimizer.pw.toml" = 'filename = "structure_layout_optimizer-neoforge-1.0.12.jar"'
     "mods/resourceful-config.pw.toml" = 'filename = "resourcefulconfig-neoforge-1.21-3.0.11.jar"'
     "mods/servercore.pw.toml"       = 'filename = "servercore-neoforge-1.5.19+1.21.1.jar"'
+    "mods/inventory-essentials.pw.toml" = 'filename = "inventoryessentials-neoforge-1.21.1-21.1.17.jar"'
 }
 foreach ($entry in $critical.GetEnumerator()) {
     $candidate = Join-Path $repoRoot ($entry.Key.Replace('/', '\'))
@@ -173,6 +174,7 @@ foreach ($entry in $critical.GetEnumerator()) {
 $sideRequirements = @{
     "mods/creativecore.pw.toml" = 'side = "client"'
     "mods/enchantment-descriptions.pw.toml" = 'side = "client"'
+    "mods/inventory-essentials.pw.toml" = 'side = "client"'
 }
 foreach ($entry in $sideRequirements.GetEnumerator()) {
     $candidate = Join-Path $repoRoot ($entry.Key.Replace('/', '\'))
@@ -181,6 +183,22 @@ foreach ($entry in $sideRequirements.GetEnumerator()) {
     }
     elseif ((Get-Content -Raw -Encoding utf8 -LiteralPath $candidate) -notmatch [regex]::Escape($entry.Value)) {
         Add-ValidationError "Incorrect side assignment in $($entry.Key); expected $($entry.Value)"
+    }
+}
+
+$inventoryEssentialsConfig = Join-Path $repoRoot "config\inventoryessentials-common.toml"
+if (-not (Test-Path -LiteralPath $inventoryEssentialsConfig -PathType Leaf)) {
+    Add-ValidationError "Missing Inventory Essentials configuration"
+}
+else {
+    $content = Get-Content -Raw -Encoding utf8 -LiteralPath $inventoryEssentialsConfig
+    foreach ($expected in @(
+        "enableShiftDrag = false",
+        'inventorySorting = "CREATIVE"'
+    )) {
+        if ($content -notmatch [regex]::Escape($expected)) {
+            Add-ValidationError "Inventory Essentials configuration is missing '$expected'"
+        }
     }
 }
 

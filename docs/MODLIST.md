@@ -1,10 +1,10 @@
 # Modliste
 
-Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.6`.
+Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.7`.
 
-- Gesamt: 172 verwaltete Eintraege
+- Gesamt: 173 verwaltete Eintraege
 - beide Seiten: 126
-- nur Client: 26
+- nur Client: 27
 - nur Server: 20
 
 ## Kuratierter Kern
@@ -104,6 +104,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.6`
 | Iceberg | `both` | `Iceberg-1.21.1-neoforge-1.3.2.jar` | [Modrinth](https://modrinth.com/project/5faXoLqX) |
 | ImmediatelyFast | `client` | `ImmediatelyFast-NeoForge-1.6.11+1.21.1.jar` | [Modrinth](https://modrinth.com/project/5ZwdcRci) |
 | Immersive Engineering | `both` | `ImmersiveEngineering-1.21.1-12.4.2-194.jar` | [Modrinth](https://modrinth.com/project/tIm2nV03) |
+| Inventory Essentials | `client` | `inventoryessentials-neoforge-1.21.1-21.1.17.jar` | [Modrinth](https://modrinth.com/project/Boon8xwi) |
 | Iris & Oculus Flywheel Compat | `client` | `iris-flywheel-compat-NeoForge-2.4.0.jar` | [Modrinth](https://modrinth.com/project/ndHYMY2K) |
 | Iris Shaders | `client` | `iris-neoforge-1.8.14-beta.1+mc1.21.1.jar` | [Modrinth](https://modrinth.com/project/YL57xq9U) |
 | Jade Addons (Neo/Forge) | `both` | `JadeAddons-1.21.1-NeoForge-6.0.1.jar` | [Modrinth](https://modrinth.com/project/xuDOzCLy) |
