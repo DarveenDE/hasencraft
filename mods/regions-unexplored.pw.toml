@@ -1,14 +1,14 @@
 name = "Regions Unexplored"
-filename = "regions-unexplored-0.6.2-neoforge-21.1.jar"
+filename = "regions-unexplored-0.6.3-neoforge-21.1.jar"
 side = "both"
 pin = true
 
 [download]
-url = "https://cdn.modrinth.com/data/Tkikq67H/versions/5A8LFnXX/regions-unexplored-0.6.2-neoforge-21.1.jar"
+url = "https://cdn.modrinth.com/data/Tkikq67H/versions/M9SMxdTX/regions-unexplored-0.6.3-neoforge-21.1.jar"
 hash-format = "sha512"
-hash = "b6475d26f22a5a3ed957b76b85f3d51d3422c0fbef16f777b74bfe9d70fd1673d75cb0c4e2a2a56121f0d0d6780a9e92fdcd7023b4f1d0d2d746d54c64c12f3c"
+hash = "744b7c37cfc7613c0c5f8507a309f61adcb117ab4ac1c572ea7b167fa7bc64d6ab0096ef7a1f0be7d33c0614cf01f76b88f25cf35936040938930c82c8f42501"
 
 [update]
 [update.modrinth]
 mod-id = "Tkikq67H"
-version = "5A8LFnXX"
+version = "M9SMxdTX"

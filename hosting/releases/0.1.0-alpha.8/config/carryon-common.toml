@@ -1,0 +1,6 @@
+[settings]
+	# Carrying entities should remain convenient for community projects without
+	# removing the deliberate movement trade-off completely.
+	# Default: 1.0
+	# Range: 0.0 ~ 1.7976931348623157E308
+	entitySlownessMultiplier = 0.25

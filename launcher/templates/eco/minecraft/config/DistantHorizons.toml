@@ -1,6 +1,8 @@
+_version = 5
+
 [common.worldGenerator]
-	distantGeneratorMode = "PRE_EXISTING_ONLY"
-	enableDistantGeneration = true
+	generatorPlan = "CHUNKS_ONLY"
+	chunkGeneratorMode = "PRE_EXISTING_ONLY"
 
 [client.advanced.graphics.quality]
 	maxHorizontalResolution = "FOUR_BLOCKS"

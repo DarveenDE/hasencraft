@@ -2,6 +2,17 @@
 
 Alle relevanten Änderungen an Mods, Konfiguration, Quests und Serveranforderungen werden hier dokumentiert.
 
+## 0.1.0-alpha.8 — 2026-11-04
+
+- 68 Mods sowie Fresh Animations und Complementary Reimagined auf die neuesten passenden Release-Stände für Minecraft 1.21.1 aktualisiert; bereits verwendete Beta-Reihen bleiben separat geprüft. Alle bisherigen Kernmods sind enthalten.
+- NeoForge auf `21.1.265` aktualisiert, damit unter anderem Create Crafts & Additions und Ecologics ihre tatsächlichen Loader-Mindestversionen erfüllen. Prism- und Servervorlagen verwenden denselben Stand.
+- FTB Library, Chunks, Teams, Quests und XMod Compat gemeinsam aktualisiert; JEI und KubeJS bringen ihre benötigten eingebetteten Bibliotheken mit.
+- Accessories `1.1.0-beta.54+1.21.1` ausdrücklich gepinnt: Hamster 3.7.0 benötigt bei vorhandenem Accessories eine neuere Version als die von Aether eingebettete Bibliothek.
+- Distant Horizons 3.3.3 auf Konfigurationsformat 5 migriert. Chunkbasierte Generierung, Eco- und Serverbeschränkung auf bestehende Chunks sowie die bisherigen Sichtweiten, CPU- und Bandbreitenlimits bleiben erhalten.
+- Critters and Companions bleibt auf `2.6.2`, weil `2.7.0` im realen Clienttest neue fehlerhafte Baby-Schnecken-Animationen meldet.
+- Eine fehlerhafte Ecologics-Loot-Tabelle für den auf Minecraft 1.21.1 nicht vorhandenen Pale-Moss-Block wird per Datapack-Bedingung deaktiviert.
+- Modliste, Grafikpack-Dateinamen, Versionsanzeige und Validierungsregeln an den neuen Stand angepasst. Update-Arbeit: [Issue #38](https://github.com/DarveenDE/hasencraft/issues/38).
+
 ## 0.1.0-alpha.7 — 2026-08-14
 
 - Inventare, Kisten und kompatible Mod-Container lassen sich mit Inventory Essentials per mittlerer Maustaste sortieren.

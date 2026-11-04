@@ -31,14 +31,14 @@ $profiles = @{
     fluffy = @{
         Name = "Hasencraft Fluffy Beta"
         Instance = @("OverrideJavaArgs=true", "JvmArgs=-XX:+UseZGC -XX:+ZGenerational", "MinMemAlloc=4096", "MaxMemAlloc=10240")
-        Options = @("renderDistance:14", "simulationDistance:8", 'resourcePacks:["vanilla","file/FreshAnimations_v1.10.4.zip"]')
+        Options = @("renderDistance:14", "simulationDistance:8", 'resourcePacks:["vanilla","file/FreshAnimations_v1.11.2_1.20+.zip"]')
         Dh = @("lodChunkRenderDistanceRadius = 256", 'renderingEngine = "AUTO"')
         Iris = @("enableShaders=true")
     }
     cozy = @{
         Name = "Hasencraft Cozy Beta"
         Instance = @("OverrideJavaArgs=true", "JvmArgs=-XX:+UseZGC -XX:+ZGenerational", "MinMemAlloc=3072", "MaxMemAlloc=8192")
-        Options = @("renderDistance:10", "simulationDistance:6", 'resourcePacks:["vanilla","file/FreshAnimations_v1.10.4.zip"]')
+        Options = @("renderDistance:10", "simulationDistance:6", 'resourcePacks:["vanilla","file/FreshAnimations_v1.11.2_1.20+.zip"]')
         Dh = @("lodChunkRenderDistanceRadius = 128", 'renderingEngine = "AUTO"')
         Iris = @("enableShaders=true")
     }

@@ -1,5 +1,18 @@
 # Validierungsstand
 
+## Stable-Freigabe 0.1.0-alpha.8 — 4. November 2026
+
+- Minecraft bleibt auf `1.21.1`; NeoForge ist auf `21.1.265` aktualisiert und bei NeoForge sowie Prism verfügbar.
+- 68 Mods und beide Grafikpacks aktualisiert; alle bisherigen Kernmods sind enthalten. Accessories ergänzt die neu erforderliche Hamster-/Aether-Kompatibilität. Insgesamt 174 gepinnte Einträge: 127 beide Seiten, 27 Client, 20 Server.
+- Download-Prüfsummen, tatsächliche und eingebettete JAR-Abhängigkeiten, packwiz, Prism-Profile und Shell-Syntax geprüft. Das lokale Cozy-Dev-Archiv wurde gebaut.
+- Der isolierte Dedicated Server erreichte nach den Korrekturen zweimal `Done` und beendete sich jeweils mit Exitcode 0. Mekanism-, Create- und Ars-Block-Entities sowie ein Chipped-Tisch und ein Hamster blieben nach dem Speichern und Neustart erhalten. KubeJS lud ohne Skriptfehler; die neun Quests wurden geladen.
+- Die erzeugte DH-v5-Konfiguration bewahrt die bisherigen Profile und Serverlimits. Der separate Client initialisierte Sodium, Iris, Distant Horizons und Complementary; der Titelbildschirm wurde visuell bestätigt.
+- Critters `2.7.0` wurde wegen eines neuen Animationsfehlers verworfen; `2.6.2` bleibt gepinnt. Der Fehler tritt damit nicht mehr auf. Die neue fehlerhafte Ecologics-Pale-Moss-Loot-Tabelle ist auf 1.21.1 per [NeoForge-Datenbedingung](https://docs.neoforged.net/docs/1.21.1/resources/server/conditions/) deaktiviert und erzeugt im erneuten Serverlauf keinen Parsefehler.
+- Bekannte nicht fatale Meldungen optionaler Create-Integrationen, zweier Dungeons-&-Taverns-Advancements und einer bereits zuvor fehlerhaften Ars-Animation bleiben bestehen.
+- Auf Wunsch wurden weitere Tests beendet. Keine abgeschlossene Bestandswelt-Migration oder Zweispielersitzung; Stable-Veröffentlichung und Server-Deployment sind ausdrücklich beauftragt; es werden keine weiteren Tests ausgeführt.
+
+## Bisherige Freigabe
+
 Stand: Freigabestand `0.1.0-alpha.7`, 14. August 2026.
 
 ## Bestanden

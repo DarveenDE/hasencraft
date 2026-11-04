@@ -1,0 +1,8 @@
+{
+  default_autoclaim_rewards: "disabled",
+  default_quest_shape: "circle",
+  emergency_items_cooldown: 300,
+  fallback_locale: "de_de",
+  progression_mode: "linear",
+  version: 13
+}

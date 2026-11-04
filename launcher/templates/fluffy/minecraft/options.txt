@@ -9,5 +9,5 @@ mipmapLevels:4
 particles:0
 renderDistance:14
 simulationDistance:8
-resourcePacks:["vanilla","file/FreshAnimations_v1.10.4.zip"]
+resourcePacks:["vanilla","file/FreshAnimations_v1.11.2_1.20+.zip"]
 incompatibleResourcePacks:[]

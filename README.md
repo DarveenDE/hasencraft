@@ -9,9 +9,9 @@ bau eine Basis, die sich nach Zuhause anfühlt, und entdecke, was dahinter liegt
 **→ [Installationsseite](https://darveende.github.io/hasencraft/)** – dort liegt
 die Importadresse für Prism, immer auf dem freigegebenen Stand.
 
-Minecraft `1.21.1` · NeoForge `21.1.247`
+Minecraft `1.21.1` · NeoForge `21.1.265`
 
-**Aktueller Stand:** `0.1.0-alpha.4` · Minecraft `1.21.1` · NeoForge `21.1.247`
+**Aktueller Stand:** `0.1.0-alpha.8` · Minecraft `1.21.1` · NeoForge `21.1.265`
 
 ## Loslegen
 

@@ -1,0 +1,14 @@
+name = "Discord Integration (DI)"
+filename = "DiscordIntegration-1.21.1-4.0.4.jar"
+side = "server"
+pin = true
+
+[download]
+url = "https://cdn.modrinth.com/data/wdZidyDu/versions/otBu1NwO/DiscordIntegration-1.21.1-4.0.4.jar"
+hash-format = "sha512"
+hash = "ae04979f1d04896730fde9227c5b2ff90ec448f65f74d25ff08a30880b8e5d873d03dc79eb047cf3088cfbda6e0d992bb9c6473acf077099e89ef1251bd59c16"
+
+[update]
+[update.modrinth]
+mod-id = "wdZidyDu"
+version = "otBu1NwO"

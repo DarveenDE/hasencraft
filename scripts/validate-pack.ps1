@@ -17,6 +17,26 @@ $indexFile = Join-Path $repoRoot "index.toml"
 if (-not (Test-Path -LiteralPath $packFile)) { Add-ValidationError "Missing pack.toml" }
 if (-not (Test-Path -LiteralPath $indexFile)) { Add-ValidationError "Missing index.toml" }
 
+$loaderRequirements = @{
+    "pack.toml" = @('minecraft = "1.21.1"', 'neoforge = "21.1.265"')
+    "launcher/templates/common/mmc-pack.json" = @('"version": "1.21.1"', '"version": "21.1.265"')
+    "server/install-server.sh" = @("neoforge_version=21.1.265")
+    "server/hasencraft.env.example" = @("NEOFORGE_VERSION=21.1.265")
+}
+foreach ($entry in $loaderRequirements.GetEnumerator()) {
+    $candidate = Join-Path $repoRoot $entry.Key
+    if (-not (Test-Path -LiteralPath $candidate -PathType Leaf)) {
+        Add-ValidationError "Missing loader configuration: $($entry.Key)"
+        continue
+    }
+    $content = Get-Content -Raw -Encoding utf8 -LiteralPath $candidate
+    foreach ($expected in $entry.Value) {
+        if ($content -notmatch [regex]::Escape($expected)) {
+            Add-ValidationError "Loader configuration $($entry.Key) is missing '$expected'"
+        }
+    }
+}
+
 if (-not $SkipRefresh) {
     $packwizCommand = Get-Command $Packwiz -ErrorAction Stop
     Push-Location $repoRoot
@@ -126,13 +146,13 @@ else {
 }
 
 $critical = @{
-    "mods/distanthorizons.pw.toml" = 'filename = "DistantHorizons-3.2.0-b-1.21.1-fabric-neoforge.jar"'
+    "mods/distanthorizons.pw.toml" = 'filename = "DistantHorizons-3.3.3-1.21.1-fabric-neoforge.jar"'
     "mods/iris.pw.toml"             = 'filename = "iris-neoforge-1.8.14-beta.1+mc1.21.1.jar"'
-    "mods/sodium.pw.toml"           = 'filename = "sodium-neoforge-0.8.12+mc1.21.1.jar"'
-    "mods/jei.pw.toml"              = 'filename = "jei-1.21.1-neoforge-19.43.0.392.jar"'
+    "mods/sodium.pw.toml"           = 'filename = "sodium-neoforge-0.8.13+mc1.21.1.jar"'
+    "mods/jei.pw.toml"              = 'filename = "jei-1.21.1-neoforge-19.64.0.455.jar"'
     "mods/create.pw.toml"           = 'filename = "create-1.21.1-6.0.10.jar"'
     "mods/fastsuite.pw.toml"        = 'filename = "FastSuite-1.21.1-6.0.7.jar"'
-    "mods/placebo.pw.toml"          = 'filename = "Placebo-1.21.1-9.9.2.jar"'
+    "mods/placebo.pw.toml"          = 'filename = "Placebo-1.21.1-9.9.4.jar"'
     "mods/structure-layout-optimizer.pw.toml" = 'filename = "structure_layout_optimizer-neoforge-1.0.12.jar"'
     "mods/resourceful-config.pw.toml" = 'filename = "resourcefulconfig-neoforge-1.21-3.0.11.jar"'
     "mods/servercore.pw.toml"       = 'filename = "servercore-neoforge-1.5.19+1.21.1.jar"'
@@ -182,7 +202,7 @@ else {
 $profileRequirements = @{
     "launcher/templates/eco/instance.cfg.in" = @("MinMemAlloc=3072", "MaxMemAlloc=6144")
     "launcher/templates/eco/minecraft/options.txt" = @("graphicsMode:0", "maxFps:60", "renderDistance:8", "simulationDistance:5", 'resourcePacks:["vanilla"]')
-    "launcher/templates/eco/minecraft/config/DistantHorizons.toml" = @("lodChunkRenderDistanceRadius = 64", 'renderingEngine = "AUTO"', 'distantGeneratorMode = "PRE_EXISTING_ONLY"')
+    "launcher/templates/eco/minecraft/config/DistantHorizons.toml" = @("lodChunkRenderDistanceRadius = 64", 'renderingEngine = "AUTO"', 'chunkGeneratorMode = "PRE_EXISTING_ONLY"', '_version = 5', 'generatorPlan = "CHUNKS_ONLY"')
     "launcher/templates/eco/minecraft/config/iris.properties" = @("enableShaders=false")
 }
 foreach ($entry in $profileRequirements.GetEnumerator()) {
@@ -202,15 +222,15 @@ foreach ($entry in $profileRequirements.GetEnumerator()) {
 
 $distantHorizonsServerConfig = Join-Path $repoRoot "server\config\DistantHorizons.toml"
 $distantHorizonsServerValues = @(
-    'distantGeneratorMode = "PRE_EXISTING_ONLY"',
-    "enableDistantGeneration = true",
+    'chunkGeneratorMode = "PRE_EXISTING_ONLY"',
     "numberOfThreads = 1",
     'threadRunTimeRatio = "0.25"',
     "realTimeUpdateDistanceRadiusInChunks = 64",
     "maxSyncOnLoadRequestDistance = 64",
     "synchronizeOnLoad = false",
     "maxGenerationRequestDistance = 64",
-    "enableServerGeneration = false",
+    '_version = 5',
+    'generatorPlan = "CHUNKS_ONLY"',
     "generationRequestRateLimit = 1",
     "syncOnLoadRateLimit = 2",
     "enableRealTimeUpdates = false",
@@ -220,11 +240,22 @@ $distantHorizonsServerValues = @(
 if (-not (Test-Path -LiteralPath $distantHorizonsServerConfig -PathType Leaf)) {
     Add-ValidationError "Missing Distant Horizons server configuration"
 }
+
 else {
     $content = Get-Content -Raw -Encoding utf8 -LiteralPath $distantHorizonsServerConfig
     foreach ($expected in $distantHorizonsServerValues) {
         if ($content -notmatch [regex]::Escape($expected)) {
             Add-ValidationError "Distant Horizons server configuration is missing '$expected'"
+        }
+    }
+}
+
+foreach ($profile in @("cozy", "fluffy")) {
+    $candidate = Join-Path $repoRoot "launcher/templates/$profile/minecraft/config/DistantHorizons.toml"
+    $content = Get-Content -Raw -Encoding utf8 -LiteralPath $candidate
+    foreach ($expected in @('_version = 5', 'generatorPlan = "CHUNKS_ONLY"', 'chunkGeneratorMode = "FEATURES"')) {
+        if ($content -notmatch [regex]::Escape($expected)) {
+            Add-ValidationError "Distant Horizons $profile profile is missing '$expected'"
         }
     }
 }

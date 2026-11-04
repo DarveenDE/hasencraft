@@ -1,8 +1,10 @@
+_version = 5
+
 [common.worldGenerator]
 	# Build LOD data only from chunks that already exist. Missing terrain is never
 	# generated in the background; use intentional, bounded pregeneration for it.
-	distantGeneratorMode = "PRE_EXISTING_ONLY"
-	enableDistantGeneration = true
+	generatorPlan = "CHUNKS_ONLY"
+	chunkGeneratorMode = "PRE_EXISTING_ONLY"
 
 [common.multiThreading]
 	# Keep a small, predictable CPU budget for background LOD conversion on the
@@ -18,7 +20,6 @@
 	maxSyncOnLoadRequestDistance = 64
 	synchronizeOnLoad = false
 	maxGenerationRequestDistance = 64
-	enableServerGeneration = false
 	generationRequestRateLimit = 1
 	syncOnLoadRateLimit = 2
 	enableRealTimeUpdates = false

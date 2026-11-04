@@ -38,11 +38,11 @@ Vor dem Restore muss außerdem der Stable-Kanal wieder auf das alte immutable Re
 
 ## Kritische Pins
 
-- NeoForge `21.1.247`
-- Distant Horizons `3.2.0-b`
+- NeoForge `21.1.265`
+- Distant Horizons `3.3.3`
 - Iris `1.8.14-beta.1`
-- Sodium `0.8.12`
+- Sodium `0.8.13`
 - Create `6.0.10`
-- JEI `19.43.0.392`
+- JEI `19.64.0.455`
 
 Diese Pins werden nur als getestete Gruppe verändert.
