@@ -1,12 +1,12 @@
 name = "Hasencraft"
 author = "Hasencraft Team"
-version = "0.1.0-alpha.8"
+version = "0.1.0-alpha.8.1"
 pack-format = "packwiz:1.1.0"
 
 [index]
 file = "index.toml"
 hash-format = "sha256"
-hash = "cf03e98e894ac86ffd754a39f560589c365796858e0cc6b8441b111f7554e407"
+hash = "58997cc3016edee20d39af5d3437bb3a06d0bfa09e35706bd16900e170e28c94"
 
 [versions]
 minecraft = "1.21.1"

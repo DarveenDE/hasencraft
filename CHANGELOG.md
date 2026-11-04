@@ -2,6 +2,13 @@
 
 Alle relevanten Änderungen an Mods, Konfiguration, Quests und Serveranforderungen werden hier dokumentiert.
 
+## 0.1.0-alpha.8.1 — 2026-11-04
+
+- AE2 JEI Integration `1.2.1` ergänzt die in AE2 seit Minecraft 1.21 ausgelagerte JEI-Anbindung, einschließlich Rezeptübertragung in das ME Crafting Terminal.
+- Polymorph von `1.1.0` auf `1.2.0+1.21.1` aktualisiert. Die neue Fassung verwendet JEIs Rezepttransfer-Listener statt der mit JEI 19.64 inkompatiblen Mixins.
+- JEI `19.64.0.455`, AE2 `19.2.18`, Minecraft `1.21.1` und NeoForge `21.1.265` bleiben auf dem bestehenden Stand.
+- Die Korrektur wird auf ausdrücklichen Wunsch direkt auf Stable veröffentlicht; keine zusätzlichen Tests.
+
 ## 0.1.0-alpha.8 — 2026-11-04
 
 - 68 Mods sowie Fresh Animations und Complementary Reimagined auf die neuesten passenden Release-Stände für Minecraft 1.21.1 aktualisiert; bereits verwendete Beta-Reihen bleiben separat geprüft. Alle bisherigen Kernmods sind enthalten.

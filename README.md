@@ -11,7 +11,7 @@ die Importadresse für Prism, immer auf dem freigegebenen Stand.
 
 Minecraft `1.21.1` · NeoForge `21.1.265`
 
-**Aktueller Stand:** `0.1.0-alpha.8` · Minecraft `1.21.1` · NeoForge `21.1.265`
+**Aktueller Stand:** `0.1.0-alpha.8.1` · Minecraft `1.21.1` · NeoForge `21.1.265`
 
 ## Loslegen
 

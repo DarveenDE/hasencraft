@@ -1,5 +1,11 @@
 # Validierungsstand
 
+## Stable-Patch 0.1.0-alpha.8.1 — 4. November 2026
+
+- Grundlage ist der veröffentlichte Alpha-8-Stand. Der Patch ergänzt ausschließlich AE2 JEI Integration `1.2.1` und aktualisiert Polymorph auf `1.2.0+1.21.1`.
+- Der Polymorph-Changelog nennt den Wechsel auf JEIs Rezepttransfer-Listener-API. Die ausgelieferten JARs enthalten die passende API beziehungsweise den neuen Listener; der alte fehlschlagende Transfer-Mixin entfällt.
+- Metadaten, feste Artefakte und Prüfsummen werden für die Veröffentlichung aufbereitet. Es wurden auf ausdrücklichen Wunsch keine weiteren Tests oder Spielstarts ausgeführt. Die tatsächliche Rezeptübertragung nach dem Client-Neustart ist damit noch nicht bestätigt.
+
 ## Stable-Freigabe 0.1.0-alpha.8 — 4. November 2026
 
 - Minecraft bleibt auf `1.21.1`; NeoForge ist auf `21.1.265` aktualisiert und bei NeoForge sowie Prism verfügbar.

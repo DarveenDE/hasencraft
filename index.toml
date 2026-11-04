@@ -86,7 +86,7 @@ hash = "7085fd04c1d807178ad8387aa31207abed87a30cf773b892c5483725110255cc"
 
 [[files]]
 file = "kubejs/assets/minecraft/textures/gui/title/edition.png"
-hash = "51b78bbc34a6072b410aa83e7f9634cde0019876b6942668e990d91550319fea"
+hash = "0e6ad9d390bbab3d43ca932c3ec00d29f6a6f020515ac6ec8a477ad5da1c716f"
 
 [[files]]
 file = "kubejs/assets/minecraft/textures/gui/title/minceraft.png"
@@ -180,6 +180,11 @@ metafile = true
 [[files]]
 file = "mods/adorable-hamster-pets.pw.toml"
 hash = "a55f5772ed51674da9f5625a12f121fc2bee35ae705c32038bbcf682fb6075f1"
+metafile = true
+
+[[files]]
+file = "mods/ae2-jei-integration.pw.toml"
+hash = "7ff379b5b70a120bf194f13ff265e7d9ac04ebd6237f4114e2c1436c94fa7e78"
 metafile = true
 
 [[files]]
@@ -789,7 +794,7 @@ metafile = true
 
 [[files]]
 file = "mods/polymorph.pw.toml"
-hash = "c9ee2fb6794440331f0d4d39dbddc9fd3a2b6bfe75c1ce228d0fc300b166e952"
+hash = "f19edfbcc0d656c3c78b6eea3b5babcd71a7f9587306cebb6f2906a4892e1f2e"
 metafile = true
 
 [[files]]

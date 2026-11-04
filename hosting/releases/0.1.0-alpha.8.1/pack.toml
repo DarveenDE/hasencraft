@@ -1,0 +1,13 @@
+name = "Hasencraft"
+author = "Hasencraft Team"
+version = "0.1.0-alpha.8.1"
+pack-format = "packwiz:1.1.0"
+
+[index]
+file = "index.toml"
+hash-format = "sha256"
+hash = "58997cc3016edee20d39af5d3437bb3a06d0bfa09e35706bd16900e170e28c94"
+
+[versions]
+minecraft = "1.21.1"
+neoforge = "21.1.265"

@@ -1,9 +1,9 @@
 # Modliste
 
-Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.8`.
+Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.8.1`.
 
-- Gesamt: 174 verwaltete Eintraege
-- beide Seiten: 127
+- Gesamt: 175 verwaltete Eintraege
+- beide Seiten: 128
 - nur Client: 27
 - nur Server: 20
 
@@ -23,6 +23,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.8`
 | [ETF] Entity Texture Features | `client` | `entity_texture_features-7.2.7-1.21-neoforge.jar` | [Modrinth](https://modrinth.com/project/BVzZfTc1) |
 | Accessories | `both` | `accessories-neoforge-1.1.0-beta.54+1.21.1.jar` | [Modrinth](https://modrinth.com/project/jtmvUHXj) |
 | Adorable Hamster Pets | `both` | `adorablehamsterpets-3.7.0-1.21.1+neoforge.jar` | [Modrinth](https://modrinth.com/project/LmrhZdK2) |
+| AE2 JEI Integration | `both` | `ae2jeiintegration-1.2.1.jar` | CurseForge #1074338 |
 | Almost Unified | `both` | `almostunified-neoforge-1.21.1-1.4.2.jar` | [Modrinth](https://modrinth.com/project/sdaSaQEz) |
 | AmbientSounds | `client` | `AmbientSounds_NEOFORGE_v6.3.11_mc1.21.1.jar` | [Modrinth](https://modrinth.com/project/fM515JnW) |
 | Animal Garden - Fennec Fox | `both` | `animalgarden-fennecfox-1.0.1-neoforge-1.21.1-21.1.215.jar` | [Modrinth](https://modrinth.com/project/BRO0Qo3Y) |
@@ -142,7 +143,7 @@ Automatisch aus den Packwiz-Metadaten erzeugt. Stand: Hasencraft `0.1.0-alpha.8`
 | oωo (owo-lib) | `both` | `owo-lib-neoforge-0.12.15.6-beta.1+1.21.jar` | [Modrinth](https://modrinth.com/project/ccKDOlHs) |
 | Patchouli | `both` | `Patchouli-1.21.1-93-NEOFORGE.jar` | [Modrinth](https://modrinth.com/project/nU0bVIaL) |
 | Placebo | `both` | `Placebo-1.21.1-9.9.4.jar` | [Modrinth](https://modrinth.com/project/tCkE8p2N) |
-| Polymorph | `both` | `polymorph-neoforge-1.1.0+1.21.1.jar` | [Modrinth](https://modrinth.com/project/tagwiZkJ) |
+| Polymorph | `both` | `polymorph-neoforge-1.2.0+1.21.1.jar` | [Modrinth](https://modrinth.com/project/tagwiZkJ) |
 | Prickle | `both` | `prickle-neoforge-1.21.1-21.1.11.jar` | [Modrinth](https://modrinth.com/project/aaRl8GiW) |
 | Productive Bees | `both` | `productivebees-1.21.1-13.14.0.jar` | CurseForge #377897 |
 | Puzzles Lib | `both` | `puzzleslib-v21.1.66-mc1.21.1+neoforge.jar` | [Modrinth](https://modrinth.com/project/QAGBst4M) |

@@ -150,6 +150,8 @@ $critical = @{
     "mods/iris.pw.toml"             = 'filename = "iris-neoforge-1.8.14-beta.1+mc1.21.1.jar"'
     "mods/sodium.pw.toml"           = 'filename = "sodium-neoforge-0.8.13+mc1.21.1.jar"'
     "mods/jei.pw.toml"              = 'filename = "jei-1.21.1-neoforge-19.64.0.455.jar"'
+    "mods/polymorph.pw.toml"        = 'filename = "polymorph-neoforge-1.2.0+1.21.1.jar"'
+    "mods/ae2-jei-integration.pw.toml" = 'filename = "ae2jeiintegration-1.2.1.jar"'
     "mods/create.pw.toml"           = 'filename = "create-1.21.1-6.0.10.jar"'
     "mods/fastsuite.pw.toml"        = 'filename = "FastSuite-1.21.1-6.0.7.jar"'
     "mods/placebo.pw.toml"          = 'filename = "Placebo-1.21.1-9.9.4.jar"'

@@ -1,0 +1,8 @@
+{
+  // Keep harvesting to the clicked crop; higher-tier hoes must not harvest an area.
+  requireHoe: false,
+  harvestInRadius: false,
+  hungerLevel: "NONE",
+  experienceType: "NONE",
+  showServerWarning: true,
+}

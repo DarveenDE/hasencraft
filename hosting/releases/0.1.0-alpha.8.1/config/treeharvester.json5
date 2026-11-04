@@ -1,0 +1,5 @@
+{
+  "mustHoldAxeForTreeHarvest": true,
+  "treeHarvestWithoutSneak": false,
+  "ignorePlayerMadeTrees": true
+}
